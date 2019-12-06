@@ -1,183 +1,64 @@
 # Steering Behavior Toolkit #
 
-This document describes an evolution to the design of the Steering Behavior AI system that was produced for the Hook! game. In that iteration, behaviors and agents were nodes, requiring tree iteration and holding node references. This version, on the other hand, is built entirely around Reference types which could be held on the root node of an actor. Once again, it is greatly inspired by the excellent GDX-AI module for LibGDX.
+## Steering Behaviors ##
 
-This document will be changed to a more thorough set of documentation for the actual system once it's implemented.
+Making agents that use artificial intelligence move and behave fits in two main modules:
 
-## Types ##
+1. Decision making - Based on what the AI knows, how should it behave, what should it behave against/towards, when to do it, and other questions like that.
+1. Action and reaction - How to act on the decision that has been taken, how to go from point A to point B, or how to act at all.
+
+Steering Behaviors are systems that aim to help answer the second. They are, as their name implies, behaviors for the AI to undergo to steer its agents through the game world. For example, an enemy spaceship pursuing the player through an asteroid field needs to avoid collisions with asteroids it may run into, and move in the direction that will take it to where the player is.
+
+Steering behaviors are a flexible and lower performance cost method of figuring out how to move around _immediately_ in a second-to-second resolution, relative to more expensive and complex pathfinding algorithms like A\* that aim to plot routes through the entire game field for movement that could be seconds or minutes into the future. Steering behaviors will not have as fine a resolution as complex pathfinding, but they are easier and more than sufficient for many games. They also have the added bonus of being able to work _with_ more complex pathfinding methods.
+
+## Toolkit Purpose ##
+
+The implementation laid out in this repository is built to run on the [Godot game engine](https://godotengine.org/). It is a purely GDScript code oriented design to keep scene trees from being bloated, geared towards the goal of making the game's programmer(s) life in making complex behaviors easier by prioritizing, combining, and chaining different modular, pre-packaged behaviors together.
+
+## Toolkit Design and Features ##
+
+The toolkit takes a lot of its inspiration from the AI module from [LibGDX](https://libgdx.badlogicgames.com/), a Java based game development framework, named GDX-AI. It's an exllencent base to work from. Some of the information in this document has a more thorough breakdown on the [GDX-AI Wiki](https://github.com/libgdx/gdx-ai/wiki/Steering-Behaviors). Though the technical aspects and Java-specific implementation details can be ignored and the toolkit will be far from identical in how it functions, it makes for an excellent primer and includes a few diagrams.
 
 ### Agent ###
 
-_extends Reference_
-
-The agent is the agent from which information is derived from to determine where the actor is, how fast it's currently going and rotating, as well as its mass and speed/velocity limits, and anything else the various behaviors use to calculate the result. It is the programmer's job to keep the Agent's values updated every frame.
+The Agent type holds information on the actor's position, velocity of travel, current orientation, as well as speed limits, mass, drag, size and other similar information. This information is used by the behaviors. It is up to the programmer to keep this information up-to-date.
 
 ### Proximity ###
 
-_extends Reference_
-
-Defines an area that is used by group behaviors to determine who is or isn't within the owner's neighbors. It is the programmer's job to make sure all relevant members of the group are within the Proximity so that no member is not accounted for.
+A way of defining a number of Agents within an area around an owner. For instance, in a spaceship game, the squad leader's ship would be the owner of the Proximity, and the agents would be in the group and their group-based behaviors would use that information to know where the area is and where it is going.
 
 ### TargetAcceleration ###
 
-_extends Reference_
-
-A type that holds the desired increase to linear and angular velocities. Its contents get replaced by the behaviors.
+The result of each behavior results in a desired **change** in velocity, linear or angular. This can be added to the current velocity to go up and down until the target is reached. The TargetAcceleration type holds both a linear and an angular acceleration, though whether they are used depends on which behavior is used.
 
 ### Behaviors ###
-#### Behavior ####
 
-_extends Reference_
-
-The base type for steering behaviors. This will have a public facing calculate_steering, and a private facing version that should will be overriden.
-
-#### Combination Behaviors ####
-##### Blended #####
-
-_extends Behavior_
-
-Blended combines any number of behaviors, each one having a certain weight that indicates how strongly it affects the end velocities. For instance, a Seek blended with a 2x force AvoidCollision.
-
-##### Priority #####
-
-_extends Behavior_
-
-Contains any number of behaviors, then iterates through them in order until one of them produces non-zero acceleration. Then it uses that one and skips the rest.
-
-#### Individual Behaviors ####
-
-##### Seek #####
-
-_extends Behavior_
-
-Given a target Agent, the math will produce a linear acceleration that will move it directly towards where the target is at this present time.
-
-##### Flee #####
-
-_extends Seek_
-
-Given a target Agent, the math will produce a linear acceleration that will move it directly away where the target is at this present time.
-
-##### Arrive #####
-
-_extends Behavior_
-
-Given a target Agent, the math will produce a linear acceleration that will move it directly towards where the target is at this present time, but aim to arrive there with zero velocity within a set amount of time.
-
-##### MatchOrientation #####
-
-_extends Behavior_
-
-Given a target Agent, the math will produce an angular acceleration that will rotate the agent until its degree of rotation matches the target's, aiming to have zero rotation by the time it reaches it.
-
-##### Pursue #####
-
-_extends Behavior_
-
-Given a target Agent, the math will produce a linear acceleration that will move it towards where the target will be by the time the agent reaches it, up to a maximum prediction time.
-
-##### Evade #####
-
-_extends Pursue_
-
-Given a target Agent, the math will produce a linear acceleration that will move it away from where the target will be by the time the agent would reach it, up to a maximum prediction time.
-
-##### Face #####
-
-_extends MatchOrientation_
-
-Given a target Agent, the math will produce an angular acceleration that will rotate the agent until it is facing its target, aiming to have zero rotation by the time it reaches it.
-
-##### LookWhereYouAreGoing #####
-
-_extends MatchOrientation_
-
-The math will produce an angular acceleration that will rotate the agent until it is facing its current direction of linear travel, or no change if it is not moving.
-
-##### FollowPath #####
-
-_extends Arrive_
-
-Given a target Array of locations making up a path, the math will produce a linear acceleration that will steer the agent along the path. Providing a non zero prediction time can make it cut corners, but appear to move more naturally.
-
-##### Intersect #####
-
-_extends Arrive_
-
-Given two target Agents and a ratio of distance between them, the math will produce a linear acceleration that will steer the agent to reach the destination between them, cutting through an imaginary line between them.
-
-##### MatchVelocity #####
-
-_extends Behavior_
-
-Given a target Agent, the math will produce a linear acceleration that will make its velocity the same as the target's.
-
-##### Jump #####
-
-_extends MatchVelocity_
-
-Given a jump starting point, a target landing point, and information about gravity, the math will produce an acceleration that will make the agent reach the starting point at the velocity required to successfully jump and land at the target landing point.
-
-#### Group Behaviors ####
-
-##### GroupBehavior #####
-
-_extends Behavior_
-
-Base class for steering behaviors that take other agents in the world into consideration within an area around the owner.
-
-##### Separation #####
-
-_extends GroupBehavior_
-
-Given a Proximity, the math will produce an acceleration that will keep the agent a minimum distance away from the proximity's owner.
-
-##### Alignment #####
-
-_extends GroupBehavior_
-
-Given a Proximity, the math will produce an angular acceleration that will turn the agent to face along with the proximity's owner.
-
-##### Cohesion #####
-
-_extends GroupBehavior_
-
-Given a Proximity, the math will produce a linear acceleration that will move the agent towards the center-of-mass of the Proximity group.
-
-##### Hide #####
-
-_extends Arrive_
-
-Given a Proximity of obstacles and a target Agent, the math will produce a linear acceleration that will move the agent to the nearest hiding point to hide from the target behind an obstacle.
-
-##### AvoidCollision #####
-
-_extends GroupBehavior_
-
-Given a Proximity of obstacles, the math will produce a linear acceleration that will move the agent away from the nearest obstacle in its proximity group.
-
-##### RaycastAvoidCollision #####
-
-_extends Behavior_
-
-Given a configuration of Raycasts to perform, the math will produce a linear acceleration that will steer the agent away from anything the raycasts happen to hit.
-
-## Usage ##
-
-Instead of creating a complex array of nodes in a tree, instead the programmer will create the behaviors they need with `Reference.new()`, configuring required fields and calling behaviors' calculate_steering as they need from where they need. For example:
-
-    //#KinematicBody2D
-        var seek: = Seek.new()
-
-        func _ready() -> void:
-            configure
-
-
-    //#StateMachine
-        //#Follow
-            var seek: Seek = owner.seek
-            var accel: = TargetAcceleration.new()
-
-            func physics_process(delta: float) -> void:
-                accel = seek.calculate_steering(accel)
-                owner.move_and_slide(accel.linear)
+- Combination Behaviors - More often than not, one behavior will not be enough to do everything you want your agent to do. These special behaviors take other behaviors and works to combine them. Combination behaviors can combine other combination behaviors.
+    - Blended - Takes any number of behaviors and associates each with a strength that determines how strong that behavior is going to be. The final acceleration will be a combination of all behaviors in the blend.
+    - Priority - Takes any number of behaviors, but the order matters - only the first to return a non-zero acceleration will be used, and all others ignored. Great for prioritizing avoiding firey death by crashing into an asteroid over pursuing the player.
+
+- Individual Behaviors - Behaviors that only feature the agent and some target information, often another agent.
+    - Seek/Flee - Produces acceleration to take the agent to where the target is right now. Flee is the opposite and moves away from where the target is.
+	- Arrive - Produces acceleration to take the agent to where the target is, but slow down to zero velocity by the time it is on top of it.
+	- MatchOrientation - Produces angular acceleration to turn the agent to match the target's own facing, and slow down to zero velocity by the time it is matched.
+	- Pursue/Evade - Produces acceleration to take the agent to where the target will be by the time it is reached. Evade is the opposite and moves away from where the target is going to be.
+	- Face - Produces angular acceleration to turn the agent towards the target. A turret could use this to keep a bead on enemies.
+	- LookWhereYouAreGoing - Produces angular acceleration to turn the agent towards the direction it is traveling. This creates an agent that moves more naturally, especially if they can then choose to move independent of their travel upon need, like humans.
+	- FollowPath - Produces acceleration that will lead the agent into following a given series of points that form a path. This can be a path generated by a complex pathfinding algorithm like A\*.
+	- Intersect - Produces acceleration that will lead the agent to cut through an imaginary line between two other agents. For example, a bodyguard could try to bodyblock for a projectile to protect another agent.
+	- MatchVelocity - Produces acceleration that will lead the agent to have the same velocity as its target. Mimics that pretend they're the players could use this.
+	- Jump - Produces acceleration that will lead the agent to have enough velocity to jump against gravity from a target starting point with enough speed to land at the target landing point.
+
+- Group Behaviors - Behaviors that use Proximity objects to keep track of other agents in a given group.
+    - Separation - Produces acceleration that will keep the agent away from a distance from other neighbors in the Proximity group. Units in a RTS could be made to smartly keeping away from neighbors with an contagious infection, or units in spaceships keeping away from their target because their weapons are dangerous to themselves in short range (missiles).
+	- Alignment - Produces angular acceleration that will rotate the agent to face along with the other agents in the Proximity group. Spaceships in a flight formation, for example.
+	- Cohesion - Produces acceleration that will aim to keep the agents in the Proximity group in a balanced group within the Proximity. An example is a sheep catching up to the rest of its flock.
+	- Hide - Produces acceleration that will keep the agent behind an object in the Proximity and a target agent. It could be a stalker in the forest staying out of sight but following the player.
+	- AvoidCollisions - Produces acceleration that will keep the agent from hitting objects in the Proximity group. For example, moving through a minefield without hitting any of the mines.
+	- RaycastAvoidCollisions - Produces acceleration that will prevent the agent from hitting something that it is usually facing - great for discovering that there is an obstacle in the agent's direction of travel, whereas AvoidCollisions works in a radius around the agent.
+
+## Resources, links, and information ##
+
+- [RedBlobGames](https://www.redblobgames.com/) - An excellent resources for complex pathfinding like A\*, graph theory, and other algorithms that are game-development related. Steering behaviors are not covered, but for anyone looking to study and bulk up on their algorithms, this is a great place.
+- [Understanding Steering Behaviors](https://gamedevelopment.tutsplus.com/series/understanding-steering-behaviors--gamedev-12732) - Breakdowns of various behaviors by Fernando Bevilacqua with graphics and in-depth explanations that go beyond the scope of this document or GDX-AI's wiki entries.
+- [GDX-AI Wiki - Steering Behaviors](https://github.com/libgdx/gdx-ai/wiki/Steering-Behaviors) - Descriptions of how LibGDX's AI submodule uses steering behaviors with a few graphics.
