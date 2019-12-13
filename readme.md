@@ -1,23 +1,33 @@
-# Steering Behavior Toolkit #
+# Godot Steering AI Framework #
+
+Godot Steering gives you tools to create complex AI agents using steering behaviors in Godot.
 
 ## Steering Behaviors ##
 
-Making agents that use artificial intelligence move and behave fits in two main modules:
+There are two main aspects to creating AI-driven agents in games:
 
-1. Decision making - Based on what the AI knows, how should it behave, what should it behave against/towards, when to do it, and other questions like that.
-1. Action and reaction - How to act on the decision that has been taken, how to go from point A to point B, or how to act at all.
+1. **Decison-making**. Based on what the AI knows, we want it to decide how should it behave, what should it react to, when, etc.
+1. **Reacting**. Based on the decision the AI took, it needs to figure out how to move to its target or how to act.
 
-Steering Behaviors are systems that aim to help answer the second. They are, as their name implies, behaviors for the AI to undergo to steer its agents through the game world. For example, an enemy spaceship pursuing the player through an asteroid field needs to avoid collisions with asteroids it may run into, and move in the direction that will take it to where the player is.
+Steering Behaviors help with reacting. They are behaviors the AI undergoes to steer its agents through the game world. 
 
-Steering behaviors are a flexible and lower performance cost method of figuring out how to move around _immediately_ in a second-to-second resolution, relative to more expensive and complex pathfinding algorithms like A\* that aim to plot routes through the entire game field for movement that could be seconds or minutes into the future. Steering behaviors will not have as fine a resolution as complex pathfinding, but they are easier and more than sufficient for many games. They also have the added bonus of being able to work _with_ more complex pathfinding methods.
+For example, an enemy spaceship pursuing the player through an asteroid field needs to avoid colliding with the asteroids. Yet, it should still move towards the player overall. Steering behaviors are good at that, and at producing smooth, natural motions.
 
-## Toolkit Purpose ##
+Steering behaviors are a flexible and low performance algorithms to move around immediately, in a second-to-second resolution. Unlike more complex algorithms like the [A* pathfinding algorithm](https://www.redblobgames.com/pathfinding/a-star/introduction.html), the agent doesn't get a complete path to the target. 
 
-The implementation laid out in this repository is built to run on the [Godot game engine](https://godotengine.org/). It is a purely GDScript code oriented design to keep scene trees from being bloated, geared towards the goal of making the game's programmer(s) life in making complex behaviors easier by prioritizing, combining, and chaining different modular, pre-packaged behaviors together.
+Steering behaviors may not have as fine a resolution as complex pathfinding, but they are easier to use and more than enough for many games. Also, they combine well with more complex pathfinding methods like A\*.
 
-## Toolkit Design and Features ##
+## About this framework ##
 
-The toolkit takes a lot of its inspiration from the AI module from [LibGDX](https://libgdx.badlogicgames.com/), a Java based game development framework, named GDX-AI. It's an exllencent base to work from. Some of the information in this document has a more thorough breakdown on the [GDX-AI Wiki](https://github.com/libgdx/gdx-ai/wiki/Steering-Behaviors). Though the technical aspects and Java-specific implementation details can be ignored and the toolkit will be far from identical in how it functions, it makes for an excellent primer and includes a few diagrams.
+This framework is designed to work with the [Godot game engine](https://godotengine.org/). It is entirely in GDScript and designed to keep scene trees from getting bloated. It helps game developers making complex behaviors more easily with tools to prioritize, combine, and sequence modular steering behaviors together.
+
+## Design and Features ##
+
+This framework takes a lot of its inspiration from the AI module from [LibGDX](https://libgdx.badlogicgames.com/): GDX-AI. It's an exllencent base to work from. 
+
+Some of the information below is covered in greater details in the [GDX-AI Wiki](https://github.com/libgdx/gdx-ai/wiki/Steering-Behaviors), although this framework is quite different in the way it works. The GDX-AI wiki makes for an excellent primer on steering-based AI and includes a few diagrams, although you can skip the Java-specific part and technical details when reading it.
+
+Below are the main concepts of our framework.
 
 ### Agent ###
 
