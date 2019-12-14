@@ -17,3 +17,8 @@
 
 - 1 toy demo for each behavior
 - 1 in context game demo that features at least two types of agents
+
+## Documentation ##
+
+- Getting started manual
+- Quick reference for the behaviors
