@@ -8,9 +8,74 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Reference",
+"class": "AgentLocation",
+"language": "GDScript",
+"path": "res://src/Steering/AgentLocation.gd"
+}, {
+"base": "SteeringBehavior",
+"class": "Arrive",
+"language": "GDScript",
+"path": "res://src/Steering/Behaviors/Arrive.gd"
+}, {
+"base": "Pursue",
+"class": "Evade",
+"language": "GDScript",
+"path": "res://src/Steering/Behaviors/Evade.gd"
+}, {
+"base": "MatchOrientation",
+"class": "Face",
+"language": "GDScript",
+"path": "res://src/Steering/Behaviors/Face.gd"
+}, {
+"base": "Seek",
+"class": "Flee",
+"language": "GDScript",
+"path": "res://src/Steering/Behaviors/Flee.gd"
+}, {
+"base": "SteeringBehavior",
+"class": "MatchOrientation",
+"language": "GDScript",
+"path": "res://src/Steering/Behaviors/MatchOrientation.gd"
+}, {
+"base": "SteeringBehavior",
+"class": "Pursue",
+"language": "GDScript",
+"path": "res://src/Steering/Behaviors/Pursue.gd"
+}, {
+"base": "SteeringBehavior",
+"class": "Seek",
+"language": "GDScript",
+"path": "res://src/Steering/Behaviors/Seek.gd"
+}, {
+"base": "AgentLocation",
+"class": "SteeringAgent",
+"language": "GDScript",
+"path": "res://src/Steering/SteeringAgent.gd"
+}, {
+"base": "Reference",
+"class": "SteeringBehavior",
+"language": "GDScript",
+"path": "res://src/Steering/SteeringBehavior.gd"
+}, {
+"base": "Reference",
+"class": "TargetAcceleration",
+"language": "GDScript",
+"path": "res://src/Steering/TargetAcceleration.gd"
+} ]
 _global_script_class_icons={
-
+"AgentLocation": "",
+"Arrive": "",
+"Evade": "",
+"Face": "",
+"Flee": "",
+"MatchOrientation": "",
+"Pursue": "",
+"Seek": "",
+"SteeringAgent": "",
+"SteeringBehavior": "",
+"TargetAcceleration": ""
 }
 
 [application]
