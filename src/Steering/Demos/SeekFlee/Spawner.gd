@@ -1,12 +1,14 @@
 extends Node2D
+"""
+Instantiates and configures a number of agent scenes within the level boundaries.
+"""
 
 
-onready var player_agent: AgentLocation = get_node(player).player_agent
+onready var player_agent: AgentLocation = owner.get_node("Player").player_agent
 
 
 export(PackedScene) var agent_scene: PackedScene
 export var agent_count: = 10
-export var player: = NodePath()
 export var min_speed: = 50.0
 export var max_speed: = 125.0
 export var agent_color: = Color.blue

@@ -1,5 +1,8 @@
 extends Reference
 class_name TargetAcceleration
+"""
+A linear and angular amount of acceleration.
+"""
 
 
 var linear: = Vector3.ZERO

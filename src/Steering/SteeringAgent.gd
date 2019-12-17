@@ -1,5 +1,8 @@
 extends AgentLocation
 class_name SteeringAgent
+"""
+Extended agent data type that adds velocity and speed data.
+"""
 
 
 var zero_linear_speed_threshold: = 0.01

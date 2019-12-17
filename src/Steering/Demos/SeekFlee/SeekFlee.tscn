@@ -71,10 +71,8 @@ shape = SubResource( 3 )
 [node name="SeekerSpawner" type="Node2D" parent="."]
 script = ExtResource( 2 )
 agent_scene = ExtResource( 4 )
-player = NodePath("../Player")
 
 [node name="FleeerSpawner" type="Node2D" parent="."]
 script = ExtResource( 2 )
 agent_scene = ExtResource( 6 )
-player = NodePath("../Player")
 agent_color = Color( 0.0980392, 0.886275, 0.517647, 1 )

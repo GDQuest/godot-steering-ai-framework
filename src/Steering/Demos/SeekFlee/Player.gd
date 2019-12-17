@@ -1,4 +1,7 @@
 extends KinematicBody2D
+"""
+Class to control the player in basic left/right up/down movement.
+"""
 
 
 onready var _radius: = ($CollisionShape2D.shape as CircleShape2D).radius

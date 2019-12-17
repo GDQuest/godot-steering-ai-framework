@@ -1,5 +1,8 @@
 extends SteeringBehavior
 class_name Seek
+"""
+Calculates acceleration to take an agent to a target agent's position as directly as possible
+"""
 
 
 var target: AgentLocation

@@ -1,5 +1,9 @@
 extends MatchOrientation
 class_name Face
+"""
+Calculates angular acceleration to rotate a target to face its target's position.
+The acceleration will attempt to arrive with zero remaining angular velocity.
+"""
 
 
 func _init(agent: SteeringAgent, target: AgentLocation).(agent, target) -> void:

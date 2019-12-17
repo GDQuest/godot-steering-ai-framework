@@ -1,4 +1,7 @@
 extends KinematicBody2D
+"""
+AI agent that uses the Seek behavior to hone in on the player's location as directly as possible.
+"""
 
 
 onready var radius: = ($CollisionShape2D.shape as CircleShape2D).radius
@@ -25,6 +28,9 @@ func _draw() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if not player_agent:
+		return
+	
 	_update_agent()
 	accel = seek.calculate_steering(accel)
 	

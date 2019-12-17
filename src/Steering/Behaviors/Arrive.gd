@@ -1,5 +1,9 @@
 extends SteeringBehavior
 class_name Arrive
+"""
+Calculates acceleration to take an agent to its target's location.
+The calculation will attempt to arrive with zero remaining velocity.
+"""
 
 
 var target: AgentLocation

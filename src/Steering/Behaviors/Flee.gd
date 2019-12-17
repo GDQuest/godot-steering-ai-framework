@@ -1,5 +1,8 @@
 extends Seek
 class_name Flee
+"""
+Calculates acceleration to take an agent directly away from a target agent.
+"""
 
 
 func _init(agent: SteeringAgent, target: AgentLocation).(agent, target) -> void:
