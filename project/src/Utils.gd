@@ -1,4 +1,7 @@
 class_name Utils
+"""
+Useful math and utility functions to complement Godot's own.
+"""
 
 
 static func clmapedv3(vector: Vector3, limit: float) -> Vector3:

@@ -1,4 +1,3 @@
-extends Reference
 class_name GSTTargetAcceleration
 """
 A linear and angular amount of acceleration.

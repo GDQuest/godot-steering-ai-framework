@@ -8,6 +8,7 @@
 - Arrive
 - Pursue/Evade
 - Face
+- LookWhereYouGo
 - FollowPath
 - Separation
 - AvoidCollisions

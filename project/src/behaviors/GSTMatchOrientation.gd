@@ -22,23 +22,23 @@ func _match_orientation(acceleration: GSTTargetAcceleration, desired_orientation
 	var rotation_size: = -rotation if rotation < 0 else rotation
 
 	if rotation_size <= alignment_tolerance:
-		return acceleration.set_zero()
+		acceleration.set_zero()
+	else:
+		var desired_rotation: = agent.max_angular_speed
 	
-	var desired_rotation: = agent.max_angular_speed
-
-	if rotation_size <= deceleration_radius:
-		desired_rotation *= rotation_size / deceleration_radius
+		if rotation_size <= deceleration_radius:
+			desired_rotation *= rotation_size / deceleration_radius
+		
+		desired_rotation *= rotation / rotation_size
 	
-	desired_rotation *= rotation / rotation_size
-
-	acceleration.angular = (desired_rotation - agent.angular_velocity) / time_to_reach
-
-	var limited_acceleration: = -acceleration.angular if acceleration.angular < 0 else acceleration.angular
-	if limited_acceleration > agent.max_angular_acceleration:
-		acceleration.angular *= agent.max_angular_acceleration / limited_acceleration
+		acceleration.angular = (desired_rotation - agent.angular_velocity) / time_to_reach
 	
-	acceleration.linear = Vector3.ZERO
-
+		var limited_acceleration: = -acceleration.angular if acceleration.angular < 0 else acceleration.angular
+		if limited_acceleration > agent.max_angular_acceleration:
+			acceleration.angular *= agent.max_angular_acceleration / limited_acceleration
+		
+		acceleration.linear = Vector3.ZERO
+	
 	return acceleration
 
 
