@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://src/Steering/Demos/SeekFlee/Player.gd" type="Script" id=1]
-[ext_resource path="res://src/Steering/Demos/SeekFlee/Spawner.gd" type="Script" id=2]
-[ext_resource path="res://src/Steering/Demos/SeekFlee/SeekFleeDemo.gd" type="Script" id=3]
-[ext_resource path="res://src/Steering/Demos/SeekFlee/Seeker.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Steering/Demos/SeekFlee/Boundary.gd" type="Script" id=5]
-[ext_resource path="res://src/Steering/Demos/SeekFlee/Coward.tscn" type="PackedScene" id=6]
+[ext_resource path="res://demos/seek_and_flee/Player.gd" type="Script" id=1]
+[ext_resource path="res://demos/seek_and_flee/Spawner.gd" type="Script" id=2]
+[ext_resource path="res://demos/seek_and_flee/SeekFleeDemo.gd" type="Script" id=3]
+[ext_resource path="res://demos/seek_and_flee/Seeker.tscn" type="PackedScene" id=4]
+[ext_resource path="res://demos/seek_and_flee/Boundary.gd" type="Script" id=5]
+[ext_resource path="res://demos/seek_and_flee/Coward.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 30.0
@@ -68,11 +68,13 @@ script = ExtResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBoundary"]
 shape = SubResource( 3 )
 
-[node name="SeekerSpawner" type="Node2D" parent="."]
-script = ExtResource( 2 )
-agent_scene = ExtResource( 4 )
+[node name="Spawners" type="Node2D" parent="."]
 
-[node name="FleeerSpawner" type="Node2D" parent="."]
+[node name="SeekerSpawner" type="Node2D" parent="Spawners"]
 script = ExtResource( 2 )
-agent_scene = ExtResource( 6 )
-agent_color = Color( 0.0980392, 0.886275, 0.517647, 1 )
+Entity = ExtResource( 4 )
+
+[node name="CowardSpawner" type="Node2D" parent="Spawners"]
+script = ExtResource( 2 )
+Entity = ExtResource( 6 )
+entity_color = Color( 0, 1, 0.741176, 1 )

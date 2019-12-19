@@ -1,5 +1,5 @@
-extends SteeringBehavior
-class_name Pursue
+extends GSTSteeringBehavior
+class_name GSTPursue
 """
 Calculates acceleration to take an agent to intersect with where a target agent will be.
 
@@ -7,20 +7,19 @@ The `max_predict_time` variable represents how far ahead to calculate the inters
 """
 
 
-var target: SteeringAgent
+var target: GSTSteeringAgent
 var max_predict_time: float
 
 
-func _init(agent: SteeringAgent, target: SteeringAgent, max_predict_time: = 1.0).(agent) -> void:
+func _init(
+		agent: GSTSteeringAgent,
+		target: GSTSteeringAgent,
+		max_predict_time: = 1.0).(agent) -> void:
 	self.target = target
 	self.max_predict_time = max_predict_time
 
 
-func get_max_linear_acceleration() -> float:
-	return agent.max_linear_acceleration
-
-
-func _calculate_internal_steering(acceleration: TargetAcceleration) -> TargetAcceleration:
+func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
 	var target_position: = target.position
 	var distance_squared: = (target_position - agent.position).length_squared()
 	
@@ -32,9 +31,14 @@ func _calculate_internal_steering(acceleration: TargetAcceleration) -> TargetAcc
 		if predict_time_squared < max_predict_time * max_predict_time:
 			predict_time = sqrt(predict_time_squared)
 	
-	acceleration.linear = ((target_position + (target.linear_velocity * predict_time))-agent.position).normalized()
-	acceleration.linear *= agent.max_linear_acceleration
+	acceleration.linear = ((
+			target_position + (target.linear_velocity * predict_time))-agent.position).normalized()
+	acceleration.linear *= _get_modified_acceleration()
 	
 	acceleration.angular = 0
 	
 	return acceleration
+
+
+func _get_modified_acceleration() -> float:
+	return agent.max_linear_acceleration

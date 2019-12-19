@@ -6,21 +6,19 @@ AI agent that uses the Seek behavior to hone in on the player's location as dire
 
 onready var radius: = ($CollisionShape2D.shape as CircleShape2D).radius
 
-var agent: SteeringAgent
-var player_agent: AgentLocation
-var seek: Seek
-var accel: = TargetAcceleration.new()
+onready var agent: = GSTSteeringAgent.new()
+onready var accel: = GSTTargetAcceleration.new()
+onready var seek: = GSTSeek.new(agent, player_agent)
+
+var player_agent: GSTAgentLocation
 var velocity: = Vector2.ZERO
 var speed: float
 var color: Color
 
 
 func _ready() -> void:
-	agent = SteeringAgent.new()
 	agent.max_linear_acceleration = speed/10
 	agent.max_linear_speed = speed
-	
-	seek = Seek.new(agent, player_agent)
 
 
 func _draw() -> void:

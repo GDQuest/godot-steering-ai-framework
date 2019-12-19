@@ -6,21 +6,19 @@ AI agent that seeks to move away from the player's location as directly as possi
 
 onready var radius: = ($CollisionShape2D.shape as CircleShape2D).radius
 
-var agent: SteeringAgent
-var player_agent: AgentLocation
-var flee: Flee
-var accel: = TargetAcceleration.new()
+onready var agent: = GSTSteeringAgent.new()
+onready var accel: = GSTTargetAcceleration.new()
+onready var flee: = GSTFlee.new(agent, player_agent)
+
+var player_agent: GSTAgentLocation
 var velocity: = Vector2.ZERO
 var speed: float
 var color: Color
 
 
 func _ready() -> void:
-	agent = SteeringAgent.new()
 	agent.max_linear_acceleration = speed/10
 	agent.max_linear_speed = speed
-	
-	flee = Flee.new(agent, player_agent)
 
 
 func _draw() -> void:

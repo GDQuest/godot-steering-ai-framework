@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/Steering/Demos/SeekFlee/Coward.gd" type="Script" id=1]
+[ext_resource path="res://demos/seek_and_flee/Coward.gd" type="Script" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
 

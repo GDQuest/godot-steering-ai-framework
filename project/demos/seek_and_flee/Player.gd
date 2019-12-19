@@ -5,10 +5,9 @@ Class to control the player in basic left/right up/down movement.
 
 
 onready var _radius: = ($CollisionShape2D.shape as CircleShape2D).radius
+onready var agent: = GSTAgentLocation.new()
 
 export var speed: = 150.0
-
-var player_agent: = AgentLocation.new()
 
 
 func _draw() -> void:
@@ -16,8 +15,8 @@ func _draw() -> void:
 
 
 func _get_movement() -> Vector2:
-	return Vector2(Input.get_action_strength("sf_right") - Input.get_action_strength("sf_left"), 
-			Input.get_action_strength("sf_down") - Input.get_action_strength("sf_up"))
+	return Vector2(	Input.get_action_strength("sf_right") - Input.get_action_strength("sf_left"),
+					Input.get_action_strength("sf_down")  - Input.get_action_strength("sf_up"))
 
 
 func _physics_process(delta: float) -> void:
@@ -26,4 +25,4 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	move_and_slide(movement * speed)
-	player_agent.position = Vector3(global_position.x, global_position.y, 0)
+	agent.position = Vector3(global_position.x, global_position.y, 0)

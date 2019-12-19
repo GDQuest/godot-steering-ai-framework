@@ -1,5 +1,5 @@
-extends AgentLocation
-class_name SteeringAgent
+extends GSTAgentLocation
+class_name GSTSteeringAgent
 """
 Extended agent data type that adds velocity and speed data.
 """
