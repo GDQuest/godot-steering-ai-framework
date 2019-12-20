@@ -36,8 +36,8 @@ func _match_orientation(acceleration: GSTTargetAcceleration, desired_orientation
 		var limited_acceleration: = -acceleration.angular if acceleration.angular < 0 else acceleration.angular
 		if limited_acceleration > agent.max_angular_acceleration:
 			acceleration.angular *= agent.max_angular_acceleration / limited_acceleration
-		
-		acceleration.linear = Vector3.ZERO
+	
+	acceleration.linear = Vector3.ZERO
 	
 	return acceleration
 

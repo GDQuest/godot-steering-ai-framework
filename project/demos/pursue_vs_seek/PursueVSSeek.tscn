@@ -29,6 +29,7 @@ script = ExtResource( 1 )
 color = Color( 0.811765, 0.909804, 0.113725, 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoundaryManager/Pursuer"]
+modulate = Color( 0.694118, 0.694118, 0.694118, 1 )
 polygon = PoolVector2Array( 0, -30, -25, 25, 25, 25 )
 
 [node name="Seeker" type="KinematicBody2D" parent="BoundaryManager"]
@@ -39,4 +40,5 @@ color = Color( 0.113725, 0.909804, 0.219608, 1 )
 use_seek = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoundaryManager/Seeker"]
+modulate = Color( 0.317647, 0.317647, 0.317647, 1 )
 polygon = PoolVector2Array( 0, -30, -25, 25, 25, 25 )

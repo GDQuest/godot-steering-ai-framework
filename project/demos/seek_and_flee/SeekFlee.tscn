@@ -3,9 +3,9 @@
 [ext_resource path="res://demos/seek_and_flee/Player.gd" type="Script" id=1]
 [ext_resource path="res://demos/seek_and_flee/Spawner.gd" type="Script" id=2]
 [ext_resource path="res://demos/seek_and_flee/SeekFleeDemo.gd" type="Script" id=3]
-[ext_resource path="res://demos/seek_and_flee/Seeker.tscn" type="PackedScene" id=4]
+[ext_resource path="res://demos/seek_and_flee/Agents/Seeker.tscn" type="PackedScene" id=4]
 [ext_resource path="res://demos/seek_and_flee/Boundary.gd" type="Script" id=5]
-[ext_resource path="res://demos/seek_and_flee/Coward.tscn" type="PackedScene" id=6]
+[ext_resource path="res://demos/seek_and_flee/Agents/Coward.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 30.0
