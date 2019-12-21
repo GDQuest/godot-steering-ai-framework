@@ -17,11 +17,11 @@ __meta__ = {
 [node name="BehaviorControls" type="VBoxContainer" parent="."]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 102.0
+margin_right = 96.0
 margin_bottom = 580.0
 
 [node name="Seek" type="CheckBox" parent="BehaviorControls"]
-margin_right = 82.0
+margin_right = 76.0
 margin_bottom = 24.0
 focus_mode = 0
 pressed = true
@@ -30,7 +30,7 @@ text = "Seek"
 
 [node name="Flee" type="CheckBox" parent="BehaviorControls"]
 margin_top = 28.0
-margin_right = 82.0
+margin_right = 76.0
 margin_bottom = 52.0
 focus_mode = 0
 enabled_focus_mode = 0
@@ -38,17 +38,17 @@ text = "Flee"
 
 [node name="Help" type="VBoxContainer" parent="BehaviorControls"]
 margin_top = 56.0
-margin_right = 82.0
+margin_right = 76.0
 margin_bottom = 108.0
 
 [node name="Controls" type="Label" parent="BehaviorControls/Help"]
-margin_right = 82.0
+margin_right = 76.0
 margin_bottom = 14.0
 text = "Controls"
 
 [node name="GridContainer" type="GridContainer" parent="BehaviorControls/Help"]
 margin_top = 18.0
-margin_right = 82.0
+margin_right = 76.0
 margin_bottom = 52.0
 columns = 3
 
@@ -59,11 +59,11 @@ rect_min_size = Vector2( 15, 15 )
 
 [node name="W" type="Label" parent="BehaviorControls/Help/GridContainer"]
 margin_left = 19.0
-margin_top = -1.0
 margin_right = 34.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 rect_min_size = Vector2( 15, 15 )
 text = "W"
+align = 1
 
 [node name="Sep2" type="Control" parent="BehaviorControls/Help/GridContainer"]
 margin_left = 38.0
@@ -72,24 +72,27 @@ margin_bottom = 15.0
 rect_min_size = Vector2( 15, 15 )
 
 [node name="A" type="Label" parent="BehaviorControls/Help/GridContainer"]
-margin_top = 18.0
+margin_top = 19.0
 margin_right = 15.0
-margin_bottom = 33.0
+margin_bottom = 34.0
 rect_min_size = Vector2( 15, 15 )
 text = "A"
+align = 1
 
 [node name="S" type="Label" parent="BehaviorControls/Help/GridContainer"]
 margin_left = 19.0
-margin_top = 18.0
+margin_top = 19.0
 margin_right = 34.0
-margin_bottom = 33.0
+margin_bottom = 34.0
 rect_min_size = Vector2( 15, 15 )
 text = "S"
+align = 1
 
 [node name="D" type="Label" parent="BehaviorControls/Help/GridContainer"]
 margin_left = 38.0
-margin_top = 18.0
+margin_top = 19.0
 margin_right = 53.0
-margin_bottom = 33.0
+margin_bottom = 34.0
 rect_min_size = Vector2( 15, 15 )
 text = "D"
+align = 1

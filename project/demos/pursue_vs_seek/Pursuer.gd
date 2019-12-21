@@ -34,8 +34,8 @@ func _setup() -> void:
 	
 	agent.max_angular_acceleration = 2
 	agent.max_angular_speed = 5
-	agent.max_linear_acceleration = 120
-	agent.max_linear_speed = 200
+	agent.max_linear_acceleration = 75
+	agent.max_linear_speed = 125
 	_update_agent()
 
 
@@ -51,9 +51,9 @@ func _physics_process(delta: float) -> void:
 	rotation = rotation + _angular_velocity * delta
 	
 	accel = _behavior.calculate_steering(accel)
-	_linear_velocity = (
-		_linear_velocity + Vector2(accel.linear.x, accel.linear.y) * delta).clamped(agent.max_linear_speed)
-	_linear_velocity -= _linear_velocity * 1 * delta
+	_linear_velocity += Vector2(accel.linear.x, accel.linear.y) * delta
+	_linear_velocity -= _linear_velocity.normalized() * 10 * delta
+	_linear_velocity = _linear_velocity.clamped(agent.max_linear_speed)
 	_linear_velocity = move_and_slide(_linear_velocity)
 	
 	_update_agent()

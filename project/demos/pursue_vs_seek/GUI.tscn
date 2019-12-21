@@ -1,0 +1,132 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://demos/pursue_vs_seek/GUI.gd" type="Script" id=1]
+
+[node name="GUI" type="MarginContainer"]
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="VBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 241.0
+margin_bottom = 580.0
+
+[node name="LinSpeed" type="HBoxContainer" parent="Controls"]
+margin_right = 221.0
+margin_bottom = 25.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="Controls/LinSpeed"]
+margin_right = 153.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 153, 25 )
+text = "Max Linear Speed"
+valign = 1
+
+[node name="LineEdit" type="LineEdit" parent="Controls/LinSpeed"]
+margin_left = 163.0
+margin_right = 221.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+focus_mode = 1
+text = "200"
+context_menu_enabled = false
+shortcut_keys_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LinAccel" type="HBoxContainer" parent="Controls"]
+margin_top = 29.0
+margin_right = 221.0
+margin_bottom = 54.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="Controls/LinAccel"]
+margin_right = 153.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 153, 25 )
+text = "Max Linear Acceleration"
+valign = 1
+
+[node name="LineEdit" type="LineEdit" parent="Controls/LinAccel"]
+margin_left = 163.0
+margin_right = 221.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+focus_mode = 1
+text = "120"
+context_menu_enabled = false
+shortcut_keys_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Help" type="VBoxContainer" parent="Controls"]
+margin_top = 58.0
+margin_right = 221.0
+margin_bottom = 110.0
+
+[node name="Controls" type="Label" parent="Controls/Help"]
+margin_right = 221.0
+margin_bottom = 14.0
+text = "Controls"
+
+[node name="GridContainer" type="GridContainer" parent="Controls/Help"]
+margin_top = 18.0
+margin_right = 221.0
+margin_bottom = 52.0
+columns = 3
+
+[node name="Sep" type="Control" parent="Controls/Help/GridContainer"]
+margin_right = 15.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 15, 15 )
+
+[node name="W" type="Label" parent="Controls/Help/GridContainer"]
+margin_left = 19.0
+margin_right = 34.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 15, 15 )
+text = "W"
+align = 1
+
+[node name="Sep2" type="Control" parent="Controls/Help/GridContainer"]
+margin_left = 38.0
+margin_right = 53.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 15, 15 )
+
+[node name="A" type="Label" parent="Controls/Help/GridContainer"]
+margin_top = 19.0
+margin_right = 15.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 15, 15 )
+text = "A"
+align = 1
+
+[node name="S" type="Label" parent="Controls/Help/GridContainer"]
+margin_left = 19.0
+margin_top = 19.0
+margin_right = 34.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 15, 15 )
+text = "S"
+align = 1
+
+[node name="D" type="Label" parent="Controls/Help/GridContainer"]
+margin_left = 38.0
+margin_top = 19.0
+margin_right = 53.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 15, 15 )
+text = "D"
+align = 1
