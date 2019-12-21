@@ -2,6 +2,8 @@
 
 [ext_resource path="res://demos/seek_and_flee/Seeker.gd" type="Script" id=1]
 
+
+
 [sub_resource type="CircleShape2D" id=1]
 
 [node name="Seeker" type="KinematicBody2D"]

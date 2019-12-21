@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://demos/seek_and_flee/GUI.gd" type="Script" id=3]
+
+[node name="GUI" type="MarginContainer"]
+anchor_bottom = 1.0
+margin_right = 116.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BehaviorControls" type="VBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 102.0
+margin_bottom = 580.0
+
+[node name="Seek" type="CheckBox" parent="BehaviorControls"]
+margin_right = 82.0
+margin_bottom = 24.0
+focus_mode = 0
+pressed = true
+enabled_focus_mode = 0
+text = "Seek"
+
+[node name="Flee" type="CheckBox" parent="BehaviorControls"]
+margin_top = 28.0
+margin_right = 82.0
+margin_bottom = 52.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Flee"
+
+[node name="Help" type="VBoxContainer" parent="BehaviorControls"]
+margin_top = 56.0
+margin_right = 82.0
+margin_bottom = 108.0
+
+[node name="Controls" type="Label" parent="BehaviorControls/Help"]
+margin_right = 82.0
+margin_bottom = 14.0
+text = "Controls"
+
+[node name="GridContainer" type="GridContainer" parent="BehaviorControls/Help"]
+margin_top = 18.0
+margin_right = 82.0
+margin_bottom = 52.0
+columns = 3
+
+[node name="Sep" type="Control" parent="BehaviorControls/Help/GridContainer"]
+margin_right = 15.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 15, 15 )
+
+[node name="W" type="Label" parent="BehaviorControls/Help/GridContainer"]
+margin_left = 19.0
+margin_top = -1.0
+margin_right = 34.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 15, 15 )
+text = "W"
+
+[node name="Sep2" type="Control" parent="BehaviorControls/Help/GridContainer"]
+margin_left = 38.0
+margin_right = 53.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 15, 15 )
+
+[node name="A" type="Label" parent="BehaviorControls/Help/GridContainer"]
+margin_top = 18.0
+margin_right = 15.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 15, 15 )
+text = "A"
+
+[node name="S" type="Label" parent="BehaviorControls/Help/GridContainer"]
+margin_left = 19.0
+margin_top = 18.0
+margin_right = 34.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 15, 15 )
+text = "S"
+
+[node name="D" type="Label" parent="BehaviorControls/Help/GridContainer"]
+margin_left = 38.0
+margin_top = 18.0
+margin_right = 53.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 15, 15 )
+text = "D"

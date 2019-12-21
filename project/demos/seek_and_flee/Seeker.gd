@@ -9,6 +9,8 @@ onready var radius: = ($CollisionShape2D.shape as CircleShape2D).radius
 onready var agent: = GSTSteeringAgent.new()
 onready var accel: = GSTTargetAcceleration.new()
 onready var seek: = GSTSeek.new(agent, player_agent)
+onready var flee: = GSTFlee.new(agent, player_agent)
+onready var _active_behavior: = seek
 
 var player_agent: GSTAgentLocation
 var velocity: = Vector2.ZERO
@@ -30,7 +32,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	_update_agent()
-	accel = seek.calculate_steering(accel)
+	accel = _active_behavior.calculate_steering(accel)
 	
 	velocity = (velocity + Vector2(accel.linear.x, accel.linear.y)).clamped(agent.max_linear_speed)
 	velocity = move_and_slide(velocity)
@@ -40,3 +42,10 @@ func _physics_process(delta: float) -> void:
 
 func _update_agent() -> void:
 	agent.position = Vector3(global_position.x, global_position.y, 0)
+
+
+func _on_GUI_mode_changed(mode: int) -> void:
+	if mode == 0:
+		_active_behavior = seek
+	else:
+		_active_behavior = flee

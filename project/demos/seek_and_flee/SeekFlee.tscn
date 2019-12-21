@@ -3,9 +3,9 @@
 [ext_resource path="res://demos/seek_and_flee/Player.gd" type="Script" id=1]
 [ext_resource path="res://demos/seek_and_flee/Spawner.gd" type="Script" id=2]
 [ext_resource path="res://demos/seek_and_flee/SeekFleeDemo.gd" type="Script" id=3]
-[ext_resource path="res://demos/seek_and_flee/Agents/Seeker.tscn" type="PackedScene" id=4]
+[ext_resource path="res://demos/seek_and_flee/Seeker.tscn" type="PackedScene" id=4]
 [ext_resource path="res://demos/seek_and_flee/Boundary.gd" type="Script" id=5]
-[ext_resource path="res://demos/seek_and_flee/Agents/Coward.tscn" type="PackedScene" id=6]
+[ext_resource path="res://demos/seek_and_flee/GUI.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 30.0
@@ -21,6 +21,12 @@ script = ExtResource( 3 )
 __meta__ = {
 "_editor_description_": "A toy demo to demonstrate the usage for the Seek and Flee steering behaviors."
 }
+
+[node name="GUI" parent="." instance=ExtResource( 7 )]
+margin_left = -512.0
+margin_top = -300.0
+margin_right = -414.0
+margin_bottom = -208.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -68,13 +74,6 @@ script = ExtResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBoundary"]
 shape = SubResource( 3 )
 
-[node name="Spawners" type="Node2D" parent="."]
-
-[node name="SeekerSpawner" type="Node2D" parent="Spawners"]
+[node name="Spawner" type="Node2D" parent="."]
 script = ExtResource( 2 )
 Entity = ExtResource( 4 )
-
-[node name="CowardSpawner" type="Node2D" parent="Spawners"]
-script = ExtResource( 2 )
-Entity = ExtResource( 6 )
-entity_color = Color( 0, 1, 0.741176, 1 )
