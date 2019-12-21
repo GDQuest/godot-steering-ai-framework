@@ -6,7 +6,6 @@ onready var _cannon: = Rect2(Vector2(-5, 0), Vector2(10, -_radius*2))
 onready var _agent: = GSTSteeringAgent.new()
 onready var _accel: = GSTTargetAcceleration.new()
 
-
 var _angular_velocity: = 0.0
 var _angular_drag: = 1.0
 var _face: GSTFace
