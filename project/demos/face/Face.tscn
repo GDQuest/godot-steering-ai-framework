@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://demos/face/Player.gd" type="Script" id=1]
 [ext_resource path="res://demos/face/Turret.gd" type="Script" id=2]
 [ext_resource path="res://demos/face/FaceDemo.gd" type="Script" id=3]
+[ext_resource path="res://demos/face/GUI.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.0
@@ -15,6 +16,8 @@ script = ExtResource( 3 )
 __meta__ = {
 "_editor_description_": "A demo showing the usage of the Face steering behavior."
 }
+
+[node name="GUI" parent="." instance=ExtResource( 4 )]
 
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 512, 450 )

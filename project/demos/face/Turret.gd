@@ -16,9 +16,10 @@ func _draw() -> void:
 	draw_circle(Vector2.ZERO, _radius, Color.teal)
 
 
+
 func _physics_process(delta: float) -> void:
 	if not _face:
-		_setup()
+		return
 	
 	_accel = _face.calculate_steering(_accel)
 	_angular_velocity += _accel.angular
@@ -33,12 +34,7 @@ func _physics_process(delta: float) -> void:
 	_update_agent()
 
 
-func _update_agent() -> void:
-	_agent.angular_velocity = _angular_velocity
-	_agent.orientation = rotation
-
-
-func _setup() -> void:
+func setup() -> void:
 	_face = GSTFace.new(_agent, owner.player.agent)
 	
 	_face.alignment_tolerance = 0.1
@@ -49,3 +45,8 @@ func _setup() -> void:
 	_agent.position = Vector3(global_position.x, global_position.y, 0)
 	
 	_update_agent()
+
+
+func _update_agent() -> void:
+	_agent.angular_velocity = _angular_velocity
+	_agent.orientation = rotation
