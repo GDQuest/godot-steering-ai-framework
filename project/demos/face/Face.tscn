@@ -17,8 +17,6 @@ __meta__ = {
 "_editor_description_": "A demo showing the usage of the Face steering behavior."
 }
 
-[node name="GUI" parent="." instance=ExtResource( 4 )]
-
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 512, 450 )
 script = ExtResource( 1 )
@@ -32,3 +30,7 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Turret"]
 shape = SubResource( 2 )
+
+[node name="GUI" parent="." instance=ExtResource( 4 )]
+margin_right = 232.0
+margin_bottom = 204.0

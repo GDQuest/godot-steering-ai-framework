@@ -22,12 +22,6 @@ __meta__ = {
 "_editor_description_": "A toy demo to demonstrate the usage for the Seek and Flee steering behaviors."
 }
 
-[node name="GUI" parent="." instance=ExtResource( 7 )]
-margin_left = -512.0
-margin_top = -300.0
-margin_right = -414.0
-margin_bottom = -208.0
-
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
@@ -77,3 +71,9 @@ shape = SubResource( 3 )
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource( 2 )
 Entity = ExtResource( 4 )
+
+[node name="GUI" parent="." instance=ExtResource( 7 )]
+margin_left = -512.0
+margin_top = -300.0
+margin_right = -414.0
+margin_bottom = -152.0

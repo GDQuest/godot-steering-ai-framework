@@ -12,8 +12,6 @@ __meta__ = {
 "_editor_description_": "Toy demo to demonstrate the use of the Pursue contrasted to the more naive Seek steering behavior."
 }
 
-[node name="GUI" parent="." instance=ExtResource( 4 )]
-
 [node name="BoundaryManager" type="Node2D" parent="."]
 script = ExtResource( 2 )
 
@@ -47,3 +45,7 @@ use_seek = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoundaryManager/Seeker"]
 modulate = Color( 0.317647, 0.317647, 0.317647, 1 )
 polygon = PoolVector2Array( 0, -30, -25, 25, 25, 25 )
+
+[node name="GUI" parent="." instance=ExtResource( 4 )]
+margin_right = 261.0
+margin_bottom = 150.0
