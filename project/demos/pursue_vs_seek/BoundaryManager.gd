@@ -4,8 +4,8 @@ Wraps the ships' positions around the world border, and controls their rendering
 """
 
 
-onready var _ships: = [$Player, $Pursuer, $Seeker]
 onready var ShipType: = preload("res://demos/pursue_vs_seek/Ship.gd")
+onready var ships: = [$Player, $Pursuer, $Seeker]
 
 var _clones: = {}
 var _world_bounds: Vector2
@@ -17,8 +17,8 @@ func _ready() -> void:
 			ProjectSettings["display/window/size/height"]
 	)
 	
-	for i in range(_ships.size()):
-		var ship: Node2D = _ships[i]
+	for i in range(ships.size()):
+		var ship: Node2D = ships[i]
 		var world_pos: = ship.position
 		
 		for i in range(3):

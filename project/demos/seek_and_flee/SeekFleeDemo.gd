@@ -6,7 +6,7 @@ Access helper class for children to access window boundaries.
 
 onready var player: KinematicBody2D = $Player
 onready var spawner: Node2D = $Spawner
-onready var _gui: = $GUI
+onready var gui: = $GUI
 
 var camera_boundaries: Rect2
 
@@ -35,5 +35,5 @@ func _ready() -> void:
 		entity.player_agent = player.agent
 		entity.speed = rng.randf_range(spawner.min_speed, spawner.max_speed)
 		entity.color = spawner.entity_color
-		_gui.connect("mode_changed", entity, "_on_GUI_mode_changed")
+		gui.connect("mode_changed", entity, "_on_GUI_mode_changed")
 		spawner.add_child(entity)

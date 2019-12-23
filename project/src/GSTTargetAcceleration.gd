@@ -20,9 +20,9 @@ func add_scaled_accel(accel: GSTTargetAcceleration, scalar: float) -> void:
 	angular += accel.angular * scalar
 
 
-func get_squared_magnitude() -> float:
+func get_magnitude_squared() -> float:
 	return linear.length_squared() + angular * angular
 
 
 func get_magnitude() -> float:
-	return sqrt(get_squared_magnitude())
+	return sqrt(get_magnitude_squared())

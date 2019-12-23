@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0
 
-[node name="Arrive" type="Node2D"]
+[node name="ArriveDemo" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Arriver" type="KinematicBody2D" parent="."]

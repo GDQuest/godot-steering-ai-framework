@@ -4,10 +4,16 @@ Class to control the player in basic left/right up/down movement.
 """
 
 
-onready var _radius: = ($CollisionShape2D.shape as CircleShape2D).radius
+onready var collision_shape: = $CollisionShape2D
 onready var agent: = GSTAgentLocation.new()
 
 export var speed: = 150.0
+
+var _radius: = 0.0
+
+
+func _ready() -> void:
+	_radius = collision_shape.shape.radius
 
 
 func _draw() -> void:

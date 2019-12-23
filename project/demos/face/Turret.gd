@@ -1,20 +1,27 @@
 extends KinematicBody2D
 
 
-onready var _radius: float = ($CollisionShape2D.shape as CircleShape2D).radius
-onready var _cannon: = Rect2(Vector2(-5, 0), Vector2(10, -_radius*2))
-onready var _agent: = GSTSteeringAgent.new()
-onready var _accel: = GSTTargetAcceleration.new()
+onready var collision_shape: = $CollisionShape2D
+
+var _radius: = 0.0
+var _cannon: Rect2
+
+var _agent: = GSTSteeringAgent.new()
+var _accel: = GSTTargetAcceleration.new()
 
 var _angular_velocity: = 0.0
 var _angular_drag: = 1.0
 var _face: GSTFace
 
 
+func _ready() -> void:
+	_radius = collision_shape.shape.radius
+	_cannon = Rect2(Vector2(-5, 0), Vector2(10, -_radius*2))
+
+
 func _draw() -> void:
 	draw_rect(_cannon, Color.blue)
 	draw_circle(Vector2.ZERO, _radius, Color.teal)
-
 
 
 func _physics_process(delta: float) -> void:

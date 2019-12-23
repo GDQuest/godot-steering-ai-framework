@@ -1,10 +1,16 @@
 extends KinematicBody2D
 
 
-onready var _radius: float = ($CollisionShape2D.shape as CircleShape2D).radius
+onready var collision_shape: = $CollisionShape2D
 onready var agent: = GSTAgentLocation.new()
 
 export var speed: = 125.0
+
+var _radius: = 0.0
+
+
+func _ready() -> void:
+	_radius = collision_shape.shape.radius
 
 
 func _draw() -> void:

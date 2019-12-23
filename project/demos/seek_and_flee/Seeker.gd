@@ -4,7 +4,7 @@ AI agent that uses the Seek behavior to hone in on the player's location as dire
 """
 
 
-onready var radius: = ($CollisionShape2D.shape as CircleShape2D).radius
+onready var collision_shape: = $CollisionShape2D
 
 onready var agent: = GSTSteeringAgent.new()
 onready var accel: = GSTTargetAcceleration.new()
@@ -16,11 +16,13 @@ var player_agent: GSTAgentLocation
 var velocity: = Vector2.ZERO
 var speed: float
 var color: Color
+var radius: = 0.0
 
 
 func _ready() -> void:
 	agent.max_linear_acceleration = speed/10
 	agent.max_linear_speed = speed
+	radius = collision_shape.shape.radius
 
 
 func _draw() -> void:

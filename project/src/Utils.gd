@@ -5,8 +5,8 @@ Useful math and utility functions to complement Godot's own.
 
 
 static func clampedv3(vector: Vector3, limit: float) -> Vector3:
-	var len2: = vector.length_squared()
-	var limit2: = limit * limit
-	if len2 > limit2:
-		vector *= sqrt(limit2 / len2)
+	var length_squared: = vector.length_squared()
+	var limit_squared: = limit * limit
+	if length_squared > limit_squared:
+		vector *= sqrt(limit_squared / length_squared)
 	return vector

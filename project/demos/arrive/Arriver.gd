@@ -1,18 +1,20 @@
 extends KinematicBody2D
 
 
-onready var _radius: float = ($CollisionShape2D.shape as CircleShape2D).radius
+onready var collision_shape: = $CollisionShape2D
 
-onready var _agent: = GSTSteeringAgent.new()
-onready var _target: = GSTAgentLocation.new()
-onready var _arrive: = GSTArrive.new(_agent, _target)
-onready var _accel: = GSTTargetAcceleration.new()
+var _radius: = 0.0
+var _agent: = GSTSteeringAgent.new()
+var _target: = GSTAgentLocation.new()
+var _arrive: = GSTArrive.new(_agent, _target)
+var _accel: = GSTTargetAcceleration.new()
 
 var _velocity: = Vector2()
 var _drag: = 1.0
 
 
 func _ready() -> void:
+	_radius = collision_shape.shape.radius
 	_agent.max_linear_acceleration = 10
 	_agent.max_linear_speed = 200
 	_arrive.arrival_tolerance = 25
