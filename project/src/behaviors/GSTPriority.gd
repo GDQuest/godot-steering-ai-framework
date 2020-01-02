@@ -1,9 +1,7 @@
 extends GSTSteeringBehavior
 class_name GSTPriority
-"""
-Contains multiple steering behaviors and returns only the result of the first that has a non-zero
- acceleration.
-"""
+# Contains multiple steering behaviors and returns only the result of the first that has a non-zero
+ # acceleration.
 
 
 onready var _behaviors: = []

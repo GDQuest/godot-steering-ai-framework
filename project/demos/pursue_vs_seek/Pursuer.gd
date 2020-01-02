@@ -1,7 +1,5 @@
 extends "res://demos/pursue_vs_seek/Ship.gd"
-"""
-Represents a ship that chases after the player.
-"""
+# Represents a ship that chases after the player.
 
 
 onready var agent: = GSTSteeringAgent.new()

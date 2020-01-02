@@ -1,7 +1,5 @@
 extends KinematicBody2D
-"""
-AI agent that uses the Seek behavior to hone in on the player's location as directly as possible.
-"""
+# AI agent that uses the Seek behavior to hone in on the player's location as directly as possible.
 
 
 onready var collision_shape: = $CollisionShape2D

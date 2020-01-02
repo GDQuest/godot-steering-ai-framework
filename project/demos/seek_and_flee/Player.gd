@@ -1,7 +1,5 @@
 extends KinematicBody2D
-"""
-Class to control the player in basic left/right up/down movement.
-"""
+# Class to control the player in basic left/right up/down movement.
 
 
 onready var collision_shape: = $CollisionShape2D

@@ -1,7 +1,5 @@
 extends Node2D
-"""
-Access helper class for children to access window boundaries.
-"""
+# Access helper class for children to access window boundaries.
 
 
 onready var player: KinematicBody2D = $Player

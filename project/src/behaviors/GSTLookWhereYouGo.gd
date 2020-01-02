@@ -1,8 +1,6 @@
 extends GSTMatchOrientation
 class_name GSTLookWhereYouGo
-"""
-Calculates an angular acceleration to match an agent's orientation to its direction of travel.
-"""
+# Calculates an angular acceleration to match an agent's orientation to its direction of travel.
 
 
 func _init(agent: GSTSteeringAgent).(agent, null) -> void:

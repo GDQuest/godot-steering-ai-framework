@@ -1,7 +1,5 @@
 extends KinematicBody2D
-"""
-Draws a notched triangle based on the vertices of the ship's polygon collider.
-"""
+# Draws a notched triangle based on the vertices of the ship's polygon collider.
 
 
 export var color: = Color()

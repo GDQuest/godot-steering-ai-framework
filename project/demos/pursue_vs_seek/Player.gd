@@ -1,7 +1,5 @@
 extends "res://demos/pursue_vs_seek/Ship.gd"
-"""
-Controls the player ship's movements based on player input.
-"""
+# Controls the player ship's movements based on player input.
 
 
 onready var agent: = GSTSteeringAgent.new()

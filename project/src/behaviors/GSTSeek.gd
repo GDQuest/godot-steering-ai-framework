@@ -1,8 +1,6 @@
 extends GSTSteeringBehavior
 class_name GSTSeek
-"""
-Calculates acceleration to take an agent to a target agent's position as directly as possible
-"""
+# Calculates acceleration to take an agent to a target agent's position as directly as possible
 
 
 var target: GSTAgentLocation

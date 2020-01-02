@@ -1,7 +1,5 @@
 extends StaticBody2D
-"""
-Draws the bounding box of the static body wall.
-"""
+# Draws the bounding box of the static body wall.
 
 
 var rect: Rect2

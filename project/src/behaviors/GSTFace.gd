@@ -1,9 +1,7 @@
 extends GSTMatchOrientation
 class_name GSTFace
-"""
-Calculates angular acceleration to rotate a target to face its target's position.
-The acceleration will attempt to arrive with zero remaining angular velocity.
-"""
+# Calculates angular acceleration to rotate a target to face its target's position.
+# The acceleration will attempt to arrive with zero remaining angular velocity.
 
 
 func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent, target) -> void:

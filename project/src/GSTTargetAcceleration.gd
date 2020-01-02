@@ -1,7 +1,5 @@
 class_name GSTTargetAcceleration
-"""
-A linear and angular amount of acceleration.
-"""
+# A linear and angular amount of acceleration.
 
 
 var linear: = Vector3.ZERO

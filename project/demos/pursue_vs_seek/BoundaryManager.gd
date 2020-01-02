@@ -1,7 +1,5 @@
 extends Node2D
-"""
-Wraps the ships' positions around the world border, and controls their rendering clones.
-"""
+# Wraps the ships' positions around the world border, and controls their rendering clones.
 
 
 onready var ShipType: = preload("res://demos/pursue_vs_seek/Ship.gd")

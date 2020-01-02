@@ -1,14 +1,12 @@
 extends GSTSteeringBehavior
 class_name GSTBlend
-"""
-Blends multiple steering behaviors into one, and returns acceleration combining all of them.
+# Blends multiple steering behaviors into one, and returns acceleration combining all of them.
 
-Each behavior is associated with a weight - a modifier by which the result will be multiplied by,
-then added to a total acceleration.
+# # Each behavior is associated with a weight - a modifier by which the result will be multiplied by,
+# then added to a total acceleration.
 
-Each behavior is stored internally as a `Dictionary` with a `behavior` key with a value of type
-`GSTSteeringBehavior` and a `weight` key with a value of type float.
-"""
+# # Each behavior is stored internally as a `Dictionary` with a `behavior` key with a value of type
+# `GSTSteeringBehavior` and a `weight` key with a value of type float.
 
 
 onready var _behaviors: = []
