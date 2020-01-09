@@ -8,9 +8,9 @@ var agents: = []
 
 
 func _init(agent: GSTSteeringAgent, agents: Array) -> void:
-    self.agent = agent
-    self.agents = agents
+	self.agent = agent
+	self.agents = agents
 
 
 func find_neighbors(callback: FuncRef) -> int:
-    return 0
+	return 0
