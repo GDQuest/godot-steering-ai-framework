@@ -1,6 +1,6 @@
 extends GSTAgentLocation
 class_name GSTSteeringAgent
-# Extended agent data type that adds velocity and speed data.
+# Extended agent data type that adds velocity, speed, and size data
 
 
 var zero_linear_speed_threshold: = 0.01

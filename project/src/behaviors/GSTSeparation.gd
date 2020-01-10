@@ -1,4 +1,4 @@
-extends GSTSteeringBehavior
+extends GSTGroupBehavior
 class_name GSTSeparation
 # Group behavior that produces acceleration repelling from the other neighbors that are in the
 # immediate area defined by the given `GSTProximity`.
@@ -11,21 +11,20 @@ class_name GSTSeparation
 var decay_coefficient: = 1.0
 
 var acceleration: GSTTargetAcceleration
-var proximity: GSTProximity
 
 
-func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent) -> void:
-	self.proximity = proximity
+func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent, proximity) -> void:
+	pass
 
 
 func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
 	acceleration.set_zero()
 	self.acceleration = acceleration
-	proximity.find_neighbors(funcref(self, "_report_neighbor"))
+	proximity.find_neighbors(_callback)
 	return acceleration
 
 
-func _report_neighbor(neighbor: GSTSteeringAgent) -> bool:
+func report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 	var to_agent: = agent.position - neighbor.position
 
 	var distance_squared: = to_agent.length_squared()

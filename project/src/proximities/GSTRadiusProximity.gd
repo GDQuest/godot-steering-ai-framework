@@ -1,7 +1,7 @@
 extends GSTProximity
 class_name GSTRadiusProximity
-# Specifies any agent that is in the specified list as being neighbors with the owner agent if they
-# lie within the specified radius.
+# Determines any agent that is in the specified list as being neighbors with the owner agent if
+# they lie within the specified radius.
 
 
 var radius: = 0.0
@@ -34,7 +34,7 @@ func find_neighbors(callback: FuncRef) -> int:
 				var range_to: = radius + current_agent.bounding_radius
 	
 				if distance_squared < range_to * range_to:
-					if callback.call_func(current_agent) == true:
+					if callback.call_func(current_agent):
 						current_agent.tagged = true
 						neighbor_count += 1
 						continue
@@ -45,7 +45,7 @@ func find_neighbors(callback: FuncRef) -> int:
 			var current_agent = agents[i] as GSTSteeringAgent
 			
 			if current_agent != agent and current_agent.tagged:
-				if callback.call_func(current_agent) == true:
+				if callback.call_func(current_agent):
 					neighbor_count += 1
 	
 	return neighbor_count

@@ -30,7 +30,7 @@ func _arrive(acceleration: GSTTargetAcceleration, target_position: Vector3) -> G
 		
 		desired_velocity = (desired_velocity - agent.linear_velocity) * 1.0 / time_to_reach
 		
-		acceleration.linear = Utils.clampedv3(desired_velocity, agent.max_linear_acceleration)
+		acceleration.linear = GSTUtils.clampedv3(desired_velocity, agent.max_linear_acceleration)
 		acceleration.angular = 0
 	
 	return acceleration

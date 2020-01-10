@@ -1,6 +1,6 @@
 extends GSTProximity
 class_name GSTInfiniteProximity
-# Specifies any agent that is in the specified list as being neighbors with the owner agent.
+# Determines any agent that is in the specified list as being neighbors with the owner agent.
 
 
 func _init(agent: GSTSteeringAgent, agents: Array).(agent, agents) -> void:

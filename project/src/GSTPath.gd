@@ -1,60 +1,69 @@
 extends Reference
 class_name GSTPath
+# Represents a path made up of Vector3 waypoints, split into path segments for use by path
+# following algorithms.
+
+# # Keeping it updated requires calling `create_path` to update the path.
 
 
-var segments: Array
-var is_open: bool
+var open: bool
 var path_length: float
 
-var nearest_point_on_segment: Vector3
-var nearest_point_on_path: Vector3
+var _segments: Array
+
+var _nearest_point_on_segment: Vector3
+var _nearest_point_on_path: Vector3
 
 
 func _init(waypoints: Array, is_open: = false) -> void:
 	self.is_open = is_open
-	_create_path(waypoints)
-	nearest_point_on_segment = waypoints[0]
-	nearest_point_on_path = waypoints[0]
+	create_path(waypoints)
+	_nearest_point_on_segment = waypoints[0]
+	_nearest_point_on_path = waypoints[0]
 
 
-func get_start_point() -> Vector3:
-	return segments.front().begin
-
-
-func get_end_point() -> Vector3:
-	return segments.back().end
-
-
-func calculate_point_segment_distance_squared(a: Vector3, b: Vector3, c: Vector3) -> float:
-	nearest_point_on_segment = a
-	var ab: = b - a
-	var ab_length_squared: = ab.length_squared()
-	if ab_length_squared != 0:
-		var t = (c - a).dot(ab) / ab_length_squared
-		nearest_point_on_segment += ab * clamp(t, 0, 1)
+func create_path(waypoints: Array) -> void:
+	if not waypoints or waypoints.size() < 2:
+		printerr("Waypoints cannot be null and must contain at least two (2) waypoints.")
 	
-	return nearest_point_on_segment.distance_squared_to(c)
+	_segments = []
+	path_length = 0
+	var current: Vector3 = _segments[0]
+	var previous: Vector3
+	
+	for i in range(1, waypoints.size(), 1):
+		previous = current
+		if i < waypoints.size():
+			current = waypoints[i]
+		elif open:
+			break
+		else:
+			current = waypoints[0]
+		var segment: = GSTSegment.new(previous, current)
+		path_length += segment.length
+		segment.cumulative_length = path_length
+		_segments.append(segment)
 
 
 func calculate_distance(agent_current_position: Vector3, path_parameter: Dictionary) -> float:
 	var smallest_distance_squared: float = INF
 	var nearest_segment: GSTSegment
-	for i in range(segments.size()):
-		var segment: GSTSegment = segments[i]
-		var distance_squared: = calculate_point_segment_distance_squared(
+	for i in range(_segments.size()):
+		var segment: GSTSegment = _segments[i]
+		var distance_squared: = _calculate_point_segment_distance_squared(
 				segment.begin,
 				segment.end,
 				agent_current_position)
 		
 		if distance_squared < smallest_distance_squared:
-			nearest_point_on_path = nearest_point_on_segment
+			_nearest_point_on_path = _nearest_point_on_segment
 			smallest_distance_squared = distance_squared
 			nearest_segment = segment
 			path_parameter.segment_index = i
 	
 	var length_on_path: = (
 		nearest_segment.cumulative_length - 
-		nearest_point_on_path.distance_to(nearest_segment.end))
+		_nearest_point_on_path.distance_to(nearest_segment.end))
 	
 	path_parameter.distance = length_on_path
 	
@@ -62,7 +71,7 @@ func calculate_distance(agent_current_position: Vector3, path_parameter: Diction
 
 
 func calculate_target_position(param: Dictionary, target_distance: float) -> Vector3:
-	if is_open:
+	if open:
 		target_distance = clamp(target_distance, 0, path_length)
 	else:
 		if target_distance < 0:
@@ -71,8 +80,8 @@ func calculate_target_position(param: Dictionary, target_distance: float) -> Vec
 			target_distance = fmod(target_distance, path_length)
 	
 	var desired_segment: GSTSegment
-	for i in range(segments.size()):
-		var segment: GSTSegment = segments[i]
+	for i in range(_segments.size()):
+		var segment: GSTSegment = _segments[i]
 		if segment.cumulative_length >= target_distance:
 			desired_segment = segment
 			break
@@ -84,27 +93,23 @@ func calculate_target_position(param: Dictionary, target_distance: float) -> Vec
 		(distance / desired_segment.length) + desired_segment.end)
 
 
-func _create_path(waypoints: Array) -> void:
-	if not waypoints or waypoints.size() < 2:
-		printerr("Waypoints cannot be null and must contain at least two (2) waypoints.")
+func get_start_point() -> Vector3:
+	return _segments.front().begin
+
+
+func get_end_point() -> Vector3:
+	return _segments.back().end
+
+
+func _calculate_point_segment_distance_squared(start: Vector3, end: Vector3, position: Vector3) -> float:
+	_nearest_point_on_segment = start
+	var start_end: = end - start
+	var start_end_length_squared: = start_end.length_squared()
+	if start_end_length_squared != 0:
+		var t = (position - start).dot(start_end) / start_end_length_squared
+		_nearest_point_on_segment += start_end * clamp(t, 0, 1)
 	
-	segments = []
-	path_length = 0
-	var current: Vector3 = segments[0]
-	var previous: Vector3
-	
-	for i in range(1, waypoints.size(), 1):
-		previous = current
-		if i < waypoints.size():
-			current = waypoints[i]
-		elif is_open:
-			break
-		else:
-			current = waypoints[0]
-		var segment: = GSTSegment.new(previous, current)
-		path_length += segment.length
-		segment.cumulative_length = path_length
-		segments.append(segment)
+	return _nearest_point_on_segment.distance_squared_to(position)
 
 
 class GSTSegment:

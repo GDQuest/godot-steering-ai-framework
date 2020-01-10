@@ -1,4 +1,4 @@
-class_name Utils
+class_name GSTUtils
 # Useful math and utility functions to complement Godot's own.
 
 

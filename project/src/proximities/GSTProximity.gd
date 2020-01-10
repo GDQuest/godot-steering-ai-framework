@@ -1,6 +1,7 @@
 extends Reference
 class_name GSTProximity
-# Defines an area that is used by group behaviors to find and process the owner's neighbors.
+# Defines a way to determine any agent that is in the specified list as being neighbors with the
+# owner agent.
 
 
 var agent: GSTSteeringAgent
