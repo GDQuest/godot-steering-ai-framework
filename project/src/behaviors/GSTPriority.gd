@@ -4,7 +4,7 @@ class_name GSTPriority
  # acceleration.
 
 
-onready var _behaviors: = []
+var _behaviors: = []
 
 var last_selected_index: int
 var threshold_for_zero: float
@@ -38,7 +38,7 @@ func _calculate_steering(accel: GSTTargetAcceleration) -> GSTTargetAcceleration:
 			var behavior: GSTSteeringBehavior = _behaviors[i]
 			behavior.calculate_steering(accel)
 			
-			if accel.get_squared_magnitude() > threshold_squared:
+			if accel.get_magnitude_squared() > threshold_squared:
 				break
 	else:
 		accel.set_zero()

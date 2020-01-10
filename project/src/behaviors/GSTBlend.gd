@@ -9,8 +9,8 @@ class_name GSTBlend
 # `GSTSteeringBehavior` and a `weight` key with a value of type float.
 
 
-onready var _behaviors: = []
-onready var _accel: = GSTTargetAcceleration.new()
+var _behaviors: = []
+var _accel: = GSTTargetAcceleration.new()
 
 
 func _init(agent: GSTSteeringAgent).(agent) -> void:
