@@ -12,14 +12,15 @@ onready var _active_behavior: = seek
 
 var player_agent: GSTAgentLocation
 var velocity: = Vector2.ZERO
-var speed: float
+var start_speed: float
+var start_accel: float
 var color: Color
 var radius: = 0.0
 
 
 func _ready() -> void:
-	agent.max_linear_acceleration = speed/10
-	agent.max_linear_speed = speed
+	agent.max_linear_acceleration = start_accel
+	agent.max_linear_speed = start_speed
 	radius = collision_shape.shape.radius
 
 
@@ -36,12 +37,13 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = (velocity + Vector2(accel.linear.x, accel.linear.y)).clamped(agent.max_linear_speed)
 	velocity = move_and_slide(velocity)
-	if velocity.length_squared() > 0:
-		update()
 
 
 func _update_agent() -> void:
-	agent.position = Vector3(global_position.x, global_position.y, 0)
+	agent.position.x = global_position.x
+	agent.position.y = global_position.y
+	agent.linear_velocity.x = velocity.x
+	agent.linear_velocity.y = velocity.y
 
 
 func _on_GUI_mode_changed(mode: int) -> void:
@@ -49,3 +51,11 @@ func _on_GUI_mode_changed(mode: int) -> void:
 		_active_behavior = seek
 	else:
 		_active_behavior = flee
+
+
+func _on_GUI_acc_changed(value: float) -> void:
+	agent.max_linear_acceleration = value
+
+
+func _on_GUI_speed_changed(value: float) -> void:
+	agent.max_linear_speed = value

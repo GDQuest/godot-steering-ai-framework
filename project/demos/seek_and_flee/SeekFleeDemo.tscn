@@ -71,9 +71,11 @@ shape = SubResource( 3 )
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource( 4 )
 Entity = ExtResource( 6 )
+max_speed = 150.0
 
 [node name="GUI" parent="." instance=ExtResource( 5 )]
 margin_left = -512.0
 margin_top = -300.0
-margin_right = -414.0
-margin_bottom = -152.0
+margin_right = -386.0
+margin_bottom = -102.0
+rect_min_size = Vector2( 0, 600 )

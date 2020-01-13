@@ -1,98 +1,143 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=1]
 [ext_resource path="res://demos/seek_and_flee/GUI.gd" type="Script" id=3]
 
-[node name="GUI" type="MarginContainer"]
+[node name="GUI" type="PanelContainer"]
 anchor_bottom = 1.0
-margin_right = 116.0
-custom_constants/margin_right = 20
-custom_constants/margin_top = 20
-custom_constants/margin_left = 20
-custom_constants/margin_bottom = 20
+margin_right = 118.0
+theme = ExtResource( 1 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BehaviorControls" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 218.0
+margin_bottom = 600.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BehaviorControls" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 96.0
+margin_right = 198.0
 margin_bottom = 580.0
 
-[node name="Seek" type="CheckBox" parent="BehaviorControls"]
-margin_right = 76.0
-margin_bottom = 24.0
+[node name="Seek" type="CheckBox" parent="MarginContainer/BehaviorControls"]
+margin_right = 178.0
+margin_bottom = 26.0
 focus_mode = 0
 pressed = true
 enabled_focus_mode = 0
 text = "Seek"
 
-[node name="Flee" type="CheckBox" parent="BehaviorControls"]
-margin_top = 28.0
-margin_right = 76.0
-margin_bottom = 52.0
+[node name="Flee" type="CheckBox" parent="MarginContainer/BehaviorControls"]
+margin_top = 34.0
+margin_right = 178.0
+margin_bottom = 60.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Flee"
 
-[node name="Help" type="VBoxContainer" parent="BehaviorControls"]
-margin_top = 56.0
-margin_right = 76.0
-margin_bottom = 108.0
+[node name="MaxAcc" type="Label" parent="MarginContainer/BehaviorControls"]
+margin_top = 68.0
+margin_right = 178.0
+margin_bottom = 94.0
+text = "Max accel (2000)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Controls" type="Label" parent="BehaviorControls/Help"]
-margin_right = 76.0
-margin_bottom = 14.0
+[node name="MaxAccValue" type="HSlider" parent="MarginContainer/BehaviorControls"]
+margin_top = 102.0
+margin_right = 178.0
+margin_bottom = 118.0
+max_value = 250.0
+step = 0.5
+value = 20.0
+
+[node name="MaxSpeed" type="Label" parent="MarginContainer/BehaviorControls"]
+margin_top = 126.0
+margin_right = 178.0
+margin_bottom = 152.0
+text = "Max speed (2000)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MaxSpeedValue" type="HSlider" parent="MarginContainer/BehaviorControls"]
+margin_top = 160.0
+margin_right = 178.0
+margin_bottom = 176.0
+max_value = 450.0
+step = 1.0
+value = 100.0
+
+[node name="Help" type="VBoxContainer" parent="MarginContainer/BehaviorControls"]
+margin_top = 184.0
+margin_right = 178.0
+margin_bottom = 274.0
+
+[node name="Controls" type="Label" parent="MarginContainer/BehaviorControls/Help"]
+margin_right = 178.0
+margin_bottom = 26.0
 text = "Controls"
 
-[node name="GridContainer" type="GridContainer" parent="BehaviorControls/Help"]
-margin_top = 18.0
-margin_right = 76.0
-margin_bottom = 52.0
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/BehaviorControls/Help"]
+margin_left = 57.0
+margin_top = 34.0
+margin_right = 120.0
+margin_bottom = 90.0
+size_flags_horizontal = 4
 columns = 3
 
-[node name="Sep" type="Control" parent="BehaviorControls/Help/GridContainer"]
+[node name="Sep" type="Control" parent="MarginContainer/BehaviorControls/Help/GridContainer"]
 margin_right = 15.0
-margin_bottom = 15.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 15, 15 )
 
-[node name="W" type="Label" parent="BehaviorControls/Help/GridContainer"]
+[node name="W" type="Label" parent="MarginContainer/BehaviorControls/Help/GridContainer"]
 margin_left = 19.0
-margin_right = 34.0
-margin_bottom = 15.0
+margin_right = 42.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 15, 15 )
 text = "W"
 align = 1
 
-[node name="Sep2" type="Control" parent="BehaviorControls/Help/GridContainer"]
-margin_left = 38.0
-margin_right = 53.0
-margin_bottom = 15.0
+[node name="Sep2" type="Control" parent="MarginContainer/BehaviorControls/Help/GridContainer"]
+margin_left = 46.0
+margin_right = 63.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 15, 15 )
 
-[node name="A" type="Label" parent="BehaviorControls/Help/GridContainer"]
-margin_top = 19.0
+[node name="A" type="Label" parent="MarginContainer/BehaviorControls/Help/GridContainer"]
+margin_top = 30.0
 margin_right = 15.0
-margin_bottom = 34.0
+margin_bottom = 56.0
 rect_min_size = Vector2( 15, 15 )
 text = "A"
 align = 1
 
-[node name="S" type="Label" parent="BehaviorControls/Help/GridContainer"]
+[node name="S" type="Label" parent="MarginContainer/BehaviorControls/Help/GridContainer"]
 margin_left = 19.0
-margin_top = 19.0
-margin_right = 34.0
-margin_bottom = 34.0
+margin_top = 30.0
+margin_right = 42.0
+margin_bottom = 56.0
 rect_min_size = Vector2( 15, 15 )
 text = "S"
 align = 1
 
-[node name="D" type="Label" parent="BehaviorControls/Help/GridContainer"]
-margin_left = 38.0
-margin_top = 19.0
-margin_right = 53.0
-margin_bottom = 34.0
+[node name="D" type="Label" parent="MarginContainer/BehaviorControls/Help/GridContainer"]
+margin_left = 46.0
+margin_top = 30.0
+margin_right = 63.0
+margin_bottom = 56.0
 rect_min_size = Vector2( 15, 15 )
 text = "D"
 align = 1
