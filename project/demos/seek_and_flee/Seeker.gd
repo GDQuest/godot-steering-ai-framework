@@ -2,8 +2,6 @@ extends KinematicBody2D
 # AI agent that uses the Seek behavior to hone in on the player's location as directly as possible.
 
 
-onready var collision_shape: = $CollisionShape2D
-
 onready var agent: = GSTSteeringAgent.new()
 onready var accel: = GSTTargetAcceleration.new()
 onready var seek: = GSTSeek.new(agent, player_agent)
@@ -14,18 +12,11 @@ var player_agent: GSTAgentLocation
 var velocity: = Vector2.ZERO
 var start_speed: float
 var start_accel: float
-var color: Color
-var radius: = 0.0
 
 
 func _ready() -> void:
 	agent.max_linear_acceleration = start_accel
 	agent.max_linear_speed = start_speed
-	radius = collision_shape.shape.radius
-
-
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, radius, color)
 
 
 func _physics_process(delta: float) -> void:
@@ -53,7 +44,7 @@ func _on_GUI_mode_changed(mode: int) -> void:
 		_active_behavior = flee
 
 
-func _on_GUI_acc_changed(value: float) -> void:
+func _on_GUI_accel_changed(value: float) -> void:
 	agent.max_linear_acceleration = value
 
 

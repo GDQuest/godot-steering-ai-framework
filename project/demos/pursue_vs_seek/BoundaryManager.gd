@@ -20,15 +20,16 @@ func _ready() -> void:
 		var world_pos: = ship.position
 		
 		for i in range(3):
-			var ship_clone: = ShipType.new($Player/CollisionPolygon2D.polygon)
+			var ship_clone: = ShipType.new()
 			
 			ship_clone.position.x = world_pos.x if i == 1 else (world_pos.x - _world_bounds.x)
 			ship_clone.position.y = world_pos.y if i == 0 else (world_pos.y - _world_bounds.y)
 			ship_clone.rotation = ship.rotation
-			ship_clone.color = ship.color
 			ship_clone.tag = i
+			ship_clone.name = ship.name + "Clone"
 			
 			add_child(ship_clone)
+			ship_clone.generate_sprite(ship.get_node("Sprite"))
 			_clones[ship_clone] = ship
 
 

@@ -45,7 +45,7 @@ focus_mode = 0
 enabled_focus_mode = 0
 text = "Flee"
 
-[node name="MaxAcc" type="Label" parent="MarginContainer/BehaviorControls"]
+[node name="MaxAccel" type="Label" parent="MarginContainer/BehaviorControls"]
 margin_top = 68.0
 margin_right = 178.0
 margin_bottom = 94.0
@@ -54,7 +54,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MaxAccValue" type="HSlider" parent="MarginContainer/BehaviorControls"]
+[node name="MaxAccelValue" type="HSlider" parent="MarginContainer/BehaviorControls"]
 margin_top = 102.0
 margin_right = 178.0
 margin_bottom = 118.0
@@ -76,7 +76,6 @@ margin_top = 160.0
 margin_right = 178.0
 margin_bottom = 176.0
 max_value = 450.0
-step = 1.0
 value = 100.0
 
 [node name="Help" type="VBoxContainer" parent="MarginContainer/BehaviorControls"]

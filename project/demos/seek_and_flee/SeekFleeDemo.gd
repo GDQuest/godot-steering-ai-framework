@@ -23,7 +23,7 @@ func _ready() -> void:
 	var rng: = RandomNumberGenerator.new()
 	rng.randomize()
 	
-	gui.max_acc.value = spawner.max_accel
+	gui.max_accel.value = spawner.max_accel
 	gui.max_speed.value = spawner.max_speed
 	
 	for i in range(spawner.entity_count):
@@ -36,8 +36,7 @@ func _ready() -> void:
 		entity.player_agent = player.agent
 		entity.start_speed = spawner.max_speed
 		entity.start_accel = spawner.max_accel
-		entity.color = spawner.entity_color
 		gui.connect("mode_changed", entity, "_on_GUI_mode_changed")
-		gui.connect("acc_changed", entity, "_on_GUI_acc_changed")
+		gui.connect("accel_changed", entity, "_on_GUI_accel_changed")
 		gui.connect("speed_changed", entity, "_on_GUI_speed_changed")
 		spawner.add_child(entity)

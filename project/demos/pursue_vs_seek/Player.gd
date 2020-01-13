@@ -40,7 +40,6 @@ func _physics_process(delta: float) -> void:
 	_linear_velocity = move_and_slide(_linear_velocity)
 	
 	_update_agent(_linear_velocity, rotation)
-	update()
 
 
 func _calculate_angular_velocity(
@@ -94,6 +93,9 @@ func _get_movement() -> Vector2:
 
 
 func _update_agent(velocity: Vector2, orientation: float) -> void:
-	agent.position = Vector3(global_position.x, global_position.y, 0)
-	agent.linear_velocity = Vector3(velocity.x, velocity.y, 0)
+	agent.position.x = global_position.x
+	agent.position.y = global_position.y
+	agent.linear_velocity.x = velocity.x
+	agent.linear_velocity.y = velocity.y
+	agent.angular_velocity = _angular_velocity
 	agent.orientation = orientation
