@@ -4,12 +4,12 @@ extends "res://demos/pursue_vs_seek/Ship.gd"
 
 onready var agent: = GSTSteeringAgent.new()
 
-export var thruster_strength: = 150.0
+export var thruster_strength: = 250.0
 export var side_thruster_strength: = 10.0
-export var max_velocity: = 150.0
+export var max_velocity: = 300.0
 export var max_angular_velocity: = 2.0
-export var angular_drag: = 5.0
-export var linear_drag: = 100.0
+export var angular_drag: = 0.025
+export var linear_drag: = 0.025
 
 var _linear_velocity: = Vector2()
 var _angular_velocity: = 0.0
@@ -56,12 +56,7 @@ func _calculate_angular_velocity(
 		max_velocity
 	)
 	
-	if velocity > 0:
-		velocity -= ship_drag * delta
-	elif velocity < 0:
-		velocity += ship_drag * delta
-	if abs(velocity) < 0.01:
-		velocity = 0
+	velocity = lerp(velocity, 0, ship_drag)
 	
 	return velocity
 
@@ -70,7 +65,7 @@ func _calculate_linear_velocity(
 		vertical_movement: float,
 		current_velocity: Vector2,
 		facing_direction: Vector2,
-		ship_drag: float,
+		ship_drag_coefficient: float,
 		strength: float,
 		max_speed: float,
 		delta: float) -> Vector2:
@@ -82,7 +77,7 @@ func _calculate_linear_velocity(
 		actual_strength = -strength/1.5
 	
 	var velocity: = current_velocity + facing_direction * actual_strength * delta
-	velocity -= current_velocity.normalized() * (ship_drag * delta)
+	velocity = velocity.linear_interpolate(Vector2.ZERO, ship_drag_coefficient)
 	
 	return velocity.clamped(max_speed)
 

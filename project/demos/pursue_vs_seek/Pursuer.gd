@@ -12,6 +12,7 @@ var _orient_behavior: GSTSteeringBehavior
 var _behavior: GSTSteeringBehavior
 
 var _linear_velocity: = Vector2()
+var _linear_drag_coefficient: = 0.025
 var _angular_velocity: = 0.0
 var _angular_drag: = 1.0
 
@@ -24,7 +25,7 @@ func _setup() -> void:
 	if use_seek:
 		_behavior = GSTSeek.new(agent, player_agent)
 	else:
-		_behavior = GSTPursue.new(agent, player_agent, 2)
+		_behavior = GSTPursue.new(agent, player_agent, owner.predict_time)
 	
 	_orient_behavior = GSTLookWhereYouGo.new(agent)
 	_orient_behavior.alignment_tolerance = 0.001
@@ -32,8 +33,8 @@ func _setup() -> void:
 	
 	agent.max_angular_acceleration = 2
 	agent.max_angular_speed = 5
-	agent.max_linear_acceleration = 75
-	agent.max_linear_speed = 125
+	agent.max_linear_acceleration = owner.max_linear_accel
+	agent.max_linear_speed = owner.max_linear_speed
 	_update_agent()
 
 
@@ -49,8 +50,8 @@ func _physics_process(delta: float) -> void:
 	rotation = rotation + _angular_velocity * delta
 	
 	accel = _behavior.calculate_steering(accel)
-	_linear_velocity += Vector2(accel.linear.x, accel.linear.y) * delta
-	_linear_velocity -= _linear_velocity.normalized() * 10 * delta
+	_linear_velocity += Vector2(accel.linear.x, accel.linear.y)
+	_linear_velocity = _linear_velocity.linear_interpolate(Vector2.ZERO, _linear_drag_coefficient)
 	_linear_velocity = _linear_velocity.clamped(agent.max_linear_speed)
 	_linear_velocity = move_and_slide(_linear_velocity)
 	

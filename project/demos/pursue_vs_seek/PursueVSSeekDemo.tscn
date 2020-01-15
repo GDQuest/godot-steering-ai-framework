@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://demos/pursue_vs_seek/Pursuer.gd" type="Script" id=1]
 [ext_resource path="res://demos/pursue_vs_seek/Player.gd" type="Script" id=2]
 [ext_resource path="res://demos/pursue_vs_seek/BoundaryManager.gd" type="Script" id=3]
 [ext_resource path="res://demos/pursue_vs_seek/PursueVSSeekDemo.gd" type="Script" id=4]
-[ext_resource path="res://demos/pursue_vs_seek/GUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/sprites/triangle.png" type="Texture" id=6]
 
 [node name="PursueVSSeekDemo" type="Node2D"]
@@ -12,9 +11,8 @@ script = ExtResource( 4 )
 __meta__ = {
 "_editor_description_": "Toy demo to demonstrate the use of the Pursue contrasted to the more naive Seek steering behavior."
 }
-start_linear_speed = 150.0
-start_linear_accel = 75.0
-start_predict_time = 2.0
+max_linear_speed = 120.0
+predict_time = 1.0
 
 [node name="BoundaryManager" type="Node2D" parent="."]
 script = ExtResource( 3 )
@@ -56,6 +54,3 @@ polygon = PoolVector2Array( 0, -32, -24, 32, 24, 32 )
 [node name="Sprite" type="Sprite" parent="BoundaryManager/Seeker"]
 modulate = Color( 0.278431, 0.815686, 0.14902, 1 )
 texture = ExtResource( 6 )
-
-[node name="GUI" parent="." instance=ExtResource( 5 )]
-margin_right = 309.0

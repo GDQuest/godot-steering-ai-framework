@@ -5,30 +5,40 @@ onready var player: = $Player
 onready var gui: = $GUI
 onready var turret: = $Turret
 
+export(int, 0, 359, 1) var max_angular_speed: = 90 setget set_max_angular_speed
+export(int, 0, 359, 1) var max_angular_accel: = 5 setget set_max_angular_accel
+export(int, 0, 180, 1) var align_tolerance: = 5 setget set_align_tolerance
+export(int, 0, 359, 1) var deceleration_radius: = 45 setget set_deceleration_radius
+
 
 func _ready() -> void:
-	gui.connect("align_tolerance_changed", self, "_on_GUI_align_tolerance_changed")
-	gui.connect("decel_radius_changed", self, "_on_GUI_decel_radius_changed")
-	gui.connect("max_accel_changed", self, "_on_GUI_max_accel_changed")
-	gui.connect("max_speed_changed", self, "_on_GUI_max_speed_changed")
-	turret.setup()
-	gui.align_tolerance.text = str(int(rad2deg(turret._face.alignment_tolerance)))
-	gui.decel_radius.text = str(int(rad2deg(turret._face.deceleration_radius)))
-	gui.max_speed.text = str(int(rad2deg(turret._agent.max_angular_speed)))
-	gui.max_accel.text = str(int(rad2deg(turret._agent.max_angular_acceleration)))
+	turret.setup(
+			deg2rad(align_tolerance),
+			deg2rad(deceleration_radius),
+			deg2rad(max_angular_accel),
+			deg2rad(max_angular_speed)
+		)
 
 
-func _on_GUI_align_tolerance_changed(value: int) -> void:
-	turret._face.alignment_tolerance = deg2rad(value)
+func set_align_tolerance(value: int) -> void:
+	align_tolerance = value
+	if turret:
+		turret._face.alignment_tolerance = deg2rad(value)
 
 
-func _on_GUI_decel_radius_changed(value: int) -> void:
-	turret._face.deceleration_radius = deg2rad(value)
+func set_deceleration_radius(value: int) -> void:
+	deceleration_radius = value
+	if turret:
+		turret._face.deceleration_radius = deg2rad(value)
 
 
-func _on_GUI_max_accel_changed(value: int) -> void:
-	turret._agent.max_angular_acceleration = deg2rad(value)
+func set_max_angular_accel(value: int) -> void:
+	max_angular_accel = value
+	if turret:
+		turret._agent.max_angular_acceleration = deg2rad(value)
 
 
-func _on_GUI_max_speed_changed(value: int) -> void:
-	turret._agent.max_angular_speed = deg2rad(value)
+func set_max_angular_speed(value: int) -> void:
+	max_angular_speed = value
+	if turret:
+		turret._agent.max_angular_speed = deg2rad(value)

@@ -4,7 +4,7 @@ extends KinematicBody2D
 
 onready var agent: = GSTAgentLocation.new()
 
-export var speed: = 150.0
+export var speed: = 200.0
 
 
 func _get_movement() -> Vector2:

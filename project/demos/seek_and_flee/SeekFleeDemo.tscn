@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://demos/seek_and_flee/Boundary.gd" type="Script" id=1]
 [ext_resource path="res://demos/seek_and_flee/Player.gd" type="Script" id=2]
 [ext_resource path="res://demos/seek_and_flee/SeekFleeDemo.gd" type="Script" id=3]
 [ext_resource path="res://demos/seek_and_flee/Spawner.gd" type="Script" id=4]
-[ext_resource path="res://demos/seek_and_flee/GUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://demos/seek_and_flee/Seeker.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sprites/large_circle.png" type="Texture" id=7]
 
@@ -76,11 +75,3 @@ shape = SubResource( 3 )
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource( 4 )
 Entity = ExtResource( 6 )
-max_speed = 150.0
-
-[node name="GUI" parent="." instance=ExtResource( 5 )]
-anchor_bottom = 0.0
-margin_left = -512.0
-margin_top = -300.0
-margin_right = -294.0
-margin_bottom = 14.0

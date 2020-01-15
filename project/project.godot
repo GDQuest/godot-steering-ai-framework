@@ -161,6 +161,10 @@ _global_script_class_icons={
 config/name="SteeringToolkit"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/always_on_top=true
+
 [input]
 
 sf_left={

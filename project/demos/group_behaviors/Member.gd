@@ -7,30 +7,37 @@ var cohesion: GSTCohesion
 var proximity: GSTRadiusProximity
 var blend: = GSTBlend.new(agent)
 var acceleration: = GSTTargetAcceleration.new()
+var draw_proximity: = false
 
-var _radius: float
 var _color: = Color.red
 var _velocity: = Vector2()
 
-onready var shape: = $CollisionShape2D
 
-
-func _ready() -> void:
-	_radius = shape.shape.radius
+func setup(
+		max_linear_speed: float,
+		max_linear_accel: float,
+		proximity_radius: float,
+		separation_decay_coefficient: float,
+		cohesion_strength: float,
+		separation_strength: float
+	) -> void:
 	_color = Color(rand_range(0.5, 1), rand_range(0.25, 1), rand_range(0, 1))
-	agent.max_linear_acceleration = 7
-	agent.max_linear_speed = 70
+	$Sprite.modulate = _color
 	
-	proximity = GSTRadiusProximity.new(agent, [], 140)
+	agent.max_linear_acceleration = max_linear_accel
+	agent.max_linear_speed = max_linear_speed
+	
+	proximity = GSTRadiusProximity.new(agent, [], proximity_radius)
 	separation = GSTSeparation.new(agent, proximity)
-	separation.decay_coefficient = 2000
+	separation.decay_coefficient = separation_decay_coefficient
 	cohesion = GSTCohesion.new(agent, proximity)
-	blend.add(separation, 1.5)
-	blend.add(cohesion, 0.3)
+	blend.add(separation, separation_strength)
+	blend.add(cohesion, cohesion_strength)
 
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, _radius, _color)
+	if draw_proximity:
+		draw_circle(Vector2.ZERO, proximity.radius, Color(0, 1, 0, 0.1))
 
 
 func _process(delta: float) -> void:
