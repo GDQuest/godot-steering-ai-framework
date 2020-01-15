@@ -36,7 +36,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	_accel = _arrive.calculate_steering(_accel)
 	_velocity += Vector2(_accel.linear.x, _accel.linear.y)
-	_velocity -= _velocity * _drag * delta
+	_velocity = _velocity.linear_interpolate(Vector2.ZERO, 0.1)
 	_velocity = move_and_slide(_velocity)
 	_update_agent()
 
