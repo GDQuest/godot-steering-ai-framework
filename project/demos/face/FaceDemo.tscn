@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://demos/face/Turret.gd" type="Script" id=1]
+[ext_resource path="res://demos/face/FaceDemo.gd" type="Script" id=2]
+[ext_resource path="res://demos/face/Player.gd" type="Script" id=3]
+[ext_resource path="res://demos/face/GUI.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 30.0
+
+[node name="FaceDemo" type="Node2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": "A demo showing the usage of the Face steering behavior."
+}
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 512, 450 )
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 1 )
+
+[node name="Turret" type="KinematicBody2D" parent="."]
+position = Vector2( 512, 150 )
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret"]
+shape = SubResource( 2 )
+
+[node name="GUI" parent="." instance=ExtResource( 4 )]
+margin_right = 232.0
+margin_bottom = 204.0

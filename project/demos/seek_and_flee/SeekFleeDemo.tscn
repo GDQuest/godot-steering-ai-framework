@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://demos/seek_and_flee/Boundary.gd" type="Script" id=1]
+[ext_resource path="res://demos/seek_and_flee/Player.gd" type="Script" id=2]
+[ext_resource path="res://demos/seek_and_flee/SeekFleeDemo.gd" type="Script" id=3]
+[ext_resource path="res://demos/seek_and_flee/Spawner.gd" type="Script" id=4]
+[ext_resource path="res://demos/seek_and_flee/GUI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://demos/seek_and_flee/Seeker.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/sprites/large_circle.png" type="Texture" id=7]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 300 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 512, 10 )
+
+[node name="SeekFleeDemo" type="Node2D"]
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "A toy demo to demonstrate the usage for the Seek and Flee steering behaviors."
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="Player" type="KinematicBody2D" parent="."]
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Player"]
+modulate = Color( 0.952941, 0.290196, 0.0588235, 1 )
+texture = ExtResource( 7 )
+
+[node name="LeftBoundary" type="StaticBody2D" parent="."]
+position = Vector2( -512, 0 )
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+shape = SubResource( 2 )
+
+[node name="RightBoundary" type="StaticBody2D" parent="."]
+position = Vector2( 512, 0 )
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+shape = SubResource( 2 )
+
+[node name="TopBoundary" type="StaticBody2D" parent="."]
+position = Vector2( 0, -300 )
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopBoundary"]
+shape = SubResource( 3 )
+
+[node name="BottomBoundary" type="StaticBody2D" parent="."]
+position = Vector2( 0, 300 )
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBoundary"]
+shape = SubResource( 3 )
+
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource( 4 )
+Entity = ExtResource( 6 )
+max_speed = 150.0
+
+[node name="GUI" parent="." instance=ExtResource( 5 )]
+anchor_bottom = 0.0
+margin_left = -512.0
+margin_top = -300.0
+margin_right = -294.0
+margin_bottom = 14.0

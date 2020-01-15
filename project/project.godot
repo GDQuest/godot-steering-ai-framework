@@ -1,0 +1,193 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "GSTAgentLocation",
+"language": "GDScript",
+"path": "res://src/GSTAgentLocation.gd"
+}, {
+"base": "GSTSteeringBehavior",
+"class": "GSTArrive",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTArrive.gd"
+}, {
+"base": "GSTGroupBehavior",
+"class": "GSTAvoidCollisions",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTAvoidCollisions.gd"
+}, {
+"base": "GSTSteeringBehavior",
+"class": "GSTBlend",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTBlend.gd"
+}, {
+"base": "GSTGroupBehavior",
+"class": "GSTCohesion",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTCohesion.gd"
+}, {
+"base": "GSTPursue",
+"class": "GSTEvade",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTEvade.gd"
+}, {
+"base": "GSTMatchOrientation",
+"class": "GSTFace",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTFace.gd"
+}, {
+"base": "GSTSeek",
+"class": "GSTFlee",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTFlee.gd"
+}, {
+"base": "GSTArrive",
+"class": "GSTFollowPath",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTFollowPath.gd"
+}, {
+"base": "GSTSteeringBehavior",
+"class": "GSTGroupBehavior",
+"language": "GDScript",
+"path": "res://src/GSTGroupBehavior.gd"
+}, {
+"base": "GSTProximity",
+"class": "GSTInfiniteProximity",
+"language": "GDScript",
+"path": "res://src/proximities/GSTInfiniteProximity.gd"
+}, {
+"base": "GSTMatchOrientation",
+"class": "GSTLookWhereYouGo",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTLookWhereYouGo.gd"
+}, {
+"base": "GSTSteeringBehavior",
+"class": "GSTMatchOrientation",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTMatchOrientation.gd"
+}, {
+"base": "Reference",
+"class": "GSTPath",
+"language": "GDScript",
+"path": "res://src/GSTPath.gd"
+}, {
+"base": "GSTSteeringBehavior",
+"class": "GSTPriority",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTPriority.gd"
+}, {
+"base": "Reference",
+"class": "GSTProximity",
+"language": "GDScript",
+"path": "res://src/proximities/GSTProximity.gd"
+}, {
+"base": "GSTSteeringBehavior",
+"class": "GSTPursue",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTPursue.gd"
+}, {
+"base": "GSTProximity",
+"class": "GSTRadiusProximity",
+"language": "GDScript",
+"path": "res://src/proximities/GSTRadiusProximity.gd"
+}, {
+"base": "GSTSteeringBehavior",
+"class": "GSTSeek",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTSeek.gd"
+}, {
+"base": "GSTGroupBehavior",
+"class": "GSTSeparation",
+"language": "GDScript",
+"path": "res://src/behaviors/GSTSeparation.gd"
+}, {
+"base": "GSTAgentLocation",
+"class": "GSTSteeringAgent",
+"language": "GDScript",
+"path": "res://src/GSTSteeringAgent.gd"
+}, {
+"base": "Reference",
+"class": "GSTSteeringBehavior",
+"language": "GDScript",
+"path": "res://src/GSTSteeringBehavior.gd"
+}, {
+"base": "Reference",
+"class": "GSTTargetAcceleration",
+"language": "GDScript",
+"path": "res://src/GSTTargetAcceleration.gd"
+}, {
+"base": "Reference",
+"class": "GSTUtils",
+"language": "GDScript",
+"path": "res://src/GSTUtils.gd"
+} ]
+_global_script_class_icons={
+"GSTAgentLocation": "",
+"GSTArrive": "",
+"GSTAvoidCollisions": "",
+"GSTBlend": "",
+"GSTCohesion": "",
+"GSTEvade": "",
+"GSTFace": "",
+"GSTFlee": "",
+"GSTFollowPath": "",
+"GSTGroupBehavior": "",
+"GSTInfiniteProximity": "",
+"GSTLookWhereYouGo": "",
+"GSTMatchOrientation": "",
+"GSTPath": "",
+"GSTPriority": "",
+"GSTProximity": "",
+"GSTPursue": "",
+"GSTRadiusProximity": "",
+"GSTSeek": "",
+"GSTSeparation": "",
+"GSTSteeringAgent": "",
+"GSTSteeringBehavior": "",
+"GSTTargetAcceleration": "",
+"GSTUtils": ""
+}
+
+[application]
+
+config/name="SteeringToolkit"
+config/icon="res://icon.png"
+
+[input]
+
+sf_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":-1.0,"script":null)
+ ]
+}
+sf_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
+ ]
+}
+sf_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
+ ]
+}
+sf_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
+ ]
+}
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
