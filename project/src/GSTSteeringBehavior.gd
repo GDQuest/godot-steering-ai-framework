@@ -2,7 +2,7 @@ class_name GSTSteeringBehavior
 # Base class to calculate how an AI agent steers itself.
 
 
-var enabled: = true
+var enabled := true
 var agent: GSTSteeringAgent
 
 

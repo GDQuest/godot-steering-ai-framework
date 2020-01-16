@@ -15,7 +15,7 @@ var _nearest_point_on_segment: Vector3
 var _nearest_point_on_path: Vector3
 
 
-func _init(waypoints: Array, is_open: = false) -> void:
+func _init(waypoints: Array, is_open := false) -> void:
 	self.is_open = is_open
 	create_path(waypoints)
 	_nearest_point_on_segment = waypoints[0]
@@ -39,7 +39,7 @@ func create_path(waypoints: Array) -> void:
 			break
 		else:
 			current = waypoints[0]
-		var segment: = GSTSegment.new(previous, current)
+		var segment := GSTSegment.new(previous, current)
 		path_length += segment.length
 		segment.cumulative_length = path_length
 		_segments.append(segment)
@@ -50,7 +50,7 @@ func calculate_distance(agent_current_position: Vector3, path_parameter: Diction
 	var nearest_segment: GSTSegment
 	for i in range(_segments.size()):
 		var segment: GSTSegment = _segments[i]
-		var distance_squared: = _calculate_point_segment_distance_squared(
+		var distance_squared := _calculate_point_segment_distance_squared(
 				segment.begin,
 				segment.end,
 				agent_current_position)
@@ -61,7 +61,7 @@ func calculate_distance(agent_current_position: Vector3, path_parameter: Diction
 			nearest_segment = segment
 			path_parameter.segment_index = i
 	
-	var length_on_path: = (
+	var length_on_path := (
 		nearest_segment.cumulative_length - 
 		_nearest_point_on_path.distance_to(nearest_segment.end))
 	
@@ -86,7 +86,7 @@ func calculate_target_position(param: Dictionary, target_distance: float) -> Vec
 			desired_segment = segment
 			break
 	
-	var distance: = desired_segment.cumulative_length - target_distance
+	var distance := desired_segment.cumulative_length - target_distance
 	
 	return (
 		(desired_segment.begin - desired_segment.end) *
@@ -103,8 +103,8 @@ func get_end_point() -> Vector3:
 
 func _calculate_point_segment_distance_squared(start: Vector3, end: Vector3, position: Vector3) -> float:
 	_nearest_point_on_segment = start
-	var start_end: = end - start
-	var start_end_length_squared: = start_end.length_squared()
+	var start_end := end - start
+	var start_end_length_squared := start_end.length_squared()
 	if start_end_length_squared != 0:
 		var t = (position - start).dot(start_end) / start_end_length_squared
 		_nearest_point_on_segment += start_end * clamp(t, 0, 1)

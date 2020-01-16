@@ -5,7 +5,7 @@ class_name GSTGroupBehavior
 
 var proximity: GSTProximity
 
-var _callback: = funcref(self, "report_neighbor")
+var _callback := funcref(self, "report_neighbor")
 
 
 func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent) -> void:
