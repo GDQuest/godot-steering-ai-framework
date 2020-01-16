@@ -22,7 +22,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			update()
 		elif not event.pressed:
 			drawing = false
-			_simplify()
+			if active_points.size() >= 2:
+				_simplify()
 
 
 func _draw() -> void:
