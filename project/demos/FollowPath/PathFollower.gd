@@ -6,17 +6,29 @@ onready var path := GSTPath.new([
 		Vector3(global_position.x, global_position.y, 0),
 		Vector3(global_position.x, global_position.y, 0)
 	], true)
-onready var follow := GSTFollowPath.new(agent, path, 20, 0)
+onready var follow := GSTFollowPath.new(agent, path, 0, 0)
 
 var _velocity := Vector2.ZERO
 var _accel := GSTTargetAcceleration.new()
 var _valid := false
+var _drag := 0.1
 
 
-func setup() -> void:
+func setup(
+			path_offset: float,
+			predict_time: float,
+			max_accel: float,
+			max_speed: float,
+			decel_radius: float,
+			arrival_tolerance: float
+	) -> void:
 	owner.drawer.connect("path_established", self, "_on_Drawer_path_established")
-	agent.max_linear_acceleration = 20
-	agent.max_linear_speed = 200
+	follow.path_offset = path_offset
+	follow.prediction_time = predict_time
+	agent.max_linear_acceleration = max_accel
+	agent.max_linear_speed = max_speed
+	follow.deceleration_radius = decel_radius
+	follow.arrival_tolerance = arrival_tolerance
 
 
 func _physics_process(delta: float) -> void:
@@ -24,6 +36,7 @@ func _physics_process(delta: float) -> void:
 		_update_agent()
 		_accel = follow.calculate_steering(_accel)
 		_velocity += Vector2(_accel.linear.x, _accel.linear.y)
+		_velocity = _velocity.linear_interpolate(Vector2.ZERO, _drag)
 		_velocity = _velocity.clamped(agent.max_linear_speed)
 		_velocity = move_and_slide(_velocity)
 

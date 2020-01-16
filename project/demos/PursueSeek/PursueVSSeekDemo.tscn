@@ -12,8 +12,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_editor_description_": "Toy demo to demonstrate the use of the Pursue contrasted to the more naive Seek steering behavior."
 }
-max_linear_speed = 120.0
-predict_time = 1.0
+max_linear_speed = 200.0
 
 [node name="BoundaryManager" type="Node2D" parent="."]
 script = ExtResource( 3 )

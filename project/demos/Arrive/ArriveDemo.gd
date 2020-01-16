@@ -2,7 +2,7 @@ extends Node2D
 
 
 export(float, 0, 2000, 40) var max_linear_speed := 800.0 setget set_max_linear_speed
-export(float, 0, 200, 1) var max_linear_acceleration := 80.0 setget set_max_linear_acceleration
+export(float, 0, 200, 2.0) var max_linear_acceleration := 80.0 setget set_max_linear_acceleration
 export(float, 0, 100, 0.1) var arrival_tolerance := 25.0 setget set_arrival_tolerance
 export(float, 0, 500, 10) var deceleration_radius := 125.0 setget set_deceleration_radius
 
@@ -36,34 +36,32 @@ func _draw():
 
 
 func set_arrival_tolerance(value: float) -> void:
+	arrival_tolerance = value
 	if not is_inside_tree():
 		return
 	
-	arrival_tolerance = value
 	arriver.arrive.arrival_tolerance = value
-	update()
 
 
 func set_deceleration_radius(value: float) -> void:
+	deceleration_radius = value
 	if not is_inside_tree():
 		return
 	
-	deceleration_radius = value
 	arriver.arrive.deceleration_radius = value
-	update()
 
 
 func set_max_linear_speed(value: float) -> void:
+	max_linear_speed = value
 	if not is_inside_tree():
 		return
 	
-	max_linear_speed = value
 	arriver.agent.max_linear_speed = value
 
 
 func set_max_linear_acceleration(value: float) -> void:
+	max_linear_acceleration = value
 	if not is_inside_tree():
 		return
 	
-	max_linear_acceleration = value
 	arriver.agent.max_linear_acceleration = value

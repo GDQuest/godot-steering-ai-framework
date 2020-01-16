@@ -14,7 +14,7 @@ var _behavior: GSTSteeringBehavior
 var _linear_velocity := Vector2()
 var _linear_drag_coefficient := 0.025
 var _angular_velocity := 0.0
-var _angular_drag := 1.0
+var _angular_drag := 0.1
 
 
 func _ready() -> void:
@@ -22,13 +22,16 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	_update_agent()
+	
 	accel = _orient_behavior.calculate_steering(accel)
 	_angular_velocity += accel.angular
 	
-	if _angular_velocity < 0:
-		_angular_velocity += _angular_drag * delta
-	elif _angular_velocity > 0:
-		_angular_velocity -= _angular_drag * delta
+	_angular_velocity = clamp(
+			lerp(_angular_velocity, 0, _angular_drag),
+			-agent.max_angular_speed,
+			agent.max_angular_speed
+	)
 	
 	rotation += _angular_velocity * delta
 	
@@ -37,8 +40,6 @@ func _physics_process(delta: float) -> void:
 	_linear_velocity = _linear_velocity.linear_interpolate(Vector2.ZERO, _linear_drag_coefficient)
 	_linear_velocity = _linear_velocity.clamped(agent.max_linear_speed)
 	_linear_velocity = move_and_slide(_linear_velocity)
-	
-	_update_agent()
 
 
 func setup(predict_time: float, max_linear_speed: float, max_linear_accel: float) -> void:
