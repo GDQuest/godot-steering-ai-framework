@@ -6,10 +6,22 @@ onready var spawner := $Spawner
 export var max_linear_speed := 100.0 setget set_max_linear_speed
 export var max_linear_accel := 25.0 setget set_max_linear_accel
 export var proximity_radius := 140.0 setget set_proximity_radius
-export var show_proximity_radius := true setget set_show_proximity_radius
 export var separation_decay_coefficient := 2000.0 setget set_separation_decay_coef
 export var cohesion_strength := 0.3 setget set_cohesion_strength
 export var separation_strength := 1.5 setget set_separation_strength
+export var show_proximity_radius := true setget set_show_proximity_radius
+
+
+func _ready() -> void:
+	spawner.setup(
+		max_linear_speed,
+		max_linear_accel,
+		proximity_radius,
+		separation_decay_coefficient,
+		cohesion_strength,
+		separation_strength,
+		show_proximity_radius
+	)
 
 
 func set_max_linear_speed(value: float) -> void:

@@ -1,10 +1,10 @@
 extends KinematicBody2D
 
 
-var agent := GSTSteeringAgent.new()
 var separation: GSTSeparation
 var cohesion: GSTCohesion
 var proximity: GSTRadiusProximity
+var agent := GSTSteeringAgent.new()
 var blend := GSTBlend.new(agent)
 var acceleration := GSTTargetAcceleration.new()
 var draw_proximity := false
@@ -41,18 +41,14 @@ func _draw() -> void:
 
 
 func _process(delta: float) -> void:
-	update_agent()
+	agent.position.x = global_position.x
+	agent.position.y = global_position.y
 	if blend:
 		acceleration = blend.calculate_steering(acceleration)
-		_velocity = (_velocity + Vector2(acceleration.linear.x, acceleration.linear.y)).clamped(agent.max_linear_speed)
+		_velocity += Vector2(acceleration.linear.x, acceleration.linear.y)
+		_velocity = _velocity.clamped(agent.max_linear_speed)
 		move_and_slide(_velocity)
 
 
 func set_neighbors(neighbor: Array) -> void:
 	proximity.agents = neighbor
-
-
-func update_agent() -> void:
-	var current_position := global_position
-	agent.position.x = current_position.x
-	agent.position.y = current_position.y

@@ -1,4 +1,4 @@
-extends "res://demos/PursueSeek/Ship.gd"
+extends KinematicBody2D
 # Represents a ship that chases after the player.
 
 
@@ -18,24 +18,7 @@ var _angular_drag := 1.0
 
 
 func _ready() -> void:
-	_setup()
-
-
-func _setup() -> void:
-	if use_seek:
-		_behavior = GSTSeek.new(agent, player_agent)
-	else:
-		_behavior = GSTPursue.new(agent, player_agent, owner.predict_time)
-	
-	_orient_behavior = GSTLookWhereYouGo.new(agent)
-	_orient_behavior.alignment_tolerance = 0.001
-	_orient_behavior.deceleration_radius = PI/2
-	
-	agent.max_angular_acceleration = 2
-	agent.max_angular_speed = 5
-	agent.max_linear_acceleration = owner.max_linear_accel
-	agent.max_linear_speed = owner.max_linear_speed
-	_update_agent()
+	set_physics_process(false)
 
 
 func _physics_process(delta: float) -> void:
@@ -47,7 +30,7 @@ func _physics_process(delta: float) -> void:
 	elif _angular_velocity > 0:
 		_angular_velocity -= _angular_drag * delta
 	
-	rotation = rotation + _angular_velocity * delta
+	rotation += _angular_velocity * delta
 	
 	accel = _behavior.calculate_steering(accel)
 	_linear_velocity += Vector2(accel.linear.x, accel.linear.y)
@@ -56,6 +39,25 @@ func _physics_process(delta: float) -> void:
 	_linear_velocity = move_and_slide(_linear_velocity)
 	
 	_update_agent()
+
+
+func setup(predict_time: float, max_linear_speed: float, max_linear_accel: float) -> void:
+	if use_seek:
+		_behavior = GSTSeek.new(agent, player_agent)
+	else:
+		_behavior = GSTPursue.new(agent, player_agent, predict_time)
+	
+	_orient_behavior = GSTLookWhereYouGo.new(agent)
+	_orient_behavior.alignment_tolerance = 0.001
+	_orient_behavior.deceleration_radius = PI/2
+	
+	agent.max_angular_acceleration = 2
+	agent.max_angular_speed = 5
+	agent.max_linear_acceleration = max_linear_accel
+	agent.max_linear_speed = max_linear_speed
+	
+	_update_agent()
+	set_physics_process(true)
 
 
 func _update_agent() -> void:

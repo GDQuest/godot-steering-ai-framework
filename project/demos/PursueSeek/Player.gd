@@ -1,4 +1,4 @@
-extends "res://demos/PursueSeek/Ship.gd"
+extends KinematicBody2D
 # Controls the player ship's movements based on player input.
 
 
@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 		angular_drag,
 		delta
 	)
-	rotation += (_angular_velocity * delta)
+	rotation += _angular_velocity * delta
 	
 	_linear_velocity = _calculate_linear_velocity(
 		movement.y,
@@ -38,18 +38,17 @@ func _physics_process(delta: float) -> void:
 	)
 	
 	_linear_velocity = move_and_slide(_linear_velocity)
-	
-	_update_agent(_linear_velocity, rotation)
+	_update_agent()
 
 
 func _calculate_angular_velocity(
-		horizontal_movement: float,
-		current_velocity: float,
-		thruster_strength: float,
-		max_velocity: float,
-		ship_drag: float,
-		delta: float) -> float:
-	
+	horizontal_movement: float,
+	current_velocity: float,
+	thruster_strength: float,
+	max_velocity: float,
+	ship_drag: float,
+	delta: float
+) -> float:
 	var velocity := clamp(
 		current_velocity + thruster_strength * horizontal_movement * delta,
 		-max_velocity,
@@ -62,14 +61,14 @@ func _calculate_angular_velocity(
 
 
 func _calculate_linear_velocity(
-		vertical_movement: float,
-		current_velocity: Vector2,
-		facing_direction: Vector2,
-		ship_drag_coefficient: float,
-		strength: float,
-		max_speed: float,
-		delta: float) -> Vector2:
-	
+	vertical_movement: float,
+	current_velocity: Vector2,
+	facing_direction: Vector2,
+	ship_drag_coefficient: float,
+	strength: float,
+	max_speed: float,
+	delta: float
+) -> Vector2:
 	var actual_strength := 0.0
 	if vertical_movement > 0:
 		actual_strength = strength
@@ -87,10 +86,10 @@ func _get_movement() -> Vector2:
 					Input.get_action_strength("sf_up") - Input.get_action_strength("sf_down"))
 
 
-func _update_agent(velocity: Vector2, orientation: float) -> void:
+func _update_agent() -> void:
 	agent.position.x = global_position.x
 	agent.position.y = global_position.y
-	agent.linear_velocity.x = velocity.x
-	agent.linear_velocity.y = velocity.y
+	agent.linear_velocity.x = _linear_velocity.x
+	agent.linear_velocity.y = _linear_velocity.y
 	agent.angular_velocity = _angular_velocity
-	agent.orientation = orientation
+	agent.orientation = rotation

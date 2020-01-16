@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://demos/PursueSeek/Pursuer.gd" type="Script" id=1]
 [ext_resource path="res://demos/PursueSeek/Player.gd" type="Script" id=2]
 [ext_resource path="res://demos/PursueSeek/BoundaryManager.gd" type="Script" id=3]
 [ext_resource path="res://demos/PursueSeek/PursueVSSeekDemo.gd" type="Script" id=4]
+[ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=5]
 [ext_resource path="res://assets/sprites/triangle.png" type="Texture" id=6]
 
 [node name="PursueVSSeekDemo" type="Node2D"]
@@ -22,6 +23,9 @@ position = Vector2( 49.2031, 556.936 )
 rotation = 1.5708
 collision_mask = 2
 script = ExtResource( 2 )
+thruster_strength = 600.0
+side_thruster_strength = 20.0
+max_velocity = 900.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoundaryManager/Player"]
 polygon = PoolVector2Array( 0, -32, -24, 32, 24, 32 )
@@ -31,7 +35,7 @@ modulate = Color( 0.968627, 0.188235, 0.0352941, 1 )
 texture = ExtResource( 6 )
 
 [node name="Pursuer" type="KinematicBody2D" parent="BoundaryManager"]
-position = Vector2( 868.495, 87.9043 )
+position = Vector2( 868.495, 200 )
 collision_layer = 2
 script = ExtResource( 1 )
 
@@ -43,7 +47,7 @@ modulate = Color( 0.756863, 0.952941, 0.054902, 1 )
 texture = ExtResource( 6 )
 
 [node name="Seeker" type="KinematicBody2D" parent="BoundaryManager"]
-position = Vector2( 821.24, 87.9043 )
+position = Vector2( 821.24, 200 )
 collision_layer = 2
 script = ExtResource( 1 )
 use_seek = true
@@ -54,3 +58,30 @@ polygon = PoolVector2Array( 0, -32, -24, 32, 24, 32 )
 [node name="Sprite" type="Sprite" parent="BoundaryManager/Seeker"]
 modulate = Color( 0.278431, 0.815686, 0.14902, 1 )
 texture = ExtResource( 6 )
+
+[node name="GUI" type="PanelContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 14.0
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI"]
+margin_right = 1024.0
+margin_bottom = 116.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/MarginContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 1008.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 84 )
+bbcode_enabled = true
+bbcode_text = "Pursue vs. Seek Demo
+Move the player around with WASD and notice the [color=yellow]yellow Pursuer[/color] and the [color=green]green Seeker[/color] follow
+the [color=red]red \"Ship\"[/color] around"
+text = "Pursue vs. Seek Demo
+Move the player around with WASD and notice the yellow Pursuer and the green Seeker follow
+the red \"Ship\" around"
+scroll_active = false

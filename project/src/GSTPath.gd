@@ -15,8 +15,8 @@ var _nearest_point_on_segment: Vector3
 var _nearest_point_on_path: Vector3
 
 
-func _init(waypoints: Array, is_open := false) -> void:
-	self.is_open = is_open
+func _init(waypoints: Array, open := false) -> void:
+	self.open = open
 	create_path(waypoints)
 	_nearest_point_on_segment = waypoints[0]
 	_nearest_point_on_path = waypoints[0]
