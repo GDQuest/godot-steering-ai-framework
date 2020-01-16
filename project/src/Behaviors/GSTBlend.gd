@@ -1,5 +1,5 @@
-extends GSTSteeringBehavior
 class_name GSTBlend
+extends GSTSteeringBehavior
 # Blends multiple steering behaviors into one, and returns acceleration combining all of them.
 
 # # Each behavior is associated with a weight - a modifier by which the result will be multiplied by,

@@ -1,6 +1,6 @@
-extends GSTGroupBehavior
 class_name GSTAvoidCollisions
-# Behavior that steers the agent to avoid obstacles lying in its path, approximated by a sphere.
+extends GSTGroupBehavior
+# Behavior that steers the agent to avoid obstacles lying in its path as approximated by a sphere.
 
 
 var first_neighbor: GSTSteeringAgent

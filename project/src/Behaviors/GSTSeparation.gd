@@ -1,5 +1,5 @@
-extends GSTGroupBehavior
 class_name GSTSeparation
+extends GSTGroupBehavior
 # Group behavior that produces acceleration repelling from the other neighbors that are in the
 # immediate area defined by the given `GSTProximity`.
 
