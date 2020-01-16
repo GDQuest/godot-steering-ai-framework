@@ -4,7 +4,15 @@ extends Node2D
 export var member: PackedScene
 
 
-func _ready() -> void:
+func setup(
+	max_linear_speed: float,
+	max_linear_accel: float,
+	proximity_radius: float,
+	separation_decay_coefficient: float,
+	cohesion_strength: float,
+	separation_strength: float,
+	show_proximity_radius: bool
+) -> void:
 	var followers := []
 	for i in range(19):
 		var follower := member.instance()
@@ -12,14 +20,14 @@ func _ready() -> void:
 		follower.position += Vector2(rand_range(-60, 60), rand_range(-60, 60))
 		followers.append(follower)
 		follower.setup(
-			owner.max_linear_speed,
-			owner.max_linear_accel,
-			owner.proximity_radius,
-			owner.separation_decay_coefficient,
-			owner.cohesion_strength,
-			owner.separation_strength
+			max_linear_speed,
+			max_linear_accel,
+			proximity_radius,
+			separation_decay_coefficient,
+			cohesion_strength,
+			separation_strength
 		)
-		if i == 0 and owner.show_proximity_radius:
+		if i == 0 and show_proximity_radius:
 			follower.draw_proximity = true
 			follower.update()
 	var agents := []

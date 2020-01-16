@@ -23,9 +23,6 @@ shape = SubResource( 1 )
 modulate = Color( 0.952941, 0.172549, 0.0431373, 1 )
 texture = ExtResource( 4 )
 
-[node name="Target" type="Node2D" parent="."]
-position = Vector2( 0, 1 )
-
 [node name="GUI" type="PanelContainer" parent="."]
 anchor_right = 1.0
 margin_right = 1024.0
@@ -40,10 +37,15 @@ __meta__ = {
 margin_right = 1024.0
 margin_bottom = 87.0
 
-[node name="Label" type="Label" parent="GUI/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/MarginContainer"]
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 1008.0
 margin_bottom = 71.0
+rect_min_size = Vector2( 0, 55 )
+bbcode_enabled = true
+bbcode_text = "Arrive Demo
+Mouse click to make the [color=red]red \"Player\"[/color] move to the [color=yellow]yellow target[/color]"
 text = "Arrive Demo
 Mouse click to make the red \"Player\" move to the yellow target"
+scroll_active = false

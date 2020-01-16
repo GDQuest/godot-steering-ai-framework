@@ -7,6 +7,7 @@ enum Mode { FLEE, SEEK }
 export(Mode) var behavior_mode := Mode.SEEK setget set_behavior_mode
 export(float, 0, 2000, 40) var max_linear_speed := 200.0 setget set_max_linear_speed
 export(float, 0, 500, 0.5) var max_linear_accel := 10.0 setget set_max_linear_accel
+export(float) var player_speed := 600.0 setget set_player_speed
 
 var camera_boundaries: Rect2
 
@@ -25,6 +26,8 @@ func _ready() -> void:
 	
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
+	
+	player.speed = player_speed
 	
 	for i in range(spawner.entity_count):
 		var new_pos := Vector2(
@@ -69,3 +72,11 @@ func set_max_linear_accel(value: float) -> void:
 	max_linear_accel = value
 	for child in spawner.get_children():
 		child.agent.max_linear_acceleration = value
+
+
+func set_player_speed(value: float) -> void:
+	if not is_inside_tree():
+		return
+	
+	player_speed = value
+	player.speed = player_speed

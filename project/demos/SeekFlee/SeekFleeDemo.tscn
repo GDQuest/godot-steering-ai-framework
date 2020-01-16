@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://demos/SeekFlee/Boundary.gd" type="Script" id=1]
 [ext_resource path="res://demos/SeekFlee/Player.gd" type="Script" id=2]
 [ext_resource path="res://demos/SeekFlee/SeekFleeDemo.gd" type="Script" id=3]
 [ext_resource path="res://demos/SeekFlee/Spawner.gd" type="Script" id=4]
+[ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=5]
 [ext_resource path="res://demos/SeekFlee/Seeker.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sprites/large_circle.png" type="Texture" id=7]
 
@@ -75,3 +76,31 @@ shape = SubResource( 3 )
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource( 4 )
 Entity = ExtResource( 6 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="PanelContainer" parent="CanvasLayer"]
+margin_right = 1024.0
+margin_bottom = 116.0
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI"]
+margin_right = 1024.0
+margin_bottom = 116.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/GUI/MarginContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 1008.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 84 )
+bbcode_enabled = true
+bbcode_text = "Seek & Flee Demo
+Move the [color=red]red \"Player\"[/color] around with WASD and notice the [color=blue]blue \"Enemies\"[/color] and the  seek/flee
+the \"Player\""
+text = "Seek & Flee Demo
+Move the red \"Player\" around with WASD and notice the blue \"Enemies\" and the  seek/flee
+the \"Player\""

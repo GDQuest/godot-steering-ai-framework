@@ -6,7 +6,7 @@ var rect: Rect2
 
 
 func _ready() -> void:
-	var extents := ($CollisionShape2D.shape as RectangleShape2D).extents
+	var extents: Vector2 = $CollisionShape2D.shape.extents
 	rect = Rect2(-extents, extents*2)
 
 
