@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://demos/FollowPath/Drawer.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/small_circle.png" type="Texture" id=2]
+[ext_resource path="res://demos/FollowPath/PathFollower.gd" type="Script" id=3]
+[ext_resource path="res://demos/FollowPath/FollowPathDemo.gd" type="Script" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0
+
+[node name="FollowPathDemo" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Drawer" type="Node2D" parent="."]
+script = ExtResource( 1 )
+
+[node name="PathFollower" type="KinematicBody2D" parent="."]
+position = Vector2( 512, 300 )
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollower"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="PathFollower"]
+modulate = Color( 0.960784, 0.231373, 0.0392157, 1 )
+texture = ExtResource( 2 )
