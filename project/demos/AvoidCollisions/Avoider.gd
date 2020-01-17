@@ -45,7 +45,7 @@ func setup(
 			rng: RandomNumberGenerator
 	) -> void:
 	rng.randomize()
-	_direction = Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized()
+	_direction = Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
 	_update_agent()
 	agent.max_linear_speed = max_linear_speed
 	agent.max_linear_acceleration = max_linear_accel
