@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://demos/AvoidCollisions/Spawner.gd" type="Script" id=1]
+[ext_resource path="res://demos/AvoidCollisions/AvoidCollisionsDemo.gd" type="Script" id=2]
+[ext_resource path="res://demos/AvoidCollisions/Avoider.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=4]
+
+[node name="AvoidCollisionsDemo" type="Node2D"]
+script = ExtResource( 2 )
+max_linear_speed = 360.0
+proximity_radius = 100.0
+
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource( 1 )
+avoider_template = ExtResource( 3 )
+normal_color = Color( 0.94902, 0.0588235, 0.0588235, 1 )
+highlight_color = Color( 0.0901961, 0.929412, 0.929412, 1 )
+
+[node name="GUI" type="PanelContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 14.0
+theme = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI"]
+margin_right = 1024.0
+margin_bottom = 116.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/MarginContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 1008.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 84 )
+bbcode_enabled = true
+bbcode_text = "Avoid Collisions Demo
+Watch each agent try to keep traveling in a particular direction, but prioritize avoiding collisions with other agents."
+text = "Avoid Collisions Demo
+Watch each agent try to keep traveling in a particular direction, but prioritize avoiding collisions with other agents."
+scroll_active = false

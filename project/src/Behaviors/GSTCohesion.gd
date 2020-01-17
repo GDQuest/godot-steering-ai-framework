@@ -1,5 +1,5 @@
-extends GSTGroupBehavior
 class_name GSTCohesion
+extends GSTGroupBehavior
 # Group behavior that produces linear acceleration that attempts to move the agent towards the
 # center of mass of the agents in the area defined by the defined Proximity.
 

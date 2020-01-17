@@ -4,7 +4,7 @@ extends KinematicBody2D
 
 onready var agent := GSTSteeringAgent.new()
 
-export var thruster_strength := 250.0
+export var thruster_strength := 175.0
 export var side_thruster_strength := 10.0
 export var max_velocity := 300.0
 export var max_angular_velocity := 2.0

@@ -1,5 +1,5 @@
-extends GSTPursue
 class_name GSTEvade
+extends GSTPursue
 # Calculates acceleration to take an agent away from where a target agent will be.
 
 # # The `max_predict_time` variable represents how far ahead to calculate the intersection point.

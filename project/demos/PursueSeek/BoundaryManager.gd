@@ -1,5 +1,5 @@
 extends Node2D
-# Wraps the ships' positions around the world border, and controls their rendering clones.
+# Wraps the ships' positions around the world border.
 
 
 var _world_bounds: Vector2

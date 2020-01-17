@@ -1,5 +1,5 @@
-extends GSTSteeringBehavior
 class_name GSTSeek
+extends GSTSteeringBehavior
 # Calculates acceleration to take an agent to a target agent's position as directly as possible
 
 

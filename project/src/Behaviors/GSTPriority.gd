@@ -1,5 +1,5 @@
-extends GSTSteeringBehavior
 class_name GSTPriority
+extends GSTSteeringBehavior
 # Contains multiple steering behaviors and returns only the result of the first that has a non-zero
  # acceleration.
 

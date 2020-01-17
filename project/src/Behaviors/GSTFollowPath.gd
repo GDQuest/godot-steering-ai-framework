@@ -1,12 +1,12 @@
-extends GSTArrive
 class_name GSTFollowPath
+extends GSTArrive
 # Produces a linear acceleration that moves the agent along the specified path.
 
 
 var path: GSTPath
 var path_offset := 0.0
 
-var path_param := {}
+var path_param := {segment_index = 0, distance = 0}
 
 var arrive_enabled := true
 var prediction_time := 0.0
@@ -32,7 +32,7 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 	
 	var target_position := path.calculate_target_position(path_param, target_distance)
 	
-	if arrive_enabled and path.is_open:
+	if arrive_enabled and path.open:
 		if path_offset >= 0:
 			if target_distance > path.length - deceleration_radius:
 				return _arrive(acceleration, target_position)

@@ -43,10 +43,10 @@ func _ready() -> void:
 
 
 func set_behavior_mode(mode: int) -> void:
+	behavior_mode = mode
 	if not is_inside_tree():
 		return
 	
-	behavior_mode = mode
 	match mode:
 		Mode.SEEK:
 			for child in spawner.get_children():
@@ -57,26 +57,26 @@ func set_behavior_mode(mode: int) -> void:
 
 
 func set_max_linear_speed(value: float) -> void:
+	max_linear_speed = value
 	if not is_inside_tree():
 		return
 	
-	max_linear_speed = value
 	for child in spawner.get_children():
 		child.agent.max_linear_speed = value
 
 
 func set_max_linear_accel(value: float) -> void:
+	max_linear_accel = value
 	if not is_inside_tree():
 		return
 	
-	max_linear_accel = value
 	for child in spawner.get_children():
 		child.agent.max_linear_acceleration = value
 
 
 func set_player_speed(value: float) -> void:
+	player_speed = value
 	if not is_inside_tree():
 		return
 	
-	player_speed = value
 	player.speed = player_speed

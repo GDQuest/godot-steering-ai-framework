@@ -7,7 +7,7 @@ class_name GSTPath
 
 
 var open: bool
-var path_length: float
+var length: float
 
 var _segments: Array
 
@@ -25,10 +25,11 @@ func _init(waypoints: Array, open := false) -> void:
 func create_path(waypoints: Array) -> void:
 	if not waypoints or waypoints.size() < 2:
 		printerr("Waypoints cannot be null and must contain at least two (2) waypoints.")
+		return
 	
 	_segments = []
-	path_length = 0
-	var current: Vector3 = _segments[0]
+	length = 0
+	var current: Vector3 = waypoints.front()
 	var previous: Vector3
 	
 	for i in range(1, waypoints.size(), 1):
@@ -40,12 +41,14 @@ func create_path(waypoints: Array) -> void:
 		else:
 			current = waypoints[0]
 		var segment := GSTSegment.new(previous, current)
-		path_length += segment.length
-		segment.cumulative_length = path_length
+		length += segment.length
+		segment.cumulative_length = length
 		_segments.append(segment)
 
 
 func calculate_distance(agent_current_position: Vector3, path_parameter: Dictionary) -> float:
+	if _segments.size() == 0:
+		return 0.0
 	var smallest_distance_squared: float = INF
 	var nearest_segment: GSTSegment
 	for i in range(_segments.size()):
@@ -53,7 +56,8 @@ func calculate_distance(agent_current_position: Vector3, path_parameter: Diction
 		var distance_squared := _calculate_point_segment_distance_squared(
 				segment.begin,
 				segment.end,
-				agent_current_position)
+				agent_current_position
+			)
 		
 		if distance_squared < smallest_distance_squared:
 			_nearest_point_on_path = _nearest_point_on_segment
@@ -72,12 +76,12 @@ func calculate_distance(agent_current_position: Vector3, path_parameter: Diction
 
 func calculate_target_position(param: Dictionary, target_distance: float) -> Vector3:
 	if open:
-		target_distance = clamp(target_distance, 0, path_length)
+		target_distance = clamp(target_distance, 0, length)
 	else:
 		if target_distance < 0:
-			target_distance = path_length + fmod(target_distance, path_length)
-		elif target_distance > path_length:
-			target_distance = fmod(target_distance, path_length)
+			target_distance = length + fmod(target_distance, length)
+		elif target_distance > length:
+			target_distance = fmod(target_distance, length)
 	
 	var desired_segment: GSTSegment
 	for i in range(_segments.size()):
@@ -85,6 +89,9 @@ func calculate_target_position(param: Dictionary, target_distance: float) -> Vec
 		if segment.cumulative_length >= target_distance:
 			desired_segment = segment
 			break
+	
+	if not desired_segment:
+		desired_segment = _segments.back()
 	
 	var distance := desired_segment.cumulative_length - target_distance
 	

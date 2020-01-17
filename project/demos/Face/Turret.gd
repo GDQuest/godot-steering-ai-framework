@@ -5,7 +5,7 @@ var face: GSTFace
 var agent := GSTSteeringAgent.new()
 
 var _accel := GSTTargetAcceleration.new()
-var _angular_drag := 0.01
+var _angular_drag := 0.1
 var _cannon: Rect2
 
 onready var collision_shape := $CollisionShape2D
