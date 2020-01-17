@@ -99,8 +99,6 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 0, 84 )
 bbcode_enabled = true
 bbcode_text = "Seek & Flee Demo
-Move the [color=red]red \"Player\"[/color] around with WASD and notice the [color=blue]blue \"Enemies\"[/color] and the  seek/flee
-the \"Player\""
+Move the [color=red]red \"Player\"[/color] around with WASD and notice the [color=blue]blue \"Enemies\"[/color] try to seek to or flee from the player."
 text = "Seek & Flee Demo
-Move the red \"Player\" around with WASD and notice the blue \"Enemies\" and the  seek/flee
-the \"Player\""
+Move the red \"Player\" around with WASD and notice the blue \"Enemies\" try to seek to or flee from the player."
