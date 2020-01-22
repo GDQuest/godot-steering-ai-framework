@@ -1,15 +1,14 @@
 extends KinematicBody2D
 
 
-export var maximum_speed := 650.0 # Maximum possible linear velocity
-export var maximum_acceleration := 70.0 # Maximum change in linear velocity
-export var maximum_rotation_speed := 240 # Maximum rotation velocity represented in degrees
-export var maximum_rotation_accel := 40 # Maximum change in rotation velocity represented in degrees
+export var speed_max := 650.0
+export var acceleration_max := 70.0
+export var rotation_speed_max := 240
+export var rotation_accel_max := 40
 export var bullet: PackedScene
 
 var velocity := Vector2.ZERO
 var angular_velocity := 0.0
-var bullet_cache := []
 var direction := Vector2.RIGHT
 
 onready var agent := GSTSteeringAgent.new()
@@ -20,10 +19,10 @@ onready var bullets := owner.get_node("Bullets")
 
 
 func _ready() -> void:
-	agent.max_linear_speed = maximum_speed
-	agent.max_linear_acceleration = maximum_acceleration
-	agent.max_angular_speed = deg2rad(maximum_rotation_speed)
-	agent.max_angular_acceleration = deg2rad(maximum_rotation_accel)
+	agent.linear_speed_max = speed_max
+	agent.linear_acceleration_max = acceleration_max
+	agent.angular_speed_max = deg2rad(rotation_speed_max)
+	agent.angular_acceleration_max = deg2rad(rotation_accel_max)
 	agent.bounding_radius = calculate_radius($CollisionPolygon2D.polygon)
 	update_agent()
 	
@@ -42,14 +41,14 @@ func _physics_process(delta: float) -> void:
 	
 	direction = Vector2(sin(-rotation), cos(rotation))
 	
-	velocity += direction * maximum_acceleration * movement
-	velocity = velocity.clamped(maximum_speed)
+	velocity += direction * acceleration_max * movement
+	velocity = velocity.clamped(speed_max)
 	velocity = velocity.linear_interpolate(Vector2.ZERO, 0.1)
 	velocity = move_and_slide(velocity)
 	
 	face.calculate_steering(accel)
 	angular_velocity += accel.angular
-	angular_velocity = clamp(angular_velocity, -agent.max_angular_speed, agent.max_angular_speed)
+	angular_velocity = clamp(angular_velocity, -agent.angular_speed_max, agent.angular_speed_max)
 	angular_velocity = lerp(angular_velocity, 0, 0.1)
 	rotation += angular_velocity * delta
 
@@ -66,6 +65,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			next_bullet.player = self
 			next_bullet.start(-direction)
 			bullets.add_child(next_bullet)
+
 
 func get_movement() -> float:
 	return Input.get_action_strength("sf_down") - Input.get_action_strength("sf_up")

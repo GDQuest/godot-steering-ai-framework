@@ -82,10 +82,10 @@ onready var priority := GSTPriority.new(agent)
 
 func _ready() -> void:
     # ---------- Configuration for our agent ----------
-    agent.max_linear_speed = speed_max
-    agent.max_linear_acceleration = acceleration_max
-    agent.max_angular_speed = deg2rad(angular_speed_max)
-    agent.max_angular_acceleration = deg2rad(angular_acceleration_max)
+    agent.linear_speed_max = speed_max
+    agent.linear_acceleration_max = acceleration_max
+    agent.angular_speed_max = deg2rad(angular_speed_max)
+    agent.angular_acceleration_max = deg2rad(angular_acceleration_max)
     agent.bounding_radius = calculate_radius($CollisionPolygon2D.polygon)
     update_agent()
 
@@ -93,7 +93,7 @@ func _ready() -> void:
     # Pursue will happen while the player is in good health. It produces acceleration that takes
     # the agent on an intercept course with the target, predicting its position in the future
     var pursue := GSTPursue.new(agent, player_agent)
-    pursue.max_predict_time = 1.5
+    pursue.predict_time_max = 1.5
 
     # Flee will happen while the player is in bad health, so will start disabled. It produces
     # acceleration that takes the agent directly away from the target with no prediction.
@@ -106,7 +106,7 @@ func _ready() -> void:
     # Face turns the agent to keep looking towards its target. It will be enabled while the agent
     # is not fleeing due to low health. It tries to arrive 'on alignment' with 0 remaining velocity
     var face := GSTFace.new(agent, player_agent)
-
+        
     # We use deg2rad because the math in the toolkit assumes radians.
     # How close for the agent to be 'aligned', if not exact
     face.alignment_tolerance = deg2rad(5)
@@ -153,8 +153,8 @@ func _physics_process(delta: float) -> void:
     # We add the discovered acceleration to our linear velocity. The toolkit does not limit
     # velocity, just acceleration, so we clamp the result ourselves here.
     velocity = (velocity + Vector2(
-                    acceleration.linear.x, acceleration.linear.y)
-    ).clamped(agent.max_linear_speed)
+                acceleration.linear.x, acceleration.linear.y)
+    ).clamped(agent.linear_speed_max)
 
     # This applies drag on the agent's motion, helping it slow down naturally
     velocity = velocity.linear_interpolate(Vector2.ZERO, linear_drag)
@@ -166,8 +166,8 @@ func _physics_process(delta: float) -> void:
     # We then do something similar to apply our agent's rotational speed
     angular_velocity = clamp(
             angular_velocity + acceleration.angular,
-            -agent.max_angular_speed,
-            agent.max_angular_speed
+            -agent.angular_speed_max,
+            agent.angular_speed_max
     )
     # This applies drag on the agent's rotation, helping it slow down naturally
     angular_velocity = lerp(angular_velocity, 0, angular_drag)
