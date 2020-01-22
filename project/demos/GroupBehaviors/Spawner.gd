@@ -5,8 +5,8 @@ export var member: PackedScene
 
 
 func setup(
-	max_linear_speed: float,
-	max_linear_accel: float,
+	linear_speed_max: float,
+	linear_accel_max: float,
 	proximity_radius: float,
 	separation_decay_coefficient: float,
 	cohesion_strength: float,
@@ -20,8 +20,8 @@ func setup(
 		follower.position += Vector2(rand_range(-60, 60), rand_range(-60, 60))
 		followers.append(follower)
 		follower.setup(
-			max_linear_speed,
-			max_linear_accel,
+			linear_speed_max,
+			linear_accel_max,
 			proximity_radius,
 			separation_decay_coefficient,
 			cohesion_strength,
@@ -37,14 +37,14 @@ func setup(
 		i.proximity.agents = agents
 
 
-func set_max_linear_speed(value: float) -> void:
+func set_linear_speed_max(value: float) -> void:
 	for child in get_children():
-		child.agent.max_linear_speed = value
+		child.agent.linear_speed_max = value
 
 
-func set_max_linear_accel(value: float) -> void:
+func set_linear_accel_max(value: float) -> void:
 	for child in get_children():
-		child.agent.max_linear_acceleration = value
+		child.agent.linear_acceleration_max = value
 
 
 func set_proximity_radius(value: float) -> void:

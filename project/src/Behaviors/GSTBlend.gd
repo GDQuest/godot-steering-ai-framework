@@ -38,7 +38,11 @@ func _calculate_steering(blended_accel: GSTTargetAcceleration) -> GSTTargetAccel
 		
 		blended_accel.add_scaled_accel(_accel, bw.weight)
 	
-	blended_accel.linear = GSTUtils.clampedv3(blended_accel.linear, agent.max_linear_acceleration)
-	blended_accel.angular = min(blended_accel.angular, agent.max_angular_acceleration)
+	blended_accel.linear = GSTUtils.clampedv3(blended_accel.linear, agent.linear_acceleration_max)
+	blended_accel.angular = clamp(
+			blended_accel.angular,
+			-agent.angular_acceleration_max,
+			agent.angular_acceleration_max
+	)
 	
 	return blended_accel

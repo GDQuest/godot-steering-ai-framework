@@ -14,18 +14,18 @@ func _physics_process(delta: float) -> void:
 	_update_agent()
 	_accel = arrive.calculate_steering(_accel)
 	_velocity += Vector2(_accel.linear.x, _accel.linear.y)
-	_velocity = _velocity.linear_interpolate(Vector2.ZERO, _drag).clamped(agent.max_linear_speed)
+	_velocity = _velocity.linear_interpolate(Vector2.ZERO, _drag).clamped(agent.linear_speed_max)
 	_velocity = move_and_slide(_velocity)
 
 
 func setup(
-	max_linear_speed: float,
-	max_linear_acceleration: float,
+	linear_speed_max: float,
+	linear_acceleration_max: float,
 	arrival_tolerance: float,
 	deceleration_radius: float
 ) -> void:
-	agent.max_linear_speed = max_linear_speed
-	agent.max_linear_acceleration = max_linear_acceleration
+	agent.linear_speed_max = linear_speed_max
+	agent.linear_acceleration_max = linear_acceleration_max
 	agent.position = Vector3(global_position.x, global_position.y, 0)
 	arrive.deceleration_radius = deceleration_radius
 	arrive.arrival_tolerance = arrival_tolerance

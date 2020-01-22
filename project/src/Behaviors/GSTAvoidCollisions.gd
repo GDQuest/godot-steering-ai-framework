@@ -33,7 +33,7 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 		else:
 			acceleration.linear = first_relative_position + (first_relative_velocity * shortest_time)
 	
-	acceleration.linear = acceleration.linear.normalized() * -agent.max_linear_acceleration
+	acceleration.linear = acceleration.linear.normalized() * -agent.linear_acceleration_max
 	acceleration.angular = 0
 	
 	return acceleration

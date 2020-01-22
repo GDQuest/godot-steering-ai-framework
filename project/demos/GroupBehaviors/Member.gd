@@ -14,8 +14,8 @@ var _velocity := Vector2()
 
 
 func setup(
-		max_linear_speed: float,
-		max_linear_accel: float,
+		linear_speed_max: float,
+		linear_accel_max: float,
 		proximity_radius: float,
 		separation_decay_coefficient: float,
 		cohesion_strength: float,
@@ -24,8 +24,8 @@ func setup(
 	_color = Color(rand_range(0.5, 1), rand_range(0.25, 1), rand_range(0, 1))
 	$Sprite.modulate = _color
 	
-	agent.max_linear_acceleration = max_linear_accel
-	agent.max_linear_speed = max_linear_speed
+	agent.linear_acceleration_max = linear_accel_max
+	agent.linear_speed_max = linear_speed_max
 	
 	proximity = GSTRadiusProximity.new(agent, [], proximity_radius)
 	separation = GSTSeparation.new(agent, proximity)
@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 		acceleration = blend.calculate_steering(acceleration)
 		_velocity += Vector2(acceleration.linear.x, acceleration.linear.y)
 		_velocity = _velocity.linear_interpolate(Vector2.ZERO, 0.1)
-		_velocity = _velocity.clamped(agent.max_linear_speed)
+		_velocity = _velocity.clamped(agent.linear_speed_max)
 		move_and_slide(_velocity)
 
 

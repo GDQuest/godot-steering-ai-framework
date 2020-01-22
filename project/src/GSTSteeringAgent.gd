@@ -4,10 +4,10 @@ class_name GSTSteeringAgent
 
 
 var zero_linear_speed_threshold := 0.01
-var max_linear_speed := 0.0
-var max_linear_acceleration := 0.0
-var max_angular_speed := 0.0
-var max_angular_acceleration := 0.0
+var linear_speed_max := 0.0
+var linear_acceleration_max := 0.0
+var angular_speed_max := 0.0
+var angular_acceleration_max := 0.0
 var linear_velocity := Vector3.ZERO
 var angular_velocity := 0.0
 var bounding_radius := 0.0

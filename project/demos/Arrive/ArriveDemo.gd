@@ -1,8 +1,8 @@
 extends Node2D
 
 
-export(float, 0, 2000, 40) var max_linear_speed := 800.0 setget set_max_linear_speed
-export(float, 0, 200, 2.0) var max_linear_acceleration := 80.0 setget set_max_linear_acceleration
+export(float, 0, 2000, 40) var linear_speed_max := 800.0 setget set_linear_speed_max
+export(float, 0, 200, 2.0) var linear_acceleration_max := 80.0 setget set_linear_acceleration_max
 export(float, 0, 100, 0.1) var arrival_tolerance := 25.0 setget set_arrival_tolerance
 export(float, 0, 500, 10) var deceleration_radius := 125.0 setget set_deceleration_radius
 
@@ -16,8 +16,8 @@ onready var arriver := $Arriver
 
 func _ready() -> void:
 	arriver.setup(
-		max_linear_speed,
-		max_linear_acceleration,
+		linear_speed_max,
+		linear_acceleration_max,
 		arrival_tolerance,
 		deceleration_radius
 	)
@@ -51,17 +51,17 @@ func set_deceleration_radius(value: float) -> void:
 	arriver.arrive.deceleration_radius = value
 
 
-func set_max_linear_speed(value: float) -> void:
-	max_linear_speed = value
+func set_linear_speed_max(value: float) -> void:
+	linear_speed_max = value
 	if not is_inside_tree():
 		return
 	
-	arriver.agent.max_linear_speed = value
+	arriver.agent.linear_speed_max = value
 
 
-func set_max_linear_acceleration(value: float) -> void:
-	max_linear_acceleration = value
+func set_linear_acceleration_max(value: float) -> void:
+	linear_acceleration_max = value
 	if not is_inside_tree():
 		return
 	
-	arriver.agent.max_linear_acceleration = value
+	arriver.agent.linear_acceleration_max = value

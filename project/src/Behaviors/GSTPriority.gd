@@ -7,11 +7,11 @@ extends GSTSteeringBehavior
 var _behaviors := []
 
 var last_selected_index: int
-var threshold_for_zero: float
+var zero_threshold: float
 
 
-func _init(agent: GSTSteeringAgent, threshold_for_zero := 0.001).(agent) -> void:
-	self.threshold_for_zero = threshold_for_zero
+func _init(agent: GSTSteeringAgent, zero_threshold := 0.001).(agent) -> void:
+	self.zero_threshold = zero_threshold
 
 
 func add(behavior: GSTSteeringBehavior) -> void:
@@ -26,7 +26,7 @@ func get_behavior_at(index: int) -> GSTSteeringBehavior:
 
 
 func _calculate_steering(accel: GSTTargetAcceleration) -> GSTTargetAcceleration:
-	var threshold_squared := threshold_for_zero * threshold_for_zero
+	var threshold_squared := zero_threshold * zero_threshold
 	
 	last_selected_index = -1
 	
