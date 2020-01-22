@@ -34,26 +34,34 @@ More details about how the various steering behaviors function can be found in t
 extends KinematicBody2D
 
 
-export var maximum_speed := 450.0 # Maximum possible linear velocity
-export var maximum_acceleration := 50.0 # Maximum change in linear velocity
-export var maximum_rotation_speed := 240 # Maximum rotation velocity represented in degrees
-export var maximum_rotation_accel := 40 # Maximum change in rotation velocity represented in degrees
-export var maximum_health := 100
+# Maximum possible linear velocity
+export var speed_max := 450.0
+# Maximum change in linear velocity
+export var acceleration_max := 50.0
+# Maximum rotation velocity represented in degrees
+export var angular_speed_max := 240
+# Maximum change in rotation velocity represented in degrees
+export var angular_acceleration_max := 40
+
+export var health_max := 100
 export var flee_health_threshold := 20
 
-var velocity := Vector2.ZERO # Represents the current velocity
-var angular_velocity := 0.0 # Represents the current rotational velocity
-var acceleration := GSTTargetAcceleration.new() # Holds the linear and angular components
-# calculated by our steering behaviors
+var velocity := Vector2.ZERO
+var angular_velocity := 0.0
+var linear_drag := 0.1
+var angular_drag := 0.1
 
-onready var current_health := maximum_health
+# Holds the linear and angular components calculated by our steering behaviors
+var acceleration := GSTTargetAcceleration.new()
+
+onready var current_health := health_max
 
 # GSTSteeringAgent holds our agent's position, orientation, maximum speed and acceleration
 onready var agent := GSTSteeringAgent.new()
 
 onready var player: Node = get_tree().get_nodes_in_group("Player")[0]
-onready var player_agent: GSTSteeringAgent = player.agent # This assumes that our player class will
-# keep its own agent updated
+# This assumes that our player class will keep its own agent updated
+onready var player_agent: GSTSteeringAgent = player.agent
 
 # Proximities represent an area with which an agent can identify where neighbors in its relevant
 # group are. In our case, the group will feature the player, which will be used to avoid a
@@ -74,10 +82,10 @@ onready var priority := GSTPriority.new(agent)
 
 func _ready() -> void:
     # ---------- Configuration for our agent ----------
-    agent.max_linear_speed = maximum_speed
-    agent.max_linear_acceleration = maximum_acceleration
-    agent.max_angular_speed = deg2rad(maximum_rotation_speed)
-    agent.max_angular_acceleration = deg2rad(maximum_rotation_accel)
+    agent.max_linear_speed = speed_max
+    agent.max_linear_acceleration = acceleration_max
+    agent.max_angular_speed = deg2rad(angular_speed_max)
+    agent.max_angular_acceleration = deg2rad(angular_acceleration_max)
     agent.bounding_radius = calculate_radius($CollisionPolygon2D.polygon)
     update_agent()
 
@@ -98,18 +106,24 @@ func _ready() -> void:
     # Face turns the agent to keep looking towards its target. It will be enabled while the agent
     # is not fleeing due to low health. It tries to arrive 'on alignment' with 0 remaining velocity
     var face := GSTFace.new(agent, player_agent)
+
     # We use deg2rad because the math in the toolkit assumes radians.
-    face.alignment_tolerance = deg2rad(5) # How close for the agent to be 'aligned', if not exact
-    face.deceleration_radius = deg2rad(45) # When to start slowing down
+    # How close for the agent to be 'aligned', if not exact
+    face.alignment_tolerance = deg2rad(5)
+    # When to start slowing down
+    face.deceleration_radius = deg2rad(45)
 
     # LookWhereYouGo turns the agent to keep looking towards its direction of travel. It will only
     # be enabled while the agent is at low health.
     var look := GSTLookWhereYouGo.new(agent)
-    look.alignment_tolerance = deg2rad(5) # How close for the agent to be 'aligned', if not exact
-    look.deceleration_radius = deg2rad(45) # When to start slowing down
+    # How close for the agent to be 'aligned', if not exact
+    look.alignment_tolerance = deg2rad(5)
+    # When to start slowing down
+    look.deceleration_radius = deg2rad(45)
 
-    flee_blend.enabled = false # Behaviors that are not enabled produce 0 acceleration
+    # Behaviors that are not enabled produce 0 acceleration
     # Adding our fleeing behaviors to a blend. The order does not matter.
+    flee_blend.enabled = false
     flee_blend.add(look, 1)
     flee_blend.add(flee, 1)
 
@@ -126,21 +140,25 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-    update_agent() # Make sure any change in position and speed has been recorded
+    # Make sure any change in position and speed has been recorded
+    update_agent()
 
-    if current_health <= flee_health_threshold: # Check to see if we should start fleeing or not
+    if current_health <= flee_health_threshold:
         pursue_blend.enabled = false
         flee_blend.enabled = true
 
-    priority.calculate_steering(acceleration) # Calculate the desired acceleration
+    # Calculate the desired acceleration
+    priority.calculate_steering(acceleration)
 
     # We add the discovered acceleration to our linear velocity. The toolkit does not limit
     # velocity, just acceleration, so we clamp the result ourselves here.
     velocity = (velocity + Vector2(
                     acceleration.linear.x, acceleration.linear.y)
-            ).clamped(agent.max_linear_speed)
+    ).clamped(agent.max_linear_speed)
+
     # This applies drag on the agent's motion, helping it slow down naturally
-    velocity = velocity.linear_interpolate(Vector2.ZERO, 0.1)
+    velocity = velocity.linear_interpolate(Vector2.ZERO, linear_drag)
+
     # And since we're using a KinematicBody2D, we use Godot's excellent move_and_slide to actually
     # apply the final movement, and record any change in velocity the physics engine discovered
     velocity = move_and_slide(velocity)
@@ -152,7 +170,7 @@ func _physics_process(delta: float) -> void:
             agent.max_angular_speed
     )
     # This applies drag on the agent's rotation, helping it slow down naturally
-    angular_velocity = lerp(angular_velocity, 0, 0.1)
+    angular_velocity = lerp(angular_velocity, 0, angular_drag)
     rotation += angular_velocity * delta
 
 
