@@ -7,7 +7,6 @@
 
 [node name="AvoidCollisionsDemo" type="Node2D"]
 script = ExtResource( 2 )
-max_linear_speed = 360.0
 proximity_radius = 100.0
 
 [node name="Spawner" type="Node2D" parent="."]

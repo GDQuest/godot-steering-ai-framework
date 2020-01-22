@@ -18,7 +18,11 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	_accel = face.calculate_steering(_accel)
-	agent.angular_velocity += _accel.angular
+	agent.angular_velocity = clamp(
+			agent.angular_velocity + _accel.angular,
+			-agent.angular_speed_max,
+			agent.angular_speed_max
+	)
 	agent.angular_velocity = lerp(agent.angular_velocity, 0, _angular_drag)
 	agent.orientation += agent.angular_velocity * delta
 	rotation = agent.orientation
@@ -32,15 +36,15 @@ func setup(
 	player_agent: GSTAgentLocation,
 	align_tolerance: float,
 	deceleration_radius: float,
-	max_angular_accel: float,
-	max_angular_speed: float
+	angular_accel_max: float,
+	angular_speed_max: float
 ) -> void:
 	face = GSTFace.new(agent, player_agent)
 	
 	face.alignment_tolerance = align_tolerance
 	face.deceleration_radius = deceleration_radius
 	
-	agent.max_angular_acceleration = max_angular_accel
-	agent.max_angular_speed = max_angular_speed
+	agent.angular_acceleration_max = angular_accel_max
+	agent.angular_speed_max = angular_speed_max
 	agent.position = Vector3(global_position.x, global_position.y, 0)
 

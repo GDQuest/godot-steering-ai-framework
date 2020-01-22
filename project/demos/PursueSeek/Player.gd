@@ -2,17 +2,17 @@ extends KinematicBody2D
 # Controls the player ship's movements based on player input.
 
 
-onready var agent := GSTSteeringAgent.new()
-
 export var thruster_strength := 175.0
 export var side_thruster_strength := 10.0
-export var max_velocity := 300.0
-export var max_angular_velocity := 2.0
+export var velocity_max := 300.0
+export var angular_velocity_max := 2.0
 export var angular_drag := 0.025
 export var linear_drag := 0.025
 
 var _linear_velocity := Vector2()
 var _angular_velocity := 0.0
+
+onready var agent := GSTSteeringAgent.new()
 
 
 func _physics_process(delta: float) -> void:
@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 		movement.x,
 		_angular_velocity,
 		side_thruster_strength,
-		max_angular_velocity,
+		angular_velocity_max,
 		angular_drag,
 		delta
 	)
@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 		Vector2.UP.rotated(rotation),
 		linear_drag,
 		thruster_strength,
-		max_velocity,
+		velocity_max,
 		delta
 	)
 	
@@ -45,14 +45,14 @@ func _calculate_angular_velocity(
 	horizontal_movement: float,
 	current_velocity: float,
 	thruster_strength: float,
-	max_velocity: float,
+	velocity_max: float,
 	ship_drag: float,
 	delta: float
 ) -> float:
 	var velocity := clamp(
 		current_velocity + thruster_strength * horizontal_movement * delta,
-		-max_velocity,
-		max_velocity
+		-velocity_max,
+		velocity_max
 	)
 	
 	velocity = lerp(velocity, 0, ship_drag)
@@ -66,7 +66,7 @@ func _calculate_linear_velocity(
 	facing_direction: Vector2,
 	ship_drag_coefficient: float,
 	strength: float,
-	max_speed: float,
+	speed_max: float,
 	delta: float
 ) -> Vector2:
 	var actual_strength := 0.0
@@ -78,7 +78,7 @@ func _calculate_linear_velocity(
 	var velocity := current_velocity + facing_direction * actual_strength * delta
 	velocity = velocity.linear_interpolate(Vector2.ZERO, ship_drag_coefficient)
 	
-	return velocity.clamped(max_speed)
+	return velocity.clamped(speed_max)
 
 
 func _get_movement() -> Vector2:

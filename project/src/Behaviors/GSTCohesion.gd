@@ -17,7 +17,7 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 	var neighbor_count = proximity.find_neighbors(_callback)
 	if neighbor_count > 0:
 		center_of_mass *= 1.0 / neighbor_count
-		acceleration.linear = (center_of_mass - agent.position).normalized() * agent.max_linear_acceleration
+		acceleration.linear = (center_of_mass - agent.position).normalized() * agent.linear_acceleration_max
 	return acceleration
 
 

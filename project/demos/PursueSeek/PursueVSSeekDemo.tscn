@@ -12,7 +12,8 @@ script = ExtResource( 4 )
 __meta__ = {
 "_editor_description_": "Toy demo to demonstrate the use of the Pursue contrasted to the more naive Seek steering behavior."
 }
-max_linear_speed = 200.0
+linear_speed_max = 240.0
+linear_accel_max = 40.0
 
 [node name="BoundaryManager" type="Node2D" parent="."]
 script = ExtResource( 3 )
@@ -24,7 +25,6 @@ collision_mask = 2
 script = ExtResource( 2 )
 thruster_strength = 600.0
 side_thruster_strength = 20.0
-max_velocity = 900.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoundaryManager/Player"]
 polygon = PoolVector2Array( 0, -32, -24, 32, 24, 32 )

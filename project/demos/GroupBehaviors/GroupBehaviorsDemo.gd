@@ -3,8 +3,8 @@ extends Node2D
 
 onready var spawner := $Spawner
 
-export(float, 0, 2000, 40.0) var max_linear_speed := 600.0 setget set_max_linear_speed
-export(float, 0, 200, 2.0) var max_linear_accel := 40.0 setget set_max_linear_accel
+export(float, 0, 2000, 40.0) var linear_speed_max := 600.0 setget set_linear_speed_max
+export(float, 0, 200, 2.0) var linear_accel_max := 40.0 setget set_linear_accel_max
 export(float, 0, 300, 2.0) var proximity_radius := 140.0 setget set_proximity_radius
 export(float, 0, 10000, 100) var separation_decay_coefficient := 2000.0 setget set_separation_decay_coef
 export(float, 0, 2, 0.1) var cohesion_strength := 0.1 setget set_cohesion_strength
@@ -14,8 +14,8 @@ export var show_proximity_radius := true setget set_show_proximity_radius
 
 func _ready() -> void:
 	spawner.setup(
-		max_linear_speed,
-		max_linear_accel,
+		linear_speed_max,
+		linear_accel_max,
 		proximity_radius,
 		separation_decay_coefficient,
 		cohesion_strength,
@@ -24,20 +24,20 @@ func _ready() -> void:
 	)
 
 
-func set_max_linear_speed(value: float) -> void:
-	max_linear_speed = value
+func set_linear_speed_max(value: float) -> void:
+	linear_speed_max = value
 	if not is_inside_tree():
 		return
 	
-	spawner.set_max_linear_speed(value)
+	spawner.set_linear_speed_max(value)
 
 
-func set_max_linear_accel(value: float) -> void:
-	max_linear_accel = value
+func set_linear_accel_max(value: float) -> void:
+	linear_accel_max = value
 	if not is_inside_tree():
 		return
 	
-	spawner.set_max_linear_accel(value)
+	spawner.set_linear_accel_max(value)
 
 
 func set_proximity_radius(value: float) -> void:

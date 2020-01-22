@@ -1,6 +1,11 @@
 extends KinematicBody2D
 
 
+var _velocity := Vector2.ZERO
+var _accel := GSTTargetAcceleration.new()
+var _valid := false
+var _drag := 0.1
+
 onready var agent := GSTSteeringAgent.new()
 onready var path := GSTPath.new([
 		Vector3(global_position.x, global_position.y, 0),
@@ -8,25 +13,20 @@ onready var path := GSTPath.new([
 	], true)
 onready var follow := GSTFollowPath.new(agent, path, 0, 0)
 
-var _velocity := Vector2.ZERO
-var _accel := GSTTargetAcceleration.new()
-var _valid := false
-var _drag := 0.1
-
 
 func setup(
 			path_offset: float,
 			predict_time: float,
-			max_accel: float,
-			max_speed: float,
+			accel_max: float,
+			speed_max: float,
 			decel_radius: float,
 			arrival_tolerance: float
 	) -> void:
 	owner.drawer.connect("path_established", self, "_on_Drawer_path_established")
 	follow.path_offset = path_offset
 	follow.prediction_time = predict_time
-	agent.max_linear_acceleration = max_accel
-	agent.max_linear_speed = max_speed
+	agent.linear_acceleration_max = accel_max
+	agent.linear_speed_max = speed_max
 	follow.deceleration_radius = decel_radius
 	follow.arrival_tolerance = arrival_tolerance
 
@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 		_accel = follow.calculate_steering(_accel)
 		_velocity += Vector2(_accel.linear.x, _accel.linear.y)
 		_velocity = _velocity.linear_interpolate(Vector2.ZERO, _drag)
-		_velocity = _velocity.clamped(agent.max_linear_speed)
+		_velocity = _velocity.clamped(agent.linear_speed_max)
 		_velocity = move_and_slide(_velocity)
 
 

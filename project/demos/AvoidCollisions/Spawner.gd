@@ -18,8 +18,8 @@ func _ready() -> void:
 		var avoider := avoider_template.instance()
 		add_child(avoider)
 		avoider.setup(
-				owner.max_linear_speed,
-				owner.max_linear_acceleration,
+				owner.linear_speed_max,
+				owner.linear_acceleration_max,
 				owner.proximity_radius,
 				boundaries.x,
 				boundaries.y,
@@ -39,14 +39,14 @@ func _physics_process(delta: float) -> void:
 		child.global_position = child.global_position.posmodv(boundaries)
 
 
-func set_max_linear_speed(value: float) -> void:
+func set_linear_speed_max(value: float) -> void:
 	for child in get_children():
-		child.agent.max_linear_speed = value
+		child.agent.linear_speed_max = value
 
 
-func set_max_linear_accel(value: float) -> void:
+func set_linear_accel_max(value: float) -> void:
 	for child in get_children():
-		child.agent.max_linear_acceleration = value
+		child.agent.linear_acceleration_max = value
 
 
 func set_proximity_radius(value: float) -> void:

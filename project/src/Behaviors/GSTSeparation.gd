@@ -28,11 +28,11 @@ func report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 	var to_agent := agent.position - neighbor.position
 
 	var distance_squared := to_agent.length_squared()
-	var max_acceleration := agent.max_linear_acceleration
+	var acceleration_max := agent.linear_acceleration_max
 
 	var strength := decay_coefficient / distance_squared
-	if strength > max_acceleration:
-		strength = max_acceleration
+	if strength > acceleration_max:
+		strength = acceleration_max
 	
 	acceleration.linear += to_agent * (strength / sqrt(distance_squared))
 

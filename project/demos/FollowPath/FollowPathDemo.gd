@@ -1,8 +1,8 @@
 extends Node2D
 
 
-export(float, 0, 2000, 40) var max_linear_speed := 600.0 setget set_max_linear_speed
-export(float, 0, 200, 10.0) var max_linear_acceleration := 40.0 setget set_max_linear_acceleration
+export(float, 0, 2000, 40) var linear_speed_max := 600.0 setget set_linear_speed_max
+export(float, 0, 200, 10.0) var linear_acceleration_max := 40.0 setget set_linear_acceleration_max
 export(float, 0, 100, 0.1) var arrival_tolerance := 10.0 setget set_arrival_tolerance
 export(float, 0, 500, 10) var deceleration_radius := 100.0 setget set_deceleration_radius
 export(float, 0, 5, 0.1) var predict_time := 0.3 setget set_predict_time
@@ -16,27 +16,27 @@ func _ready() -> void:
 	follower.setup(
 			path_offset,
 			predict_time,
-			max_linear_acceleration,
-			max_linear_speed,
+			linear_acceleration_max,
+			linear_speed_max,
 			deceleration_radius,
 			arrival_tolerance
 	)
 
 
-func set_max_linear_speed(value: float) -> void:
-	max_linear_speed = value
+func set_linear_speed_max(value: float) -> void:
+	linear_speed_max = value
 	if not is_inside_tree():
 		return
 	
-	follower.agent.max_linear_speed = value
+	follower.agent.linear_speed_max = value
 
 
-func set_max_linear_acceleration(value: float) -> void:
-	max_linear_acceleration = value
+func set_linear_acceleration_max(value: float) -> void:
+	linear_acceleration_max = value
 	if not is_inside_tree():
 		return
 	
-	follower.agent.max_linear_acceleration = value
+	follower.agent.linear_acceleration_max = value
 
 
 func set_arrival_tolerance(value: float) -> void:

@@ -5,8 +5,8 @@ extends Node2D
 enum Mode { FLEE, SEEK }
 
 export(Mode) var behavior_mode := Mode.SEEK setget set_behavior_mode
-export(float, 0, 2000, 40) var max_linear_speed := 200.0 setget set_max_linear_speed
-export(float, 0, 500, 0.5) var max_linear_accel := 10.0 setget set_max_linear_accel
+export(float, 0, 2000, 40) var linear_speed_max := 200.0 setget set_linear_speed_max
+export(float, 0, 500, 0.5) var linear_accel_max := 10.0 setget set_linear_accel_max
 export(float) var player_speed := 600.0 setget set_player_speed
 
 var camera_boundaries: Rect2
@@ -37,8 +37,8 @@ func _ready() -> void:
 		var entity: KinematicBody2D = spawner.Entity.instance()
 		entity.global_position = new_pos
 		entity.player_agent = player.agent
-		entity.start_speed = max_linear_speed
-		entity.start_accel = max_linear_accel
+		entity.start_speed = linear_speed_max
+		entity.start_accel = linear_accel_max
 		spawner.add_child(entity)
 
 
@@ -56,22 +56,22 @@ func set_behavior_mode(mode: int) -> void:
 				child.use_seek = false
 
 
-func set_max_linear_speed(value: float) -> void:
-	max_linear_speed = value
+func set_linear_speed_max(value: float) -> void:
+	linear_speed_max = value
 	if not is_inside_tree():
 		return
 	
 	for child in spawner.get_children():
-		child.agent.max_linear_speed = value
+		child.agent.linear_speed_max = value
 
 
-func set_max_linear_accel(value: float) -> void:
-	max_linear_accel = value
+func set_linear_accel_max(value: float) -> void:
+	linear_accel_max = value
 	if not is_inside_tree():
 		return
 	
 	for child in spawner.get_children():
-		child.agent.max_linear_acceleration = value
+		child.agent.linear_acceleration_max = value
 
 
 func set_player_speed(value: float) -> void:
