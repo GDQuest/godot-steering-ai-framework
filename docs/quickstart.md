@@ -1,8 +1,8 @@
 # Godot Steering Toolkit #
 
-In the 1990s, [Craig Reynolds](http://www.red3d.com/cwr/) developed algorithms for common AI behaviors. They allowed AI agents to seek out or flee from a target, follow a pre-defined path, or face in a particular direction. They were simple, repeatable tasks that could be broken down into a programming algorith which made them easy to reuse, maintain and extend.
+In the 1990s, [Craig Reynolds](http://www.red3d.com/cwr/) developed algorithms for common AI behaviors. They allowed AI agents to seek out or flee from a target, follow a pre-defined path, or face in a particular direction. They were simple, repeatable tasks that could be broken down into a programming algorithms which made them easy to reuse, maintain, combine and extend.
 
-While an AI agent's next action is decided by decision making and planning algorithms, steering behaviors dictate how it will move from one frame to the next. They look at what information is available and calculate where the agent should move at that moment.
+While an AI agent's next action is based on decision making and planning algorithms, steering behaviors dictate how it will move from one frame to the next. They use available information and calculate where to move at that moment.
 
 Joining these systems together can give complex and graceful movement while also being more efficient than complex path finding algorithms like A\*.
 
@@ -10,13 +10,13 @@ Joining these systems together can give complex and graceful movement while also
 
 This toolkit is a framework for the [Godot engine](https://godotengine.org/). It takes a lot of inspiration from the excellent [GDX-AI](https://github.com/libgdx/gdx-ai) framework for the [LibGDX](https://libgdx.badlogicgames.com/) java-based framework. Every class in the toolkit is based on Godot's [Reference](https://docs.godotengine.org/en/latest/classes/class_reference.html) type. There is no need to have a complex scene tree; everything that has to do with the AI's movement can be contained inside movement oriented classes.
 
-As a short overview, a character is represented by a steering agent; it stores its position, orientation, maximum speeds and current velocity. A steering behavior is associated with a steering agent calculates a linear and/or angular change in speed from the information that is available. The coder then applies that acceleration in whatever ways is appropriate to the character to change its velocity.
+As a short overview, a character is represented by a steering agent; it stores its position, orientation, maximum speeds and current velocity. A steering behavior is associated with a steering agent and calculates a linear and/or angular change in velocity based on its information. The coder then applies that acceleration in whatever ways is appropriate to the character to change its velocity, like RigidBody's apply_impulse, or a KinematicBody's move_and_slide.
 
 ## More information and resources ##
 
 - [Understanding Steering Behaviors](https://gamedevelopment.tutsplus.com/series/understanding-steering-behaviors--gamedev-12732): Breakdowns of various behaviors by Fernando Bevilacqua with graphics and in-depth explanations.
 - [GDX-AI Wiki](https://github.com/libgdx/gdx-ai/wiki/Steering-Behaviors): Descriptions of how LibGDX's AI submodule uses steering behaviors with a few graphics. Since this toolkit uses it for inspiration, there will be some similarities.
-- [RedBlobGames](https://www.redblobgames.com/) - An excellent resources for complex pathfinding like A*, graph theory, and other algorithms that are game-development related. Steering behaviors are not covered, but for anyone looking to study and bulk up on their algorithms, this is a great place.
+- [RedBlobGames](https://www.redblobgames.com/) - An excellent resources for complex pathfinding like A\*, graph theory, and other algorithms that are game-development related. Steering behaviors are not covered, but for anyone looking to study and bulk up on their algorithms, this is a great place.
 
 ## Example usage ##
 
@@ -28,7 +28,7 @@ Our game will be in 2D and assumed to be a top-down spaceship game.
 
 You can see the demo in action by opening the `demos/QuickStartDemo.tscn` file in Godot. The agent approaches the player and hovers near them until the agent is shot enough times, at which point it will try to flee.
 
-More details about how the various steering behaviors function can be found in the [Reference](./reference.md) document.
+More details about how the various steering behaviors function can be found in the [Reference](https://github.com/GDQuest/godot-steering-toolkit/wiki/Manual-API-reference-draft) wiki page.
 
 ```ruby
 extends KinematicBody2D

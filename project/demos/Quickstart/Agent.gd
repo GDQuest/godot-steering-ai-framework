@@ -18,21 +18,21 @@ var angular_velocity := 0.0
 var linear_drag := 0.1
 var angular_drag := 0.1
 
-# Holds the linear and angular components calculated by our steering behaviors
+# Holds the linear and angular components calculated by our steering behaviors.
 var acceleration := GSTTargetAcceleration.new()
 
 onready var current_health := health_max
 
-# GSTSteeringAgent holds our agent's position, orientation, maximum speed and acceleration
+# GSTSteeringAgent holds our agent's position, orientation, maximum speed and acceleration.
 onready var agent := GSTSteeringAgent.new()
 
 onready var player: Node = get_tree().get_nodes_in_group("Player")[0]
-# This assumes that our player class will keep its own agent updated
+# This assumes that our player class will keep its own agent updated.
 onready var player_agent: GSTSteeringAgent = player.agent
 
 # Proximities represent an area with which an agent can identify where neighbors in its relevant
 # group are. In our case, the group will feature the player, which will be used to avoid a
-# collision with him. We use a radius proximity so the player is only relevant inside 100 pixels
+# collision with them. We use a radius proximity so the player is only relevant inside 100 pixels.
 onready var proximity := GSTRadiusProximity.new(agent, [player_agent], 100)
 
 # GSTBlend combines behaviors together, calculating all of their acceleration together and adding
@@ -57,25 +57,25 @@ func _ready() -> void:
 	update_agent()
 
 	# ---------- Configuration for our behaviors ----------
-	# Pursue will happen while the player is in good health. It produces acceleration that takes
-	# the agent on an intercept course with the target, predicting its position in the future
+	# Pursue will happen while the agent is in good health. It produces acceleration that takes
+	# the agent on an intercept course with the target, predicting its position in the future.
 	var pursue := GSTPursue.new(agent, player_agent)
 	pursue.predict_time_max = 1.5
 
-	# Flee will happen while the player is in bad health, so will start disabled. It produces
+	# Flee will happen while the agent is in bad health, so will start disabled. It produces
 	# acceleration that takes the agent directly away from the target with no prediction.
 	var flee := GSTFlee.new(agent, player_agent)
 
 	# AvoidCollision tries to keep the agent from running into any of the neighbors found in its
-	# proximity group. In this case, that will be the player, if he is close enough.
+	# proximity group. In our case, this will be the player, if they are close enough.
 	var avoid := GSTAvoidCollisions.new(agent, proximity)
 
 	# Face turns the agent to keep looking towards its target. It will be enabled while the agent
-	# is not fleeing due to low health. It tries to arrive 'on alignment' with 0 remaining velocity
+	# is not fleeing due to low health. It tries to arrive 'on alignment' with 0 remaining velocity.
 	var face := GSTFace.new(agent, player_agent)
 	
 	# We use deg2rad because the math in the toolkit assumes radians.
-	# How close for the agent to be 'aligned', if not exact
+	# How close for the agent to be 'aligned', if not exact.
 	face.alignment_tolerance = deg2rad(5)
 	# When to start slowing down
 	face.deceleration_radius = deg2rad(45)
@@ -85,10 +85,10 @@ func _ready() -> void:
 	var look := GSTLookWhereYouGo.new(agent)
 	# How close for the agent to be 'aligned', if not exact
 	look.alignment_tolerance = deg2rad(5)
-	# When to start slowing down
+	# When to start slowing down.
 	look.deceleration_radius = deg2rad(45)
 
-	# Behaviors that are not enabled produce 0 acceleration
+	# Behaviors that are not enabled produce 0 acceleration.
 	# Adding our fleeing behaviors to a blend. The order does not matter.
 	flee_blend.enabled = false
 	flee_blend.add(look, 1)
@@ -98,7 +98,7 @@ func _ready() -> void:
 	pursue_blend.add(face, 1)
 	pursue_blend.add(pursue, 1)
 
-	# Adding our final behaviors to the main priority behavior. The order does matter.
+	# Adding our final behaviors to the main priority behavior. The order does matter here.
 	# We want to avoid collision with the player first, flee from the player second when enabled,
 	# and pursue the player last when enabled.
 	priority.add(avoid)
@@ -107,14 +107,14 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# Make sure any change in position and speed has been recorded
+	# Make sure any change in position and speed has been recorded.
 	update_agent()
 
 	if current_health <= flee_health_threshold:
 		pursue_blend.enabled = false
 		flee_blend.enabled = true
 
-	# Calculate the desired acceleration
+	# Calculate the desired acceleration.
 	priority.calculate_steering(acceleration)
 
 	# We add the discovered acceleration to our linear velocity. The toolkit does not limit
@@ -123,20 +123,20 @@ func _physics_process(delta: float) -> void:
 					acceleration.linear.x, acceleration.linear.y)
 	).clamped(agent.linear_speed_max)
 	
-	# This applies drag on the agent's motion, helping it slow down naturally
+	# This applies drag on the agent's motion, helping it to slow down naturally.
 	velocity = velocity.linear_interpolate(Vector2.ZERO, linear_drag)
 	
 	# And since we're using a KinematicBody2D, we use Godot's excellent move_and_slide to actually
-	# apply the final movement, and record any change in velocity the physics engine discovered
+	# apply the final movement, and record any change in velocity the physics engine discovered.
 	velocity = move_and_slide(velocity)
 
-	# We then do something similar to apply our agent's rotational speed
+	# We then do something similar to apply our agent's rotational speed.
 	angular_velocity = clamp(
 			angular_velocity + acceleration.angular,
 			-agent.angular_speed_max,
 			agent.angular_speed_max
 	)
-	# This applies drag on the agent's rotation, helping it slow down naturally
+	# This applies drag on the agent's rotation, helping it slow down naturally.
 	angular_velocity = lerp(angular_velocity, 0, angular_drag)
 	rotation += angular_velocity * delta
 
