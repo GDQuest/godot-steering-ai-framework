@@ -3,6 +3,7 @@ Finds and collects docstrings from individual GDScript files
 """
 import re
 from dataclasses import dataclass
+from typing import List
 
 REGEX = {
     "function": re.compile(r"^func (\w+)\((.*)\) ?-> ?(\w+)"),
@@ -24,9 +25,9 @@ class Statement:
     type: str
 
 
-def _collect_reference_statements(gdscript: list[str] = "") -> StatementsList:
+def _collect_reference_statements(gdscript: List[str]) -> List[Statement]:
     """Returns a StatementsList of the lines to process for the docs"""
-    statements: list[Statement] = []
+    statements: List[Statement] = []
     types_map: dict = {
         "var": "property",
         "onready": "property",
@@ -40,19 +41,19 @@ def _collect_reference_statements(gdscript: list[str] = "") -> StatementsList:
             if not line.startswith(pattern):
                 continue
             statements.append(Statement(index, line, types_map[pattern]))
-        return statements
+    return statements
 
 
-def _find_docstring(gdscript: list[str], statement: Statement) -> list[str]:
+def _find_docstring(gdscript: List[str], statement: Statement) -> List[str]:
     """Returns the docstring found in the GDScript file for the given statement, or an empty
     string if there's no docstring."""
-    docstring: list[str] = []
+    docstring: List[str] = []
     index_start = statement.index - 1
     index = index_start
     while gdscript[index].startswith("#"):
         index -= 1
     if index != index_start:
-        docstring = gdscript[index + 1 : index_start]
+        docstring = gdscript[index + 1: index_start]
     return docstring
 
 
@@ -60,7 +61,7 @@ def _get_property_data(line: str) -> dict:
     """Returns a dictionary that contains information about a member variable"""
     match = re.match(REGEX["property"], line)
     if not match:
-        return
+        return {}
 
     setter, getter = "", ""
     if match.group(7):
@@ -78,11 +79,11 @@ def _get_property_data(line: str) -> dict:
     }
 
 
-def _get_function_data(line: str) -> list[dict]:
+def _get_function_data(line: str) -> List[dict]:
     """Returns a dictionary that contains information about a member variable"""
     match = re.match(REGEX["function"], line)
     if not match:
-        return
+        return []
 
     arguments = []
     args: str = match.group(2).strip()
@@ -91,24 +92,23 @@ def _get_function_data(line: str) -> list[dict]:
             match_arg = re.match(REGEX["argument"], line)
             if not match_arg:
                 continue
-            arguments.append({
-                "identifier": match_arg.group(1),
-                "type": match_arg.group(2),
-            })
+            arguments.append(
+                {"identifier": match_arg.group(1), "type": match_arg.group(2),}
+            )
     return arguments
 
 
-def get_file_reference(gdscript: list[str]) -> dict:
+def get_file_reference(gdscript: List[str]) -> dict:
     """Returns a dictionary with the functions, properties, and inner classes collected from
     a GDScript file, with their docstrings.
 
     Keyword Arguments:
-    gdscript: list[str] -- (default "")
+    gdscript: List[str] -- (default "")
     """
-    data = {}
-    statements: list[Statement] = _collect_reference_statements(gdscript)
+    data: dict = {}
+    statements: List[Statement] = _collect_reference_statements(gdscript)
     docstrings = map(
-        lambda statement: (statement, _find_docstring(statement)), statements
+        lambda statement: (statement, _find_docstring(gdscript, statement)), statements
     )
     for statement in statements:
         data[statement.type].append()
