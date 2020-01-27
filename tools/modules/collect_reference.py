@@ -5,18 +5,6 @@ import re
 from dataclasses import dataclass
 from typing import List
 
-REGEX = {
-    "function": re.compile(r"^func (\w+)\((.*)\) ?-> ?(\w+)"),
-    "argument": re.compile(r"(\w+) ?: ?(\w*)"),
-    # Groups 3, 4, and 5 respectively match the symbol, type, and value
-    # Use group 6 and the setget regex to find setter and getter functions
-    "property": re.compile(
-        r"^(export|onready)?(\(.+\))? ?var (\w+) ?:? ?(\w+)? ?=? ?([\"\'].+[\"\']|([\d.\w]+))?( setget.*)?"
-    ),
-    "setget": re.compile(r"setget (set_\w+)?,? ?(get_\w+)?"),
-    "subclass": re.compile(r"class (.+):$"),
-}
-
 
 @dataclass
 class Statement:
@@ -62,13 +50,18 @@ def _find_docstring(gdscript: List[str], statement: Statement) -> List[str]:
 
 def _get_property_data(line: str) -> dict:
     """Returns a dictionary that contains information about a member variable"""
-    match = re.match(REGEX["property"], line)
+    # Groups 3, 4, and 5 respectively match the symbol, type, and value
+    # Use group 6 and the setget regex to find setter and getter functions
+    match = re.match(
+        r"^(export|onready)?(\(.+\))? ?var (\w+) ?:? ?(\w+)? ?=? ?([\"\'].+[\"\']|([\d.\w]+))?( setget.*)?",
+        line,
+    )
     if not match:
         return {}
 
     setter, getter = "", ""
     if match.group(7):
-        match_setget = re.match(REGEX["setget"], line)
+        match_setget = re.match(r"setget (set_\w+)?,? ?(get_\w+)?", line)
         if match_setget:
             setter = match_setget.group(1)
             getter = match_setget.group(2)
@@ -82,23 +75,52 @@ def _get_property_data(line: str) -> dict:
     }
 
 
-def _get_function_data(line: str) -> List[dict]:
-    """Returns a dictionary that contains information about a member variable"""
-    match = re.match(REGEX["function"], line)
+def _get_function_data(line: str) -> dict:
+    """Returns a dictionary that contains information about a function"""
+    data: dict = {
+        "name": "",
+        "arguments": "",
+        "type": "",
+    }
+    print(line)
+    match = re.match(r"^func (\w+)\((.*)\) ?-> ?(\w+)", line)
     if not match:
         return []
 
+    data["name"] = match.group(1)
+    data["type"] = match.group(3)
     arguments = []
     args: str = match.group(2).strip()
     if args:
         for arg in args.split(","):
-            match_arg = re.match(REGEX["argument"], line)
+            match_arg = re.match(r"(\w+) ?: ?(\w*)", line)
             if not match_arg:
                 continue
             arguments.append(
                 {"identifier": match_arg.group(1), "type": match_arg.group(2),}
             )
-    return arguments
+    data["arguments"] = arguments
+    return data
+
+
+def _get_signal_data(line: str) -> dict:
+    """Returns a dictionary that contains information about a signal"""
+    data: dict = {
+        "name": "",
+        "arguments": "",
+    }
+    return data
+
+
+def _get_subclass_data(line: str="") -> dict:
+    """Returns a dictionary that contains information about a subclass"""
+    data: dict = {
+        "name": "",
+    }
+    match = re.match(r"class (.+):$", line)
+    if match:
+        data["name"] = match.group(1)
+    return data
 
 
 def get_file_reference(gdscript: List[str]) -> dict:
@@ -114,11 +136,17 @@ def get_file_reference(gdscript: List[str]) -> dict:
         "function": [],
         "subclass": [],
     }
+    functions_map: dict = {
+        "property": _get_property_data,
+        "function": _get_function_data,
+        "signal": _get_signal_data,
+        "subclass": _get_subclass_data,
+    }
     statements: List[Statement] = _collect_reference_statements(gdscript)
     for statement in statements:
         docstring: str = "\n".join(_find_docstring(gdscript, statement))
-        statement_reference: dict = {
-            "docstring": docstring,
-        }
-        data[statement.type].append(statement_reference)
+        statement_data: dict = functions_map[statement.type](statement.line)
+        reference_data: dict = statement_data
+        reference_data["docstring"] = docstring
+        data[statement.type].append(reference_data)
     return data
