@@ -2,9 +2,8 @@ class_name GSTEvade
 extends GSTPursue
 # Calculates acceleration to take an agent away from where a target agent will be.
 
-# # The `predict_time_max` variable represents how far ahead to calculate the intersection point.
 
-
+# Initializes the behavior
 func _init(
 		agent: GSTSteeringAgent,
 		target: GSTSteeringAgent,

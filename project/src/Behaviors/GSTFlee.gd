@@ -3,6 +3,7 @@ extends GSTSeek
 # Calculates acceleration to take an agent directly away from a target agent.
 
 
+# Initializes the behavior
 func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent, target) -> void:
 	pass
 

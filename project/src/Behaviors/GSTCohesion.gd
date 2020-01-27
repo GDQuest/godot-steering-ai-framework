@@ -1,12 +1,13 @@
 class_name GSTCohesion
 extends GSTGroupBehavior
 # Group behavior that produces linear acceleration that attempts to move the agent towards the
-# center of mass of the agents in the area defined by the defined Proximity.
+# center of mass of the agents in the area defined by the Proximity.
 
 
 var center_of_mass: Vector3
 
 
+# Initializes the behavior
 func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent, proximity) -> void:
 	pass
 

@@ -1,23 +1,28 @@
 class_name GSTPriority
 extends GSTSteeringBehavior
-# Contains multiple steering behaviors and returns only the result of the first that has a non-zero
- # acceleration.
+# Contains multiple behaviors and returns only the result of the first with non-zero acceleration.
 
 
 var _behaviors := []
 
+# The index in the behavior array of the last behavior that was selected.
 var last_selected_index: int
+# The amount of acceleration for a behavior to be considered to have effectively zero acceleration
 var zero_threshold: float
 
 
+# Initializes the behavior
 func _init(agent: GSTSteeringAgent, zero_threshold := 0.001).(agent) -> void:
 	self.zero_threshold = zero_threshold
 
 
+# Add a steering `behavior` to the pool of behaviors to consider
 func add(behavior: GSTSteeringBehavior) -> void:
 	_behaviors.append(behavior)
 
 
+# Returns the behavior at the position in the pool referred to by `index`.
+# Returns `null` if none were found.
 func get_behavior_at(index: int) -> GSTSteeringBehavior:
 	if _behaviors.size() > index:
 		return _behaviors[index]

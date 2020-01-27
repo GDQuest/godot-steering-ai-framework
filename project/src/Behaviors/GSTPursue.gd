@@ -1,14 +1,16 @@
 class_name GSTPursue
 extends GSTSteeringBehavior
-# Calculates acceleration to take an agent to intersect with where a target agent will be.
+# Calculates acceleration to take an agent to intersect with where a target agent will be, instead
+# of where it currently is.
 
-# # The `predict_time_max` variable represents how far ahead to calculate the intersection point.
 
-
+# The target agent that the behavior is trying to intercept
 var target: GSTSteeringAgent
+# The maximum amount of time in the future for the behavior to predict the target's position
 var predict_time_max: float
 
 
+# Initializes the behavior
 func _init(
 		agent: GSTSteeringAgent,
 		target: GSTSteeringAgent,

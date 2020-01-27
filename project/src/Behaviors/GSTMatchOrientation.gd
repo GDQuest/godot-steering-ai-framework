@@ -4,12 +4,17 @@ extends GSTSteeringBehavior
 # The calculation will attempt to arrive with zero remaining angular velocity.
 
 
+# The target orientation for the behavior to try and match rotations to
 var target: GSTAgentLocation
+# The amount of distance in radians for the behavior to consider itself close enough to match
 var alignment_tolerance: float
+# The amount of distance in radians from the goal to start slowing down
 var deceleration_radius: float
+# A constant to represent the time it takes to change angular accelerations
 var time_to_reach: float = 0.1
 
 
+# Initializes the behavior
 func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent) -> void:
 	self.target = target
 

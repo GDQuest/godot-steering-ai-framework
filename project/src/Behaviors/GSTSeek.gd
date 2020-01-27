@@ -1,11 +1,13 @@
 class_name GSTSeek
 extends GSTSteeringBehavior
-# Calculates acceleration to take an agent to a target agent's position as directly as possible
+# Calculates acceleration to take an agent to a target agent's position directly
 
 
+# The target that the behavior aims to move the agent to
 var target: GSTAgentLocation
 
 
+# Initializes the behavior
 func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent) -> void:
 	self.target = target
 

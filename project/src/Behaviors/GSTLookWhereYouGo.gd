@@ -3,6 +3,7 @@ extends GSTMatchOrientation
 # Calculates an angular acceleration to match an agent's orientation to its direction of travel.
 
 
+# Initializes the behavior
 func _init(agent: GSTSteeringAgent).(agent, null) -> void:
 	pass
 

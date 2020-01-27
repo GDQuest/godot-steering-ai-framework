@@ -9,7 +9,7 @@ var proximity: GSTProximity
 var _callback := funcref(self, "report_neighbor")
 
 
-# Initializes the behavior with its owning `agent` and group's `proximity`
+# Initializes the behavior
 func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent) -> void:
 	self.proximity = proximity
 

@@ -1,11 +1,11 @@
 class_name GSTBlend
 extends GSTSteeringBehavior
 # Blends multiple steering behaviors into one, and returns acceleration combining all of them.
-
-# # Each behavior is associated with a weight - a modifier by which the result will be multiplied by,
+# 
+# Each behavior is associated with a weight - a modifier by which the result will be multiplied by,
 # then added to a total acceleration.
-
-# # Each behavior is stored internally as a `Dictionary` with a `behavior` key with a value of type
+# 
+# Each behavior is stored internally as a `Dictionary` with a `behavior` key with a value of type
 # `GSTSteeringBehavior` and a `weight` key with a value of type float.
 
 
@@ -13,15 +13,18 @@ var _behaviors := []
 var _accel := GSTTargetAcceleration.new()
 
 
+# Initializes the behavior
 func _init(agent: GSTSteeringAgent).(agent) -> void:
 	pass
 
 
+# Adds a behavior to the next index and gives it a `weight` by which its results will be multiplied
 func add(behavior: GSTSteeringBehavior, weight: float) -> void:
 	behavior.agent = agent
 	_behaviors.append({behavior = behavior, weight = weight})
 
 
+# Returns the behavior at the specified `index`. Returns an empty `Dictionary` if none was found.
 func get_behavior_at(index: int) -> Dictionary:
 	if _behaviors.size() > index:
 		return _behaviors[index]
