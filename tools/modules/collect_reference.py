@@ -54,6 +54,9 @@ def _find_docstring(gdscript: List[str], statement: Statement) -> List[str]:
         index -= 1
     if index != index_start:
         docstring = gdscript[index + 1 : index_start + 1]
+
+    for index, line in enumerate(docstring):
+        docstring[index] = docstring[index].replace("#", "", 1).strip()
     return docstring
 
 
