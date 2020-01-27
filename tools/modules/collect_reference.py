@@ -53,7 +53,7 @@ def _find_docstring(gdscript: List[str], statement: Statement) -> List[str]:
     while gdscript[index].startswith("#"):
         index -= 1
     if index != index_start:
-        docstring = gdscript[index + 1: index_start]
+        docstring = gdscript[index + 1 : index_start]
     return docstring
 
 
@@ -107,11 +107,10 @@ def get_file_reference(gdscript: List[str]) -> dict:
     """
     data: dict = {}
     statements: List[Statement] = _collect_reference_statements(gdscript)
-    docstrings = map(
-        lambda statement: (statement, _find_docstring(gdscript, statement)), statements
-    )
     for statement in statements:
-        data[statement.type].append()
-    {statement.type: [] for statement in statements}
-
+        docstring: str = "\n".join(_find_docstring(gdscript, statement))
+        statement_reference: dict = {
+            "docstring": docstring,
+        }
+        data[statement.type].append(statement_reference)
     return data
