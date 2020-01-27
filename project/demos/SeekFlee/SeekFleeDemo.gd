@@ -39,6 +39,7 @@ func _ready() -> void:
 		entity.player_agent = player.agent
 		entity.start_speed = linear_speed_max
 		entity.start_accel = linear_accel_max
+		entity.use_seek = behavior_mode == Mode.SEEK
 		spawner.add_child(entity)
 
 
