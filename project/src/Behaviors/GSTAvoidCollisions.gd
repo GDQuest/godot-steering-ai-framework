@@ -11,7 +11,6 @@ var first_relative_position: Vector3
 var first_relative_velocity: Vector3
 
 
-# Intializes the behavior
 func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent, proximity) -> void:
 	pass
 

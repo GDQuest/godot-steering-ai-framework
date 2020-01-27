@@ -1,7 +1,6 @@
 extends Reference
 class_name GSTProximity
-# Defines a way to determine any agent that is in the specified list as being neighbors with the
-# owner agent.
+# Base container type that stores data to find the neighbors of an agent.
 
 
 var agent: GSTSteeringAgent

@@ -13,7 +13,6 @@ var _behaviors := []
 var _accel := GSTTargetAcceleration.new()
 
 
-# Initializes the behavior
 func _init(agent: GSTSteeringAgent).(agent) -> void:
 	pass
 

@@ -15,7 +15,6 @@ var arrive_enabled := true
 var prediction_time := 0.0
 
 
-# Initializes the behavior
 func _init(
 		agent: GSTSteeringAgent, 
 		path: GSTPath, 

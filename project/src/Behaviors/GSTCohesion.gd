@@ -7,7 +7,6 @@ extends GSTGroupBehavior
 var center_of_mass: Vector3
 
 
-# Initializes the behavior
 func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent, proximity) -> void:
 	pass
 

@@ -10,7 +10,6 @@ var target: GSTSteeringAgent
 var predict_time_max: float
 
 
-# Initializes the behavior
 func _init(
 		agent: GSTSteeringAgent,
 		target: GSTSteeringAgent,

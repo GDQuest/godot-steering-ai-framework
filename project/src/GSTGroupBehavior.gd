@@ -1,19 +1,19 @@
 extends GSTSteeringBehavior
 class_name GSTGroupBehavior
-# Extended behavior that features a Proximity group for group-based behaviors.
+# Base type for group-based steering behaviors.
 
 
-# The group area definition that will be used to find the owning agent's neighbors
+# Container to find neighbors of the agent and apply a group behavior.
 var proximity: GSTProximity
 
 var _callback := funcref(self, "report_neighbor")
 
 
-# Initializes the behavior
 func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent) -> void:
 	self.proximity = proximity
 
 
-# Internal callback for the behavior to define whether or not a member is relevant
+# Internal callback for the behavior to define whether or not a member is
+# relevant
 func report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 	return false

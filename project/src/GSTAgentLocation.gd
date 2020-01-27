@@ -1,5 +1,5 @@
 class_name GSTAgentLocation
-# Data type to represent an agent with a location and an orientation only.
+# Represents an agent with only a location and an orientation.
 
 
 # The agent's position in space.

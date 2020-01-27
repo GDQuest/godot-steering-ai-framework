@@ -7,7 +7,6 @@ extends GSTSteeringBehavior
 var target: GSTAgentLocation
 
 
-# Initializes the behavior
 func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent) -> void:
 	self.target = target
 

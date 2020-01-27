@@ -13,7 +13,6 @@ var decay_coefficient := 1.0
 var acceleration: GSTTargetAcceleration
 
 
-# Initializes the behavior
 func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent, proximity) -> void:
 	pass
 

@@ -1,24 +1,25 @@
 class_name GSTSteeringBehavior
-# The base class for all steering behaviors to extend. A steering behavior calculates the linear
-# and/or angular acceleration to be applied to its owning agent
-# 
-# The entry point for all behaviors is the `calculate_steering` function. Everything else is
-# self-contained within the behavior.
+# Base class for all steering behaviors.
+#
+# Steering behaviors calculate the linear and the angular acceleration to be
+# to the agent that owns them.
+#
+# The `calculate_steering` function is the entry point for all behaviors.
+# Individual steering behaviors encapsulate the steering logic.
 
 
-# Whether this behavior is enabled. All disabled behaviors return zero amounts of acceleration.
-# Defaults to true
+# If `false`, all calculations return zero amounts of acceleration.
 var enabled := true
-# The agent on which all steering calculations are to be made.
+# The AI agent on which the steering behavior bases its calculations.
 var agent: GSTSteeringAgent
 
 
-# Initializes the behavior
 func _init(agent: GSTSteeringAgent) -> void:
 	self.agent = agent
 
 
-# Returns the `acceleration` parameter modified with the behavior's desired amount of acceleration
+# Returns the `acceleration` modified with the behavior's desired amount of
+# acceleration.
 func calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
 	if enabled:
 		return _calculate_steering(acceleration)

@@ -11,7 +11,6 @@ var last_selected_index: int
 var zero_threshold: float
 
 
-# Initializes the behavior
 func _init(agent: GSTSteeringAgent, zero_threshold := 0.001).(agent) -> void:
 	self.zero_threshold = zero_threshold
 

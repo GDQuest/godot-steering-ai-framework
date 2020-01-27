@@ -4,7 +4,6 @@ extends GSTMatchOrientation
 # The acceleration will attempt to arrive with zero remaining angular velocity.
 
 
-# Initializes the behavior
 func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent, target) -> void:
 	pass
 

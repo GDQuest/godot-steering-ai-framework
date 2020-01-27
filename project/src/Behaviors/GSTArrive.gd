@@ -14,7 +14,6 @@ var deceleration_radius: float
 var time_to_reach := 0.1
 
 
-# Initializes the behavior
 func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent) -> void:
 	self.target = target
 
@@ -22,22 +21,22 @@ func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent) -> void:
 func _arrive(acceleration: GSTTargetAcceleration, target_position: Vector3) -> GSTTargetAcceleration:
 	var to_target := target_position - agent.position
 	var distance := to_target.length()
-	
+
 	if distance <= arrival_tolerance:
 		acceleration.set_zero()
 	else:
 		var desired_speed := agent.linear_speed_max
-		
+
 		if distance <= deceleration_radius:
 			desired_speed *= distance / deceleration_radius
-		
+
 		var desired_velocity := to_target * desired_speed/distance
-		
+
 		desired_velocity = (desired_velocity - agent.linear_velocity) * 1.0 / time_to_reach
-		
+
 		acceleration.linear = GSTUtils.clampedv3(desired_velocity, agent.linear_acceleration_max)
 		acceleration.angular = 0
-	
+
 	return acceleration
 
 
