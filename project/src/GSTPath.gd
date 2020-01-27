@@ -1,12 +1,12 @@
 extends Reference
 class_name GSTPath
 # Represents a path made up of Vector3 waypoints, split into path segments for use by path
-# following algorithms.
-
-# # Keeping it updated requires calling `create_path` to update the path.
+# following behaviors.
 
 
+# Whether the path is a loop, or has its start and end disconnected and open ended
 var open: bool
+# The length of the full path
 var length: float
 
 var _segments: Array
@@ -15,6 +15,7 @@ var _nearest_point_on_segment: Vector3
 var _nearest_point_on_path: Vector3
 
 
+# Initializes and creates a path with the provided waypoints
 func _init(waypoints: Array, open := false) -> void:
 	self.open = open
 	create_path(waypoints)
@@ -22,6 +23,7 @@ func _init(waypoints: Array, open := false) -> void:
 	_nearest_point_on_path = waypoints[0]
 
 
+# Creates a path with the provided waypoints
 func create_path(waypoints: Array) -> void:
 	if not waypoints or waypoints.size() < 2:
 		printerr("Waypoints cannot be null and must contain at least two (2) waypoints.")
@@ -46,7 +48,8 @@ func create_path(waypoints: Array) -> void:
 		_segments.append(segment)
 
 
-func calculate_distance(agent_current_position: Vector3, path_parameter: Dictionary) -> float:
+# Returns the distance from the provided `agent_current_position` to the next point waypoint.
+func calculate_distance(agent_current_position: Vector3) -> float:
 	if _segments.size() == 0:
 		return 0.0
 	var smallest_distance_squared: float = INF
@@ -63,18 +66,17 @@ func calculate_distance(agent_current_position: Vector3, path_parameter: Diction
 			_nearest_point_on_path = _nearest_point_on_segment
 			smallest_distance_squared = distance_squared
 			nearest_segment = segment
-			path_parameter.segment_index = i
 	
 	var length_on_path := (
 		nearest_segment.cumulative_length - 
 		_nearest_point_on_path.distance_to(nearest_segment.end))
 	
-	path_parameter.distance = length_on_path
-	
 	return length_on_path
 
 
-func calculate_target_position(param: Dictionary, target_distance: float) -> Vector3:
+# Calculates the target position on the path based on the provided `target_distance` from the
+# path's starting point.
+func calculate_target_position(target_distance: float) -> Vector3:
 	if open:
 		target_distance = clamp(target_distance, 0, length)
 	else:
@@ -100,10 +102,12 @@ func calculate_target_position(param: Dictionary, target_distance: float) -> Vec
 		(distance / desired_segment.length) + desired_segment.end)
 
 
+# Returns the position of the beginning point of the path
 func get_start_point() -> Vector3:
 	return _segments.front().begin
 
 
+# Returns the position of the last point of the path
 func get_end_point() -> Vector3:
 	return _segments.back().end
 

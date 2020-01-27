@@ -12,5 +12,5 @@ func _calculate_steering(accel: GSTTargetAcceleration) -> GSTTargetAcceleration:
 		accel.set_zero()
 		return accel
 	else:
-		var orientation := atan2(agent.linear_velocity.x, -agent.linear_velocity.y)
+		var orientation := GSTUtils.vector_to_angle(agent.linear_velocity)
 		return _match_orientation(accel, orientation)
