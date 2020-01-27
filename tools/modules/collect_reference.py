@@ -82,7 +82,6 @@ def _get_function_data(line: str) -> dict:
         "arguments": "",
         "type": "",
     }
-    print(line)
     match = re.match(r"^func (\w+)\((.*)\) ?-> ?(\w+)", line)
     if not match:
         return []
