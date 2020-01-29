@@ -1,7 +1,7 @@
-class_name GSTCohesion
-extends GSTGroupBehavior
 # Group behavior that produces linear acceleration that attempts to move the agent towards the
 # center of mass of the agents in the area defined by the Proximity.
+class_name GSTCohesion
+extends GSTGroupBehavior
 
 
 var center_of_mass: Vector3
@@ -21,6 +21,8 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 	return acceleration
 
 
+# Callback for the proximity to call when finding neighbors. Adds `neighbor`'s position
+# to the center of mass of the group.
 func report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 	center_of_mass += neighbor.position
 	return true

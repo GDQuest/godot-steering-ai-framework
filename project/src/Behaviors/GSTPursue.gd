@@ -1,7 +1,7 @@
-class_name GSTPursue
-extends GSTSteeringBehavior
 # Calculates acceleration to take an agent to intersect with where a target agent will be, instead
 # of where it currently is.
+class_name GSTPursue
+extends GSTSteeringBehavior
 
 
 # The target agent that the behavior is trying to intercept

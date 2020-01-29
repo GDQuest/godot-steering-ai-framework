@@ -1,9 +1,9 @@
+# Base type for group-based steering behaviors.
 extends GSTSteeringBehavior
 class_name GSTGroupBehavior
-# Base type for group-based steering behaviors.
 
 
-# Container to find neighbors of the agent and apply a group behavior.
+# Container to find neighbors of the agent and calculate group behavior.
 var proximity: GSTProximity
 
 var _callback := funcref(self, "report_neighbor")

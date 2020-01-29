@@ -1,6 +1,6 @@
-extends Reference class_name GSTPath
 # Represents a path made up of Vector3 waypoints, split into segments path
 # follow behaviors can use.
+extends Reference class_name GSTPath
 
 
 # If `false`, the path loops.

@@ -1,7 +1,7 @@
-class_name GSTMatchOrientation
-extends GSTSteeringBehavior
 # Calculates an angular acceleration to match an agent's orientation to its target's.
 # The calculation will attempt to arrive with zero remaining angular velocity.
+class_name GSTMatchOrientation
+extends GSTSteeringBehavior
 
 
 # The target orientation for the behavior to try and match rotations to
@@ -10,7 +10,7 @@ var target: GSTAgentLocation
 var alignment_tolerance: float
 # The amount of distance in radians from the goal to start slowing down
 var deceleration_radius: float
-# A constant to represent the time it takes to change angular accelerations
+# The amount of time to reach the target velocity
 var time_to_reach: float = 0.1
 
 

@@ -1,6 +1,6 @@
+# Calculates acceleration to take an agent to a target agent's position directly
 class_name GSTSeek
 extends GSTSteeringBehavior
-# Calculates acceleration to take an agent to a target agent's position directly
 
 
 # The target that the behavior aims to move the agent to

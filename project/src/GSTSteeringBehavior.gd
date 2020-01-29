@@ -1,4 +1,3 @@
-class_name GSTSteeringBehavior
 # Base class for all steering behaviors.
 #
 # Steering behaviors calculate the linear and the angular acceleration to be
@@ -6,6 +5,7 @@ class_name GSTSteeringBehavior
 #
 # The `calculate_steering` function is the entry point for all behaviors.
 # Individual steering behaviors encapsulate the steering logic.
+class_name GSTSteeringBehavior
 
 
 # If `false`, all calculations return zero amounts of acceleration.

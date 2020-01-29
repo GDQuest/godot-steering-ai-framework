@@ -1,9 +1,10 @@
-extends GSTProximity
-class_name GSTRadiusProximity
 # Determines any agent that is in the specified list as being neighbors with the owner agent if
 # they lie within the specified radius.
+extends GSTProximity
+class_name GSTRadiusProximity
 
 
+# The radius around the owning agent to find neighbors in
 var radius := 0.0
 
 var _last_frame := 0
@@ -15,6 +16,10 @@ func _init(agent: GSTSteeringAgent, agents: Array, radius: float).(agent, agents
 	_scene_tree = Engine.get_main_loop()
 
 
+# Returns a number of neighbors based on a `callback` function.
+#
+# `find_neighbors` calls `callback` for each agent in the `agents` array that lie within
+# the radius around the owning agent and adds one to the count if its `callback` returns true.
 func find_neighbors(callback: FuncRef) -> int:
 	var agent_count := agents.size()
 	var neighbor_count := 0

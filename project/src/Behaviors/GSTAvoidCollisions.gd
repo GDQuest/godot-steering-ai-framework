@@ -1,6 +1,6 @@
+# Behavior that steers the agent to avoid obstacles lying in its path as approximated by spheres.
 class_name GSTAvoidCollisions
 extends GSTGroupBehavior
-# Behavior that steers the agent to avoid obstacles lying in its path as approximated by spheres.
 
 
 var first_neighbor: GSTSteeringAgent
@@ -39,6 +39,8 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 	return acceleration
 
 
+# Callback for the proximity to call when finding neighbors. Keeps track of every `neighbor`
+# that was found but only keeps the one the owning agent will most likely collide with.
 func report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 	var relative_position := neighbor.position - agent.position
 	var relative_velocity := neighbor.linear_velocity - agent.linear_velocity

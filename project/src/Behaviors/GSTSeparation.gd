@@ -1,13 +1,13 @@
-class_name GSTSeparation
-extends GSTGroupBehavior
 # Group behavior that produces acceleration that repels the agent from the other neighbors that
 # are in the area defined by the given `GSTProximity`.
 # 
 # The produced acceleration is an average of all agents under consideration, multiplied by a
 # strength decreasing by the inverse square law in relation to distance, and accumulated.
+class_name GSTSeparation
+extends GSTGroupBehavior
 
 
-# The constant coefficient to calculate how fast the separation strength decays with distance.
+# The coefficient to calculate how fast the separation strength decays with distance.
 var decay_coefficient := 1.0
 
 var acceleration: GSTTargetAcceleration
@@ -24,6 +24,8 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 	return acceleration
 
 
+# Callback for the proximity to call when finding neighbors. Determines the amount of
+# acceleration that `neighbor` imposes based on its distance from the owner agent.
 func report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 	var to_agent := agent.position - neighbor.position
 

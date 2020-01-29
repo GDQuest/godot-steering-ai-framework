@@ -1,6 +1,6 @@
+# Produces a linear acceleration that moves the agent along the specified path.
 class_name GSTFollowPath
 extends GSTArrive
-# Produces a linear acceleration that moves the agent along the specified path.
 
 
 # The path to follow and travel along

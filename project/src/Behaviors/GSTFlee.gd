@@ -1,6 +1,6 @@
+# Calculates acceleration to take an agent directly away from a target agent.
 class_name GSTFlee
 extends GSTSeek
-# Calculates acceleration to take an agent directly away from a target agent.
 
 
 func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent, target) -> void:

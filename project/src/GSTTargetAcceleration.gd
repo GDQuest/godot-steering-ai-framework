@@ -1,6 +1,6 @@
-class_name GSTTargetAcceleration
 # A desired linear and angular amount of acceleration requested by the steering
 # system.
+class_name GSTTargetAcceleration
 
 
 # Linear acceleration

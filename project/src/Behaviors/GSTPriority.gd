@@ -1,6 +1,6 @@
+# Contains multiple behaviors and returns only the result of the first with non-zero acceleration.
 class_name GSTPriority
 extends GSTSteeringBehavior
-# Contains multiple behaviors and returns only the result of the first with non-zero acceleration.
 
 
 var _behaviors := []

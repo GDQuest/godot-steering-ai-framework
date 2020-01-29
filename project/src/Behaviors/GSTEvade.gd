@@ -1,6 +1,6 @@
+# Calculates acceleration to take an agent away from where a target agent will be.
 class_name GSTEvade
 extends GSTPursue
-# Calculates acceleration to take an agent away from where a target agent will be.
 
 
 func _init(

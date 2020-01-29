@@ -1,9 +1,9 @@
-extends GSTAgentLocation
-class_name GSTSteeringAgent
 # Adds velocity, speed, and size data to `GSTAgentLocation`.
 #
 # It is the character's responsibility to keep this information up to date for
 # the steering toolkit to work correctly.
+extends GSTAgentLocation
+class_name GSTSteeringAgent
 
 
 # The amount of velocity to be considered effectively not moving.

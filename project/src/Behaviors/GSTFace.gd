@@ -1,7 +1,7 @@
-class_name GSTFace
-extends GSTMatchOrientation
 # Calculates angular acceleration to rotate a target to face its target's position.
 # The acceleration will attempt to arrive with zero remaining angular velocity.
+class_name GSTFace
+extends GSTMatchOrientation
 
 
 func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent, target) -> void:
