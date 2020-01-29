@@ -1,16 +1,17 @@
-# Calculates acceleration to take an agent to its target's location.
-# The calculation will attempt to arrive with zero remaining velocity.
+# Calculates acceleration to take an agent to its target's location. The
+# calculation attempts to arrive with zero remaining velocity.
 class_name GSTArrive
 extends GSTSteeringBehavior
 
 
-# The target whose location the agent will be steered to arrive at
+# Target agent to arrive to.
 var target: GSTAgentLocation
-# The distance from the target for the agent to be considered successfully arrived
+# Distance from the target for the agent to be considered successfully
+# arrived.
 var arrival_tolerance: float
-# The distance from the target for the agent to begin slowing down
+# Distance from the target for the agent to begin slowing down.
 var deceleration_radius: float
-# The amount of time to reach the target velocity
+# Represents the time it takes to change acceleration.
 var time_to_reach := 0.1
 
 

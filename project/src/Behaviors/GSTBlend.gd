@@ -1,10 +1,11 @@
-# Blends multiple steering behaviors into one, and returns acceleration combining all of them.
-# 
-# Each behavior is associated with a weight - a modifier by which the result will be multiplied by,
-# then added to a total acceleration.
-# 
-# Each behavior is stored internally as a `Dictionary` with a `behavior` key with a value of type
-# `GSTSteeringBehavior` and a `weight` key with a value of type float.
+# Blends multiple steering behaviors into one, and returns a weighted
+# acceleration from their calculations.
+#
+# Stores the behaviors internally as dictionaries of the form
+# {
+# 	behavior : GSTSteeringBehavior,
+# 	weight : float
+# }
 class_name GSTBlend
 extends GSTSteeringBehavior
 
@@ -17,13 +18,14 @@ func _init(agent: GSTSteeringAgent).(agent) -> void:
 	pass
 
 
-# Adds a behavior to the next index and gives it a `weight` by which its results will be multiplied
+# Appends a behavior to the internal array along with its `weight`.
 func add(behavior: GSTSteeringBehavior, weight: float) -> void:
 	behavior.agent = agent
 	_behaviors.append({behavior = behavior, weight = weight})
 
 
-# Returns the behavior at the specified `index`. Returns an empty `Dictionary` if none was found.
+# Returns the behavior at the specified `index`, or an empty `Dictionary` if
+# none was found.
 func get_behavior_at(index: int) -> Dictionary:
 	if _behaviors.size() > index:
 		return _behaviors[index]
@@ -33,18 +35,18 @@ func get_behavior_at(index: int) -> Dictionary:
 
 func _calculate_steering(blended_accel: GSTTargetAcceleration) -> GSTTargetAcceleration:
 	blended_accel.set_zero()
-	
+
 	for i in range(_behaviors.size()):
 		var bw: Dictionary = _behaviors[i]
 		bw.behavior.calculate_steering(_accel)
-		
+
 		blended_accel.add_scaled_accel(_accel, bw.weight)
-	
+
 	blended_accel.linear = GSTUtils.clampedv3(blended_accel.linear, agent.linear_acceleration_max)
 	blended_accel.angular = clamp(
 			blended_accel.angular,
 			-agent.angular_acceleration_max,
 			agent.angular_acceleration_max
 	)
-	
+
 	return blended_accel

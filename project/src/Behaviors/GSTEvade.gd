@@ -1,4 +1,5 @@
-# Calculates acceleration to take an agent away from where a target agent will be.
+# Calculates acceleration to take an agent away from where a target agent is
+# moving.
 class_name GSTEvade
 extends GSTPursue
 

@@ -1,7 +1,6 @@
-# Represents a path made up of Vector3 waypoints, split into path segments for use by path
-# following behaviors.
-extends Reference
-class_name GSTPath
+# Represents a path made up of Vector3 waypoints, split into segments path
+# follow behaviors can use.
+extends Reference class_name GSTPath
 
 
 # If `false`, the path loops.
@@ -27,12 +26,12 @@ func create_path(waypoints: Array) -> void:
 	if not waypoints or waypoints.size() < 2:
 		printerr("Waypoints cannot be null and must contain at least two (2) waypoints.")
 		return
-	
+
 	_segments = []
 	length = 0
 	var current: Vector3 = waypoints.front()
 	var previous: Vector3
-	
+
 	for i in range(1, waypoints.size(), 1):
 		previous = current
 		if i < waypoints.size():
@@ -60,16 +59,16 @@ func calculate_distance(agent_current_position: Vector3) -> float:
 				segment.end,
 				agent_current_position
 			)
-		
+
 		if distance_squared < smallest_distance_squared:
 			_nearest_point_on_path = _nearest_point_on_segment
 			smallest_distance_squared = distance_squared
 			nearest_segment = segment
-	
+
 	var length_on_path := (
-		nearest_segment.cumulative_length - 
+		nearest_segment.cumulative_length -
 		_nearest_point_on_path.distance_to(nearest_segment.end))
-	
+
 	return length_on_path
 
 
@@ -82,19 +81,19 @@ func calculate_target_position(target_distance: float) -> Vector3:
 			target_distance = length + fmod(target_distance, length)
 		elif target_distance > length:
 			target_distance = fmod(target_distance, length)
-	
+
 	var desired_segment: GSTSegment
 	for i in range(_segments.size()):
 		var segment: GSTSegment = _segments[i]
 		if segment.cumulative_length >= target_distance:
 			desired_segment = segment
 			break
-	
+
 	if not desired_segment:
 		desired_segment = _segments.back()
-	
+
 	var distance := desired_segment.cumulative_length - target_distance
-	
+
 	return (
 		(desired_segment.begin - desired_segment.end) *
 		(distance / desired_segment.length) + desired_segment.end)
@@ -117,7 +116,7 @@ func _calculate_point_segment_distance_squared(start: Vector3, end: Vector3, pos
 	if start_end_length_squared != 0:
 		var t = (position - start).dot(start_end) / start_end_length_squared
 		_nearest_point_on_segment += start_end * clamp(t, 0, 1)
-	
+
 	return _nearest_point_on_segment.distance_squared_to(position)
 
 
@@ -126,8 +125,8 @@ class GSTSegment:
 	var end: Vector3
 	var length: float
 	var cumulative_length: float
-	
-	
+
+
 	func _init(begin: Vector3, end: Vector3) -> void:
 		self.begin = begin
 		self.end = end

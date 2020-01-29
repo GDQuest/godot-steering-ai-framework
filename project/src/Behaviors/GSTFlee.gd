@@ -11,5 +11,5 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 	acceleration.linear = (
 			(agent.position - target.position).normalized() * agent.linear_acceleration_max)
 	acceleration.angular = 0
-	
+
 	return acceleration

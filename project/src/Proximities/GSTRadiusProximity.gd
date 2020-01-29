@@ -23,34 +23,34 @@ func _init(agent: GSTSteeringAgent, agents: Array, radius: float).(agent, agents
 func find_neighbors(callback: FuncRef) -> int:
 	var agent_count := agents.size()
 	var neighbor_count := 0
-	
+
 	var current_frame := _scene_tree.get_frame() if _scene_tree else -_last_frame
 	if current_frame != _last_frame:
 		_last_frame = current_frame
-		
+
 		var owner_position := agent.position
-		
+
 		for i in range(agent_count):
 			var current_agent := agents[i] as GSTSteeringAgent
-	
+
 			if current_agent != agent:
 				var distance_squared := owner_position.distance_squared_to(current_agent.position)
-	
+
 				var range_to := radius + current_agent.bounding_radius
-	
+
 				if distance_squared < range_to * range_to:
 					if callback.call_func(current_agent):
 						current_agent.tagged = true
 						neighbor_count += 1
 						continue
-			
+
 			current_agent.tagged = false
 	else:
 		for i in range(agent_count):
 			var current_agent = agents[i] as GSTSteeringAgent
-			
+
 			if current_agent != agent and current_agent.tagged:
 				if callback.call_func(current_agent):
 					neighbor_count += 1
-	
+
 	return neighbor_count

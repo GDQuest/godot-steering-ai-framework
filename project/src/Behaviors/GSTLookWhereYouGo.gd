@@ -1,4 +1,5 @@
-# Calculates an angular acceleration to match an agent's orientation to its direction of travel.
+# Calculates an angular acceleration to match an agent's orientation to its
+# direction of travel.
 class_name GSTLookWhereYouGo
 extends GSTMatchOrientation
 
