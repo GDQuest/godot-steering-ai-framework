@@ -9,7 +9,7 @@ var path: GSTPath
 var path_offset := 0.0
 
 # Whether to use `GSTArrive` behavior on an open path.
-var arrive_enabled := true
+var is_arrive_enabled := true
 # The amount of time in the future to predict the owning agent's position along
 # the path. Setting it to 0.0 will force non-predictive path following.
 var prediction_time := 0.0
@@ -35,7 +35,7 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 
 	var target_position := path.calculate_target_position(target_distance)
 
-	if arrive_enabled and path.open:
+	if is_arrive_enabled and path.is_open:
 		if path_offset >= 0:
 			if target_distance > path.length - deceleration_radius:
 				return _arrive(acceleration, target_position)

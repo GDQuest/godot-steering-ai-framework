@@ -18,9 +18,9 @@ func _init(agent: GSTSteeringAgent, agents: Array, radius: float).(agent, agents
 
 # Returns a number of neighbors based on a `callback` function.
 #
-# `find_neighbors` calls `callback` for each agent in the `agents` array that lie within
+# `_find_neighbors` calls `callback` for each agent in the `agents` array that lie within
 # the radius around the owning agent and adds one to the count if its `callback` returns true.
-func find_neighbors(callback: FuncRef) -> int:
+func _find_neighbors(callback: FuncRef) -> int:
 	var agent_count := agents.size()
 	var neighbor_count := 0
 
@@ -40,16 +40,16 @@ func find_neighbors(callback: FuncRef) -> int:
 
 				if distance_squared < range_to * range_to:
 					if callback.call_func(current_agent):
-						current_agent.tagged = true
+						current_agent.is_tagged = true
 						neighbor_count += 1
 						continue
 
-			current_agent.tagged = false
+			current_agent.is_tagged = false
 	else:
 		for i in range(agent_count):
 			var current_agent = agents[i] as GSTSteeringAgent
 
-			if current_agent != agent and current_agent.tagged:
+			if current_agent != agent and current_agent.is_tagged:
 				if callback.call_func(current_agent):
 					neighbor_count += 1
 

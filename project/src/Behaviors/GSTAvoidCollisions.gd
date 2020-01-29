@@ -22,7 +22,7 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 	first_minimum_separation = 0
 	first_distance = 0
 
-	var neighbor_count := proximity.find_neighbors(_callback)
+	var neighbor_count := proximity._find_neighbors(_callback)
 
 	if neighbor_count == 0 or not first_neighbor:
 		acceleration.set_zero()
@@ -42,7 +42,7 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 
 # Callback for the proximity to call when finding neighbors. Keeps track of every `neighbor`
 # that was found but only keeps the one the owning agent will most likely collide with.
-func report_neighbor(neighbor: GSTSteeringAgent) -> bool:
+func _report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 	var relative_position := neighbor.position - agent.position
 	var relative_velocity := neighbor.linear_velocity - agent.linear_velocity
 	var relative_speed_squared := relative_velocity.length_squared()

@@ -1,10 +1,11 @@
 # Represents a path made up of Vector3 waypoints, split into segments path
 # follow behaviors can use.
-extends Reference class_name GSTPath
+class_name GSTPath
+extends Reference
 
 
 # If `false`, the path loops.
-var open: bool
+var is_open: bool
 # Total length of the path.
 var length: float
 
@@ -14,8 +15,8 @@ var _nearest_point_on_segment: Vector3
 var _nearest_point_on_path: Vector3
 
 
-func _init(waypoints: Array, open := false) -> void:
-	self.open = open
+func _init(waypoints: Array, is_open := false) -> void:
+	self.is_open = is_open
 	create_path(waypoints)
 	_nearest_point_on_segment = waypoints[0]
 	_nearest_point_on_path = waypoints[0]
@@ -36,7 +37,7 @@ func create_path(waypoints: Array) -> void:
 		previous = current
 		if i < waypoints.size():
 			current = waypoints[i]
-		elif open:
+		elif is_open:
 			break
 		else:
 			current = waypoints[0]
@@ -74,7 +75,7 @@ func calculate_distance(agent_current_position: Vector3) -> float:
 
 # Calculates a target position from the path's starting point based on the `target_distance`.
 func calculate_target_position(target_distance: float) -> Vector3:
-	if open:
+	if is_open:
 		target_distance = clamp(target_distance, 0, length)
 	else:
 		if target_distance < 0:

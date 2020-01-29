@@ -25,4 +25,4 @@ var angular_velocity := 0.0
 var bounding_radius := 0.0
 # Used internally by group behaviors and proximities to mark the agent as already
 # considered.
-var tagged := false
+var is_tagged := false

@@ -16,7 +16,7 @@ func _init(agent: GSTSteeringAgent, agents: Array) -> void:
 
 # Returns a number of neighbors based on a `callback` function.
 #
-# `find_neighbors` calls `callback` for each agent in the `agents` array and
+# `_find_neighbors` calls `callback` for each agent in the `agents` array and
 # adds one to the count if its `callback` returns true.
-func find_neighbors(callback: FuncRef) -> int:
+func _find_neighbors(callback: FuncRef) -> int:
 	return 0

@@ -9,7 +9,7 @@ class_name GSTSteeringBehavior
 
 
 # If `false`, all calculations return zero amounts of acceleration.
-var enabled := true
+var is_enabled := true
 # The AI agent on which the steering behavior bases its calculations.
 var agent: GSTSteeringAgent
 
@@ -21,7 +21,7 @@ func _init(agent: GSTSteeringAgent) -> void:
 # Returns the `acceleration` modified with the behavior's desired amount of
 # acceleration.
 func calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
-	if enabled:
+	if is_enabled:
 		return _calculate_steering(acceleration)
 	else:
 		acceleration.set_zero()

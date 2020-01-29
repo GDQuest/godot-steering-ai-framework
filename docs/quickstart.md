@@ -123,7 +123,7 @@ func _ready() -> void:
 
     # Behaviors that are not enabled produce 0 acceleration.
     # Adding our fleeing behaviors to a blend. The order does not matter.
-    flee_blend.enabled = false
+    flee_blend.is_enabled = false
     flee_blend.add(look, 1)
     flee_blend.add(flee, 1)
 
@@ -144,8 +144,8 @@ func _physics_process(delta: float) -> void:
     update_agent()
 
     if current_health <= flee_health_threshold:
-        pursue_blend.enabled = false
-        flee_blend.enabled = true
+        pursue_blend.is_enabled = false
+        flee_blend.is_enabled = true
 
     # Calculate the desired acceleration.
     priority.calculate_steering(acceleration)

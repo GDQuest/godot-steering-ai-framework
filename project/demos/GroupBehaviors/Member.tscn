@@ -3,7 +3,6 @@
 [ext_resource path="res://demos/GroupBehaviors/Member.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/small_circle.png" type="Texture" id=2]
 
-
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0
 
