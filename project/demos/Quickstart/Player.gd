@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	
 	var movement := get_movement()
 	
-	direction = Vector2(sin(-rotation), cos(rotation))
+	direction = GSTUtils.angle_to_vector2(rotation)
 	
 	velocity += direction * acceleration_max * movement
 	velocity = velocity.clamped(speed_max)

@@ -16,7 +16,7 @@ func _face(acceleration: GSTTargetAcceleration, target_position: Vector3) -> GST
 		acceleration.set_zero()
 		return acceleration
 	else:
-		var orientation = GSTUtils.vector_to_angle(to_target)
+		var orientation = GSTUtils.vector3_to_angle(to_target)
 		return _match_orientation(acceleration, orientation)
 
 

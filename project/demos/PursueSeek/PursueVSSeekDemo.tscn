@@ -14,12 +14,13 @@ __meta__ = {
 }
 linear_speed_max = 240.0
 linear_accel_max = 40.0
+predict_time = 1.1
 
 [node name="BoundaryManager" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
 [node name="Player" type="KinematicBody2D" parent="BoundaryManager"]
-position = Vector2( 49.2031, 556.936 )
+position = Vector2( 47.3369, 329.724 )
 rotation = 1.5708
 collision_mask = 2
 script = ExtResource( 2 )
@@ -34,7 +35,7 @@ modulate = Color( 0.968627, 0.188235, 0.0352941, 1 )
 texture = ExtResource( 6 )
 
 [node name="Pursuer" type="KinematicBody2D" parent="BoundaryManager"]
-position = Vector2( 868.495, 200 )
+position = Vector2( 980, 550 )
 collision_layer = 2
 script = ExtResource( 1 )
 
@@ -46,7 +47,8 @@ modulate = Color( 0.756863, 0.952941, 0.054902, 1 )
 texture = ExtResource( 6 )
 
 [node name="Seeker" type="KinematicBody2D" parent="BoundaryManager"]
-position = Vector2( 821.24, 200 )
+position = Vector2( 980, 150 )
+rotation = 3.14159
 collision_layer = 2
 script = ExtResource( 1 )
 use_seek = true
