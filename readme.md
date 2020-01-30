@@ -20,7 +20,7 @@ As a short overview, a character is represented by a steering agent; it stores i
 
 ## Manual ##
 
-The various behaviors and types in the toolkit have been gathered into a [Reference](https://github.com/GDQuest/godot-steering-toolkit/wiki/Manual-API-reference-draft) manual.
+The various behaviors and types in the toolkit have been gathered into a [Reference](https://github.com/GDQuest/godot-steering-toolkit/wiki) manual.
 
 ## Example usage ##
 
@@ -29,6 +29,8 @@ The fastest way to get started is to look at a sample class that makes use of th
 The goal of this class is to show how an agent can chase a player and predict where the player *will* be while also maintaining a distance from them. When the agent’s health is low, it will flee from the player directly. The agent will keep facing the player while it’s chasing them, but will look where it's going while it’s fleeing.
 
 Our game will be in 2D and assumed to be a top-down spaceship game.
+
+You can see the demo in action by running the `demos/QuickStartDemo.tscn` scene in Godot. There are other demos there that showcase the various behaviors, and the behavior parameters can be tweaked and changed by changing the demo's root node's parameters.
 
 ```ruby
 extends KinematicBody2D
@@ -206,5 +208,3 @@ func damage(amount: int) -> void:
         queue_free()
 
 ```
-
-You can see the demo in action by running the `demos/QuickStartDemo.tscn` scene in Godot. There are other demos there that showcase the various behaviors, and the behavior parameters can be tweaked and changed by changing the demo's root node's parameters.
