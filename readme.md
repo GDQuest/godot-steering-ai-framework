@@ -1,74 +1,210 @@
-# Godot Steering AI Framework #
+# Godot Steering Toolkit #
 
-Godot Steering gives you tools to create complex AI agents using steering behaviors in Godot.
+In the 1990s, [Craig Reynolds](http://www.red3d.com/cwr/) developed algorithms for common AI behaviors. They allowed AI agents to seek out or flee from a target, follow a pre-defined path, or face in a particular direction. They were simple, repeatable tasks that could be broken down into a programming algorithms which made them easy to reuse, maintain, combine and extend.
 
-## Steering Behaviors ##
+While an AI agent's next action is based on decision making and planning algorithms, steering behaviors dictate how it will move from one frame to the next. They use available information and calculate where to move at that moment.
 
-There are two main aspects to creating AI-driven agents in games:
+Joining these systems together can give complex and graceful movement while also being more efficient than complex path finding algorithms like A\*.
 
-1. **Decison-making**. Based on what the AI knows, we want it to decide how should it behave, what should it react to, when, etc.
-1. **Reacting**. Based on the decision the AI took, it needs to figure out how to move to its target or how to act.
+## Summary ##
 
-Steering Behaviors help with reacting. They are behaviors the AI undergoes to steer its agents through the game world. 
+This toolkit is a framework for the [Godot engine](https://godotengine.org/). It takes a lot of inspiration from the excellent [GDX-AI](https://github.com/libgdx/gdx-ai) framework for the [LibGDX](https://libgdx.badlogicgames.com/) java-based framework. Every class in the toolkit is based on Godot's [Reference](https://docs.godotengine.org/en/latest/classes/class_reference.html) type. There is no need to have a complex scene tree; everything that has to do with the AI's movement can be contained inside movement oriented classes.
 
-For example, an enemy spaceship pursuing the player through an asteroid field needs to avoid colliding with the asteroids. Yet, it should still move towards the player overall. Steering behaviors are good at that, and at producing smooth, natural motions.
+As a short overview, a character is represented by a steering agent; it stores its position, orientation, maximum speeds and current velocity. A steering behavior is associated with a steering agent and calculates a linear and/or angular change in velocity based on its information. The coder then applies that acceleration in whatever ways is appropriate to the character to change its velocity, like RigidBody's apply_impulse, or a KinematicBody's move_and_slide.
 
-Steering behaviors are a flexible and low performance algorithms to move around immediately, in a second-to-second resolution. Unlike more complex algorithms like the [A* pathfinding algorithm](https://www.redblobgames.com/pathfinding/a-star/introduction.html), the agent doesn't get a complete path to the target. 
+## More information and resources ##
 
-Steering behaviors may not have as fine a resolution as complex pathfinding, but they are easier to use and more than enough for many games. Also, they combine well with more complex pathfinding methods like A\*.
-
-## About this framework ##
-
-This framework is designed to work with the [Godot game engine](https://godotengine.org/). It is entirely in GDScript and designed to keep scene trees from getting bloated. It helps game developers making complex behaviors more easily with tools to prioritize, combine, and sequence modular steering behaviors together.
-
-## Design and Features ##
-
-This framework takes a lot of its inspiration from the AI module from [LibGDX](https://libgdx.badlogicgames.com/): GDX-AI. It's an exllencent base to work from. 
-
-Some of the information below is covered in greater details in the [GDX-AI Wiki](https://github.com/libgdx/gdx-ai/wiki/Steering-Behaviors), although this framework is quite different in the way it works. The GDX-AI wiki makes for an excellent primer on steering-based AI and includes a few diagrams, although you can skip the Java-specific part and technical details when reading it.
-
-Below are the main concepts of our framework.
-
-### Agent ###
-
-The Agent type holds information on the actor's position, velocity of travel, current orientation, as well as speed limits, mass, drag, size and other similar information. This information is used by the behaviors. It is up to the programmer to keep this information up-to-date.
-
-### Proximity ###
-
-A way of defining a number of Agents within an area around an owner. For instance, in a spaceship game, the squad leader's ship would be the owner of the Proximity, and the agents would be in the group and their group-based behaviors would use that information to know where the area is and where it is going.
-
-### TargetAcceleration ###
-
-The result of each behavior results in a desired **change** in velocity, linear or angular. This can be added to the current velocity to go up and down until the target is reached. The TargetAcceleration type holds both a linear and an angular acceleration, though whether they are used depends on which behavior is used.
-
-### Behaviors ###
-
-- Combination Behaviors - More often than not, one behavior will not be enough to do everything you want your agent to do. These special behaviors take other behaviors and works to combine them. Combination behaviors can combine other combination behaviors.
-    - Blended - Takes any number of behaviors and associates each with a strength that determines how strong that behavior is going to be. The final acceleration will be a combination of all behaviors in the blend.
-    - Priority - Takes any number of behaviors, but the order matters - only the first to return a non-zero acceleration will be used, and all others ignored. Great for prioritizing avoiding firey death by crashing into an asteroid over pursuing the player.
-
-- Individual Behaviors - Behaviors that only feature the agent and some target information, often another agent.
-    - Seek/Flee - Produces acceleration to take the agent to where the target is right now. Flee is the opposite and moves away from where the target is.
-	- Arrive - Produces acceleration to take the agent to where the target is, but slow down to zero velocity by the time it is on top of it.
-	- MatchOrientation - Produces angular acceleration to turn the agent to match the target's own facing, and slow down to zero velocity by the time it is matched.
-	- Pursue/Evade - Produces acceleration to take the agent to where the target will be by the time it is reached. Evade is the opposite and moves away from where the target is going to be.
-	- Face - Produces angular acceleration to turn the agent towards the target. A turret could use this to keep a bead on enemies.
-	- LookWhereYouAreGoing - Produces angular acceleration to turn the agent towards the direction it is traveling. This creates an agent that moves more naturally, especially if they can then choose to move independent of their travel upon need, like humans.
-	- FollowPath - Produces acceleration that will lead the agent into following a given series of points that form a path. This can be a path generated by a complex pathfinding algorithm like A\*.
-	- Intersect - Produces acceleration that will lead the agent to cut through an imaginary line between two other agents. For example, a bodyguard could try to bodyblock for a projectile to protect another agent.
-	- MatchVelocity - Produces acceleration that will lead the agent to have the same velocity as its target. Mimics that pretend they're the players could use this.
-	- Jump - Produces acceleration that will lead the agent to have enough velocity to jump against gravity from a target starting point with enough speed to land at the target landing point.
-
-- Group Behaviors - Behaviors that use Proximity objects to keep track of other agents in a given group.
-    - Separation - Produces acceleration that will keep the agent away from a distance from other neighbors in the Proximity group. Units in a RTS could be made to smartly keeping away from neighbors with an contagious infection, or units in spaceships keeping away from their target because their weapons are dangerous to themselves in short range (missiles).
-	- Alignment - Produces angular acceleration that will rotate the agent to face along with the other agents in the Proximity group. Spaceships in a flight formation, for example.
-	- Cohesion - Produces acceleration that will aim to keep the agents in the Proximity group in a balanced group within the Proximity. An example is a sheep catching up to the rest of its flock.
-	- Hide - Produces acceleration that will keep the agent behind an object in the Proximity and a target agent. It could be a stalker in the forest staying out of sight but following the player.
-	- AvoidCollisions - Produces acceleration that will keep the agent from hitting objects in the Proximity group. For example, moving through a minefield without hitting any of the mines.
-	- RaycastAvoidCollisions - Produces acceleration that will prevent the agent from hitting something that it is usually facing - great for discovering that there is an obstacle in the agent's direction of travel, whereas AvoidCollisions works in a radius around the agent.
-
-## Resources, links, and information ##
-
+- [Understanding Steering Behaviors](https://gamedevelopment.tutsplus.com/series/understanding-steering-behaviors--gamedev-12732): Breakdowns of various behaviors by Fernando Bevilacqua with graphics and in-depth explanations.
+- [GDX-AI Wiki](https://github.com/libgdx/gdx-ai/wiki/Steering-Behaviors): Descriptions of how LibGDX's AI submodule uses steering behaviors with a few graphics. Since this toolkit uses it for inspiration, there will be some similarities.
 - [RedBlobGames](https://www.redblobgames.com/) - An excellent resources for complex pathfinding like A\*, graph theory, and other algorithms that are game-development related. Steering behaviors are not covered, but for anyone looking to study and bulk up on their algorithms, this is a great place.
-- [Understanding Steering Behaviors](https://gamedevelopment.tutsplus.com/series/understanding-steering-behaviors--gamedev-12732) - Breakdowns of various behaviors by Fernando Bevilacqua with graphics and in-depth explanations that go beyond the scope of this document or GDX-AI's wiki entries.
-- [GDX-AI Wiki - Steering Behaviors](https://github.com/libgdx/gdx-ai/wiki/Steering-Behaviors) - Descriptions of how LibGDX's AI submodule uses steering behaviors with a few graphics.
+
+## Manual ##
+
+The various behaviors and types in the toolkit have been gathered into a [Reference](https://github.com/GDQuest/godot-steering-toolkit/wiki/Manual-API-reference-draft) manual.
+
+## Example usage ##
+
+The fastest way to get started is to look at a sample class that makes use of the toolkit.
+
+The goal of this class is to show how an agent can chase a player and predict where the player *will* be while also maintaining a distance from them. When the agent’s health is low, it will flee from the player directly. The agent will keep facing the player while it’s chasing them, but will look where it's going while it’s fleeing.
+
+Our game will be in 2D and assumed to be a top-down spaceship game.
+
+```ruby
+extends KinematicBody2D
+
+
+# Maximum possible linear velocity
+export var speed_max := 450.0
+# Maximum change in linear velocity
+export var acceleration_max := 50.0
+# Maximum rotation velocity represented in degrees
+export var angular_speed_max := 240
+# Maximum change in rotation velocity represented in degrees
+export var angular_acceleration_max := 40
+
+export var health_max := 100
+export var flee_health_threshold := 20
+
+var velocity := Vector2.ZERO
+var angular_velocity := 0.0
+var linear_drag := 0.1
+var angular_drag := 0.1
+
+# Holds the linear and angular components calculated by our steering behaviors.
+var acceleration := GSTTargetAcceleration.new()
+
+onready var current_health := health_max
+
+# GSTSteeringAgent holds our agent's position, orientation, maximum speed and acceleration.
+onready var agent := GSTSteeringAgent.new()
+
+onready var player: Node = get_tree().get_nodes_in_group("Player")[0]
+# This assumes that our player class will keep its own agent updated.
+onready var player_agent: GSTSteeringAgent = player.agent
+
+# Proximities represent an area with which an agent can identify where neighbors in its relevant
+# group are. In our case, the group will feature the player, which will be used to avoid a
+# collision with them. We use a radius proximity so the player is only relevant inside 100 pixels
+onready var proximity := GSTRadiusProximity.new(agent, [player_agent], 100).
+
+# GSTBlend combines behaviors together, calculating all of their acceleration together and adding
+# them together, multiplied by a strength. We will have one for fleeing, and one for pursuing,
+# toggling them depending on the agent's health. Since we want the agent to rotate AND move, then
+# we aim to blend them together.
+onready var flee_blend := GSTBlend.new(agent)
+onready var pursue_blend := GSTBlend.new(agent)
+
+# GSTPriority will be the main steering behavior we use. It holds sub-behaviors and will pick the  
+# first one that returns non-zero acceleration, ignoring any afterwards.
+onready var priority := GSTPriority.new(agent)
+
+
+func _ready() -> void:
+    # ---------- Configuration for our agent ----------
+    agent.linear_speed_max = speed_max
+    agent.linear_acceleration_max = acceleration_max
+    agent.angular_speed_max = deg2rad(angular_speed_max)
+    agent.angular_acceleration_max = deg2rad(angular_acceleration_max)
+    agent.bounding_radius = calculate_radius($CollisionPolygon2D.polygon)
+    update_agent()
+
+    # ---------- Configuration for our behaviors ----------
+    # Pursue will happen while the player is in good health. It produces acceleration that takes
+    # the agent on an intercept course with the target, predicting its position in the future.
+    var pursue := GSTPursue.new(agent, player_agent)
+    pursue.predict_time_max = 1.5
+
+    # Flee will happen while the agent is in bad health, so will start disabled. It produces
+    # acceleration that takes the agent directly away from the target with no prediction.
+    var flee := GSTFlee.new(agent, player_agent)
+
+    # AvoidCollision tries to keep the agent from running into any of the neighbors found in its
+    # proximity group. In our case, this will be the player if they are close enough.
+    var avoid := GSTAvoidCollisions.new(agent, proximity)
+
+    # Face turns the agent to keep looking towards its target. It will be enabled while the agent
+    # is not fleeing due to low health. It tries to arrive 'on alignment' with 0 remaining velocity.
+    var face := GSTFace.new(agent, player_agent)
+
+    # We use deg2rad because the math in the toolkit assumes radians.
+    # How close for the agent to be 'aligned', if not exact.
+    face.alignment_tolerance = deg2rad(5)
+    # When to start slowing down.
+    face.deceleration_radius = deg2rad(45)
+
+    # LookWhereYouGo turns the agent to keep looking towards its direction of travel. It will only
+    # be enabled while the agent is at low health.
+    var look := GSTLookWhereYouGo.new(agent)
+    # How close for the agent to be 'aligned', if not exact.
+    look.alignment_tolerance = deg2rad(5)
+    # When to start slowing down.
+    look.deceleration_radius = deg2rad(45)
+
+    # Behaviors that are not enabled produce 0 acceleration.
+    # Adding our fleeing behaviors to a blend. The order does not matter.
+    flee_blend.is_enabled = false
+
+    flee_blend.add(look, 1)
+    flee_blend.add(flee, 1)
+
+    # Adding our pursuit behaviors to a blend. The order does not matter.
+    pursue_blend.add(face, 1)
+    pursue_blend.add(pursue, 1)
+
+    # Adding our final behaviors to the main priority behavior. The order does matter here.
+    # We want to avoid collision with the player first, flee from the player second when enabled,
+    # and pursue the player last when enabled.
+    priority.add(avoid)
+    priority.add(flee_blend)
+    priority.add(pursue_blend)
+
+
+func _physics_process(delta: float) -> void:
+    # Make sure any change in position and speed has been recorded.
+    update_agent()
+
+    if current_health <= flee_health_threshold:
+        pursue_blend.is_enabled = false
+
+        flee_blend.is_enabled = true
+
+
+    # Calculate the desired acceleration.
+    priority.calculate_steering(acceleration)
+
+    # We add the discovered acceleration to our linear velocity. The toolkit does not limit
+    # velocity, just acceleration, so we clamp the result ourselves here.
+    velocity = (velocity + Vector2(
+                acceleration.linear.x, acceleration.linear.y)
+    ).clamped(agent.linear_speed_max)
+
+    # This applies drag on the agent's motion, helping it to slow down naturally.
+    velocity = velocity.linear_interpolate(Vector2.ZERO, linear_drag)
+
+    # And since we're using a KinematicBody2D, we use Godot's excellent move_and_slide to actually
+    # apply the final movement, and record any change in velocity the physics engine discovered.
+    velocity = move_and_slide(velocity)
+
+    # We then do something similar to apply our agent's rotational speed.
+    angular_velocity = clamp(
+            angular_velocity + acceleration.angular,
+            -agent.angular_speed_max,
+            agent.angular_speed_max
+    )
+    # This applies drag on the agent's rotation, helping it slow down naturally.
+    angular_velocity = lerp(angular_velocity, 0, angular_drag)
+    rotation += angular_velocity * delta
+
+
+# In order to support both 2D and 3D, the toolkit uses Vector3, so the conversion is required
+# when using 2D nodes. The Z component can be left to 0 safely.
+func update_agent() -> void:
+    agent.position.x = global_position.x
+    agent.position.y = global_position.y
+    agent.orientation = rotation
+    agent.linear_velocity.x = velocity.x
+    agent.linear_velocity.y = velocity.y
+    agent.angular_velocity = angular_velocity
+
+
+# We calculate the radius from the collision shape - this will approximate the agent's size in the
+# game world, to avoid collisions with the player.
+func calculate_radius(polygon: PoolVector2Array) -> float:
+    var furthest_point := Vector2(-INF, -INF)
+    for p in polygon:
+        if abs(p.x) > furthest_point.x:
+            furthest_point.x = p.x
+        if abs(p.y) > furthest_point.y:
+            furthest_point.y = p.y
+    return furthest_point.length()
+
+
+func damage(amount: int) -> void:
+    current_health -= amount
+    if current_health <= 0:
+        queue_free()
+
+```
+
+You can see the demo in action by running the `demos/QuickStartDemo.tscn` scene in Godot. There are other demos there that showcase the various behaviors, and the behavior parameters can be tweaked and changed by changing the demo's root node's parameters.
