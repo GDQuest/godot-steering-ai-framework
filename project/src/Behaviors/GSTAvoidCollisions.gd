@@ -4,12 +4,12 @@ class_name GSTAvoidCollisions
 extends GSTGroupBehavior
 
 
-var first_neighbor: GSTSteeringAgent
-var shortest_time: float
-var first_minimum_separation: float
-var first_distance: float
-var first_relative_position: Vector3
-var first_relative_velocity: Vector3
+var _first_neighbor: GSTSteeringAgent
+var _shortest_time: float
+var _first_minimum_separation: float
+var _first_distance: float
+var _first_relative_position: Vector3
+var _first_relative_velocity: Vector3
 
 
 func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent, proximity) -> void:
@@ -17,22 +17,22 @@ func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent, proximity) 
 
 
 func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
-	shortest_time = INF
-	first_neighbor = null
-	first_minimum_separation = 0
-	first_distance = 0
+	_shortest_time = INF
+	_first_neighbor = null
+	_first_minimum_separation = 0
+	_first_distance = 0
 
 	var neighbor_count := proximity._find_neighbors(_callback)
 
-	if neighbor_count == 0 or not first_neighbor:
+	if neighbor_count == 0 or not _first_neighbor:
 		acceleration.set_zero()
 	else:
 		if(
-				first_minimum_separation <= 0 or
-				first_distance < agent.bounding_radius + first_neighbor.bounding_radius):
-			acceleration.linear = first_neighbor.position - agent.position
+				_first_minimum_separation <= 0 or
+				_first_distance < agent.bounding_radius + _first_neighbor.bounding_radius):
+			acceleration.linear = _first_neighbor.position - agent.position
 		else:
-			acceleration.linear = first_relative_position + (first_relative_velocity * shortest_time)
+			acceleration.linear = _first_relative_position + (_first_relative_velocity * _shortest_time)
 
 	acceleration.linear = acceleration.linear.normalized() * -agent.linear_acceleration_max
 	acceleration.angular = 0
@@ -52,7 +52,7 @@ func _report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 	else:
 		var time_to_collision = -relative_position.dot(relative_velocity) / relative_speed_squared
 
-		if time_to_collision <= 0 or time_to_collision >= shortest_time:
+		if time_to_collision <= 0 or time_to_collision >= _shortest_time:
 			return false
 		else:
 			var distance = relative_position.length()
@@ -60,10 +60,10 @@ func _report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 			if minimum_separation > agent.bounding_radius + neighbor.bounding_radius:
 				return false
 			else:
-				shortest_time = time_to_collision
-				first_neighbor = neighbor
-				first_minimum_separation = minimum_separation
-				first_distance = distance
-				first_relative_position = relative_position
-				first_relative_velocity = relative_velocity
+				_shortest_time = time_to_collision
+				_first_neighbor = neighbor
+				_first_minimum_separation = minimum_separation
+				_first_distance = distance
+				_first_relative_position = relative_position
+				_first_relative_velocity = relative_velocity
 				return true

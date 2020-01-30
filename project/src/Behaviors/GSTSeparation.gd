@@ -10,8 +10,8 @@ extends GSTGroupBehavior
 
 # The coefficient to calculate how fast the separation strength decays with distance.
 var decay_coefficient := 1.0
-# Container for the calculated acceleration.
-var acceleration: GSTTargetAcceleration
+
+var _acceleration: GSTTargetAcceleration
 
 
 func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent, proximity) -> void:
@@ -20,13 +20,14 @@ func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent, proximity) 
 
 func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
 	acceleration.set_zero()
-	self.acceleration = acceleration
+	self._acceleration = acceleration
 	proximity._find_neighbors(_callback)
 	return acceleration
 
 
 # Callback for the proximity to call when finding neighbors. Determines the amount of
 # acceleration that `neighbor` imposes based on its distance from the owner agent.
+# virtual
 func _report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 	var to_agent := agent.position - neighbor.position
 
@@ -37,6 +38,6 @@ func _report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 	if strength > acceleration_max:
 		strength = acceleration_max
 
-	acceleration.linear += to_agent * (strength / sqrt(distance_squared))
+	_acceleration.linear += to_agent * (strength / sqrt(distance_squared))
 
 	return true

@@ -12,6 +12,7 @@ func _init(agent: GSTSteeringAgent, agents: Array).(agent, agents) -> void:
 #
 # `_find_neighbors` calls `callback` for each agent in the `agents` array and
 # adds one to the count if its `callback` returns true.
+# virtual
 func _find_neighbors(callback: FuncRef) -> int:
 	var neighbor_count := 0
 	var agent_count := agents.size()
