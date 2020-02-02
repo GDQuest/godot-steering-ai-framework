@@ -27,7 +27,7 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 
 # Callback for the proximity to call when finding neighbors. Determines the amount of
 # acceleration that `neighbor` imposes based on its distance from the owner agent.
-# virtual
+# tags: virtual
 func _report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 	var to_agent := agent.position - neighbor.position
 

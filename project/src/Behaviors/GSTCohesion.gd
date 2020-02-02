@@ -23,7 +23,7 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 
 # Callback for the proximity to call when finding neighbors. Adds `neighbor`'s position
 # to the center of mass of the group.
-# virtual
+# tags: virtual
 func _report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 	_center_of_mass += neighbor.position
 	return true
