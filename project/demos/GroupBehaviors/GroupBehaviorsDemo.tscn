@@ -1,14 +1,22 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://demos/GroupBehaviors/Member.tscn" type="PackedScene" id=1]
 [ext_resource path="res://demos/GroupBehaviors/Spawner.gd" type="Script" id=2]
 [ext_resource path="res://demos/GroupBehaviors/GroupBehaviorsDemo.gd" type="Script" id=3]
 [ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=4]
+[ext_resource path="res://assets/sprites/background.png" type="Texture" id=5]
 
 [node name="GroupBehaviorsDemo" type="Node2D"]
 script = ExtResource( 3 )
 cohesion_strength = 0.2
 separation_strength = 4.5
+
+[node name="BackgroudLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="Sprite" parent="BackgroudLayer"]
+texture = ExtResource( 5 )
+centered = false
 
 [node name="Spawner" type="Node2D" parent="."]
 position = Vector2( 512, 300 )

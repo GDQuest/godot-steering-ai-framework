@@ -1,16 +1,24 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://demos/FollowPath/Drawer.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/small_circle.png" type="Texture" id=2]
 [ext_resource path="res://demos/FollowPath/PathFollower.gd" type="Script" id=3]
 [ext_resource path="res://demos/FollowPath/FollowPathDemo.gd" type="Script" id=4]
 [ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=5]
+[ext_resource path="res://demos/Utils/CircleDraw.gd" type="Script" id=6]
+[ext_resource path="res://assets/sprites/background.png" type="Texture" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0
 
 [node name="FollowPathDemo" type="Node2D"]
 script = ExtResource( 4 )
+
+[node name="BackgroudLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="Sprite" parent="BackgroudLayer"]
+texture = ExtResource( 7 )
+centered = false
 
 [node name="Drawer" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -21,10 +29,10 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollower"]
 shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="PathFollower"]
-modulate = Color( 0.960784, 0.231373, 0.0392157, 1 )
-texture = ExtResource( 2 )
+script = ExtResource( 6 )
+inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
+outer_color = Color( 0.560784, 0.870588, 0.364706, 1 )
+stroke = 4.0
 
 [node name="GUI" type="PanelContainer" parent="."]
 margin_right = 1024.0
@@ -46,7 +54,7 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 0, 84 )
 bbcode_enabled = true
 bbcode_text = "Follow Path Demo
-Use the mouse to draw a path on screen and watch the [color=red]red \"Agent\"[/color] follow it to the end."
+Use the mouse to draw a path on screen and watch the [color=lime]green \"Agent\"[/color] follow it to the end."
 text = "Follow Path Demo
-Use the mouse to draw a path on screen and watch the red \"Agent\" follow it to the end."
+Use the mouse to draw a path on screen and watch the green \"Agent\" follow it to the end."
 scroll_active = false

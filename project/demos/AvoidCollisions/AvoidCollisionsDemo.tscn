@@ -1,19 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://demos/AvoidCollisions/Spawner.gd" type="Script" id=1]
 [ext_resource path="res://demos/AvoidCollisions/AvoidCollisionsDemo.gd" type="Script" id=2]
 [ext_resource path="res://demos/AvoidCollisions/Avoider.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=4]
+[ext_resource path="res://assets/sprites/background.png" type="Texture" id=5]
 
 [node name="AvoidCollisionsDemo" type="Node2D"]
 script = ExtResource( 2 )
 proximity_radius = 100.0
 
+[node name="BackgroudLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="Sprite" parent="BackgroudLayer"]
+texture = ExtResource( 5 )
+centered = false
+
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource( 1 )
 avoider_template = ExtResource( 3 )
-normal_color = Color( 0.94902, 0.0588235, 0.0588235, 1 )
-highlight_color = Color( 0.0901961, 0.929412, 0.929412, 1 )
+inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
+outer_color = Color( 0.560784, 0.870588, 0.364706, 1 )
 
 [node name="GUI" type="PanelContainer" parent="."]
 margin_right = 1024.0

@@ -9,7 +9,8 @@ var _radius: float
 var _accel := GSTTargetAcceleration.new()
 var _velocity := Vector2.ZERO
 var _direction := Vector2()
-var _drag: = 0.1
+var _drag := 0.1
+var _color := Color(0.4, 1.0, 0.89, 0.3)
 
 onready var collision := $CollisionShape2D
 onready var agent := GSTSteeringAgent.new()
@@ -18,12 +19,11 @@ onready var avoid := GSTAvoidCollisions.new(agent, proximity)
 onready var target := GSTAgentLocation.new()
 onready var seek := GSTSeek.new(agent, target)
 onready var priority := GSTPriority.new(agent, 0.0001)
-onready var sprite := $Sprite
 
 
 func _draw() -> void:
 	if draw_proximity:
-		draw_circle(Vector2.ZERO, proximity.radius, Color(0, 1, 0, 0.1))
+		draw_circle(Vector2.ZERO, proximity.radius, _color)
 
 
 func _physics_process(delta: float) -> void:

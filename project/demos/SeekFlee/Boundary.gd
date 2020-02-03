@@ -2,6 +2,8 @@ extends StaticBody2D
 # Draws the bounding box of the static body wall.
 
 
+const COLOR := Color("8fde5d")
+
 var rect: Rect2
 
 
@@ -11,4 +13,4 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	draw_rect(rect, Color.yellowgreen)
+	draw_rect(rect, COLOR)

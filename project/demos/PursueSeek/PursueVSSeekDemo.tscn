@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://demos/PursueSeek/Pursuer.gd" type="Script" id=1]
 [ext_resource path="res://demos/PursueSeek/Player.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://demos/PursueSeek/PursueVSSeekDemo.gd" type="Script" id=4]
 [ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=5]
 [ext_resource path="res://assets/sprites/triangle.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/background.png" type="Texture" id=7]
 
 [node name="PursueVSSeekDemo" type="Node2D"]
 script = ExtResource( 4 )
@@ -15,6 +16,13 @@ __meta__ = {
 linear_speed_max = 240.0
 linear_accel_max = 40.0
 predict_time = 1.1
+
+[node name="BackgroudLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="Sprite" parent="BackgroudLayer"]
+texture = ExtResource( 7 )
+centered = false
 
 [node name="BoundaryManager" type="Node2D" parent="."]
 script = ExtResource( 3 )
@@ -43,7 +51,7 @@ script = ExtResource( 1 )
 polygon = PoolVector2Array( 0, -32, -24, 32, 24, 32 )
 
 [node name="Sprite" type="Sprite" parent="BoundaryManager/Pursuer"]
-modulate = Color( 0.756863, 0.952941, 0.054902, 1 )
+modulate = Color( 1, 0.937255, 0.0235294, 1 )
 texture = ExtResource( 6 )
 
 [node name="Seeker" type="KinematicBody2D" parent="BoundaryManager"]
@@ -80,7 +88,7 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 0, 84 )
 bbcode_enabled = true
 bbcode_text = "Pursue vs. Seek Demo
-Move the player around with WASD and notice the [color=yellow]yellow Pursuer[/color] and the [color=green]green Seeker[/color] follow
+Move the player around with WASD and notice the [color=yellow]yellow Pursuer[/color] and the [color=lime]green Seeker[/color] follow
 the [color=red]red \"Ship\"[/color] around"
 text = "Pursue vs. Seek Demo
 Move the player around with WASD and notice the yellow Pursuer and the green Seeker follow
