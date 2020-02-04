@@ -2,14 +2,15 @@ extends Node2D
 
 
 export var avoider_template: PackedScene
-export var normal_color := Color()
-export var highlight_color := Color()
+export var inner_color := Color()
+export var outer_color := Color()
 
 var boundaries: Vector2
 
 
 func _ready() -> void:
-	boundaries = Vector2(ProjectSettings["display/window/size/width"],
+	boundaries = Vector2(
+			ProjectSettings["display/window/size/width"],
 			ProjectSettings["display/window/size/height"])
 	var rng: = RandomNumberGenerator.new()
 	var avoiders := []
@@ -28,7 +29,9 @@ func _ready() -> void:
 		)
 		avoider_agents.append(avoider.agent)
 		avoider.set_random_nonoverlapping_position(avoiders, 16)
-		avoider.sprite.modulate = normal_color if i != 0 or not owner.draw_proximity else highlight_color
+		if i == 0:
+			avoider.collision.inner_color = inner_color
+			avoider.collision.outer_color = outer_color
 		avoiders.append(avoider)
 	for child in get_children():
 		child.set_proximity_agents(avoider_agents)
@@ -58,8 +61,4 @@ func set_proximity_radius(value: float) -> void:
 func set_draw_proximity(value: bool) -> void:
 	var child := get_child(0)
 	child.draw_proximity = value
-	if not value:
-		child.sprite.modulate = normal_color
-	else:
-		child.sprite.modulate = highlight_color
 	child.update()

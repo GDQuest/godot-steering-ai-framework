@@ -12,6 +12,8 @@ var draw_proximity := false
 var _color := Color.red
 var _velocity := Vector2()
 
+onready var collision_shape := $CollisionShape2D
+
 
 func setup(
 		linear_speed_max: float,
@@ -22,7 +24,7 @@ func setup(
 		separation_strength: float
 	) -> void:
 	_color = Color(rand_range(0.5, 1), rand_range(0.25, 1), rand_range(0, 1))
-	$Sprite.modulate = _color
+	collision_shape.inner_color = _color
 	
 	agent.linear_acceleration_max = linear_accel_max
 	agent.linear_speed_max = linear_speed_max
@@ -37,7 +39,7 @@ func setup(
 
 func _draw() -> void:
 	if draw_proximity:
-		draw_circle(Vector2.ZERO, proximity.radius, Color(0, 1, 0, 0.1))
+		draw_circle(Vector2.ZERO, proximity.radius, Color(0.4, 1.0, 0.89, 0.3))
 
 
 func _physics_process(delta: float) -> void:

@@ -7,8 +7,8 @@ export(float, 0, 100, 0.1) var arrival_tolerance := 25.0 setget set_arrival_tole
 export(float, 0, 500, 10) var deceleration_radius := 125.0 setget set_deceleration_radius
 
 const COLORS := {
-	deceleration_radius = Color(0.9, 1, 0, 0.1),
-	arrival_tolerance = Color(0.5, 0.7, 0.9, 0.2)
+	deceleration_radius = Color(1.0, 0.419, 0.592, 0.5),
+	arrival_tolerance = Color(0.278, 0.231, 0.47, 0.3)
 }
 
 onready var arriver := $Arriver

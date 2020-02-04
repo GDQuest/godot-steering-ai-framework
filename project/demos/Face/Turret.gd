@@ -7,6 +7,7 @@ var agent := GSTSteeringAgent.new()
 var _accel := GSTTargetAcceleration.new()
 var _angular_drag := 0.1
 var _cannon: Rect2
+var _color: Color
 
 onready var collision_shape := $CollisionShape2D
 
@@ -14,6 +15,7 @@ onready var collision_shape := $CollisionShape2D
 func _ready() -> void:
 	var radius = collision_shape.shape.radius
 	_cannon = Rect2(Vector2(-5, 0), Vector2(10, -radius*2))
+	_color = collision_shape.outer_color
 
 
 func _physics_process(delta: float) -> void:
@@ -29,7 +31,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _draw() -> void:
-	draw_rect(_cannon, Color.cadetblue)
+	draw_rect(_cannon, _color)
 
 
 func setup(

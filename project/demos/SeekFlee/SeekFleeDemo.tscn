@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://demos/SeekFlee/Boundary.gd" type="Script" id=1]
 [ext_resource path="res://demos/SeekFlee/Player.gd" type="Script" id=2]
@@ -6,7 +6,8 @@
 [ext_resource path="res://demos/SeekFlee/Spawner.gd" type="Script" id=4]
 [ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=5]
 [ext_resource path="res://demos/SeekFlee/Seeker.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/sprites/large_circle.png" type="Texture" id=7]
+[ext_resource path="res://demos/Utils/CircleDraw.gd" type="Script" id=7]
+[ext_resource path="res://assets/sprites/background.png" type="Texture" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 32.0
@@ -23,6 +24,13 @@ __meta__ = {
 "_editor_description_": "A toy demo to demonstrate the usage for the Seek and Flee steering behaviors."
 }
 
+[node name="BackgroudLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="Sprite" parent="BackgroudLayer"]
+texture = ExtResource( 8 )
+centered = false
+
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
@@ -32,10 +40,10 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Player"]
-modulate = Color( 0.952941, 0.290196, 0.0588235, 1 )
-texture = ExtResource( 7 )
+script = ExtResource( 7 )
+inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
+outer_color = Color( 0.560784, 0.870588, 0.364706, 1 )
+stroke = 4.0
 
 [node name="LeftBoundary" type="StaticBody2D" parent="."]
 position = Vector2( -512, 0 )
@@ -99,6 +107,6 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 0, 84 )
 bbcode_enabled = true
 bbcode_text = "Seek & Flee Demo
-Move the [color=red]red \"Player\"[/color] around with WASD and notice the [color=blue]blue \"Enemies\"[/color] try to seek to or flee from the player."
+Move the [color=lime]green \"Player\"[/color] around with WASD and notice the [color=#ffb570]orange \"Enemies\"[/color] try to seek to or flee from the player."
 text = "Seek & Flee Demo
-Move the red \"Player\" around with WASD and notice the blue \"Enemies\" try to seek to or flee from the player."
+Move the green \"Player\" around with WASD and notice the orange \"Enemies\" try to seek to or flee from the player."
