@@ -43,7 +43,7 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 0, 84 )
 bbcode_enabled = true
 bbcode_text = "Group Behavior Demo
-Each of the \"Agents\" are both attempting to stay separated and within reach of their nearest group's center of mass."
+Each of the \"Agents\" are both attempting to stay separated from each other but within reach of their nearest group's center of mass."
 text = "Group Behavior Demo
-Each of the \"Agents\" are both attempting to stay separated and within reach of their nearest group's center of mass."
+Each of the \"Agents\" are both attempting to stay separated from each other but within reach of their nearest group's center of mass."
 scroll_active = false

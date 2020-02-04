@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://demos/SeekFlee/Boundary.gd" type="Script" id=1]
 [ext_resource path="res://demos/SeekFlee/Player.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=5]
 [ext_resource path="res://demos/SeekFlee/Seeker.tscn" type="PackedScene" id=6]
 [ext_resource path="res://demos/Utils/CircleDraw.gd" type="Script" id=7]
+[ext_resource path="res://assets/sprites/background.png" type="Texture" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 32.0
@@ -22,7 +23,13 @@ script = ExtResource( 3 )
 __meta__ = {
 "_editor_description_": "A toy demo to demonstrate the usage for the Seek and Flee steering behaviors."
 }
-behavior_mode = 0
+
+[node name="BackgroudLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="Sprite" parent="BackgroudLayer"]
+texture = ExtResource( 8 )
+centered = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
