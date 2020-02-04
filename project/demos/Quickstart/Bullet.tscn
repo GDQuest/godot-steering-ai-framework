@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/sprites/small_circle.png" type="Texture" id=1]
+[ext_resource path="res://demos/Utils/CircleDraw.gd" type="Script" id=1]
 [ext_resource path="res://demos/Quickstart/Bullet.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -13,11 +13,10 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.141176, 0.188235, 0.901961, 1 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 1 )
+script = ExtResource( 1 )
+inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
+outer_color = Color( 0.560784, 0.870588, 0.364706, 1 )
+stroke = 2.0
 
 [node name="Lifetime" type="Timer" parent="."]
 process_mode = 0
