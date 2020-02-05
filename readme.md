@@ -20,7 +20,7 @@ As a short overview, a character is represented by a steering agent; it stores i
 
 ## Manual ##
 
-The various behaviors and types in the toolkit have been gathered into a [Reference](https://github.com/GDQuest/godot-steering-toolkit/wiki) manual.
+The various behaviors and types in the toolkit are available in the [Wiki](https://github.com/GDQuest/godot-steering-toolkit/wiki) or on the [GDQuest](https://www.gdquest.com/docs/godot-steering-toolkit/getting-started/) website's documents.
 
 ## Example usage ##
 
@@ -32,7 +32,7 @@ Our game will be in 2D and assumed to be a top-down spaceship game.
 
 You can see the demo in action by running the `demos/QuickStartDemo.tscn` scene in Godot. There are other demos there that showcase the various behaviors, and the behavior parameters can be tweaked and changed by changing the demo's root node's parameters.
 
-```ruby
+```gdscript
 extends KinematicBody2D
 
 
