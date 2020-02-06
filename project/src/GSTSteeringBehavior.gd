@@ -18,16 +18,13 @@ func _init(agent: GSTSteeringAgent) -> void:
 	self.agent = agent
 
 
-# Returns the `acceleration` modified with the behavior's desired amount of
-# acceleration.
-func calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
+# Sets the `acceleration` with the behavior's desired amount of acceleration.
+func calculate_steering(acceleration: GSTTargetAcceleration) -> void:
 	if is_enabled:
-		return _calculate_steering(acceleration)
+		_calculate_steering(acceleration)
 	else:
 		acceleration.set_zero()
-		return acceleration
 
 
-func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
+func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:
 	acceleration.set_zero()
-	return acceleration

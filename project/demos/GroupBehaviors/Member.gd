@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	agent.position.x = global_position.x
 	agent.position.y = global_position.y
 	if blend:
-		acceleration = blend.calculate_steering(acceleration)
+		blend.calculate_steering(acceleration)
 		_velocity += Vector2(acceleration.linear.x, acceleration.linear.y)
 		_velocity = _velocity.linear_interpolate(Vector2.ZERO, 0.1)
 		_velocity = _velocity.clamped(agent.linear_speed_max)

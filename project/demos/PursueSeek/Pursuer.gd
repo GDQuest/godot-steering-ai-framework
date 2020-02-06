@@ -25,11 +25,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_update_agent()
 	
-	accel = _behavior.calculate_steering(accel)
+	_behavior.calculate_steering(accel)
 	
 	_direction_face.position = agent.position + accel.linear.normalized()
 	
-	accel = _orient_behavior.calculate_steering(accel)
+	_orient_behavior.calculate_steering(accel)
 	_angular_velocity += accel.angular
 	
 	_angular_velocity = clamp(

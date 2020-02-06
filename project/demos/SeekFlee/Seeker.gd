@@ -25,9 +25,9 @@ func _physics_process(delta: float) -> void:
 	
 	_update_agent()
 	if use_seek:
-		accel = seek.calculate_steering(accel)
+		seek.calculate_steering(accel)
 	else:
-		accel = flee.calculate_steering(accel)
+		flee.calculate_steering(accel)
 	
 	velocity = (velocity + Vector2(accel.linear.x, accel.linear.y)).clamped(agent.linear_speed_max)
 	velocity = move_and_slide(velocity)

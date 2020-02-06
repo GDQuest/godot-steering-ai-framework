@@ -33,7 +33,7 @@ func get_behavior_at(index: int) -> Dictionary:
 	return {}
 
 
-func _calculate_steering(blended_accel: GSTTargetAcceleration) -> GSTTargetAcceleration:
+func _calculate_steering(blended_accel: GSTTargetAcceleration) -> void:
 	blended_accel.set_zero()
 
 	for i in range(_behaviors.size()):
@@ -48,5 +48,3 @@ func _calculate_steering(blended_accel: GSTTargetAcceleration) -> GSTTargetAccel
 			-agent.angular_acceleration_max,
 			agent.angular_acceleration_max
 	)
-
-	return blended_accel

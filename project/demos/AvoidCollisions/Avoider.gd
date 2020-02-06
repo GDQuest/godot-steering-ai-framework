@@ -28,7 +28,7 @@ func _draw() -> void:
 
 func _physics_process(delta: float) -> void:
 	_update_agent()
-	_accel = priority.calculate_steering(_accel)
+	priority.calculate_steering(_accel)
 	_velocity += Vector2(_accel.linear.x, _accel.linear.y)
 	_velocity = _velocity.linear_interpolate(Vector2.ZERO, _drag)
 	_velocity = _velocity.clamped(agent.linear_speed_max)

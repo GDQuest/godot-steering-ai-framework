@@ -12,7 +12,7 @@ var _drag := 0.1
 
 func _physics_process(delta: float) -> void:
 	_update_agent()
-	_accel = arrive.calculate_steering(_accel)
+	arrive.calculate_steering(_accel)
 	_velocity += Vector2(_accel.linear.x, _accel.linear.y)
 	_velocity = _velocity.linear_interpolate(Vector2.ZERO, _drag).clamped(agent.linear_speed_max)
 	_velocity = move_and_slide(_velocity)

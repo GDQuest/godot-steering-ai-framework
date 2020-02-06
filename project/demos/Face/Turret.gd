@@ -19,7 +19,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	_accel = face.calculate_steering(_accel)
+	face.calculate_steering(_accel)
 	agent.angular_velocity = clamp(
 			agent.angular_velocity + _accel.angular,
 			-agent.angular_speed_max,
