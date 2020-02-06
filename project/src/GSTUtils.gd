@@ -25,3 +25,13 @@ static func vector3_to_angle(vector: Vector3) -> float:
 # rotate around the Y axis.
 static func angle_to_vector2(angle: float) -> Vector2:
 	return Vector2(sin(-angle), cos(angle))
+
+
+# Returns a vector2 with `vector`'s x and y components.
+static func to_vector2(vector: Vector3) -> Vector2:
+	return Vector2(vector.x, vector.y)
+
+
+# Returns a vector3 with `vector`'s x and y components and 0 in z.
+static func to_vector3(vector: Vector2) -> Vector3:
+	return Vector3(vector.x, vector.y, 0)

@@ -74,6 +74,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Behaviors/GSTMatchOrientation.gd"
 }, {
+"base": "GSTNodeAgent",
+"class": "GSTNode2DAgent",
+"language": "GDScript",
+"path": "res://src/Agents/GSTNode2DAgent.gd"
+}, {
+"base": "GSTSteeringAgent",
+"class": "GSTNodeAgent",
+"language": "GDScript",
+"path": "res://src/Agents/GSTNodeAgent.gd"
+}, {
 "base": "Reference",
 "class": "GSTPath",
 "language": "GDScript",
@@ -109,6 +119,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Behaviors/GSTSeparation.gd"
 }, {
+"base": "GSTNodeAgent",
+"class": "GSTSpatialAgent",
+"language": "GDScript",
+"path": "res://src/Agents/GSTSpatialAgent.gd"
+}, {
 "base": "GSTAgentLocation",
 "class": "GSTSteeringAgent",
 "language": "GDScript",
@@ -143,6 +158,8 @@ _global_script_class_icons={
 "GSTInfiniteProximity": "",
 "GSTLookWhereYouGo": "",
 "GSTMatchOrientation": "",
+"GSTNode2DAgent": "",
+"GSTNodeAgent": "",
 "GSTPath": "",
 "GSTPriority": "",
 "GSTProximity": "",
@@ -150,6 +167,7 @@ _global_script_class_icons={
 "GSTRadiusProximity": "",
 "GSTSeek": "",
 "GSTSeparation": "",
+"GSTSpatialAgent": "",
 "GSTSteeringAgent": "",
 "GSTSteeringBehavior": "",
 "GSTTargetAcceleration": "",
