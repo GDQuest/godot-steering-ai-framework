@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-var agent := GSTNode2DAgent.new(self)
+var agent := GSTKinematicBody2DAgent.new(self)
 var target := GSTAgentLocation.new()
 var arrive := GSTArrive.new(agent, target)
 var _accel := GSTTargetAcceleration.new()

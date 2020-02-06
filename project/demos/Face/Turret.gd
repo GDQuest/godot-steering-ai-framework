@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 var face: GSTFace
-var agent := GSTNode2DAgent.new(self)
+var agent := GSTKinematicBody2DAgent.new(self)
 
 var _accel := GSTTargetAcceleration.new()
 var _angular_drag := 0.1

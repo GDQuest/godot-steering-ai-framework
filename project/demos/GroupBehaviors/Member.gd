@@ -4,7 +4,7 @@ extends KinematicBody2D
 var separation: GSTSeparation
 var cohesion: GSTCohesion
 var proximity: GSTRadiusProximity
-var agent := GSTNode2DAgent.new(self)
+var agent := GSTKinematicBody2DAgent.new(self)
 var blend := GSTBlend.new(agent)
 var acceleration := GSTTargetAcceleration.new()
 var draw_proximity := false

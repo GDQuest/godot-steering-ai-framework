@@ -10,7 +10,7 @@ var _linear_drag_coefficient := 0.025
 var _angular_drag := 0.1
 var _direction_face := GSTAgentLocation.new()
 
-onready var agent := GSTNode2DAgent.new(self)
+onready var agent := GSTKinematicBody2DAgent.new(self)
 onready var accel := GSTTargetAcceleration.new()
 onready var player_agent: GSTSteeringAgent = owner.find_node("Player", true, false).agent
 

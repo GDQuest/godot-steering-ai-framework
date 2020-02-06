@@ -13,7 +13,7 @@ var _drag := 0.1
 var _color := Color(0.4, 1.0, 0.89, 0.3)
 
 onready var collision := $CollisionShape2D
-onready var agent := GSTNode2DAgent.new(self)
+onready var agent := GSTKinematicBody2DAgent.new(self)
 onready var proximity := GSTRadiusProximity.new(agent, [], 140)
 onready var avoid := GSTAvoidCollisions.new(agent, proximity)
 onready var target := GSTAgentLocation.new()

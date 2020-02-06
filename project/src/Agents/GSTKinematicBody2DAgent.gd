@@ -1,16 +1,26 @@
 # A specialized steering agent that updates itself every frame so the user does
-# not have to.
-extends GSTNodeAgent
-class_name GSTNode2DAgent
+# not have to using a KinematicBody2D
+extends GSTSpecializedAgent
+class_name GSTKinematicBody2DAgent
 
 
-# The Node2D to keep track of
-var body: Node2D setget _set_body
+enum KinematicMovementType { SLIDE, COLLIDE, POSITION }
+
+
+# The KinematicBody2D to keep track of
+var body: KinematicBody2D setget _set_body
+
+# The type of movement the body executes
+# 
+# SLIDE uses use move_and_slide
+# COLLIDE uses move_and_collide
+# POSITION changes the global_position directly
+var kinematic_movement_type: int = KinematicMovementType.SLIDE
 
 var _last_position: Vector2
 
 
-func _init(body: Node2D) -> void:
+func _init(body: KinematicBody2D) -> void:
 	self.body = body
 	if body.is_inside_tree():
 		body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
@@ -22,29 +32,15 @@ func _init(body: Node2D) -> void:
 # tags: virtual
 func _apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
 	_applied_steering = true
-	match _body_type:
-		BodyType.RIGID:
-			_apply_rigid_steering(acceleration)
-		BodyType.KINEMATIC:
-			match kinematic_movement_type:
-				MovementType.COLLIDE:
-					_apply_collide_steering(acceleration.linear, delta)
-				MovementType.SLIDE:
-					_apply_sliding_steering(acceleration.linear)
-				MovementType.POSITION:
-					_apply_normal_steering(acceleration.linear, delta)
-		BodyType.NODE:
+	match kinematic_movement_type:
+		KinematicMovementType.COLLIDE:
+			_apply_collide_steering(acceleration.linear, delta)
+		KinematicMovementType.SLIDE:
+			_apply_sliding_steering(acceleration.linear)
+		_:
 			_apply_normal_steering(acceleration.linear, delta)
-	if not _body_type == BodyType.RIGID:
-		_apply_orientation_steering(acceleration.angular, delta)
-
-
-func _apply_rigid_steering(accel: GSTTargetAcceleration) -> void:
-	body.apply_central_impulse(GSTUtils.to_vector2(accel.linear))
-	body.apply_torque_impulse(accel.angular)
-	if calculate_velocities:
-		linear_velocity = GSTUtils.to_vector3(body.linear_velocity)
-		angular_velocity = body.angular_velocity
+	
+	_apply_orientation_steering(acceleration.angular, delta)
 
 
 func _apply_sliding_steering(accel: Vector3) -> void:
@@ -89,31 +85,11 @@ func _apply_orientation_steering(angular_acceleration: float, delta: float) -> v
 		angular_velocity = velocity
 
 
-func _set_use_physics(value: bool) -> void:
-	if use_physics and not value:
-		body.get_tree().disconnect("idle_frame", self, "_on_SceneTree_frame")
-		body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
-	elif not use_physics and value:
-		body.get_tree().disconnect("physics_frame", self, "_on_SceneTree_frame")
-		body.get_tree().connect("idle_frame", self, "_on_SceneTree_frame")
-	use_physics = value
-
-
-func _set_body(value: Node2D) -> void:
+func _set_body(value: KinematicBody2D) -> void:
 	body = value
-	if body is RigidBody2D:
-		_body_type = BodyType.RIGID
-	elif body is KinematicBody2D:
-		_body_type = BodyType.KINEMATIC
-	else:
-		_body_type = BodyType.NODE
 	
-	if _body_type == BodyType.RIGID:
-		linear_velocity = GSTUtils.to_vector3(body.linear_velocity)
-		angular_velocity = body.angular_velocity
-	else:
-		_last_position = body.global_position
-		_last_orientation = body.rotation
+	_last_position = body.global_position
+	_last_orientation = body.rotation
 	
 	position = GSTUtils.to_vector3(_last_position)
 	orientation = _last_orientation
@@ -135,31 +111,28 @@ func _on_SceneTree_frame() -> void:
 		if _applied_steering:
 			_applied_steering = false
 		else:
-			match _body_type:
-				BodyType.RIGID:
-					linear_velocity = GSTUtils.to_vector3(body.linear_velocity)
-					angular_velocity = body.angular_velocity
-				_:
-					linear_velocity = GSTUtils.clampedv3(
-							GSTUtils.to_vector3(_last_position - current_position),
-							linear_speed_max
-					)
-					if apply_linear_drag:
-						linear_velocity = linear_velocity.linear_interpolate(
-								Vector3.ZERO,
-								linear_drag_percentage
-						)
-					angular_velocity = clamp(
-							_last_orientation - current_orientation,
-							-angular_speed_max,
-							angular_speed_max
-					)
-					if apply_angular_drag:
-						angular_velocity = lerp(
-								angular_velocity,
-								0,
-								angular_drag_percentage
-						)
+			linear_velocity = GSTUtils.clampedv3(
+				GSTUtils.to_vector3(_last_position - current_position),
+				linear_speed_max
+			)
+			if apply_linear_drag:
+				linear_velocity = linear_velocity.linear_interpolate(
+					Vector3.ZERO,
+					linear_drag_percentage
+				)
+			
+			angular_velocity = clamp(
+				_last_orientation - current_orientation,
+				-angular_speed_max,
+				angular_speed_max
+			)
+			
+			if apply_angular_drag:
+				angular_velocity = lerp(
+					angular_velocity,
+					0,
+					angular_drag_percentage
+			)
 			
 			_last_position = current_position
 			_last_orientation = current_orientation

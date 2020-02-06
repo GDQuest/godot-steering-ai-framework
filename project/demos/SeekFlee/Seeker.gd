@@ -7,7 +7,7 @@ var start_speed: float
 var start_accel: float
 var use_seek := true
 
-onready var agent := GSTNode2DAgent.new(self)
+onready var agent := GSTKinematicBody2DAgent.new(self)
 onready var accel := GSTTargetAcceleration.new()
 onready var seek := GSTSeek.new(agent, player_agent)
 onready var flee := GSTFlee.new(agent, player_agent)
