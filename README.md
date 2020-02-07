@@ -1,8 +1,20 @@
 # Godot Steering AI Framework #
 
+![Project banner](./assets/banner.svg)
+
 This project is a framework to code complex and smooth AI movement in GDScript, using steering behaviors. It works in both 2D and 3D games.
 
 It supports all essential steering behaviors like flee, follow, look at, but also blended behaviors, group behaviors, avoiding neighbors, following a path, following the leader, and much more.
+
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [Introduction](#introduction)
+- [The framework](#the-framework)
+- [Getting Started](#getting-started)
+- [Example usage](#example-usage)
+<!-- markdown-toc end -->
+
 
 ## Introduction ##
 
