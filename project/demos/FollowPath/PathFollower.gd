@@ -6,6 +6,7 @@ var _accel := GSTTargetAcceleration.new()
 var _valid := false
 var _drag := 0.1
 
+
 onready var agent := GSTKinematicBody2DAgent.new(self)
 onready var path := GSTPath.new([
 		Vector3(global_position.x, global_position.y, 0),
@@ -40,8 +41,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_Drawer_path_established(points: Array) -> void:
-	var points3 := []
+	var positions := PoolVector3Array()
 	for p in points:
-		points3.append(Vector3(p.x, p.y, 0))
-	path.create_path(points3)
+		positions.append(Vector3(p.x, p.y, 0))
+	path.create_path(positions)
 	_valid = true

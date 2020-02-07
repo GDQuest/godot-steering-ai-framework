@@ -5,39 +5,36 @@ signal path_established(points)
 
 
 var active_points := []
-var drawing := false
+var is_drawing := false
 var distance_threshold := 100.0
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		if drawing:
+		if is_drawing:
 			active_points.append(event.position)
 			update()
 	elif event is InputEventMouseButton:
 		if event.pressed and event.button_index == BUTTON_LEFT:
 			active_points.clear()
 			active_points.append(event.position)
-			drawing = true
+			is_drawing = true
 			update()
 		elif not event.pressed:
-			drawing = false
+			is_drawing = false
 			if active_points.size() >= 2:
 				_simplify()
 
 
 func _draw() -> void:
-	if drawing:
+	if is_drawing:
 		for point in active_points:
 			draw_circle(point, 1, Color.red)
 	else:
 		if active_points.size() > 0:
 			draw_circle(active_points.front(), 2, Color.red)
 			draw_circle(active_points.back(), 2, Color.yellow)
-			for i in range(1, active_points.size()):
-				var start: Vector2 = active_points[i-1]
-				var end: Vector2 = active_points[i]
-				draw_line(start, end, Color.skyblue)
+			draw_polyline(active_points, Color.skyblue, 1.0)
 
 
 func _simplify() -> void:
