@@ -19,7 +19,7 @@ func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent) -> void:
 	self.target = target
 
 
-func _arrive(acceleration: GSTTargetAcceleration, target_position: Vector3) -> GSTTargetAcceleration:
+func _arrive(acceleration: GSTTargetAcceleration, target_position: Vector3) -> void:
 	var to_target := target_position - agent.position
 	var distance := to_target.length()
 
@@ -38,8 +38,6 @@ func _arrive(acceleration: GSTTargetAcceleration, target_position: Vector3) -> G
 		acceleration.linear = GSTUtils.clampedv3(desired_velocity, agent.linear_acceleration_max)
 		acceleration.angular = 0
 
-	return acceleration
 
-
-func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
-	return _arrive(acceleration, target.position)
+func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:
+	_arrive(acceleration, target.position)

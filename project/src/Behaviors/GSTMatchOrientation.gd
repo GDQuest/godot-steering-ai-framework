@@ -20,7 +20,7 @@ func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent) -> void:
 	self.target = target
 
 
-func _match_orientation(acceleration: GSTTargetAcceleration, desired_orientation: float) -> GSTTargetAcceleration:
+func _match_orientation(acceleration: GSTTargetAcceleration, desired_orientation: float) -> void:
 	var rotation := wrapf(desired_orientation - agent.orientation, -PI, PI)
 
 	var rotation_size := abs(rotation)
@@ -43,8 +43,6 @@ func _match_orientation(acceleration: GSTTargetAcceleration, desired_orientation
 
 	acceleration.linear = Vector3.ZERO
 
-	return acceleration
 
-
-func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
-	return _match_orientation(acceleration, target.orientation)
+func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:
+	_match_orientation(acceleration, target.orientation)

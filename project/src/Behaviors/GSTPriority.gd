@@ -31,7 +31,7 @@ func get_behavior_at(index: int) -> GSTSteeringBehavior:
 	return null
 
 
-func _calculate_steering(accel: GSTTargetAcceleration) -> GSTTargetAcceleration:
+func _calculate_steering(accel: GSTTargetAcceleration) -> void:
 	var threshold_squared := zero_threshold * zero_threshold
 
 	last_selected_index = -1
@@ -48,5 +48,3 @@ func _calculate_steering(accel: GSTTargetAcceleration) -> GSTTargetAcceleration:
 				break
 	else:
 		accel.set_zero()
-
-	return accel

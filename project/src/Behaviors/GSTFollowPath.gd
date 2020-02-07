@@ -25,7 +25,7 @@ func _init(
 	self.prediction_time = prediction_time
 
 
-func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
+func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:
 	var location := (
 			agent.position if prediction_time == 0
 			else agent.position + (agent.linear_velocity * prediction_time))
@@ -38,13 +38,13 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 	if is_arrive_enabled and path.is_open:
 		if path_offset >= 0:
 			if target_distance > path.length - deceleration_radius:
-				return _arrive(acceleration, target_position)
+				_arrive(acceleration, target_position)
+				return
 		else:
 			if target_distance < deceleration_radius:
-				return _arrive(acceleration, target_position)
+				_arrive(acceleration, target_position)
+				return
 
 	acceleration.linear = (target_position - agent.position).normalized()
 	acceleration.linear *= agent.linear_acceleration_max
 	acceleration.angular = 0
-
-	return acceleration

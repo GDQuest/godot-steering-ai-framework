@@ -8,17 +8,16 @@ func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent, target) ->
 	pass
 
 
-func _face(acceleration: GSTTargetAcceleration, target_position: Vector3) -> GSTTargetAcceleration:
+func _face(acceleration: GSTTargetAcceleration, target_position: Vector3) -> void:
 	var to_target := target_position - agent.position
 	var distance_squared := to_target.length_squared()
 
 	if distance_squared < agent.zero_linear_speed_threshold:
 		acceleration.set_zero()
-		return acceleration
 	else:
 		var orientation = GSTUtils.vector3_to_angle(to_target)
-		return _match_orientation(acceleration, orientation)
+		_match_orientation(acceleration, orientation)
 
 
-func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
-	return _face(acceleration, target.position)
+func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:
+	_face(acceleration, target.position)

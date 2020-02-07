@@ -19,7 +19,7 @@ func _init(
 	self.predict_time_max = predict_time_max
 
 
-func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
+func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:
 	var target_position := target.position
 	var distance_squared := (target_position - agent.position).length_squared()
 
@@ -36,8 +36,6 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 	acceleration.linear *= _get_modified_acceleration()
 
 	acceleration.angular = 0
-
-	return acceleration
 
 
 func _get_modified_acceleration() -> float:

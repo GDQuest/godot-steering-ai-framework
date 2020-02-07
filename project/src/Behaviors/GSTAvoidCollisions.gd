@@ -16,7 +16,7 @@ func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent, proximity) 
 	pass
 
 
-func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
+func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:
 	_shortest_time = INF
 	_first_neighbor = null
 	_first_minimum_separation = 0
@@ -36,8 +36,6 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAccele
 
 	acceleration.linear = acceleration.linear.normalized() * -agent.linear_acceleration_max
 	acceleration.angular = 0
-
-	return acceleration
 
 
 # Callback for the proximity to call when finding neighbors. Keeps track of every `neighbor`

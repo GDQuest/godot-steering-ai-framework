@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 var face: GSTFace
-var agent := GSTSteeringAgent.new()
+var agent := GSTKinematicBody2DAgent.new(self)
 
 var _accel := GSTTargetAcceleration.new()
 var _angular_drag := 0.1
@@ -19,15 +19,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	_accel = face.calculate_steering(_accel)
-	agent.angular_velocity = clamp(
-			agent.angular_velocity + _accel.angular,
-			-agent.angular_speed_max,
-			agent.angular_speed_max
-	)
-	agent.angular_velocity = lerp(agent.angular_velocity, 0, _angular_drag)
-	agent.orientation += agent.angular_velocity * delta
-	rotation = agent.orientation
+	face.calculate_steering(_accel)
+	agent._apply_steering(_accel, delta)
 
 
 func _draw() -> void:
@@ -48,5 +41,4 @@ func setup(
 	
 	agent.angular_acceleration_max = angular_accel_max
 	agent.angular_speed_max = angular_speed_max
-	agent.position = Vector3(global_position.x, global_position.y, 0)
-
+	agent.angular_drag_percentage = _angular_drag
