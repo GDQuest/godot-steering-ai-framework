@@ -1,4 +1,10 @@
-# Godot Steering Toolkit #
+# Godot Steering AI Framework #
+
+This project is a framework to code complex and smooth AI movement in GDScript, using steering behaviors. It works in both 2D and 3D games.
+
+It supports all essential steering behaviors like flee, follow, look at, but also blended behaviors, group behaviors, avoiding neighbors, following a path, following the leader, and much more.
+
+## Introduction ##
 
 In the 1990s, [Craig Reynolds](http://www.red3d.com/cwr/) developed algorithms for common AI behaviors. They allowed AI agents to seek out or flee from a target, follow a pre-defined path, or face in a particular direction. They were simple, repeatable tasks that could be broken down into a programming algorithms which made them easy to reuse, maintain, combine and extend.
 
@@ -6,21 +12,23 @@ While an AI agent's next action is based on decision making and planning algorit
 
 Joining these systems together can give complex and graceful movement while also being more efficient than complex path finding algorithms like A\*.
 
-## Summary ##
+## The framework ##
 
-This toolkit is a framework for the [Godot engine](https://godotengine.org/). It takes a lot of inspiration from the excellent [GDX-AI](https://github.com/libgdx/gdx-ai) framework for the [LibGDX](https://libgdx.badlogicgames.com/) java-based framework. Every class in the toolkit is based on Godot's [Reference](https://docs.godotengine.org/en/latest/classes/class_reference.html) type. There is no need to have a complex scene tree; everything that has to do with the AI's movement can be contained inside movement oriented classes.
+This project is a framework for the [Godot game engine](https://godotengine.org/). It takes a lot of inspiration from the excellent [GDX-AI](https://github.com/libgdx/gdx-ai) framework for the [LibGDX](https://libgdx.badlogicgames.com/) java-based framework. 
+
+Every class in the toolkit is based on Godot's [Reference](https://docs.godotengine.org/en/latest/classes/class_reference.html) type. There is no need to have a complex scene tree; everything that has to do with the AI's movement can be contained inside movement-oriented classes.
 
 As a short overview, a character is represented by a steering agent; it stores its position, orientation, maximum speeds and current velocity. A steering behavior is associated with a steering agent and calculates a linear and/or angular change in velocity based on its information. The coder then applies that acceleration in whatever ways is appropriate to the character to change its velocity, like RigidBody's apply_impulse, or a KinematicBody's move_and_slide.
 
-## More information and resources ##
+## Getting Started ##
+
+The framework's documentation and code reference are both available on the [GDQuest](https://www.gdquest.com/docs/godot-steering-toolkit/getting-started/) website's documents.
+
+### More information and resources ###
 
 - [Understanding Steering Behaviors](https://gamedevelopment.tutsplus.com/series/understanding-steering-behaviors--gamedev-12732): Breakdowns of various behaviors by Fernando Bevilacqua with graphics and in-depth explanations.
 - [GDX-AI Wiki](https://github.com/libgdx/gdx-ai/wiki/Steering-Behaviors): Descriptions of how LibGDX's AI submodule uses steering behaviors with a few graphics. Since this toolkit uses it for inspiration, there will be some similarities.
 - [RedBlobGames](https://www.redblobgames.com/) - An excellent resources for complex pathfinding like A\*, graph theory, and other algorithms that are game-development related. Steering behaviors are not covered, but for anyone looking to study and bulk up on their algorithms, this is a great place.
-
-## Manual ##
-
-The various behaviors and types in the toolkit are available in the [Wiki](https://github.com/GDQuest/godot-steering-toolkit/wiki) or on the [GDQuest](https://www.gdquest.com/docs/godot-steering-toolkit/getting-started/) website's documents.
 
 ## Example usage ##
 
