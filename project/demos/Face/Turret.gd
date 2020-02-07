@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	face.calculate_steering(_accel)
-	agent._apply_steering(_accel, delta)
+	agent.apply_steering(_accel, delta)
 
 
 func _draw() -> void:

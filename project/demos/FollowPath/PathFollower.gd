@@ -36,7 +36,7 @@ func setup(
 func _physics_process(delta: float) -> void:
 	if _valid:
 		follow.calculate_steering(_accel)
-		agent._apply_steering(_accel, delta)
+		agent.apply_steering(_accel, delta)
 
 
 func _on_Drawer_path_established(points: Array) -> void:

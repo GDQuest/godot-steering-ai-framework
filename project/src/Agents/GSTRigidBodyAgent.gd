@@ -20,7 +20,7 @@ func _init(body: RigidBody) -> void:
 
 # Moves the agent's `body` by target `acceleration`.
 # tags: virtual
-func _apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
+func apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
 	_applied_steering = true
 	body.apply_central_impulse(acceleration.linear)
 	body.apply_torque_impulse(Vector3.UP * acceleration.angular)

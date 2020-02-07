@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 	target.position.y = agent.position.y + _direction.y*_radius
 	
 	priority.calculate_steering(_accel)
-	agent._apply_steering(_accel, delta)
+	agent.apply_steering(_accel, delta)
 
 
 func setup(

@@ -12,7 +12,7 @@ var _drag := 0.1
 
 func _physics_process(delta: float) -> void:
 	arrive.calculate_steering(_accel)
-	agent._apply_steering(_accel, delta)
+	agent.apply_steering(_accel, delta)
 
 
 func setup(

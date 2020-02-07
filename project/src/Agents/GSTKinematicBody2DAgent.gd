@@ -4,7 +4,7 @@ extends GSTSpecializedAgent
 class_name GSTKinematicBody2DAgent
 
 
-enum KinematicMovementType { SLIDE, COLLIDE, POSITION }
+enum MovementType { SLIDE, COLLIDE, POSITION }
 
 
 # The KinematicBody2D to keep track of
@@ -15,30 +15,31 @@ var body: KinematicBody2D setget _set_body
 # SLIDE uses use move_and_slide
 # COLLIDE uses move_and_collide
 # POSITION changes the global_position directly
-var kinematic_movement_type: int = KinematicMovementType.SLIDE
+var movement_type: int
 
 var _last_position: Vector2
 
 
-func _init(body: KinematicBody2D) -> void:
+func _init(body: KinematicBody2D, movement_type: int = MovementType.SLIDE) -> void:
+	yield(body, "ready")
+	
 	self.body = body
-	if body.is_inside_tree():
-		body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
-	else:
-		body.connect("ready", self, "_on_body_ready")
+	self.movement_type = movement_type
+	
+	body.get_tree().connect("physics_frame", self, "_on_SceneTree_physics_frame")
 
 
 # Moves the agent's `body` by target `acceleration`.
 # tags: virtual
-func _apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
+func apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
 	_applied_steering = true
-	match kinematic_movement_type:
-		KinematicMovementType.COLLIDE:
+	match movement_type:
+		MovementType.COLLIDE:
 			_apply_collide_steering(acceleration.linear, delta)
-		KinematicMovementType.SLIDE:
+		MovementType.SLIDE:
 			_apply_sliding_steering(acceleration.linear)
 		_:
-			_apply_normal_steering(acceleration.linear, delta)
+			_apply_position_steering(acceleration.linear, delta)
 	
 	_apply_orientation_steering(acceleration.angular, delta)
 
@@ -64,7 +65,7 @@ func _apply_collide_steering(accel: Vector3, delta: float) -> void:
 		linear_velocity = velocity
 
 
-func _apply_normal_steering(accel: Vector3, delta: float) -> void:
+func _apply_position_steering(accel: Vector3, delta: float) -> void:
 	var velocity := GSTUtils.clampedv3(linear_velocity + accel, linear_speed_max)
 	if apply_linear_drag:
 		velocity = velocity.linear_interpolate(
@@ -95,12 +96,7 @@ func _set_body(value: KinematicBody2D) -> void:
 	orientation = _last_orientation
 
 
-func _on_body_ready() -> void:
-	body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
-	_set_body(body)
-
-
-func _on_SceneTree_frame() -> void:
+func _on_SceneTree_physics_frame() -> void:
 	var current_position: Vector2 = body.global_position
 	var current_orientation: float = body.rotation
 	
