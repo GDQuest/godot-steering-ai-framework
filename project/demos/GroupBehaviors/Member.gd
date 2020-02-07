@@ -46,7 +46,7 @@ func _draw() -> void:
 func _physics_process(delta: float) -> void:
 	if blend:
 		blend.calculate_steering(acceleration)
-		agent.apply_steering(acceleration, delta)
+		agent._apply_steering(acceleration, delta)
 
 
 func set_neighbors(neighbor: Array) -> void:

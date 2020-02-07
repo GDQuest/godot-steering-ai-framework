@@ -9,12 +9,12 @@ class_name GSTSpecializedAgent
 # frame. When `false`, the user must keep those values updated.
 var calculate_velocities := true
 
-# If `true` and velocities and `calculate_velocities` is true, interpolates
+# If `true` and `calculate_velocities` is true, interpolates
 # the current linear velocity towards 0 by the `linear_drag_percentage` value.
 # Does not apply to `RigidBody` and `RigidBody2D` nodes.
 var apply_linear_drag := true
 
-# If `true` and velocities and `calculate_velocities` is true, interpolates
+# If `true` and `calculate_velocities` is true, interpolates
 # the current angular velocity towards 0 by the `angular_drag_percentage` value.
 # Does not apply to `RigidBody` and `RigidBody2D` nodes.
 var apply_angular_drag := true
@@ -36,5 +36,5 @@ var _applied_steering := false
 
 # Moves the agent's body by target `acceleration`.
 # tags: virtual
-func apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
+func _apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
 	pass

@@ -11,16 +11,15 @@ var _last_position: Vector2
 
 
 func _init(body: RigidBody2D) -> void:
+	if not body.is_inside_tree():
+		yield(body, "ready")
+	
 	self.body = body
-	if body.is_inside_tree():
-		body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
-	else:
-		body.connect("ready", self, "_on_body_ready")
 
 
 # Moves the agent's `body` by target `acceleration`.
 # tags: virtual
-func apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
+func _apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
 	_applied_steering = true
 	body.apply_central_impulse(GSTUtils.to_vector2(acceleration.linear))
 	body.apply_torque_impulse(acceleration.angular)

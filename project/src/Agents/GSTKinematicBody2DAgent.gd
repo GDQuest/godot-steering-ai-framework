@@ -4,6 +4,9 @@ extends GSTSpecializedAgent
 class_name GSTKinematicBody2DAgent
 
 
+# SLIDE uses `move_and_slide`
+# COLLIDE uses `move_and_collide`
+# POSITION changes the `global_position` directly
 enum MovementType { SLIDE, COLLIDE, POSITION }
 
 
@@ -11,17 +14,14 @@ enum MovementType { SLIDE, COLLIDE, POSITION }
 var body: KinematicBody2D setget _set_body
 
 # The type of movement the body executes
-# 
-# SLIDE uses use move_and_slide
-# COLLIDE uses move_and_collide
-# POSITION changes the global_position directly
 var movement_type: int
 
 var _last_position: Vector2
 
 
 func _init(body: KinematicBody2D, movement_type: int = MovementType.SLIDE) -> void:
-	yield(body, "ready")
+	if not body.is_inside_tree():
+		yield(body, "ready")
 	
 	self.body = body
 	self.movement_type = movement_type
@@ -31,7 +31,7 @@ func _init(body: KinematicBody2D, movement_type: int = MovementType.SLIDE) -> vo
 
 # Moves the agent's `body` by target `acceleration`.
 # tags: virtual
-func apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
+func _apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
 	_applied_steering = true
 	match movement_type:
 		MovementType.COLLIDE:

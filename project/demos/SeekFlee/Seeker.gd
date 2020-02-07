@@ -27,4 +27,4 @@ func _physics_process(delta: float) -> void:
 	else:
 		flee.calculate_steering(accel)
 	
-	agent.apply_steering(accel, delta)
+	agent._apply_steering(accel, delta)
