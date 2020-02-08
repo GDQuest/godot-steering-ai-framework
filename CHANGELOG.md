@@ -8,11 +8,11 @@ This document lists new features, improvements, changes, and bug fixes in every 
 
 ### Features ###
 
-- Add a main default scene that can load the demos on the fly.
+- There is now a main scene with a demo picker, so you can select and play any demo on the fly.
 
 ### Bug fixes ###
 
-- GSTFollowPath will no longer loop back around itself on open paths when `predict_time` is non-zero.
+- GSTFollowPath no longer loops back around itself on open paths when `predict_time` is non-zero.
 
 ## Godot Steering AI Framework 1.0.0 ##
 
