@@ -12,7 +12,6 @@ onready var button: Button = $VBoxContainer/Button
 
 func _ready() -> void:
 	list.connect("demo_selected", self, "set_demo_path")
-	# I don't emit the demo_path as an argument as I've had type issues doing so
 	list.connect("item_activated", self, "emit_signal", ["demo_requested"])
 	button.connect("pressed", self, "emit_signal", ["demo_requested"])
 
