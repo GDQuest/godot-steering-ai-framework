@@ -32,9 +32,13 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:
 
 	var distance := path.calculate_distance(location)
 	var target_distance := distance + path_offset
+	
+	if prediction_time > 0 and path.is_open:
+		if target_distance < path.calculate_distance(agent.position):
+			target_distance = path.length
 
 	var target_position := path.calculate_target_position(target_distance)
-
+	
 	if is_arrive_enabled and path.is_open:
 		if path_offset >= 0:
 			if target_distance > path.length - deceleration_radius:
