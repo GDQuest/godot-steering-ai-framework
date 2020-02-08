@@ -2,7 +2,19 @@
 
 This document lists new features, improvements, changes, and bug fixes in every release of the add-on.
 
-## Godot Steering Toolkit 1.0.0 ##
+## Godot Steering AI Framework 1.1 ##
+
+*In development*
+
+### Features ###
+
+- Add a main default scene that can load the demos on the fly.
+
+### Bug fixes ###
+
+- GSTFollowPath will no longer loop back around itself on open paths when `predict_time` is non-zero.
+
+## Godot Steering AI Framework 1.0.0 ##
 
 This is the first major release of the framework. It comes with:
 
