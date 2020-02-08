@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 
 export(float, 0, 2000, 40) var linear_speed_max := 800.0 setget set_linear_speed_max
@@ -6,12 +6,8 @@ export(float, 0, 200, 2.0) var linear_acceleration_max := 80.0 setget set_linear
 export(float, 0, 100, 0.1) var arrival_tolerance := 25.0 setget set_arrival_tolerance
 export(float, 0, 500, 10) var deceleration_radius := 125.0 setget set_deceleration_radius
 
-const COLORS := {
-	deceleration_radius = Color(1.0, 0.419, 0.592, 0.5),
-	arrival_tolerance = Color(0.278, 0.231, 0.47, 0.3)
-}
-
 onready var arriver := $Arriver
+onready var target_drawer := $TargetDrawer
 
 
 func _ready() -> void:
@@ -26,13 +22,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed():
 		arriver.target.position = Vector3(event.position.x, event.position.y, 0)
-		update()
-
-
-func _draw():
-	var target_position := Vector2(arriver.target.position.x, arriver.target.position.y)
-	draw_circle(target_position, deceleration_radius, COLORS.deceleration_radius)
-	draw_circle(target_position, arrival_tolerance, COLORS.arrival_tolerance)
+		target_drawer.update()
 
 
 func set_arrival_tolerance(value: float) -> void:

@@ -1,15 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://demos/Arrive/Arriver.gd" type="Script" id=1]
 [ext_resource path="res://demos/Utils/DemoInterface.tscn" type="PackedScene" id=2]
 [ext_resource path="res://demos/Arrive/ArriveDemo.gd" type="Script" id=3]
 [ext_resource path="res://demos/Utils/BackgroudLayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://demos/Arrive/TargetDrawer.gd" type="Script" id=5]
 [ext_resource path="res://demos/Utils/CircleDraw.gd" type="Script" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0
 
-[node name="ArriveDemo" type="Node2D"]
+[node name="ArriveDemo" type="Node"]
 script = ExtResource( 3 )
 
 [node name="BackgroudLayer" parent="." instance=ExtResource( 4 )]
@@ -26,4 +27,9 @@ inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
 outer_color = Color( 0.560784, 0.870588, 0.364706, 1 )
 stroke = 4.0
 
+[node name="TargetDrawer" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
 [node name="DemoInterface" parent="." instance=ExtResource( 2 )]
+text_bbcode = "Arrive Demo
+Mouse click to make the [color=lime]green \"Player\"[/color] move to the [color=fuchsia]purple target[/color]"
