@@ -1,11 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://demos/PopulateItemList.gd" type="Script" id=1]
 [ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=2]
 [ext_resource path="res://assets/sprites/background.png" type="Texture" id=3]
-[ext_resource path="res://demos/DemoSelector.gd" type="Script" id=4]
+[ext_resource path="res://demos/DemoPickerUI.gd" type="Script" id=4]
+[ext_resource path="res://demos/DemoPlayer.gd" type="Script" id=5]
+[ext_resource path="res://demos/Demos.gd" type="Script" id=6]
 
-[node name="DemoSelector" type="CenterContainer"]
+[node name="Demos" type="Node"]
+script = ExtResource( 6 )
+
+[node name="DemoPlayer" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="DemoPickerUI" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
@@ -14,7 +22,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="DemoPickerUI"]
 margin_right = 1024.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 1024, 600 )
@@ -24,31 +32,44 @@ texture = ExtResource( 3 )
 expand = true
 stretch_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 170.0
-margin_top = 277.0
-margin_right = 852.0
-margin_bottom = 323.0
+[node name="VBoxContainer" type="VBoxContainer" parent="DemoPickerUI"]
+margin_left = 171.0
+margin_top = 261.0
+margin_right = 853.0
+margin_bottom = 338.0
 rect_min_size = Vector2( 682, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ItemList" type="ItemList" parent="VBoxContainer"]
+[node name="ItemList" type="ItemList" parent="DemoPickerUI/VBoxContainer"]
 margin_right = 682.0
-margin_bottom = 12.0
-size_flags_vertical = 3
-custom_constants/vseparation = 5
-custom_constants/hseparation = 20
+margin_bottom = 9.0
 auto_height = true
-max_columns = 2
-same_column_width = true
 script = ExtResource( 1 )
 
-[node name="Button" type="Button" parent="VBoxContainer"]
-margin_left = 283.0
-margin_top = 20.0
-margin_right = 398.0
-margin_bottom = 46.0
+[node name="Button" type="Button" parent="DemoPickerUI/VBoxContainer"]
+margin_left = 241.0
+margin_top = 17.0
+margin_right = 441.0
+margin_bottom = 77.0
+rect_min_size = Vector2( 200, 60 )
 size_flags_horizontal = 4
 size_flags_vertical = 13
 text = "Load scene"
+
+[node name="ButtonGoBack" type="Button" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = -92.0
+margin_right = 200.0
+margin_bottom = -32.0
+rect_min_size = Vector2( 160, 60 )
+size_flags_horizontal = 4
+size_flags_vertical = 13
+theme = ExtResource( 2 )
+text = "Go back"
+__meta__ = {
+"_edit_use_anchors_": false
+}

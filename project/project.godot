@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "CenterContainer",
+"class": "DemoPickerUI",
+"language": "GDScript",
+"path": "res://demos/DemoPickerUI.gd"
+}, {
 "base": "Reference",
 "class": "GSTAgentLocation",
 "language": "GDScript",
@@ -155,6 +160,7 @@ _global_script_classes=[ {
 "path": "res://src/GSTUtils.gd"
 } ]
 _global_script_class_icons={
+"DemoPickerUI": "",
 "GSTAgentLocation": "",
 "GSTArrive": "",
 "GSTAvoidCollisions": "",

@@ -1,39 +1,35 @@
 extends ItemList
 
 
+signal demo_selected(scene_path)
+
 var file_paths := PoolStringArray()
 
 
 func _ready() -> void:
-	file_paths = _find_files("./", ["*Demo.tscn"], true)
+	self.connect("item_selected", self, "_on_item_selected")
+
+	var this_directory: String = get_tree().current_scene.filename.rsplit("/", false, 1)[0]
+	file_paths = _find_files(this_directory, ["*Demo.tscn"], true)
 	populate(file_paths)
-	
+	select(0)
+
 
 func populate(demos: PoolStringArray) -> void:
-	for demo in demos:
-		var start: int = demo.find_last("/")+1
-		var end: int = demo.find_last("Demo")
-		var length := end - start
-		var demo_name: String = demo.substr(start, length)
+	for path in demos:
+		var demo_name: String = path.rsplit("/", true, 1)[-1]
+		demo_name = demo_name.rsplit("Demo", true, 1)[0]
 		demo_name = sentencify(demo_name)
 		add_item(demo_name)
 
 
 func sentencify(line: String) -> String:
-	var word_starts := []
-	for i in range(line.length()):
-		var code := line.ord_at(i)
-		if code < 97:
-			word_starts.append(i)
-	var sentence := ""
-	var last := 0
-	for i in range(word_starts.size()-1):
-		var start: int = word_starts[i]
-		last = word_starts[i+1]
-		var length: = last - start
-		sentence += line.substr(start, length) + " "
-	sentence += line.substr(last)
-	return sentence
+	var regex := RegEx.new()
+	regex.compile("[A-Z]")
+	
+	line = line.split(".", true, 1)[0]
+	line = regex.sub(line, " $0", true)
+	return line
 
 
 func _find_files(dirpath := "", patterns := PoolStringArray(), is_recursive := false, do_skip_hidden := true) -> PoolStringArray:
@@ -62,3 +58,8 @@ func _find_files(dirpath := "", patterns := PoolStringArray(), is_recursive := f
 
 	directory.list_dir_end()
 	return file_paths
+
+
+func _on_item_selected(index: int) -> void:
+	var demo_path := file_paths[index]
+	emit_signal("demo_selected", demo_path)
