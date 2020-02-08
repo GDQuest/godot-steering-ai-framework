@@ -9,23 +9,23 @@ class_name GSTSpecializedAgent
 # frame. When `false`, the user must keep those values updated.
 var calculate_velocities := true
 
-# If `true` and `calculate_velocities` is true, interpolates
-# the current linear velocity towards 0 by the `linear_drag_percentage` value.
+# If `true`, interpolates the current linear velocity towards 0 by the 
+# `linear_drag_percentage` value.
 # Does not apply to `RigidBody` and `RigidBody2D` nodes.
 var apply_linear_drag := true
 
-# If `true` and `calculate_velocities` is true, interpolates
-# the current angular velocity towards 0 by the `angular_drag_percentage` value.
+# If `true`, interpolates the current angular velocity towards 0 by the
+# `angular_drag_percentage` value.
 # Does not apply to `RigidBody` and `RigidBody2D` nodes.
 var apply_angular_drag := true
 
 # The percentage between the current linear velocity and 0 to interpolate by if
-# `calculate_velocities` and `apply_linear_drag` are true.
+# `apply_linear_drag` is true.
 # Does not apply to `RigidBody` and `RigidBody2D` nodes.
 var linear_drag_percentage := 0.0
 
 # The percentage between the current angular velocity and 0 to interpolate by if
-# `calculate_velocities` and `apply_angular_drag` are true.
+# `apply_angular_drag` is true.
 # Does not apply to `RigidBody` and `RigidBody2D` nodes.
 var angular_drag_percentage := 0.0
 

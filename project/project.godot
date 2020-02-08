@@ -153,11 +153,6 @@ _global_script_classes=[ {
 "class": "GSTUtils",
 "language": "GDScript",
 "path": "res://src/GSTUtils.gd"
-}, {
-"base": "EditorScript",
-"class": "ReferenceCollector",
-"language": "GDScript",
-"path": "res://ReferenceCollector.gd"
 } ]
 _global_script_class_icons={
 "GSTAgentLocation": "",
@@ -188,13 +183,13 @@ _global_script_class_icons={
 "GSTSteeringAgent": "",
 "GSTSteeringBehavior": "",
 "GSTTargetAcceleration": "",
-"GSTUtils": "",
-"ReferenceCollector": ""
+"GSTUtils": ""
 }
 
 [application]
 
 config/name="SteeringToolkit"
+run/main_scene="res://demos/DemoSelector.tscn"
 config/icon="res://icon.png"
 
 [display]
