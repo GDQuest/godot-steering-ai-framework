@@ -8,7 +8,6 @@
 [ext_resource path="res://demos/Utils/Line2DDraw.gd" type="Script" id=6]
 [ext_resource path="res://assets/sprites/background.png" type="Texture" id=7]
 
-
 [node name="PursueVSSeekDemo" type="Node2D"]
 script = ExtResource( 4 )
 __meta__ = {

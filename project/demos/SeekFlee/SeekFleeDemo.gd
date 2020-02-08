@@ -31,8 +31,8 @@ func _ready() -> void:
 	
 	for i in range(spawner.entity_count):
 		var new_pos := Vector2(
-				rng.randf_range(-camera_boundaries.size.x/2, camera_boundaries.size.x/2),
-				rng.randf_range(-camera_boundaries.size.y/2, camera_boundaries.size.y/2)
+				rng.randf_range(0, camera_boundaries.size.x),
+				rng.randf_range(0, camera_boundaries.size.y)
 		)
 		var entity: KinematicBody2D = spawner.Entity.instance()
 		entity.global_position = new_pos

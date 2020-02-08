@@ -31,10 +31,8 @@ layer = -1
 texture = ExtResource( 8 )
 centered = false
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-
 [node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 512, 300 )
 collision_mask = 2
 script = ExtResource( 2 )
 
@@ -46,7 +44,7 @@ outer_color = Color( 0.560784, 0.870588, 0.364706, 1 )
 stroke = 4.0
 
 [node name="LeftBoundary" type="StaticBody2D" parent="."]
-position = Vector2( -512, 0 )
+position = Vector2( 0, 300 )
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 1 )
@@ -55,7 +53,7 @@ script = ExtResource( 1 )
 shape = SubResource( 2 )
 
 [node name="RightBoundary" type="StaticBody2D" parent="."]
-position = Vector2( 512, 0 )
+position = Vector2( 1024, 300 )
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 1 )
@@ -64,7 +62,7 @@ script = ExtResource( 1 )
 shape = SubResource( 2 )
 
 [node name="TopBoundary" type="StaticBody2D" parent="."]
-position = Vector2( 0, -300 )
+position = Vector2( 512, 0 )
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 1 )
@@ -73,7 +71,7 @@ script = ExtResource( 1 )
 shape = SubResource( 3 )
 
 [node name="BottomBoundary" type="StaticBody2D" parent="."]
-position = Vector2( 0, 300 )
+position = Vector2( 512, 600 )
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 1 )
@@ -85,9 +83,7 @@ shape = SubResource( 3 )
 script = ExtResource( 4 )
 Entity = ExtResource( 6 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="GUI" type="PanelContainer" parent="CanvasLayer"]
+[node name="GUI" type="PanelContainer" parent="."]
 margin_right = 1024.0
 margin_bottom = 116.0
 theme = ExtResource( 5 )
@@ -95,11 +91,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI"]
+[node name="MarginContainer" type="MarginContainer" parent="GUI"]
 margin_right = 1024.0
 margin_bottom = 116.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/GUI/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/MarginContainer"]
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 1008.0
