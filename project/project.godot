@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Control",
+"base": "CenterContainer",
 "class": "DemoPickerUI",
 "language": "GDScript",
 "path": "res://demos/DemoPickerUI.gd"
@@ -200,11 +200,7 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=1920
-window/size/height=1080
 window/size/always_on_top=true
-window/stretch/mode="2d"
-window/stretch/aspect="expand"
 
 [input]
 
