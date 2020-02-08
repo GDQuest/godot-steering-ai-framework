@@ -4,16 +4,11 @@
 [ext_resource path="res://demos/Quickstart/Agent.gd" type="Script" id=2]
 [ext_resource path="res://demos/Quickstart/Player.gd" type="Script" id=3]
 [ext_resource path="res://demos/Quickstart/Bullet.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/sprites/background.png" type="Texture" id=5]
+[ext_resource path="res://demos/Utils/BackgroudLayer.tscn" type="PackedScene" id=5]
 
-[node name="QuickStartDemo" type="Node2D"]
+[node name="QuickStartDemo" type="Node"]
 
-[node name="BackgroudLayer" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="Background" type="Sprite" parent="BackgroudLayer"]
-texture = ExtResource( 5 )
-centered = false
+[node name="BackgroudLayer" parent="." instance=ExtResource( 5 )]
 
 [node name="Player" type="KinematicBody2D" parent="." groups=[
 "Player",

@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 
 export(float, 0, 2000, 40) var linear_speed_max := 120.0 setget set_linear_speed_max

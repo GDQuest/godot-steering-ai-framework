@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 # Access helper class for children to access window boundaries.
 
 

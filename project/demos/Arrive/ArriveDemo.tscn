@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://demos/Arrive/Arriver.gd" type="Script" id=1]
-[ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=2]
+[ext_resource path="res://demos/Utils/DemoInterface.tscn" type="PackedScene" id=2]
 [ext_resource path="res://demos/Arrive/ArriveDemo.gd" type="Script" id=3]
-[ext_resource path="res://assets/sprites/background.png" type="Texture" id=5]
+[ext_resource path="res://demos/Utils/BackgroudLayer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://demos/Utils/CircleDraw.gd" type="Script" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -12,12 +12,7 @@ radius = 16.0
 [node name="ArriveDemo" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="BackgroudLayer" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="Background" type="Sprite" parent="BackgroudLayer"]
-texture = ExtResource( 5 )
-centered = false
+[node name="BackgroudLayer" parent="." instance=ExtResource( 4 )]
 
 [node name="Arriver" type="KinematicBody2D" parent="."]
 show_behind_parent = true
@@ -31,29 +26,4 @@ inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
 outer_color = Color( 0.560784, 0.870588, 0.364706, 1 )
 stroke = 4.0
 
-[node name="GUI" type="PanelContainer" parent="."]
-anchor_right = 1.0
-margin_right = 1024.0
-margin_bottom = 87.0
-rect_min_size = Vector2( 1024, 0 )
-theme = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MarginContainer" type="MarginContainer" parent="GUI"]
-margin_right = 1024.0
-margin_bottom = 87.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GUI/MarginContainer"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 1008.0
-margin_bottom = 71.0
-rect_min_size = Vector2( 0, 55 )
-bbcode_enabled = true
-bbcode_text = "Arrive Demo
-Mouse click to make the [color=lime]green \"Player\"[/color] move to the [color=fuchsia]purple target[/color]"
-text = "Arrive Demo
-Mouse click to make the green \"Player\" move to the purple target"
-scroll_active = false
+[node name="DemoInterface" parent="." instance=ExtResource( 2 )]

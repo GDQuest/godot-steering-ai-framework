@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 
 onready var spawner := $Spawner

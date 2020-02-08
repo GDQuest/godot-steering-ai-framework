@@ -1,5 +1,5 @@
 class_name DemoPickerUI
-extends CenterContainer
+extends Control
 
 
 signal demo_requested

@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 
 export(int, 0, 359, 2) var angular_speed_max := 120 setget set_angular_speed_max

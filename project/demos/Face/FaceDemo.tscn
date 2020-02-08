@@ -3,8 +3,8 @@
 [ext_resource path="res://demos/Face/Turret.gd" type="Script" id=1]
 [ext_resource path="res://demos/Face/FaceDemo.gd" type="Script" id=2]
 [ext_resource path="res://demos/Face/Player.gd" type="Script" id=3]
-[ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=6]
-[ext_resource path="res://assets/sprites/background.png" type="Texture" id=7]
+[ext_resource path="res://demos/Utils/DemoInterface.tscn" type="PackedScene" id=4]
+[ext_resource path="res://demos/Utils/BackgroudLayer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://demos/Utils/CircleDraw.gd" type="Script" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -13,18 +13,10 @@ radius = 16.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 32.0
 
-[node name="FaceDemo" type="Node2D"]
+[node name="FaceDemo" type="Node"]
 script = ExtResource( 2 )
-__meta__ = {
-"_editor_description_": "A demo showing the usage of the Face steering behavior."
-}
 
-[node name="BackgroudLayer" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="Background" type="Sprite" parent="BackgroudLayer"]
-texture = ExtResource( 7 )
-centered = false
+[node name="BackgroudLayer" parent="." instance=ExtResource( 5 )]
 
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 512, 450 )
@@ -48,26 +40,6 @@ inner_color = Color( 0.890196, 0.411765, 0.337255, 1 )
 outer_color = Color( 1, 0.709804, 0.439216, 1 )
 stroke = 8.0
 
-[node name="GUI" type="PanelContainer" parent="."]
-margin_right = 1024.0
-margin_bottom = 14.0
-theme = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MarginContainer" type="MarginContainer" parent="GUI"]
-margin_right = 1024.0
-margin_bottom = 87.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GUI/MarginContainer"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 1008.0
-margin_bottom = 71.0
-rect_min_size = Vector2( 0, 55 )
-bbcode_enabled = true
-bbcode_text = "Face Demo
+[node name="DemoInterface" parent="." instance=ExtResource( 4 )]
+text_bbcode = "Face Demo
 Move the [color=lime]green player[/color] around with WASD and notice the [color=#ffb570]orange turret[/color] orient itself"
-text = "Face Demo
-Move the green player around with WASD and notice the orange turret orient itself"
