@@ -1,7 +1,7 @@
 # A specialized steering agent that updates itself every frame so the user does
 # not have to using a RigidBody
 extends GSAISpecializedAgent
-class_name GSAIRigidBodyAgent
+class_name GSAIRigidBody3DAgent
 
 
 # The RigidBody to keep track of

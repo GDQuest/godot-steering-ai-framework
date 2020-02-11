@@ -75,9 +75,9 @@ _global_script_classes=[ {
 "path": "res://src/Agents/GSAIKinematicBody2DAgent.gd"
 }, {
 "base": "GSAISpecializedAgent",
-"class": "GSAIKinematicBodyAgent",
+"class": "GSAIKinematicBody3DAgent",
 "language": "GDScript",
-"path": "res://src/Agents/GSAIKinematicBodyAgent.gd"
+"path": "res://src/Agents/GSAIKinematicBody3DAgent.gd"
 }, {
 "base": "GSAIMatchOrientation",
 "class": "GSAILookWhereYouGo",
@@ -120,9 +120,9 @@ _global_script_classes=[ {
 "path": "res://src/Agents/GSAIRigidBody2DAgent.gd"
 }, {
 "base": "GSAISpecializedAgent",
-"class": "GSAIRigidBodyAgent",
+"class": "GSAIRigidBody3DAgent",
 "language": "GDScript",
-"path": "res://src/Agents/GSAIRigidBodyAgent.gd"
+"path": "res://src/Agents/GSAIRigidBody3DAgent.gd"
 }, {
 "base": "GSAISteeringBehavior",
 "class": "GSAISeek",
@@ -173,7 +173,7 @@ _global_script_class_icons={
 "GSAIGroupBehavior": "",
 "GSAIInfiniteProximity": "",
 "GSAIKinematicBody2DAgent": "",
-"GSAIKinematicBodyAgent": "",
+"GSAIKinematicBody3DAgent": "",
 "GSAILookWhereYouGo": "",
 "GSAIMatchOrientation": "",
 "GSAIPath": "",
@@ -182,7 +182,7 @@ _global_script_class_icons={
 "GSAIPursue": "",
 "GSAIRadiusProximity": "",
 "GSAIRigidBody2DAgent": "",
-"GSAIRigidBodyAgent": "",
+"GSAIRigidBody3DAgent": "",
 "GSAISeek": "",
 "GSAISeparation": "",
 "GSAISpecializedAgent": "",

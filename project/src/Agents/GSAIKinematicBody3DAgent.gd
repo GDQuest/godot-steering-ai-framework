@@ -1,7 +1,7 @@
 # A specialized steering agent that updates itself every frame so the user does
 # not have to using a KinematicBody
 extends GSAISpecializedAgent
-class_name GSAIKinematicBodyAgent
+class_name GSAIKinematicBody3DAgent
 
 # SLIDE uses `move_and_slide`
 # COLLIDE uses `move_and_collide`
