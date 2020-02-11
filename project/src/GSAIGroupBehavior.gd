@@ -9,8 +9,8 @@ var proximity: GSAIProximity
 var _callback := funcref(self, "_report_neighbor")
 
 
-func _init(agent: GSAISteeringAgent, proximity: GSAIProximity).(agent) -> void:
-	self.proximity = proximity
+func _init(agent: GSAISteeringAgent, _proximity: GSAIProximity).(agent) -> void:
+	self.proximity = _proximity
 
 
 # Internal callback for the behavior to define whether or not a member is

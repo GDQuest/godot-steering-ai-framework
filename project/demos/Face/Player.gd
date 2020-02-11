@@ -6,7 +6,7 @@ var speed: float
 onready var agent := GSAIAgentLocation.new()
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var movement := _get_movement()
 	move_and_slide(movement * speed)
 	agent.position = Vector3(global_position.x, global_position.y, 0)

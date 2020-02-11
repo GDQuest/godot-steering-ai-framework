@@ -18,14 +18,15 @@ var movement_type: int
 var _last_position: Vector3
 
 
-func _init(body: KinematicBody, movement_type: int = MovementType.SLIDE) -> void:
-	if not body.is_inside_tree():
-		yield(body, "ready")
+func _init(_body: KinematicBody, _movement_type: int = MovementType.SLIDE) -> void:
+	if not _body.is_inside_tree():
+		yield(_body, "ready")
 	
-	self.body = body
-	self.movement_type = movement_type
+	self.body = _body
+	self.movement_type = _movement_type
 	
-	body.get_tree().connect("physics_frame", self, "_on_SceneTree_physics_frame")
+	# warning-ignore:return_value_discarded
+	self.body.get_tree().connect("physics_frame", self, "_on_SceneTree_physics_frame")
 
 
 # Moves the agent's `body` by target `acceleration`.
@@ -59,6 +60,7 @@ func _apply_collide_steering(accel: Vector3, delta: float) -> void:
 				Vector3.ZERO,
 				linear_drag_percentage
 		)
+	# warning-ignore:return_value_discarded
 	body.move_and_collide(velocity * delta)
 	if calculate_velocities:
 		linear_velocity = velocity

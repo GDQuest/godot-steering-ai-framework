@@ -21,6 +21,7 @@ func _init(agent: GSAISteeringAgent, proximity: GSAIProximity).(agent, proximity
 func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:
 	acceleration.set_zero()
 	self._acceleration = acceleration
+	# warning-ignore:return_value_discarded
 	proximity._find_neighbors(_callback)
 
 

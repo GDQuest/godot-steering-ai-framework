@@ -8,7 +8,6 @@ export(int, 0, 359, 2) var deceleration_radius := 45 setget set_deceleration_rad
 export(float, 0, 1000, 40) var player_speed := 600.0 setget set_player_speed
 
 onready var player := $Player
-onready var gui := $GUI
 onready var turret := $Turret
 
 

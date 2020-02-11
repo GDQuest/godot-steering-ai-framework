@@ -17,6 +17,10 @@ We decided to make this change as soon as possible, as the framework was release
 - There is now a main scene with a demo picker, so you can select and play any demo on the fly.
 - The demo projects now support resizing and toggling fullscreen with <kbd>F11</kbd>.
 
+### Improvements ###
+
+- We handled all warnings in the framework, so using it won't add warnings to your projects.
+
 ### Changes ###
 
 - Renamed all classes from `GST*` (Godot Steering Toolkit) to `GSAI*` (Godot Steering AI).

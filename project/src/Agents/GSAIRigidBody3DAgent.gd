@@ -10,18 +10,19 @@ var body: RigidBody setget _set_body
 var _last_position: Vector3
 
 
-func _init(body: RigidBody) -> void:
-	if not body.is_inside_tree():
-		yield(body, "ready")
+func _init(_body: RigidBody) -> void:
+	if not _body.is_inside_tree():
+		yield(_body, "ready")
 	
-	self.body = body
-	body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
+	self.body = _body
+	# warning-ignore:return_value_discarded
+	self.body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
 	
 
 
 # Moves the agent's `body` by target `acceleration`.
 # tags: virtual
-func _apply_steering(acceleration: GSAITargetAcceleration, delta: float) -> void:
+func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> void:
 	_applied_steering = true
 	body.apply_central_impulse(acceleration.linear)
 	body.apply_torque_impulse(Vector3.UP * acceleration.angular)
@@ -41,6 +42,7 @@ func _set_body(value: RigidBody) -> void:
 
 
 func _on_body_ready() -> void:
+	# warning-ignore:return_value_discarded
 	body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
 	_set_body(body)
 

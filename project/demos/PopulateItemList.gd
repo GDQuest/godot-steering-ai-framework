@@ -7,6 +7,7 @@ var file_paths := PoolStringArray()
 
 
 func _ready() -> void:
+	# warning-ignore:return_value_discarded
 	self.connect("item_selected", self, "_on_item_selected")
 
 	var this_directory: String = get_tree().current_scene.filename.rsplit("/", false, 1)[0]

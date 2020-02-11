@@ -8,8 +8,8 @@ extends GSAISteeringBehavior
 var target: GSAIAgentLocation
 
 
-func _init(agent: GSAISteeringAgent, target: GSAIAgentLocation).(agent) -> void:
-	self.target = target
+func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation).(agent) -> void:
+	self.target = _target
 
 
 func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:

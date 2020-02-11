@@ -44,15 +44,15 @@ func _physics_process(delta: float) -> void:
 func _calculate_angular_velocity(
 	horizontal_movement: float,
 	current_velocity: float,
-	thruster_strength: float,
-	velocity_max: float,
+	_thruster_strength: float,
+	_velocity_max: float,
 	ship_drag: float,
 	delta: float
 ) -> float:
 	var velocity := clamp(
-		current_velocity + thruster_strength * horizontal_movement * delta,
-		-velocity_max,
-		velocity_max
+		current_velocity + _thruster_strength * horizontal_movement * delta,
+		-_velocity_max,
+		_velocity_max
 	)
 	
 	velocity = lerp(velocity, 0, ship_drag)

@@ -17,12 +17,12 @@ var prediction_time := 0.0
 
 func _init(
 		agent: GSAISteeringAgent,
-		path: GSAIPath,
-		path_offset := 0.0,
-		prediction_time := 0.0).(agent, null) -> void:
-	self.path = path
-	self.path_offset = path_offset
-	self.prediction_time = prediction_time
+		_path: GSAIPath,
+		_path_offset := 0.0,
+		_prediction_time := 0.0).(agent, null) -> void:
+	self.path = _path
+	self.path_offset = _path_offset
+	self.prediction_time = _prediction_time
 
 
 func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:

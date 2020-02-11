@@ -10,16 +10,16 @@ var body: RigidBody2D setget _set_body
 var _last_position: Vector2
 
 
-func _init(body: RigidBody2D) -> void:
-	if not body.is_inside_tree():
-		yield(body, "ready")
+func _init(_body: RigidBody2D) -> void:
+	if not _body.is_inside_tree():
+		yield(_body, "ready")
 	
-	self.body = body
+	self.body = _body
 
 
 # Moves the agent's `body` by target `acceleration`.
 # tags: virtual
-func _apply_steering(acceleration: GSAITargetAcceleration, delta: float) -> void:
+func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> void:
 	_applied_steering = true
 	body.apply_central_impulse(GSAIUtils.to_vector2(acceleration.linear))
 	body.apply_torque_impulse(acceleration.angular)
@@ -39,6 +39,7 @@ func _set_body(value: RigidBody2D) -> void:
 
 
 func _on_body_ready() -> void:
+	# warning-ignore:return_value_discarded
 	body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
 	_set_body(body)
 

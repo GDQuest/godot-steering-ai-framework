@@ -12,8 +12,11 @@ onready var button: Button = $VBoxContainer/Button
 
 
 func _ready() -> void:
+	# warning-ignore:return_value_discarded
 	list.connect("demo_selected", self, "set_demo_path")
+	# warning-ignore:return_value_discarded
 	list.connect("item_activated", self, "emit_signal", ["demo_requested"])
+	# warning-ignore:return_value_discarded
 	button.connect("pressed", self, "emit_signal", ["demo_requested"])
 	demo_path = list.file_paths[0]
 
