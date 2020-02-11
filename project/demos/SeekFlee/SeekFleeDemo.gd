@@ -29,7 +29,7 @@ func _ready() -> void:
 	
 	player.speed = player_speed
 	
-	for i in range(spawner.entity_count):
+	for _i in range(spawner.entity_count):
 		var new_pos := Vector2(
 				rng.randf_range(0, camera_boundaries.size.x),
 				rng.randf_range(0, camera_boundaries.size.y)

@@ -16,8 +16,8 @@ var deceleration_radius: float
 var time_to_reach: float = 0.1
 
 
-func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent) -> void:
-	self.target = target
+func _init(agent: GSTSteeringAgent, _target: GSTAgentLocation).(agent) -> void:
+	target = _target
 
 
 func _match_orientation(acceleration: GSTTargetAcceleration, desired_orientation: float) -> void:

@@ -11,8 +11,8 @@ var _last_frame := 0
 var _scene_tree: SceneTree
 
 
-func _init(agent: GSTSteeringAgent, agents: Array, radius: float).(agent, agents) -> void:
-	self.radius = radius
+func _init(agent: GSTSteeringAgent, agents: Array, _radius: float).(agent, agents) -> void:
+	radius = _radius
 	_scene_tree = Engine.get_main_loop()
 
 

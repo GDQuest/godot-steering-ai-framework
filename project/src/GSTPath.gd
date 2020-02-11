@@ -15,8 +15,8 @@ var _nearest_point_on_segment: Vector3
 var _nearest_point_on_path: Vector3
 
 
-func _init(waypoints: Array, is_open := false) -> void:
-	self.is_open = is_open
+func _init(waypoints: Array, _is_open := false) -> void:
+	is_open = _is_open
 	create_path(waypoints)
 	_nearest_point_on_segment = waypoints[0]
 	_nearest_point_on_path = waypoints[0]
@@ -128,7 +128,7 @@ class GSTSegment:
 	var cumulative_length: float
 
 
-	func _init(begin: Vector3, end: Vector3) -> void:
-		self.begin = begin
-		self.end = end
+	func _init(_begin: Vector3, _end: Vector3) -> void:
+		begin = _begin
+		end = _end
 		length = begin.distance_to(end)

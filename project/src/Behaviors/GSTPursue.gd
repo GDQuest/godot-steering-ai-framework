@@ -13,10 +13,10 @@ var predict_time_max: float
 
 func _init(
 		agent: GSTSteeringAgent,
-		target: GSTSteeringAgent,
-		predict_time_max := 1.0).(agent) -> void:
-	self.target = target
-	self.predict_time_max = predict_time_max
+		_target: GSTSteeringAgent,
+		_predict_time_max := 1.0).(agent) -> void:
+	target = _target
+	predict_time_max = _predict_time_max
 
 
 func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:

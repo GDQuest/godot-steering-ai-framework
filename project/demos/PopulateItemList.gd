@@ -7,7 +7,7 @@ var file_paths := PoolStringArray()
 
 
 func _ready() -> void:
-	self.connect("item_selected", self, "_on_item_selected")
+	var _err := self.connect("item_selected", self, "_on_item_selected")
 
 	var this_directory: String = get_tree().current_scene.filename.rsplit("/", false, 1)[0]
 	file_paths = _find_files(this_directory, ["*Demo.tscn"], true)
@@ -25,7 +25,7 @@ func populate(demos: PoolStringArray) -> void:
 
 func sentencify(line: String) -> String:
 	var regex := RegEx.new()
-	regex.compile("[A-Z]")
+	var _err := regex.compile("[A-Z]")
 	
 	line = line.split(".", true, 1)[0]
 	line = regex.sub(line, " $0", true)
@@ -33,31 +33,31 @@ func sentencify(line: String) -> String:
 
 
 func _find_files(dirpath := "", patterns := PoolStringArray(), is_recursive := false, do_skip_hidden := true) -> PoolStringArray:
-	var file_paths: = PoolStringArray()
+	var _file_paths: = PoolStringArray()
 	var directory: = Directory.new()
 
 	if not directory.dir_exists(dirpath):
 		printerr("The directory does not exist: %s" % dirpath)
-		return file_paths
+		return _file_paths
 	if not directory.open(dirpath) == OK:
 		printerr("Could not open the following dirpath: %s" % dirpath)
-		return file_paths
+		return _file_paths
 
-	directory.list_dir_begin(true, do_skip_hidden)
+	var _err := directory.list_dir_begin(true, do_skip_hidden)
 	var file_name: = directory.get_next()
-	var subdirectories: = PoolStringArray()
+
 	while file_name != "":
 		if directory.current_is_dir() and is_recursive:
 			var subdirectory: = dirpath.plus_file(file_name)
-			file_paths.append_array(_find_files(subdirectory, patterns, is_recursive))
+			_file_paths.append_array(_find_files(subdirectory, patterns, is_recursive))
 		else:
 			for pattern in patterns:
 				if file_name.match(pattern):
-					file_paths.append(dirpath.plus_file(file_name))
+					_file_paths.append(dirpath.plus_file(file_name))
 		file_name = directory.get_next()
 
 	directory.list_dir_end()
-	return file_paths
+	return _file_paths
 
 
 func _on_item_selected(index: int) -> void:

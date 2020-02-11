@@ -40,7 +40,7 @@ func setup(
 			proximity_radius: float,
 			boundary_right: float,
 			boundary_bottom: float,
-			draw_proximity: bool,
+			_draw_proximity: bool,
 			rng: RandomNumberGenerator
 	) -> void:
 	rng.randomize()
@@ -58,7 +58,7 @@ func setup(
 	
 	agent.linear_drag_percentage = _drag
 	
-	self.draw_proximity = draw_proximity
+	draw_proximity = _draw_proximity
 	
 	priority.add(avoid)
 	priority.add(seek)

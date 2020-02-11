@@ -37,7 +37,7 @@ func _ready() -> void:
 		child.set_proximity_agents(avoider_agents)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	for child in get_children():
 		child.global_position = child.global_position.posmodv(boundaries)
 

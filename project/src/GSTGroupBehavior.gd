@@ -9,12 +9,12 @@ var proximity: GSTProximity
 var _callback := funcref(self, "_report_neighbor")
 
 
-func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent) -> void:
-	self.proximity = proximity
+func _init(agent: GSTSteeringAgent, _proximity: GSTProximity).(agent) -> void:
+	proximity = _proximity
 
 
 # Internal callback for the behavior to define whether or not a member is
 # relevant
 # tags: virtual
-func _report_neighbor(neighbor: GSTSteeringAgent) -> bool:
+func _report_neighbor(_neighbor: GSTSteeringAgent) -> bool:
 	return false

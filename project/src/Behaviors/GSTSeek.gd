@@ -8,8 +8,8 @@ extends GSTSteeringBehavior
 var target: GSTAgentLocation
 
 
-func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent) -> void:
-	self.target = target
+func _init(agent: GSTSteeringAgent, _target: GSTAgentLocation).(agent) -> void:
+	target = _target
 
 
 func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:

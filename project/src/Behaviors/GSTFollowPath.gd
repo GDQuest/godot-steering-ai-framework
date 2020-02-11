@@ -17,12 +17,12 @@ var prediction_time := 0.0
 
 func _init(
 		agent: GSTSteeringAgent,
-		path: GSTPath,
-		path_offset := 0.0,
-		prediction_time := 0.0).(agent, null) -> void:
-	self.path = path
-	self.path_offset = path_offset
-	self.prediction_time = prediction_time
+		_path: GSTPath,
+		_path_offset := 0.0,
+		_prediction_time := 0.0).(agent, null) -> void:
+	path = _path
+	path_offset = _path_offset
+	prediction_time = _prediction_time
 
 
 func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:

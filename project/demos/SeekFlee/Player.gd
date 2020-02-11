@@ -10,12 +10,12 @@ func _ready() -> void:
 	agent.position = GSTUtils.to_vector3(global_position)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var movement := _get_movement()
 	if movement.length_squared() < 0.01:
 		return
 	
-	move_and_slide(movement * speed)
+	var _velocity := move_and_slide(movement * speed)
 	agent.position = GSTUtils.to_vector3(global_position)
 
 

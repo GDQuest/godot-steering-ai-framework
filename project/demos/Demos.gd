@@ -7,8 +7,8 @@ onready var button_go_back: Button = $ButtonGoBack
 
 
 func _ready() -> void:
-	demo_picker.connect("demo_requested", self, "_on_DemoPickerUI_demo_requested")
-	button_go_back.connect("pressed", self, "_on_ButtonGoBack_pressed")
+	var _err := demo_picker.connect("demo_requested", self, "_on_DemoPickerUI_demo_requested")
+	_err = button_go_back.connect("pressed", self, "_on_ButtonGoBack_pressed")
 
 
 func _on_DemoPickerUI_demo_requested() -> void:

@@ -10,7 +10,7 @@ onready var timer := $Lifetime
 
 
 func _ready() -> void:
-	timer.connect("timeout", self, "_on_Lifetime_timeout")
+	var _err := timer.connect("timeout", self, "_on_Lifetime_timeout")
 	timer.start()
 
 

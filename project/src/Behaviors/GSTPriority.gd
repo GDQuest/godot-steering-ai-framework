@@ -13,8 +13,8 @@ var last_selected_index: int
 var zero_threshold: float
 
 
-func _init(agent: GSTSteeringAgent, zero_threshold := 0.001).(agent) -> void:
-	self.zero_threshold = zero_threshold
+func _init(agent: GSTSteeringAgent, _zero_threshold := 0.001).(agent) -> void:
+	zero_threshold = _zero_threshold
 
 
 # Appends a steering behavior as a child of this container.

@@ -9,9 +9,9 @@ var agent: GSTSteeringAgent
 var agents := []
 
 
-func _init(agent: GSTSteeringAgent, agents: Array) -> void:
-	self.agent = agent
-	self.agents = agents
+func _init(_agent: GSTSteeringAgent, _agents: Array) -> void:
+	agent = _agent
+	agents = _agents
 
 
 # Returns a number of neighbors based on a `callback` function.
@@ -19,5 +19,5 @@ func _init(agent: GSTSteeringAgent, agents: Array) -> void:
 # `_find_neighbors` calls `callback` for each agent in the `agents` array and
 # adds one to the count if its `callback` returns true.
 # tags: virtual
-func _find_neighbors(callback: FuncRef) -> int:
+func _find_neighbors(_callback: FuncRef) -> int:
 	return 0

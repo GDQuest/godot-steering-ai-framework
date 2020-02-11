@@ -5,7 +5,7 @@ const COLOR := Color("8fde5d")
 
 
 func _ready() -> void:
-	get_tree().root.connect("size_changed", self, "_on_SceneTree_size_changed")
+	var _err := get_tree().root.connect("size_changed", self, "_on_SceneTree_size_changed")
 
 
 func _draw() -> void:

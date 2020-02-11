@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "CenterContainer",
+"base": "Control",
 "class": "DemoPickerUI",
 "language": "GDScript",
 "path": "res://demos/DemoPickerUI.gd"
