@@ -25,6 +25,7 @@ func populate(demos: PoolStringArray) -> void:
 
 func sentencify(line: String) -> String:
 	var regex := RegEx.new()
+	# warning-ignore:return_value_discarded
 	regex.compile("[A-Z]")
 	
 	line = line.split(".", true, 1)[0]
@@ -33,31 +34,31 @@ func sentencify(line: String) -> String:
 
 
 func _find_files(dirpath := "", patterns := PoolStringArray(), is_recursive := false, do_skip_hidden := true) -> PoolStringArray:
-	var file_paths: = PoolStringArray()
+	var paths: = PoolStringArray()
 	var directory: = Directory.new()
 
 	if not directory.dir_exists(dirpath):
 		printerr("The directory does not exist: %s" % dirpath)
-		return file_paths
+		return paths
 	if not directory.open(dirpath) == OK:
 		printerr("Could not open the following dirpath: %s" % dirpath)
-		return file_paths
+		return paths
 
+	# warning-ignore:return_value_discarded
 	directory.list_dir_begin(true, do_skip_hidden)
 	var file_name: = directory.get_next()
-	var subdirectories: = PoolStringArray()
 	while file_name != "":
 		if directory.current_is_dir() and is_recursive:
 			var subdirectory: = dirpath.plus_file(file_name)
-			file_paths.append_array(_find_files(subdirectory, patterns, is_recursive))
+			paths.append_array(_find_files(subdirectory, patterns, is_recursive))
 		else:
 			for pattern in patterns:
 				if file_name.match(pattern):
-					file_paths.append(dirpath.plus_file(file_name))
+					paths.append(dirpath.plus_file(file_name))
 		file_name = directory.get_next()
 
 	directory.list_dir_end()
-	return file_paths
+	return paths
 
 
 func _on_item_selected(index: int) -> void:

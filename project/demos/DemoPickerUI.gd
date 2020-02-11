@@ -2,6 +2,7 @@ class_name DemoPickerUI
 extends Control
 
 
+# warning-ignore:unused_signal
 signal demo_requested
 
 var demo_path := "" setget set_demo_path
