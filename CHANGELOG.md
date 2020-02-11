@@ -2,13 +2,29 @@
 
 This document lists new features, improvements, changes, and bug fixes in every release of the add-on.
 
-## Godot Steering AI Framework 1.1 ##
+## Godot Steering AI Framework 2.0.0 ##
 
-*In development*
+This release brings one new feature and bug fix, and breaking changes to the framework as we renamed all the classes.
+
+**Important**: we renamed all classes from GST\* to GSAI\* (Godot Steering AI). When you upgrade the framework in your project, use the project search and replace feature in Godot (<kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>F</kbd>) to find and replace `GST` with `GSAI`.
+
+If you were using `GSTKinematicBodyAgent` or `GSTRigidBodyAgent`, search and replace them respectively with `GSAIKinematicBody3DAgent` and `GSAIRigidBody3DAgent`.
+
+We decided to make this change as soon as possible, as the framework was released a few days ago.
 
 ### Features ###
 
 - There is now a main scene with a demo picker, so you can select and play any demo on the fly.
+- The demo projects now support resizing and toggling fullscreen with <kbd>F11</kbd>.
+
+### Changes ###
+
+- Renamed all classes from `GST*` (Godot Steering Toolkit) to `GSAI*` (Godot Steering AI).
+- Removed `GSTNode2DAgent`, `GSTNodeAgent`, and `GSTSpatialAgent` classes.
+    - For specialized steering agents, `GSAIKinematicBody2DAgent`, `GSAIRigidBody2DAgent`, or their 3D equivalent. 
+    - If you intend to write your own movement system instead of using Godot's, the base class `GSTSpecializedAgent` is there to help you.
+- Renamed `GSAIRigidBodyAgent` and `GSAIRigidBodyAgent` to `GSAIRigidBody3DAgent` and `GSAIRigidBody3DAgent` respectively.
+    - 3D nodes like `Sprite`, `KinematicBody`, etc. are being renamed to `Sprite3D`, `KinematicBody3D`, etc. in the upcoming Godot 4.0 release, to be consistent with 2D nodes. We decided to rename them now instead of breaking compatibility in a future release.
 
 ### Bug fixes ###
 
