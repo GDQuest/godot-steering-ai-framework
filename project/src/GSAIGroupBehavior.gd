@@ -16,5 +16,5 @@ func _init(agent: GSAISteeringAgent, proximity: GSAIProximity).(agent) -> void:
 # Internal callback for the behavior to define whether or not a member is
 # relevant
 # tags: virtual
-func _report_neighbor(neighbor: GSAISteeringAgent) -> bool:
+func _report_neighbor(_neighbor: GSAISteeringAgent) -> bool:
 	return false

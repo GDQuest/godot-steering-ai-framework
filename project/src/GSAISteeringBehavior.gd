@@ -14,8 +14,8 @@ var is_enabled := true
 var agent: GSAISteeringAgent
 
 
-func _init(agent: GSAISteeringAgent) -> void:
-	self.agent = agent
+func _init(_agent: GSAISteeringAgent) -> void:
+	self.agent = _agent
 
 
 # Sets the `acceleration` with the behavior's desired amount of acceleration.

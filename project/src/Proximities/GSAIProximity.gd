@@ -19,5 +19,5 @@ func _init(agent: GSAISteeringAgent, agents: Array) -> void:
 # `_find_neighbors` calls `callback` for each agent in the `agents` array and
 # adds one to the count if its `callback` returns true.
 # tags: virtual
-func _find_neighbors(callback: FuncRef) -> int:
+func _find_neighbors(_callback: FuncRef) -> int:
 	return 0
