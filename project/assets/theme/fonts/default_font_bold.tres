@@ -3,6 +3,6 @@
 [ext_resource path="res://assets/theme/fonts/montserrat/Montserrat-Bold.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 20
+size = 26
 use_filter = true
 font_data = ExtResource( 1 )
