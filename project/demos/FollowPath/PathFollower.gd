@@ -2,17 +2,17 @@ extends KinematicBody2D
 
 
 var _velocity := Vector2.ZERO
-var _accel := GSTTargetAcceleration.new()
+var _accel := GSAITargetAcceleration.new()
 var _valid := false
 var _drag := 0.1
 
 
-onready var agent := GSTKinematicBody2DAgent.new(self)
-onready var path := GSTPath.new([
+onready var agent := GSAIKinematicBody2DAgent.new(self)
+onready var path := GSAIPath.new([
 		Vector3(global_position.x, global_position.y, 0),
 		Vector3(global_position.x, global_position.y, 0)
 	], true)
-onready var follow := GSTFollowPath.new(agent, path, 0, 0)
+onready var follow := GSAIFollowPath.new(agent, path, 0, 0)
 
 
 func setup(

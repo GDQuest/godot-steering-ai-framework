@@ -1,5 +1,5 @@
 # Math and vector utility functions.
-class_name GSTUtils
+class_name GSAIUtils
 
 
 # Returns the `vector` with its length capped to `limit`.

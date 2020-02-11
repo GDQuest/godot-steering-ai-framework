@@ -1,5 +1,5 @@
 # Represents an agent with only a location and an orientation.
-class_name GSTAgentLocation
+class_name GSAIAgentLocation
 
 
 # The agent's position in space.

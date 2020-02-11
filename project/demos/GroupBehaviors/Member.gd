@@ -1,12 +1,12 @@
 extends KinematicBody2D
 
 
-var separation: GSTSeparation
-var cohesion: GSTCohesion
-var proximity: GSTRadiusProximity
-var agent := GSTKinematicBody2DAgent.new(self)
-var blend := GSTBlend.new(agent)
-var acceleration := GSTTargetAcceleration.new()
+var separation: GSAISeparation
+var cohesion: GSAICohesion
+var proximity: GSAIRadiusProximity
+var agent := GSAIKinematicBody2DAgent.new(self)
+var blend := GSAIBlend.new(agent)
+var acceleration := GSAITargetAcceleration.new()
 var draw_proximity := false
 
 var _color := Color.red
@@ -30,10 +30,10 @@ func setup(
 	agent.linear_speed_max = linear_speed_max
 	agent.linear_drag_percentage = 0.1
 	
-	proximity = GSTRadiusProximity.new(agent, [], proximity_radius)
-	separation = GSTSeparation.new(agent, proximity)
+	proximity = GSAIRadiusProximity.new(agent, [], proximity_radius)
+	separation = GSAISeparation.new(agent, proximity)
 	separation.decay_coefficient = separation_decay_coefficient
-	cohesion = GSTCohesion.new(agent, proximity)
+	cohesion = GSAICohesion.new(agent, proximity)
 	blend.add(separation, separation_strength)
 	blend.add(cohesion, cohesion_strength)
 

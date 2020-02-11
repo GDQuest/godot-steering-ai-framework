@@ -1,6 +1,6 @@
 # Represents a path made up of Vector3 waypoints, split into segments path
 # follow behaviors can use.
-class_name GSTPath
+class_name GSAIPath
 extends Reference
 
 
@@ -41,7 +41,7 @@ func create_path(waypoints: Array) -> void:
 			break
 		else:
 			current = waypoints[0]
-		var segment := GSTSegment.new(previous, current)
+		var segment := GSAISegment.new(previous, current)
 		length += segment.length
 		segment.cumulative_length = length
 		_segments.append(segment)
@@ -52,9 +52,9 @@ func calculate_distance(agent_current_position: Vector3) -> float:
 	if _segments.size() == 0:
 		return 0.0
 	var smallest_distance_squared: float = INF
-	var nearest_segment: GSTSegment
+	var nearest_segment: GSAISegment
 	for i in range(_segments.size()):
-		var segment: GSTSegment = _segments[i]
+		var segment: GSAISegment = _segments[i]
 		var distance_squared := _calculate_point_segment_distance_squared(
 				segment.begin,
 				segment.end,
@@ -83,9 +83,9 @@ func calculate_target_position(target_distance: float) -> Vector3:
 		elif target_distance > length:
 			target_distance = fmod(target_distance, length)
 
-	var desired_segment: GSTSegment
+	var desired_segment: GSAISegment
 	for i in range(_segments.size()):
-		var segment: GSTSegment = _segments[i]
+		var segment: GSAISegment = _segments[i]
 		if segment.cumulative_length >= target_distance:
 			desired_segment = segment
 			break
@@ -121,7 +121,7 @@ func _calculate_point_segment_distance_squared(start: Vector3, end: Vector3, pos
 	return _nearest_point_on_segment.distance_squared_to(position)
 
 
-class GSTSegment:
+class GSAISegment:
 	var begin: Vector3
 	var end: Vector3
 	var length: float

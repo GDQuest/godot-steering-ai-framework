@@ -1,10 +1,10 @@
 extends KinematicBody2D
 
 
-var agent := GSTKinematicBody2DAgent.new(self)
-var target := GSTAgentLocation.new()
-var arrive := GSTArrive.new(agent, target)
-var _accel := GSTTargetAcceleration.new()
+var agent := GSAIKinematicBody2DAgent.new(self)
+var target := GSAIAgentLocation.new()
+var arrive := GSAIArrive.new(agent, target)
+var _accel := GSAITargetAcceleration.new()
 
 var _velocity := Vector2()
 var _drag := 0.1

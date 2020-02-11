@@ -19,32 +19,32 @@ var linear_drag := 0.1
 var angular_drag := 0.1
 
 # Holds the linear and angular components calculated by our steering behaviors.
-var acceleration := GSTTargetAcceleration.new()
+var acceleration := GSAITargetAcceleration.new()
 
 onready var current_health := health_max
 
-# GSTSteeringAgent holds our agent's position, orientation, maximum speed and acceleration.
-onready var agent := GSTSteeringAgent.new()
+# GSAISteeringAgent holds our agent's position, orientation, maximum speed and acceleration.
+onready var agent := GSAISteeringAgent.new()
 
 onready var player: Node = get_tree().get_nodes_in_group("Player")[0]
 # This assumes that our player class will keep its own agent updated.
-onready var player_agent: GSTSteeringAgent = player.agent
+onready var player_agent: GSAISteeringAgent = player.agent
 
 # Proximities represent an area with which an agent can identify where neighbors in its relevant
 # group are. In our case, the group will feature the player, which will be used to avoid a
 # collision with them. We use a radius proximity so the player is only relevant inside 100 pixels.
-onready var proximity := GSTRadiusProximity.new(agent, [player_agent], 100)
+onready var proximity := GSAIRadiusProximity.new(agent, [player_agent], 100)
 
-# GSTBlend combines behaviors together, calculating all of their acceleration together and adding
+# GSAIBlend combines behaviors together, calculating all of their acceleration together and adding
 # them together, multiplied by a strength. We will have one for fleeing, and one for pursuing,
 # toggling them depending on the agent's health. Since we want the agent to rotate AND move, then
 # we aim to blend them together.
-onready var flee_blend := GSTBlend.new(agent)
-onready var pursue_blend := GSTBlend.new(agent)
+onready var flee_blend := GSAIBlend.new(agent)
+onready var pursue_blend := GSAIBlend.new(agent)
 
-# GSTPriority will be the main steering behavior we use. It holds sub-behaviors and will pick the  
+# GSAIPriority will be the main steering behavior we use. It holds sub-behaviors and will pick the
 # first one that returns non-zero acceleration, ignoring any afterwards.
-onready var priority := GSTPriority.new(agent)
+onready var priority := GSAIPriority.new(agent)
 
 
 func _ready() -> void:
@@ -59,20 +59,20 @@ func _ready() -> void:
 	# ---------- Configuration for our behaviors ----------
 	# Pursue will happen while the agent is in good health. It produces acceleration that takes
 	# the agent on an intercept course with the target, predicting its position in the future.
-	var pursue := GSTPursue.new(agent, player_agent)
+	var pursue := GSAIPursue.new(agent, player_agent)
 	pursue.predict_time_max = 1.5
 
 	# Flee will happen while the agent is in bad health, so will start disabled. It produces
 	# acceleration that takes the agent directly away from the target with no prediction.
-	var flee := GSTFlee.new(agent, player_agent)
+	var flee := GSAIFlee.new(agent, player_agent)
 
 	# AvoidCollision tries to keep the agent from running into any of the neighbors found in its
 	# proximity group. In our case, this will be the player, if they are close enough.
-	var avoid := GSTAvoidCollisions.new(agent, proximity)
+	var avoid := GSAIAvoidCollisions.new(agent, proximity)
 
 	# Face turns the agent to keep looking towards its target. It will be enabled while the agent
 	# is not fleeing due to low health. It tries to arrive 'on alignment' with 0 remaining velocity.
-	var face := GSTFace.new(agent, player_agent)
+	var face := GSAIFace.new(agent, player_agent)
 	
 	# We use deg2rad because the math in the toolkit assumes radians.
 	# How close for the agent to be 'aligned', if not exact.
@@ -82,7 +82,7 @@ func _ready() -> void:
 
 	# LookWhereYouGo turns the agent to keep looking towards its direction of travel. It will only
 	# be enabled while the agent is at low health.
-	var look := GSTLookWhereYouGo.new(agent)
+	var look := GSAILookWhereYouGo.new(agent)
 	# How close for the agent to be 'aligned', if not exact
 	look.alignment_tolerance = deg2rad(5)
 	# When to start slowing down.

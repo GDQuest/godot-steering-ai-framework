@@ -1,10 +1,10 @@
 # Determines any agent that is in the specified list as being neighbors with the
 # owner agent, regardless of distance.
-extends GSTProximity
-class_name GSTInfiniteProximity
+extends GSAIProximity
+class_name GSAIInfiniteProximity
 
 
-func _init(agent: GSTSteeringAgent, agents: Array).(agent, agents) -> void:
+func _init(agent: GSAISteeringAgent, agents: Array).(agent, agents) -> void:
 	pass
 
 
@@ -17,7 +17,7 @@ func _find_neighbors(callback: FuncRef) -> int:
 	var neighbor_count := 0
 	var agent_count := agents.size()
 	for i in range(agent_count):
-		var current_agent := agents[i] as GSTSteeringAgent
+		var current_agent := agents[i] as GSAISteeringAgent
 
 		if current_agent != agent:
 			if callback.call_func(current_agent):

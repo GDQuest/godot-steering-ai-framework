@@ -1,7 +1,7 @@
 # Determines any agent that is in the specified list as being neighbors with the owner agent if
 # they lie within the specified radius.
-extends GSTProximity
-class_name GSTRadiusProximity
+extends GSAIProximity
+class_name GSAIRadiusProximity
 
 
 # The radius around the owning agent to find neighbors in
@@ -11,7 +11,7 @@ var _last_frame := 0
 var _scene_tree: SceneTree
 
 
-func _init(agent: GSTSteeringAgent, agents: Array, radius: float).(agent, agents) -> void:
+func _init(agent: GSAISteeringAgent, agents: Array, radius: float).(agent, agents) -> void:
 	self.radius = radius
 	_scene_tree = Engine.get_main_loop()
 
@@ -32,7 +32,7 @@ func _find_neighbors(callback: FuncRef) -> int:
 		var owner_position := agent.position
 
 		for i in range(agent_count):
-			var current_agent := agents[i] as GSTSteeringAgent
+			var current_agent := agents[i] as GSAISteeringAgent
 
 			if current_agent != agent:
 				var distance_squared := owner_position.distance_squared_to(current_agent.position)
@@ -48,7 +48,7 @@ func _find_neighbors(callback: FuncRef) -> int:
 			current_agent.is_tagged = false
 	else:
 		for i in range(agent_count):
-			var current_agent = agents[i] as GSTSteeringAgent
+			var current_agent = agents[i] as GSAISteeringAgent
 
 			if current_agent != agent and current_agent.is_tagged:
 				if callback.call_func(current_agent):

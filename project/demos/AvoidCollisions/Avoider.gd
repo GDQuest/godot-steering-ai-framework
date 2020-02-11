@@ -6,19 +6,19 @@ var draw_proximity: bool
 var _boundary_right: float
 var _boundary_bottom: float
 var _radius: float
-var _accel := GSTTargetAcceleration.new()
+var _accel := GSAITargetAcceleration.new()
 var _velocity := Vector2.ZERO
 var _direction := Vector2()
 var _drag := 0.1
 var _color := Color(0.4, 1.0, 0.89, 0.3)
 
 onready var collision := $CollisionShape2D
-onready var agent := GSTKinematicBody2DAgent.new(self)
-onready var proximity := GSTRadiusProximity.new(agent, [], 140)
-onready var avoid := GSTAvoidCollisions.new(agent, proximity)
-onready var target := GSTAgentLocation.new()
-onready var seek := GSTSeek.new(agent, target)
-onready var priority := GSTPriority.new(agent, 0.0001)
+onready var agent := GSAIKinematicBody2DAgent.new(self)
+onready var proximity := GSAIRadiusProximity.new(agent, [], 140)
+onready var avoid := GSAIAvoidCollisions.new(agent, proximity)
+onready var target := GSAIAgentLocation.new()
+onready var seek := GSAISeek.new(agent, target)
+onready var priority := GSAIPriority.new(agent, 0.0001)
 
 
 func _draw() -> void:

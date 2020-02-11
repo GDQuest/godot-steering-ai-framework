@@ -1,10 +1,10 @@
 # Steers the agent to avoid obstacles in its path. Approximates obstacles as
 # spheres.
-class_name GSTAvoidCollisions
-extends GSTGroupBehavior
+class_name GSAIAvoidCollisions
+extends GSAIGroupBehavior
 
 
-var _first_neighbor: GSTSteeringAgent
+var _first_neighbor: GSAISteeringAgent
 var _shortest_time: float
 var _first_minimum_separation: float
 var _first_distance: float
@@ -12,11 +12,11 @@ var _first_relative_position: Vector3
 var _first_relative_velocity: Vector3
 
 
-func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent, proximity) -> void:
+func _init(agent: GSAISteeringAgent, proximity: GSAIProximity).(agent, proximity) -> void:
 	pass
 
 
-func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:
+func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:
 	_shortest_time = INF
 	_first_neighbor = null
 	_first_minimum_separation = 0
@@ -41,7 +41,7 @@ func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:
 # Callback for the proximity to call when finding neighbors. Keeps track of every `neighbor`
 # that was found but only keeps the one the owning agent will most likely collide with.
 # tags: virtual
-func _report_neighbor(neighbor: GSTSteeringAgent) -> bool:
+func _report_neighbor(neighbor: GSAISteeringAgent) -> bool:
 	var relative_position := neighbor.position - agent.position
 	var relative_velocity := neighbor.linear_velocity - agent.linear_velocity
 	var relative_speed_squared := relative_velocity.length_squared()

@@ -1,7 +1,7 @@
 # A specialized steering agent that updates itself every frame so the user does
 # not have to using a RigidBody
-extends GSTSpecializedAgent
-class_name GSTRigidBodyAgent
+extends GSAISpecializedAgent
+class_name GSAIRigidBodyAgent
 
 
 # The RigidBody to keep track of
@@ -21,7 +21,7 @@ func _init(body: RigidBody) -> void:
 
 # Moves the agent's `body` by target `acceleration`.
 # tags: virtual
-func _apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
+func _apply_steering(acceleration: GSAITargetAcceleration, delta: float) -> void:
 	_applied_steering = true
 	body.apply_central_impulse(acceleration.linear)
 	body.apply_torque_impulse(Vector3.UP * acceleration.angular)

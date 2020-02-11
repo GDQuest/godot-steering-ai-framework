@@ -12,7 +12,7 @@ export var linear_drag := 0.025
 var _linear_velocity := Vector2()
 var _angular_velocity := 0.0
 
-onready var agent := GSTSteeringAgent.new()
+onready var agent := GSAISteeringAgent.new()
 
 
 func _physics_process(delta: float) -> void:

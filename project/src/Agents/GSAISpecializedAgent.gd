@@ -1,8 +1,8 @@
 # A base class for a specialized steering agent that updates itself every frame
 # so the user does not have to. All other specialized agents derive from this.
 # tags: abstract
-extends GSTSteeringAgent
-class_name GSTSpecializedAgent
+extends GSAISteeringAgent
+class_name GSAISpecializedAgent
 
 
 # If `true`, calculates linear and angular velocities based on the previous
@@ -36,5 +36,5 @@ var _applied_steering := false
 
 # Moves the agent's body by target `acceleration`.
 # tags: virtual
-func _apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
+func _apply_steering(acceleration: GSAITargetAcceleration, delta: float) -> void:
 	pass

@@ -1,12 +1,12 @@
 # Calculates acceleration to take an agent away from where a target agent is
 # moving.
-class_name GSTEvade
-extends GSTPursue
+class_name GSAIEvade
+extends GSAIPursue
 
 
 func _init(
-		agent: GSTSteeringAgent,
-		target: GSTSteeringAgent,
+		agent: GSAISteeringAgent,
+		target: GSAISteeringAgent,
 		predict_time_max := 1.0).(agent, target, predict_time_max):
 	pass
 

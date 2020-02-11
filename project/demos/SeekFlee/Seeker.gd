@@ -1,16 +1,16 @@
 extends KinematicBody2D
 
 
-var player_agent: GSTAgentLocation
+var player_agent: GSAIAgentLocation
 var velocity := Vector2.ZERO
 var start_speed: float
 var start_accel: float
 var use_seek := true
 
-onready var agent := GSTKinematicBody2DAgent.new(self)
-onready var accel := GSTTargetAcceleration.new()
-onready var seek := GSTSeek.new(agent, player_agent)
-onready var flee := GSTFlee.new(agent, player_agent)
+onready var agent := GSAIKinematicBody2DAgent.new(self)
+onready var accel := GSAITargetAcceleration.new()
+onready var seek := GSAISeek.new(agent, player_agent)
+onready var flee := GSAIFlee.new(agent, player_agent)
 
 
 func _ready() -> void:

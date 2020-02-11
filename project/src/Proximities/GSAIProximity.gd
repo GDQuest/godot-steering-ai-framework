@@ -1,15 +1,15 @@
 # Base container type that stores data to find the neighbors of an agent.
 extends Reference
-class_name GSTProximity
+class_name GSAIProximity
 
 
 # The owning agent whose neighbors are found in the group
-var agent: GSTSteeringAgent
+var agent: GSAISteeringAgent
 # The agents who are part of this group and could be potential neighbors
 var agents := []
 
 
-func _init(agent: GSTSteeringAgent, agents: Array) -> void:
+func _init(agent: GSAISteeringAgent, agents: Array) -> void:
 	self.agent = agent
 	self.agents = agents
 

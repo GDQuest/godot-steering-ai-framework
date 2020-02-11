@@ -3,23 +3,23 @@
 #
 # Stores the behaviors internally as dictionaries of the form
 # {
-# 	behavior : GSTSteeringBehavior,
+# 	behavior : GSAISteeringBehavior,
 # 	weight : float
 # }
-class_name GSTBlend
-extends GSTSteeringBehavior
+class_name GSAIBlend
+extends GSAISteeringBehavior
 
 
 var _behaviors := []
-var _accel := GSTTargetAcceleration.new()
+var _accel := GSAITargetAcceleration.new()
 
 
-func _init(agent: GSTSteeringAgent).(agent) -> void:
+func _init(agent: GSAISteeringAgent).(agent) -> void:
 	pass
 
 
 # Appends a behavior to the internal array along with its `weight`.
-func add(behavior: GSTSteeringBehavior, weight: float) -> void:
+func add(behavior: GSAISteeringBehavior, weight: float) -> void:
 	behavior.agent = agent
 	_behaviors.append({behavior = behavior, weight = weight})
 
@@ -33,7 +33,7 @@ func get_behavior_at(index: int) -> Dictionary:
 	return {}
 
 
-func _calculate_steering(blended_accel: GSTTargetAcceleration) -> void:
+func _calculate_steering(blended_accel: GSAITargetAcceleration) -> void:
 	blended_accel.set_zero()
 
 	for i in range(_behaviors.size()):
@@ -42,7 +42,7 @@ func _calculate_steering(blended_accel: GSTTargetAcceleration) -> void:
 
 		blended_accel.add_scaled_accel(_accel, bw.weight)
 
-	blended_accel.linear = GSTUtils.clampedv3(blended_accel.linear, agent.linear_acceleration_max)
+	blended_accel.linear = GSAIUtils.clampedv3(blended_accel.linear, agent.linear_acceleration_max)
 	blended_accel.angular = clamp(
 			blended_accel.angular,
 			-agent.angular_acceleration_max,

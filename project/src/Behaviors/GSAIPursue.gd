@@ -1,25 +1,25 @@
 # Calculates an acceleration to make an agent intercept another based on the
 # target agent's movement.
-class_name GSTPursue
-extends GSTSteeringBehavior
+class_name GSAIPursue
+extends GSAISteeringBehavior
 
 
 # The target agent that the behavior is trying to intercept.
-var target: GSTSteeringAgent
+var target: GSAISteeringAgent
 # The maximum amount of time in the future the behavior predicts the target's
 # location.
 var predict_time_max: float
 
 
 func _init(
-		agent: GSTSteeringAgent,
-		target: GSTSteeringAgent,
+		agent: GSAISteeringAgent,
+		target: GSAISteeringAgent,
 		predict_time_max := 1.0).(agent) -> void:
 	self.target = target
 	self.predict_time_max = predict_time_max
 
 
-func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:
+func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:
 	var target_position := target.position
 	var distance_squared := (target_position - agent.position).length_squared()
 

@@ -4,15 +4,15 @@ extends KinematicBody2D
 
 export var use_seek: bool = false
 
-var _blend: GSTBlend
+var _blend: GSAIBlend
 
 var _linear_drag_coefficient := 0.025
 var _angular_drag := 0.1
-var _direction_face := GSTAgentLocation.new()
+var _direction_face := GSAIAgentLocation.new()
 
-onready var agent := GSTKinematicBody2DAgent.new(self)
-onready var accel := GSTTargetAcceleration.new()
-onready var player_agent: GSTSteeringAgent = owner.find_node("Player", true, false).agent
+onready var agent := GSAIKinematicBody2DAgent.new(self)
+onready var accel := GSAITargetAcceleration.new()
+onready var player_agent: GSAISteeringAgent = owner.find_node("Player", true, false).agent
 
 
 func _ready() -> void:
@@ -35,8 +35,8 @@ func _physics_process(delta: float) -> void:
 	rotation += agent.angular_velocity * delta
 	
 	var linear_velocity := (
-			GSTUtils.to_vector2(agent.linear_velocity) + 
-			(GSTUtils.angle_to_vector2(rotation) * -agent.linear_acceleration_max)
+			GSAIUtils.to_vector2(agent.linear_velocity) +
+			(GSAIUtils.angle_to_vector2(rotation) * -agent.linear_acceleration_max)
 	)
 	linear_velocity = linear_velocity.clamped(agent.linear_speed_max)
 	linear_velocity = linear_velocity.linear_interpolate(
@@ -45,21 +45,21 @@ func _physics_process(delta: float) -> void:
 	)
 	
 	linear_velocity = move_and_slide(linear_velocity)
-	agent.linear_velocity = GSTUtils.to_vector3(linear_velocity)
+	agent.linear_velocity = GSAIUtils.to_vector3(linear_velocity)
 
 
 func setup(predict_time: float, linear_speed_max: float, linear_accel_max: float) -> void:
-	var behavior: GSTSteeringBehavior
+	var behavior: GSAISteeringBehavior
 	if use_seek:
-		behavior = GSTSeek.new(agent, player_agent)
+		behavior = GSAISeek.new(agent, player_agent)
 	else:
-		behavior = GSTPursue.new(agent, player_agent, predict_time)
+		behavior = GSAIPursue.new(agent, player_agent, predict_time)
 	
-	var orient_behavior := GSTFace.new(agent, _direction_face)
+	var orient_behavior := GSAIFace.new(agent, _direction_face)
 	orient_behavior.alignment_tolerance = deg2rad(5)
 	orient_behavior.deceleration_radius = deg2rad(5)
 	
-	_blend = GSTBlend.new(agent)
+	_blend = GSAIBlend.new(agent)
 	_blend.add(behavior, 1)
 	_blend.add(orient_behavior, 1)
 	

@@ -1,20 +1,20 @@
 # Base type for group-based steering behaviors.
-class_name GSTGroupBehavior
-extends GSTSteeringBehavior
+class_name GSAIGroupBehavior
+extends GSAISteeringBehavior
 
 
 # Container to find neighbors of the agent and calculate group behavior.
-var proximity: GSTProximity
+var proximity: GSAIProximity
 
 var _callback := funcref(self, "_report_neighbor")
 
 
-func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent) -> void:
+func _init(agent: GSAISteeringAgent, proximity: GSAIProximity).(agent) -> void:
 	self.proximity = proximity
 
 
 # Internal callback for the behavior to define whether or not a member is
 # relevant
 # tags: virtual
-func _report_neighbor(neighbor: GSTSteeringAgent) -> bool:
+func _report_neighbor(neighbor: GSAISteeringAgent) -> bool:
 	return false

@@ -3,11 +3,11 @@ extends KinematicBody2D
 
 
 var speed: float
-onready var agent := GSTAgentLocation.new()
+onready var agent := GSAIAgentLocation.new()
 
 
 func _ready() -> void:
-	agent.position = GSTUtils.to_vector3(global_position)
+	agent.position = GSAIUtils.to_vector3(global_position)
 
 
 func _physics_process(delta: float) -> void:
@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	move_and_slide(movement * speed)
-	agent.position = GSTUtils.to_vector3(global_position)
+	agent.position = GSAIUtils.to_vector3(global_position)
 
 
 func _get_movement() -> Vector2:

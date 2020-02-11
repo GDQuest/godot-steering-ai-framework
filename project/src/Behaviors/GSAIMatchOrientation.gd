@@ -1,12 +1,12 @@
 # Calculates an angular acceleration to match an agent's orientation to that of
 # its target. Attempts to make the agent arrive with zero remaining angular
 # velocity.
-class_name GSTMatchOrientation
-extends GSTSteeringBehavior
+class_name GSAIMatchOrientation
+extends GSAISteeringBehavior
 
 
 # The target orientation for the behavior to try and match rotations to.
-var target: GSTAgentLocation
+var target: GSAIAgentLocation
 # The amount of distance in radians for the behavior to consider itself close
 # enough to be matching the target agent's rotation.
 var alignment_tolerance: float
@@ -16,11 +16,11 @@ var deceleration_radius: float
 var time_to_reach: float = 0.1
 
 
-func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent) -> void:
+func _init(agent: GSAISteeringAgent, target: GSAIAgentLocation).(agent) -> void:
 	self.target = target
 
 
-func _match_orientation(acceleration: GSTTargetAcceleration, desired_orientation: float) -> void:
+func _match_orientation(acceleration: GSAITargetAcceleration, desired_orientation: float) -> void:
 	var rotation := wrapf(desired_orientation - agent.orientation, -PI, PI)
 
 	var rotation_size := abs(rotation)
@@ -44,5 +44,5 @@ func _match_orientation(acceleration: GSTTargetAcceleration, desired_orientation
 	acceleration.linear = Vector3.ZERO
 
 
-func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:
+func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:
 	_match_orientation(acceleration, target.orientation)
