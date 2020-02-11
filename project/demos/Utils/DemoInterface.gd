@@ -12,4 +12,3 @@ func set_text_bbcode(value: String)-> void:
 	if not rich_text_label:
 		yield(self, "ready")
 	rich_text_label.bbcode_text = text_bbcode
-	print(rich_text_label.text)
