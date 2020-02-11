@@ -12,5 +12,5 @@ func load_demo(scene_path: String) -> void:
 
 func unload() -> void:
 	for node in get_children():
-		remove_child(node)
+		call_deferred("remove_child", node)
 		node.queue_free()
