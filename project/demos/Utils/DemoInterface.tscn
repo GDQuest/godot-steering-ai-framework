@@ -11,7 +11,7 @@ extends RichTextLabel
 
 [node name="DemoInterface" type="PanelContainer"]
 anchor_right = 1.0
-margin_bottom = 87.0
+margin_bottom = 140.0
 rect_min_size = Vector2( 1024, 0 )
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
@@ -22,13 +22,13 @@ text_bbcode = "Replace this text for the demo."
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 1920.0
-margin_bottom = 87.0
+margin_bottom = 140.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 1904.0
-margin_bottom = 71.0
+margin_bottom = 124.0
 rect_min_size = Vector2( 0, 55 )
 bbcode_enabled = true
 bbcode_text = "Replace this text for the demo."
