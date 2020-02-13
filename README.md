@@ -35,7 +35,7 @@ As a short overview, a character is represented by a steering agent; it stores i
 
 ## Installation ##
 
-The cleanest way to install the framework onto your project is to take the `/src/` folder and copy it into your project. I recommend something like `res://systems/godot-steering-framework/`.
+The cleanest way to install the framework onto your project is to take the `/src/` folder and copy it into your project. We recommend placing it in a directory where you will store all your third-party libraries or dependencies. For example `res://src/libraries/godot_steering_framework/`.
 
 ## Getting Started ##
 
