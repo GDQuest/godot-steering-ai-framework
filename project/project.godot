@@ -196,7 +196,7 @@ _global_script_class_icons={
 
 config/name="SteeringToolkit"
 run/main_scene="res://demos/DemoSelector.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/icon.png"
 
 [display]
 
