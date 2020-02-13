@@ -10,6 +10,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
 __meta__ = {
 "_edit_use_anchors_": false
 }
