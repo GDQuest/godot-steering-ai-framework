@@ -10,8 +10,8 @@
 
 [node name="PursueVSSeekDemo" type="Node"]
 script = ExtResource( 4 )
-linear_speed_max = 240.0
-linear_accel_max = 40.0
+linear_speed_max = 400.0
+linear_accel_max = 80.0
 predict_time = 1.1
 
 [node name="BackgroudLayer" parent="." instance=ExtResource( 7 )]
@@ -20,12 +20,17 @@ predict_time = 1.1
 script = ExtResource( 3 )
 
 [node name="Player" type="KinematicBody2D" parent="BoundaryManager"]
-position = Vector2( 47.3369, 329.724 )
+position = Vector2( 307.552, 555.999 )
 rotation = 1.5708
 collision_mask = 2
 script = ExtResource( 2 )
-thruster_strength = 600.0
-side_thruster_strength = 20.0
+__meta__ = {
+"_edit_group_": true
+}
+thruster_strength = 1000.0
+side_thruster_strength = 40.0
+velocity_max = 450.0
+angular_velocity_max = 3.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoundaryManager/Player"]
 polygon = PoolVector2Array( 0, -32, -24, 32, 24, 32 )
@@ -40,9 +45,12 @@ script = ExtResource( 6 )
 inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
 
 [node name="Pursuer" type="KinematicBody2D" parent="BoundaryManager"]
-position = Vector2( 980, 550 )
+position = Vector2( 1240.22, 866.784 )
 collision_layer = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoundaryManager/Pursuer"]
 polygon = PoolVector2Array( 0, -32, -24, 32, 24, 32 )
@@ -57,10 +65,13 @@ script = ExtResource( 6 )
 inner_color = Color( 0.890196, 0.411765, 0.337255, 1 )
 
 [node name="Seeker" type="KinematicBody2D" parent="BoundaryManager"]
-position = Vector2( 980, 150 )
+position = Vector2( 1240.22, 280.108 )
 rotation = 3.14159
 collision_layer = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 use_seek = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoundaryManager/Seeker"]

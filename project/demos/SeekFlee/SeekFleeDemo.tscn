@@ -24,7 +24,7 @@ script = ExtResource( 3 )
 [node name="BackgroudLayer" parent="." instance=ExtResource( 8 )]
 
 [node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( 512, 300 )
+position = Vector2( 960, 540 )
 collision_mask = 2
 script = ExtResource( 2 )
 

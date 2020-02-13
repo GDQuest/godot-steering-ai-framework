@@ -6,7 +6,11 @@ This document lists new features, improvements, changes, and bug fixes in every 
 
 ### Features ###
 
-- There is now a `Arrive3d` demo for a 3D usecase
+- There is now an `Arrive3d` demo to showcase 3D movement.
+
+### Improvements ###
+
+- All the demos got a bit of attention to improve their feel.
 
 ### Changes ###
 
@@ -20,6 +24,7 @@ This document lists new features, improvements, changes, and bug fixes in every 
 - Fixed `GSAIKinematicBody3DAgent` and `GSAIRigidBody3DAgent` trying to use `global_position` instead of `transform.origin`.
 - The `SeekFleeDemo`'s boundaries will now match the size of the screen.
 - Fixed error when double clicking an item in the DemoPicker.
+- Fixed the background sometimes not covering the entire viewport in demos.
 
 ## Godot Steering AI Framework 2.0.0 ##
 

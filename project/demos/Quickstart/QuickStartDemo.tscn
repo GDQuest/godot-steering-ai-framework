@@ -13,7 +13,7 @@
 [node name="Player" type="KinematicBody2D" parent="." groups=[
 "Player",
 ]]
-position = Vector2( 235.469, 449.34 )
+position = Vector2( 402.346, 573.791 )
 rotation = 1.5708
 collision_mask = 2
 script = ExtResource( 3 )
@@ -32,7 +32,7 @@ script = ExtResource( 1 )
 inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
 
 [node name="Agent" type="KinematicBody2D" parent="."]
-position = Vector2( 807.798, 141.773 )
+position = Vector2( 974.675, 266.224 )
 rotation = 1.5708
 collision_layer = 2
 collision_mask = 5
