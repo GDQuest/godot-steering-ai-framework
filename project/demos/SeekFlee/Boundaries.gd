@@ -6,6 +6,8 @@ const COLOR := Color("8fde5d")
 
 func _ready() -> void:
 	get_tree().root.connect("size_changed", self, "_on_SceneTree_size_changed")
+	_on_SceneTree_size_changed()
+	
 
 
 func _draw() -> void:
@@ -15,7 +17,10 @@ func _draw() -> void:
 
 
 func _on_SceneTree_size_changed() -> void:
-	var size := get_tree().root.size
+	var size := Vector2(
+		ProjectSettings["display/window/size/width"],
+		ProjectSettings["display/window/size/height"]
+	)
 	for b in get_children():
 		var boundary: String = b.name.rsplit("Boundary")[0]
 		match boundary:

@@ -90,7 +90,7 @@ func _apply_orientation_steering(angular_acceleration: float, delta: float) -> v
 func _set_body(value: KinematicBody) -> void:
 	body = value
 	
-	_last_position = body.global_position
+	_last_position = body.transform.origin
 	_last_orientation = body.rotation.y
 	
 	position = _last_position
@@ -98,8 +98,8 @@ func _set_body(value: KinematicBody) -> void:
 
 
 func _on_SceneTree_physics_frame() -> void:
-	var current_position: Vector3 = body.global_position
-	var current_orientation: float = body.rotation.y
+	var current_position := body.transform.origin
+	var current_orientation := body.rotation.y
 	
 	position = current_position
 	orientation = current_orientation

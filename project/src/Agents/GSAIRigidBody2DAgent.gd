@@ -45,8 +45,8 @@ func _on_body_ready() -> void:
 
 
 func _on_SceneTree_frame() -> void:
-	var current_position: Vector2 = body.global_position
-	var current_orientation: float = body.rotation
+	var current_position := body.global_position
+	var current_orientation := body.rotation
 	
 	position = GSAIUtils.to_vector3(current_position)
 	orientation = current_orientation

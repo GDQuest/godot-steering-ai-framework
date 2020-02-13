@@ -8,10 +8,11 @@ It supports all essential steering behaviors like flee, follow, look at, but als
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
-
 - [Introduction](#introduction)
 - [The framework](#the-framework)
+- [Installation](#installation)
 - [Getting Started](#getting-started)
+  - [More information and resources](#more-information-and-resources)
 - [Example usage](#example-usage)
 <!-- markdown-toc end -->
 
@@ -28,23 +29,27 @@ Joining these systems together can give complex and graceful movement while also
 
 This project is a framework for the [Godot game engine](https://godotengine.org/). It takes a lot of inspiration from the excellent [GDX-AI](https://github.com/libgdx/gdx-ai) framework for the [LibGDX](https://libgdx.badlogicgames.com/) java-based framework. 
 
-Every class in the toolkit is based on Godot's [Reference](https://docs.godotengine.org/en/latest/classes/class_reference.html) type. There is no need to have a complex scene tree; everything that has to do with the AI's movement can be contained inside movement-oriented classes.
+Every class in the framework is based on Godot's [Reference](https://docs.godotengine.org/en/latest/classes/class_reference.html) type. There is no need to have a complex scene tree; everything that has to do with the AI's movement can be contained inside movement-oriented classes.
 
 As a short overview, a character is represented by a steering agent; it stores its position, orientation, maximum speeds and current velocity. A steering behavior is associated with a steering agent and calculates a linear and/or angular change in velocity based on its information. The coder then applies that acceleration in whatever ways is appropriate to the character to change its velocity, like RigidBody's apply_impulse, or a KinematicBody's move_and_slide.
 
+## Installation ##
+
+The cleanest way to install the framework onto your project is to take the `/src/` folder and copy it into your project. I recommend something like `res://systems/godot-steering-framework/`.
+
 ## Getting Started ##
 
-The framework's documentation and code reference are both available on the [GDQuest](https://www.gdquest.com/docs/godot-steering-toolkit/getting-started/) website's documents.
+The framework's documentation and code reference are both available on the [GDQuest](https://www.gdquest.com/docs/godot-steering-ai-framework/getting-started) website's documents.
 
 ### More information and resources ###
 
 - [Understanding Steering Behaviors](https://gamedevelopment.tutsplus.com/series/understanding-steering-behaviors--gamedev-12732): Breakdowns of various behaviors by Fernando Bevilacqua with graphics and in-depth explanations.
-- [GDX-AI Wiki](https://github.com/libgdx/gdx-ai/wiki/Steering-Behaviors): Descriptions of how LibGDX's AI submodule uses steering behaviors with a few graphics. Since this toolkit uses it for inspiration, there will be some similarities.
-- [RedBlobGames](https://www.redblobgames.com/) - An excellent resources for complex pathfinding like A\*, graph theory, and other algorithms that are game-development related. Steering behaviors are not covered, but for anyone looking to study and bulk up on their algorithms, this is a great place.
+- [GDX-AI Wiki](https://github.com/libgdx/gdx-ai/wiki/Steering-Behaviors): Descriptions of how LibGDX's AI submodule uses steering behaviors with a few graphics. Since this framework uses it for inspiration, there will be some similarities.
+- [RedBlobGames](https://www.redblobgames.com/): An excellent resources for complex pathfinding like A\*, graph theory, and other algorithms that are game-development related. Steering behaviors are not covered, but for anyone looking to study and bulk up on their algorithms, this is a great place.
 
 ## Example usage ##
 
-The fastest way to get started is to look at a sample class that makes use of the toolkit.
+The fastest way to get started is to look at a sample class that makes use of the framework.
 
 The goal of this class is to show how an agent can chase a player and predict where the player *will* be while also maintaining a distance from them. When the agent’s health is low, it will flee from the player directly. The agent will keep facing the player while it’s chasing them, but will look where it's going while it’s fleeing.
 
@@ -74,32 +79,42 @@ var linear_drag := 0.1
 var angular_drag := 0.1
 
 # Holds the linear and angular components calculated by our steering behaviors.
-var acceleration := GSAITargetAcceleration.new()
+var acceleration := GSAITargetAcceleration.new()
+
 
 onready var current_health := health_max
 
-# GSAISteeringAgent holds our agent's position, orientation, maximum speed and acceleration.
-onready var agent := GSAISteeringAgent.new()
+# GSAISteeringAgent holds our agent's position, orientation, maximum speed and acceleration.
+
+onready var agent := GSAISteeringAgent.new()
+
 
 onready var player: Node = get_tree().get_nodes_in_group("Player")[0]
 # This assumes that our player class will keep its own agent updated.
-onready var player_agent: GSAISteeringAgent = player.agent
+onready var player_agent: GSAISteeringAgent = player.agent
+
 
 # Proximities represent an area with which an agent can identify where neighbors in its relevant
 # group are. In our case, the group will feature the player, which will be used to avoid a
 # collision with them. We use a radius proximity so the player is only relevant inside 100 pixels
-onready var proximity := GSAIRadiusProximity.new(agent, [player_agent], 100).
+onready var proximity := GSAIRadiusProximity.new(agent, [player_agent], 100).
 
-# GSAIBlend combines behaviors together, calculating all of their acceleration together and adding
+
+# GSAIBlend combines behaviors together, calculating all of their acceleration together and adding
+
 # them together, multiplied by a strength. We will have one for fleeing, and one for pursuing,
 # toggling them depending on the agent's health. Since we want the agent to rotate AND move, then
 # we aim to blend them together.
-onready var flee_blend := GSAIBlend.new(agent)
-onready var pursue_blend := GSAIBlend.new(agent)
+onready var flee_blend := GSAIBlend.new(agent)
 
-# GSAIPriority will be the main steering behavior we use. It holds sub-behaviors and will pick the  
+onready var pursue_blend := GSAIBlend.new(agent)
+
+
+# GSAIPriority will be the main steering behavior we use. It holds sub-behaviors and will pick the  
+
 # first one that returns non-zero acceleration, ignoring any afterwards.
-onready var priority := GSAIPriority.new(agent)
+onready var priority := GSAIPriority.new(agent)
+
 
 
 func _ready() -> void:
@@ -114,22 +129,26 @@ func _ready() -> void:
     # ---------- Configuration for our behaviors ----------
     # Pursue will happen while the player is in good health. It produces acceleration that takes
     # the agent on an intercept course with the target, predicting its position in the future.
-    var pursue := GSAIPursue.new(agent, player_agent)
+    var pursue := GSAIPursue.new(agent, player_agent)
+
     pursue.predict_time_max = 1.5
 
     # Flee will happen while the agent is in bad health, so will start disabled. It produces
     # acceleration that takes the agent directly away from the target with no prediction.
-    var flee := GSAIFlee.new(agent, player_agent)
+    var flee := GSAIFlee.new(agent, player_agent)
+
 
     # AvoidCollision tries to keep the agent from running into any of the neighbors found in its
     # proximity group. In our case, this will be the player if they are close enough.
-    var avoid := GSAIAvoidCollisions.new(agent, proximity)
+    var avoid := GSAIAvoidCollisions.new(agent, proximity)
+
 
     # Face turns the agent to keep looking towards its target. It will be enabled while the agent
     # is not fleeing due to low health. It tries to arrive 'on alignment' with 0 remaining velocity.
-    var face := GSAIFace.new(agent, player_agent)
+    var face := GSAIFace.new(agent, player_agent)
 
-    # We use deg2rad because the math in the toolkit assumes radians.
+
+    # We use deg2rad because the math in the framework assumes radians.
     # How close for the agent to be 'aligned', if not exact.
     face.alignment_tolerance = deg2rad(5)
     # When to start slowing down.
@@ -137,7 +156,8 @@ func _ready() -> void:
 
     # LookWhereYouGo turns the agent to keep looking towards its direction of travel. It will only
     # be enabled while the agent is at low health.
-    var look := GSAILookWhereYouGo.new(agent)
+    var look := GSAILookWhereYouGo.new(agent)
+
     # How close for the agent to be 'aligned', if not exact.
     look.alignment_tolerance = deg2rad(5)
     # When to start slowing down.
@@ -175,7 +195,7 @@ func _physics_process(delta: float) -> void:
     # Calculate the desired acceleration.
     priority.calculate_steering(acceleration)
 
-    # We add the discovered acceleration to our linear velocity. The toolkit does not limit
+    # We add the discovered acceleration to our linear velocity. The framework does not limit
     # velocity, just acceleration, so we clamp the result ourselves here.
     velocity = (velocity + Vector2(
                 acceleration.linear.x, acceleration.linear.y)
@@ -199,7 +219,7 @@ func _physics_process(delta: float) -> void:
     rotation += angular_velocity * delta
 
 
-# In order to support both 2D and 3D, the toolkit uses Vector3, so the conversion is required
+# In order to support both 2D and 3D, the framework uses Vector3, so the conversion is required
 # when using 2D nodes. The Z component can be left to 0 safely.
 func update_agent() -> void:
     agent.position.x = global_position.x

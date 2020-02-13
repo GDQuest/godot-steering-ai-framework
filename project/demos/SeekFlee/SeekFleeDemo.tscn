@@ -39,7 +39,7 @@ stroke = 4.0
 script = ExtResource( 9 )
 
 [node name="LeftBoundary" type="StaticBody2D" parent="Boundaries"]
-position = Vector2( 0, 300 )
+position = Vector2( 0, 540 )
 collision_layer = 2
 collision_mask = 5
 
@@ -47,7 +47,7 @@ collision_mask = 5
 shape = SubResource( 2 )
 
 [node name="RightBoundary" type="StaticBody2D" parent="Boundaries"]
-position = Vector2( 1024, 300 )
+position = Vector2( 1920, 540 )
 collision_layer = 2
 collision_mask = 5
 
@@ -55,7 +55,7 @@ collision_mask = 5
 shape = SubResource( 2 )
 
 [node name="TopBoundary" type="StaticBody2D" parent="Boundaries"]
-position = Vector2( 512, 2.00002 )
+position = Vector2( 960, 0 )
 collision_layer = 2
 collision_mask = 5
 
@@ -63,7 +63,7 @@ collision_mask = 5
 shape = SubResource( 3 )
 
 [node name="BottomBoundary" type="StaticBody2D" parent="Boundaries"]
-position = Vector2( 512, 600 )
+position = Vector2( 960, 1080 )
 collision_layer = 2
 collision_mask = 5
 

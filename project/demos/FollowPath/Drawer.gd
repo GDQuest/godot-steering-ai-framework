@@ -29,7 +29,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _draw() -> void:
 	if is_drawing:
 		for point in active_points:
-			draw_circle(point, 1, Color.red)
+			draw_circle(point, 2, Color.red)
 	else:
 		if active_points.size() > 0:
 			draw_circle(active_points.front(), 2, Color.red)

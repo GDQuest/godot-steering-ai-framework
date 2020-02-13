@@ -34,7 +34,7 @@ func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> voi
 func _set_body(value: RigidBody) -> void:
 	body = value
 	
-	_last_position = body.global_position
+	_last_position = body.transform.origin
 	_last_orientation = body.rotation.y
 	
 	position = _last_position
@@ -48,8 +48,8 @@ func _on_body_ready() -> void:
 
 
 func _on_SceneTree_frame() -> void:
-	var current_position: Vector3 = body.global_position
-	var current_orientation: float = body.rotation.y
+	var current_position := body.transform.origin
+	var current_orientation := body.rotation.y
 	
 	position = current_position
 	orientation = current_orientation

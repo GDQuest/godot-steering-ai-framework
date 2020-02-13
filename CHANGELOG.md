@@ -2,6 +2,24 @@
 
 This document lists new features, improvements, changes, and bug fixes in every release of the add-on.
 
+## Godot Steering AI Framework 2.1.0 ##
+
+### Features ###
+
+- There is now a `Arrive3d` demo for a 3D usecase
+
+### Changes ###
+
+- `GSAIUtils.vector3_to_angle` now uses the vector's X and Z components to determine angle. Use `GSAIUtils.vector2_to_angle` for 2D use cases.
+- `GSAIMatchOrientation` and its subclasses like `GSAIFace` and `GSAILookWhereYouGo` now include a `use_z` property. It should be `true` when using 3D so that facing will be done with the X and Z components.
+- The README now mentions a simple way to install the framework.
+- Exposed `agent_count` inside the `AvoidCollisionsDemo`.
+
+### Bug fixes ###
+
+- Fixed `GSAIKinematicBody3DAgent` and `GSAIRigidBody3DAgent` trying to use `global_position` instead of `transform.origin`.
+- The `SeekFleeDemo`'s boundaries will now match the size of the screen.
+
 ## Godot Steering AI Framework 2.0.0 ##
 
 This release brings one new feature and bug fix, and breaking changes to the framework as we renamed all the classes.

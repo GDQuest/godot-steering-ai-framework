@@ -4,6 +4,7 @@ extends Node2D
 export var avoider_template: PackedScene
 export var inner_color := Color()
 export var outer_color := Color()
+export var agent_count := 60
 
 var boundaries: Vector2
 
@@ -15,7 +16,7 @@ func _ready() -> void:
 	var rng: = RandomNumberGenerator.new()
 	var avoiders := []
 	var avoider_agents := []
-	for i in range(60):
+	for i in range(agent_count):
 		var avoider := avoider_template.instance()
 		add_child(avoider)
 		avoider.setup(
@@ -33,6 +34,8 @@ func _ready() -> void:
 			avoider.collision.inner_color = inner_color
 			avoider.collision.outer_color = outer_color
 		avoiders.append(avoider)
+		if i % 10 == 0:
+			yield(get_tree(), "idle_frame")
 	for child in get_children():
 		child.set_proximity_agents(avoider_agents)
 

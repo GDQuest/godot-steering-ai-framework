@@ -13,9 +13,14 @@ static func clampedv3(vector: Vector3, limit: float) -> Vector3:
 
 # Returns an angle in radians between the positive X axis and the `vector`.
 #
-# This assumes orientation for 2D agents or 3D agents that are upright and
-# rotate around the Y axis.
+# This assumes orientation for 3D agents that are upright and rotate
+# around the Y axis.
 static func vector3_to_angle(vector: Vector3) -> float:
+	return atan2(vector.x, vector.z)
+
+
+# Returns an angle in radians between the positive X axis and the `vector`.
+static func vector2_to_angle(vector: Vector2) -> float:
 	return atan2(vector.x, -vector.y)
 
 

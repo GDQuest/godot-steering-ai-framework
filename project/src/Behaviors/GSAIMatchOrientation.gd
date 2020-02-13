@@ -14,9 +14,13 @@ var alignment_tolerance: float
 var deceleration_radius: float
 # The amount of time to reach the target velocity
 var time_to_reach: float = 0.1
+# Whether to use the X and Z components instead of X and Y components when
+# determining angles. X and Z should be used in 3D.
+var use_z: bool
 
 
-func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation).(agent) -> void:
+func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation, _use_z := false).(agent) -> void:
+	self.use_z = _use_z
 	self.target = _target
 
 
