@@ -19,6 +19,7 @@ This document lists new features, improvements, changes, and bug fixes in every 
 
 - Fixed `GSAIKinematicBody3DAgent` and `GSAIRigidBody3DAgent` trying to use `global_position` instead of `transform.origin`.
 - The `SeekFleeDemo`'s boundaries will now match the size of the screen.
+- Fixed error when double clicking an item in the DemoPicker.
 
 ## Godot Steering AI Framework 2.0.0 ##
 
