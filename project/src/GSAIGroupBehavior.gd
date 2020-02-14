@@ -2,7 +2,6 @@
 class_name GSAIGroupBehavior
 extends GSAISteeringBehavior
 
-
 # Container to find neighbors of the agent and calculate group behavior.
 var proximity: GSAIProximity
 

@@ -1,6 +1,5 @@
 extends Node2D
 
-
 export var member: PackedScene
 
 

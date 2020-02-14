@@ -1,7 +1,6 @@
 class_name DemoPickerUI
 extends Control
 
-
 # warning-ignore:unused_signal
 signal demo_requested
 
@@ -23,7 +22,7 @@ func _ready() -> void:
 
 func set_demo_path(value: String) -> void:
 	demo_path = value
-	
+
 
 func _on_ItemList_item_activated(_index: int) -> void:
 	emit_signal("demo_requested")

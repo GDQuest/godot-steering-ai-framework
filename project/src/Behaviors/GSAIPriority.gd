@@ -3,7 +3,6 @@
 class_name GSAIPriority
 extends GSAISteeringBehavior
 
-
 var _behaviors := []
 
 # The index of the last behavior the container prioritized.

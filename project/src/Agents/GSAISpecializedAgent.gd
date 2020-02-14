@@ -4,7 +4,6 @@
 extends GSAISteeringAgent
 class_name GSAISpecializedAgent
 
-
 # If `true`, calculates linear and angular velocities based on the previous
 # frame. When `false`, the user must keep those values updated.
 var calculate_velocities := true

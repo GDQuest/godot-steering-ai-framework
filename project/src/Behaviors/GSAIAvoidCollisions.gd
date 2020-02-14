@@ -3,7 +3,6 @@
 class_name GSAIAvoidCollisions
 extends GSAIGroupBehavior
 
-
 var _first_neighbor: GSAISteeringAgent
 var _shortest_time: float
 var _first_minimum_separation: float
@@ -27,14 +26,18 @@ func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:
 	if neighbor_count == 0 or not _first_neighbor:
 		acceleration.set_zero()
 	else:
-		if(
-				_first_minimum_separation <= 0 or
-				_first_distance < agent.bounding_radius + _first_neighbor.bounding_radius):
+		if (
+			_first_minimum_separation <= 0
+			or _first_distance < agent.bounding_radius + _first_neighbor.bounding_radius
+		):
 			acceleration.linear = _first_neighbor.position - agent.position
 		else:
-			acceleration.linear = _first_relative_position + (_first_relative_velocity * _shortest_time)
+			acceleration.linear = (
+				_first_relative_position
+				+ (_first_relative_velocity * _shortest_time)
+			)
 
-	acceleration.linear = acceleration.linear.normalized() * -agent.linear_acceleration_max
+	acceleration.linear = (acceleration.linear.normalized() * -agent.linear_acceleration_max)
 	acceleration.angular = 0
 
 
@@ -55,7 +58,10 @@ func _report_neighbor(neighbor: GSAISteeringAgent) -> bool:
 			return false
 		else:
 			var distance = relative_position.length()
-			var minimum_separation: float = distance - sqrt(relative_speed_squared) * time_to_collision
+			var minimum_separation: float = (
+				distance
+				- sqrt(relative_speed_squared) * time_to_collision
+			)
 			if minimum_separation > agent.bounding_radius + neighbor.bounding_radius:
 				return false
 			else:

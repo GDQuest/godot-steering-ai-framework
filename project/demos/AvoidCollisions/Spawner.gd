@@ -1,6 +1,5 @@
 extends Node2D
 
-
 export var avoider_template: PackedScene
 export var inner_color := Color()
 export var outer_color := Color()
@@ -11,22 +10,22 @@ var boundaries: Vector2
 
 func _ready() -> void:
 	boundaries = Vector2(
-			ProjectSettings["display/window/size/width"],
-			ProjectSettings["display/window/size/height"])
-	var rng: = RandomNumberGenerator.new()
+		ProjectSettings["display/window/size/width"], ProjectSettings["display/window/size/height"]
+	)
+	var rng := RandomNumberGenerator.new()
 	var avoiders := []
 	var avoider_agents := []
 	for i in range(agent_count):
 		var avoider := avoider_template.instance()
 		add_child(avoider)
 		avoider.setup(
-				owner.linear_speed_max,
-				owner.linear_acceleration_max,
-				owner.proximity_radius,
-				boundaries.x,
-				boundaries.y,
-				true if i == 0 and owner.draw_proximity else false,
-				rng
+			owner.linear_speed_max,
+			owner.linear_acceleration_max,
+			owner.proximity_radius,
+			boundaries.x,
+			boundaries.y,
+			true if i == 0 and owner.draw_proximity else false,
+			rng
 		)
 		avoider_agents.append(avoider.agent)
 		avoider.set_random_nonoverlapping_position(avoiders, 16)

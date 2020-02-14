@@ -1,6 +1,5 @@
 extends Camera
 
-
 var target: Spatial
 
 onready var ray := $RayCast

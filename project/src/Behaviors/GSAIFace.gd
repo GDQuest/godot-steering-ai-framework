@@ -4,7 +4,9 @@ class_name GSAIFace
 extends GSAIMatchOrientation
 
 
-func _init(agent: GSAISteeringAgent, target: GSAIAgentLocation, use_z := false).(agent, target, use_z) -> void:
+func _init(agent: GSAISteeringAgent, target: GSAIAgentLocation, use_z := false).(
+	agent, target, use_z
+) -> void:
 	pass
 
 
@@ -15,7 +17,8 @@ func _face(acceleration: GSAITargetAcceleration, target_position: Vector3) -> vo
 	if distance_squared < agent.zero_linear_speed_threshold:
 		acceleration.set_zero()
 	else:
-		var orientation = (GSAIUtils.vector3_to_angle(to_target)
+		var orientation = (
+			GSAIUtils.vector3_to_angle(to_target)
 			if use_z
 			else GSAIUtils.vector2_to_angle(GSAIUtils.to_vector2(to_target))
 		)

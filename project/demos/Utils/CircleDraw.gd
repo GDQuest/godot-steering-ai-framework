@@ -1,9 +1,9 @@
 tool
 extends CollisionShape2D
 
-export(Color) var inner_color := Color() setget set_inner_color
-export(Color) var outer_color := Color() setget set_outer_color
-export(float) var stroke := 0.0 setget set_stroke
+export (Color) var inner_color := Color() setget set_inner_color
+export (Color) var outer_color := Color() setget set_outer_color
+export (float) var stroke := 0.0 setget set_stroke
 
 
 func _draw() -> void:

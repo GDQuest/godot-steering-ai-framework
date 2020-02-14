@@ -7,7 +7,6 @@
 class_name GSAISeparation
 extends GSAIGroupBehavior
 
-
 # The coefficient to calculate how fast the separation strength decays with distance.
 var decay_coefficient := 1.0
 

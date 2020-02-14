@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 var separation: GSAISeparation
 var cohesion: GSAICohesion
 var proximity: GSAIRadiusProximity
@@ -16,20 +15,20 @@ onready var collision_shape := $CollisionShape2D
 
 
 func setup(
-		linear_speed_max: float,
-		linear_accel_max: float,
-		proximity_radius: float,
-		separation_decay_coefficient: float,
-		cohesion_strength: float,
-		separation_strength: float
-	) -> void:
+	linear_speed_max: float,
+	linear_accel_max: float,
+	proximity_radius: float,
+	separation_decay_coefficient: float,
+	cohesion_strength: float,
+	separation_strength: float
+) -> void:
 	_color = Color(rand_range(0.5, 1), rand_range(0.25, 1), rand_range(0, 1))
 	collision_shape.inner_color = _color
-	
+
 	agent.linear_acceleration_max = linear_accel_max
 	agent.linear_speed_max = linear_speed_max
 	agent.linear_drag_percentage = 0.1
-	
+
 	proximity = GSAIRadiusProximity.new(agent, [], proximity_radius)
 	separation = GSAISeparation.new(agent, proximity)
 	separation.decay_coefficient = separation_decay_coefficient

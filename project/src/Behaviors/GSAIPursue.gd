@@ -3,7 +3,6 @@
 class_name GSAIPursue
 extends GSAISteeringBehavior
 
-
 # The target agent that the behavior is trying to intercept.
 var target: GSAISteeringAgent
 # The maximum amount of time in the future the behavior predicts the target's
@@ -11,10 +10,7 @@ var target: GSAISteeringAgent
 var predict_time_max: float
 
 
-func _init(
-		agent: GSAISteeringAgent,
-		_target: GSAISteeringAgent,
-		_predict_time_max := 1.0).(agent) -> void:
+func _init(agent: GSAISteeringAgent, _target: GSAISteeringAgent, _predict_time_max := 1.0).(agent) -> void:
 	self.target = _target
 	self.predict_time_max = _predict_time_max
 
@@ -31,8 +27,7 @@ func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:
 		if predict_time_squared < predict_time_max * predict_time_max:
 			predict_time = sqrt(predict_time_squared)
 
-	acceleration.linear = ((
-			target_position + (target.linear_velocity * predict_time))-agent.position).normalized()
+	acceleration.linear = ((target_position + (target.linear_velocity * predict_time)) - agent.position).normalized()
 	acceleration.linear *= _get_modified_acceleration()
 
 	acceleration.angular = 0

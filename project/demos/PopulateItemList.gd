@@ -1,6 +1,5 @@
 extends ItemList
 
-
 signal demo_selected(scene_path)
 
 var file_paths := PoolStringArray()
@@ -28,15 +27,17 @@ func sentencify(line: String) -> String:
 	var regex := RegEx.new()
 	# warning-ignore:return_value_discarded
 	regex.compile("[A-Z]")
-	
+
 	line = line.split(".", true, 1)[0]
 	line = regex.sub(line, " $0", true)
 	return line
 
 
-func _find_files(dirpath := "", patterns := PoolStringArray(), is_recursive := false, do_skip_hidden := true) -> PoolStringArray:
-	var paths: = PoolStringArray()
-	var directory: = Directory.new()
+func _find_files(
+	dirpath := "", patterns := PoolStringArray(), is_recursive := false, do_skip_hidden := true
+) -> PoolStringArray:
+	var paths := PoolStringArray()
+	var directory := Directory.new()
 
 	if not directory.dir_exists(dirpath):
 		printerr("The directory does not exist: %s" % dirpath)
@@ -47,10 +48,10 @@ func _find_files(dirpath := "", patterns := PoolStringArray(), is_recursive := f
 
 	# warning-ignore:return_value_discarded
 	directory.list_dir_begin(true, do_skip_hidden)
-	var file_name: = directory.get_next()
+	var file_name := directory.get_next()
 	while file_name != "":
 		if directory.current_is_dir() and is_recursive:
-			var subdirectory: = dirpath.plus_file(file_name)
+			var subdirectory := dirpath.plus_file(file_name)
 			paths.append_array(_find_files(subdirectory, patterns, is_recursive))
 		else:
 			for pattern in patterns:

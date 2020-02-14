@@ -9,7 +9,6 @@
 class_name GSAIBlend
 extends GSAISteeringBehavior
 
-
 var _behaviors := []
 var _accel := GSAITargetAcceleration.new()
 
@@ -44,7 +43,5 @@ func _calculate_steering(blended_accel: GSAITargetAcceleration) -> void:
 
 	blended_accel.linear = GSAIUtils.clampedv3(blended_accel.linear, agent.linear_acceleration_max)
 	blended_accel.angular = clamp(
-			blended_accel.angular,
-			-agent.angular_acceleration_max,
-			agent.angular_acceleration_max
+		blended_accel.angular, -agent.angular_acceleration_max, agent.angular_acceleration_max
 	)

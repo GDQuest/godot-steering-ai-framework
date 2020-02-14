@@ -9,5 +9,7 @@ func _init(agent: GSAISteeringAgent, target: GSAIAgentLocation).(agent, target) 
 
 func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:
 	acceleration.linear = (
-			(agent.position - target.position).normalized() * agent.linear_acceleration_max)
+		(agent.position - target.position).normalized()
+		* agent.linear_acceleration_max
+	)
 	acceleration.angular = 0

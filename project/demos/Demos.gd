@@ -1,6 +1,5 @@
 extends Node
 
-
 onready var demo_picker: DemoPickerUI = $DemoPickerUI
 onready var demo_player := $DemoPlayer
 onready var button_go_back: Button = $ButtonGoBack

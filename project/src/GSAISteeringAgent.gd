@@ -5,7 +5,6 @@
 extends GSAIAgentLocation
 class_name GSAISteeringAgent
 
-
 # The amount of velocity to be considered effectively not moving.
 var zero_linear_speed_threshold := 0.01
 # The maximum speed at which the agent can move.

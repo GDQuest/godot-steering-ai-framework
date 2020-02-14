@@ -3,7 +3,6 @@
 class_name GSAIPath
 extends Reference
 
-
 # If `false`, the path loops.
 var is_open: bool
 # Total length of the path.
@@ -56,10 +55,8 @@ func calculate_distance(agent_current_position: Vector3) -> float:
 	for i in range(_segments.size()):
 		var segment: GSAISegment = _segments[i]
 		var distance_squared := _calculate_point_segment_distance_squared(
-				segment.begin,
-				segment.end,
-				agent_current_position
-			)
+			segment.begin, segment.end, agent_current_position
+		)
 
 		if distance_squared < smallest_distance_squared:
 			_nearest_point_on_path = _nearest_point_on_segment
@@ -67,8 +64,9 @@ func calculate_distance(agent_current_position: Vector3) -> float:
 			nearest_segment = segment
 
 	var length_on_path := (
-		nearest_segment.cumulative_length -
-		_nearest_point_on_path.distance_to(nearest_segment.end))
+		nearest_segment.cumulative_length
+		- _nearest_point_on_path.distance_to(nearest_segment.end)
+	)
 
 	return length_on_path
 
@@ -96,8 +94,9 @@ func calculate_target_position(target_distance: float) -> Vector3:
 	var distance := desired_segment.cumulative_length - target_distance
 
 	return (
-		(desired_segment.begin - desired_segment.end) *
-		(distance / desired_segment.length) + desired_segment.end)
+		((desired_segment.begin - desired_segment.end) * (distance / desired_segment.length))
+		+ desired_segment.end
+	)
 
 
 # Returns the position of the first point on the path.
@@ -126,7 +125,6 @@ class GSAISegment:
 	var end: Vector3
 	var length: float
 	var cumulative_length: float
-
 
 	func _init(_begin: Vector3, _end: Vector3) -> void:
 		self.begin = _begin

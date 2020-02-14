@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 var player_agent: GSAIAgentLocation
 var velocity := Vector2.ZERO
 var start_speed: float
@@ -21,10 +20,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not player_agent:
 		return
-	
+
 	if use_seek:
 		seek.calculate_steering(accel)
 	else:
 		flee.calculate_steering(accel)
-	
+
 	agent._apply_steering(accel, delta)

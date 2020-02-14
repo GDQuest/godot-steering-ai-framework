@@ -1,8 +1,6 @@
 extends Node2D
 
-
 signal path_established(points)
-
 
 var active_points := []
 var is_drawing := false

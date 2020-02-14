@@ -1,13 +1,12 @@
 extends Node
 # Access helper class for children to access window boundaries.
 
-
 enum Mode { FLEE, SEEK }
 
-export(Mode) var behavior_mode := Mode.SEEK setget set_behavior_mode
-export(float, 0, 2000, 40) var linear_speed_max := 200.0 setget set_linear_speed_max
-export(float, 0, 500, 0.5) var linear_accel_max := 10.0 setget set_linear_accel_max
-export(float) var player_speed := 600.0 setget set_player_speed
+export (Mode) var behavior_mode := Mode.SEEK setget set_behavior_mode
+export (float, 0, 2000, 40) var linear_speed_max := 200.0 setget set_linear_speed_max
+export (float, 0, 500, 0.5) var linear_accel_max := 10.0 setget set_linear_accel_max
+export (float) var player_speed := 600.0 setget set_player_speed
 
 var camera_boundaries: Rect2
 
@@ -21,18 +20,18 @@ func _ready() -> void:
 		Vector2(
 			ProjectSettings["display/window/size/width"],
 			ProjectSettings["display/window/size/height"]
-			)
 		)
-	
+	)
+
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
-	
+
 	player.speed = player_speed
-	
+
 	for i in range(spawner.entity_count):
 		var new_pos := Vector2(
-				rng.randf_range(0, camera_boundaries.size.x),
-				rng.randf_range(0, camera_boundaries.size.y)
+			rng.randf_range(0, camera_boundaries.size.x),
+			rng.randf_range(0, camera_boundaries.size.y)
 		)
 		var entity: KinematicBody2D = spawner.Entity.instance()
 		entity.global_position = new_pos
@@ -47,7 +46,7 @@ func set_behavior_mode(mode: int) -> void:
 	behavior_mode = mode
 	if not is_inside_tree():
 		return
-	
+
 	match mode:
 		Mode.SEEK:
 			for child in spawner.get_children():
@@ -61,7 +60,7 @@ func set_linear_speed_max(value: float) -> void:
 	linear_speed_max = value
 	if not is_inside_tree():
 		return
-	
+
 	for child in spawner.get_children():
 		child.agent.linear_speed_max = value
 
@@ -70,7 +69,7 @@ func set_linear_accel_max(value: float) -> void:
 	linear_accel_max = value
 	if not is_inside_tree():
 		return
-	
+
 	for child in spawner.get_children():
 		child.agent.linear_acceleration_max = value
 
@@ -79,5 +78,5 @@ func set_player_speed(value: float) -> void:
 	player_speed = value
 	if not is_inside_tree():
 		return
-	
+
 	player.speed = player_speed

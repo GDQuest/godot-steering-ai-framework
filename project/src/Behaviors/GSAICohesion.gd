@@ -3,7 +3,6 @@
 class_name GSAICohesion
 extends GSAIGroupBehavior
 
-
 var _center_of_mass: Vector3
 
 
@@ -17,7 +16,10 @@ func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:
 	var neighbor_count = proximity._find_neighbors(_callback)
 	if neighbor_count > 0:
 		_center_of_mass *= 1.0 / neighbor_count
-		acceleration.linear = (_center_of_mass - agent.position).normalized() * agent.linear_acceleration_max
+		acceleration.linear = (
+			(_center_of_mass - agent.position).normalized()
+			* agent.linear_acceleration_max
+		)
 
 
 # Callback for the proximity to call when finding neighbors. Adds `neighbor`'s position

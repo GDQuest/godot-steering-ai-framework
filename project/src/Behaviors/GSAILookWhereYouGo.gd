@@ -12,7 +12,8 @@ func _calculate_steering(accel: GSAITargetAcceleration) -> void:
 	if agent.linear_velocity.length_squared() < agent.zero_linear_speed_threshold:
 		accel.set_zero()
 	else:
-		var orientation := (GSAIUtils.vector3_to_angle(agent.linear_velocity)
+		var orientation := (
+			GSAIUtils.vector3_to_angle(agent.linear_velocity)
 			if use_z
 			else GSAIUtils.vector2_to_angle(GSAIUtils.to_vector2(agent.linear_velocity))
 		)

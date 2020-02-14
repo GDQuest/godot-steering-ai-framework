@@ -2,7 +2,6 @@
 # system.
 class_name GSAITargetAcceleration
 
-
 # Linear acceleration
 var linear := Vector3.ZERO
 # Angular acceleration

@@ -4,7 +4,6 @@
 class_name GSAIMatchOrientation
 extends GSAISteeringBehavior
 
-
 # The target orientation for the behavior to try and match rotations to.
 var target: GSAIAgentLocation
 # The amount of distance in radians for the behavior to consider itself close
@@ -39,11 +38,11 @@ func _match_orientation(acceleration: GSAITargetAcceleration, desired_orientatio
 
 		desired_rotation *= rotation / rotation_size
 
-		acceleration.angular = (desired_rotation - agent.angular_velocity) / time_to_reach
+		acceleration.angular = ((desired_rotation - agent.angular_velocity) / time_to_reach)
 
 		var limited_acceleration := abs(acceleration.angular)
 		if limited_acceleration > agent.angular_acceleration_max:
-			acceleration.angular *= agent.angular_acceleration_max / limited_acceleration
+			acceleration.angular *= (agent.angular_acceleration_max / limited_acceleration)
 
 	acceleration.linear = Vector3.ZERO
 

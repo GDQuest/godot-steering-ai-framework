@@ -3,7 +3,6 @@
 extends GSAIProximity
 class_name GSAIRadiusProximity
 
-
 # The radius around the owning agent to find neighbors in
 var radius := 0.0
 

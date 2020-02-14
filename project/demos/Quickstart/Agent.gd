@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 # Maximum possible linear velocity
 export var speed_max := 450.0
 # Maximum change in linear velocity
@@ -73,7 +72,7 @@ func _ready() -> void:
 	# Face turns the agent to keep looking towards its target. It will be enabled while the agent
 	# is not fleeing due to low health. It tries to arrive 'on alignment' with 0 remaining velocity.
 	var face := GSAIFace.new(agent, player_agent)
-	
+
 	# We use deg2rad because the math in the toolkit assumes radians.
 	# How close for the agent to be 'aligned', if not exact.
 	face.alignment_tolerance = deg2rad(5)
@@ -119,22 +118,20 @@ func _physics_process(delta: float) -> void:
 
 	# We add the discovered acceleration to our linear velocity. The toolkit does not limit
 	# velocity, just acceleration, so we clamp the result ourselves here.
-	velocity = (velocity + Vector2(
-					acceleration.linear.x, acceleration.linear.y)
-	).clamped(agent.linear_speed_max)
-	
+	velocity = (velocity + Vector2(acceleration.linear.x, acceleration.linear.y)).clamped(
+		agent.linear_speed_max
+	)
+
 	# This applies drag on the agent's motion, helping it to slow down naturally.
 	velocity = velocity.linear_interpolate(Vector2.ZERO, linear_drag)
-	
+
 	# And since we're using a KinematicBody2D, we use Godot's excellent move_and_slide to actually
 	# apply the final movement, and record any change in velocity the physics engine discovered.
 	velocity = move_and_slide(velocity)
 
 	# We then do something similar to apply our agent's rotational speed.
 	angular_velocity = clamp(
-			angular_velocity + acceleration.angular,
-			-agent.angular_speed_max,
-			agent.angular_speed_max
+		angular_velocity + acceleration.angular, -agent.angular_speed_max, agent.angular_speed_max
 	)
 	# This applies drag on the agent's rotation, helping it slow down naturally.
 	angular_velocity = lerp(angular_velocity, 0, angular_drag)

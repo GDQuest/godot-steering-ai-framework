@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 export var speed_max := 650.0
 export var acceleration_max := 70.0
 export var rotation_speed_max := 240
@@ -25,27 +24,27 @@ func _ready() -> void:
 	agent.angular_acceleration_max = deg2rad(rotation_accel_max)
 	agent.bounding_radius = calculate_radius($CollisionPolygon2D.polygon)
 	update_agent()
-	
+
 	var mouse_pos := get_global_mouse_position()
 	proxy_target.position.x = mouse_pos.x
 	proxy_target.position.y = mouse_pos.y
-	
+
 	face.alignment_tolerance = deg2rad(5)
 	face.deceleration_radius = deg2rad(45)
 
 
 func _physics_process(delta: float) -> void:
 	update_agent()
-	
+
 	var movement := get_movement()
-	
+
 	direction = GSAIUtils.angle_to_vector2(rotation)
-	
+
 	velocity += direction * acceleration_max * movement
 	velocity = velocity.clamped(speed_max)
 	velocity = velocity.linear_interpolate(Vector2.ZERO, 0.1)
 	velocity = move_and_slide(velocity)
-	
+
 	face.calculate_steering(accel)
 	angular_velocity += accel.angular
 	angular_velocity = clamp(angular_velocity, -agent.angular_speed_max, agent.angular_speed_max)
@@ -60,8 +59,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		proxy_target.position.y = mouse_pos.y
 	elif event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			var next_bullet: = bullet.instance()
-			next_bullet.global_position = global_position - direction * (agent.bounding_radius-5)
+			var next_bullet := bullet.instance()
+			next_bullet.global_position = (
+				global_position
+				- direction * (agent.bounding_radius - 5)
+			)
 			next_bullet.player = self
 			next_bullet.start(-direction)
 			bullets.add_child(next_bullet)

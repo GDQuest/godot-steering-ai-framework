@@ -2,7 +2,6 @@
 class_name GSAIFollowPath
 extends GSAIArrive
 
-
 # The path to follow and travel along.
 var path: GSAIPath
 # The distance along the path to generate the next target position.
@@ -15,11 +14,9 @@ var is_arrive_enabled := true
 var prediction_time := 0.0
 
 
-func _init(
-		agent: GSAISteeringAgent,
-		_path: GSAIPath,
-		_path_offset := 0.0,
-		_prediction_time := 0.0).(agent, null) -> void:
+func _init(agent: GSAISteeringAgent, _path: GSAIPath, _path_offset := 0.0, _prediction_time := 0.0).(
+	agent, null
+) -> void:
 	self.path = _path
 	self.path_offset = _path_offset
 	self.prediction_time = _prediction_time
@@ -27,18 +24,20 @@ func _init(
 
 func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:
 	var location := (
-			agent.position if prediction_time == 0
-			else agent.position + (agent.linear_velocity * prediction_time))
+		agent.position
+		if prediction_time == 0
+		else agent.position + (agent.linear_velocity * prediction_time)
+	)
 
 	var distance := path.calculate_distance(location)
 	var target_distance := distance + path_offset
-	
+
 	if prediction_time > 0 and path.is_open:
 		if target_distance < path.calculate_distance(agent.position):
 			target_distance = path.length
 
 	var target_position := path.calculate_target_position(target_distance)
-	
+
 	if is_arrive_enabled and path.is_open:
 		if path_offset >= 0:
 			if target_distance > path.length - deceleration_radius:

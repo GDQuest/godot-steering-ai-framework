@@ -7,7 +7,6 @@
 # Individual steering behaviors encapsulate the steering logic.
 class_name GSAISteeringBehavior
 
-
 # If `false`, all calculations return zero amounts of acceleration.
 var is_enabled := true
 # The AI agent on which the steering behavior bases its calculations.

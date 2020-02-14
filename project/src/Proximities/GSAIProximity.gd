@@ -2,7 +2,6 @@
 extends Reference
 class_name GSAIProximity
 
-
 # The owning agent whose neighbors are found in the group
 var agent: GSAISteeringAgent
 # The agents who are part of this group and could be potential neighbors

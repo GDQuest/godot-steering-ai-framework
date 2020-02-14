@@ -1,6 +1,5 @@
 extends Node2D
 
-
 const COLORS := {
 	deceleration_radius = Color(1.0, 0.419, 0.592, 0.5),
 	arrival_tolerance = Color(0.278, 0.231, 0.47, 0.3)

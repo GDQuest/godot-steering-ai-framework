@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 var agent := GSAIKinematicBody2DAgent.new(self)
 var target := GSAIAgentLocation.new()
 var arrive := GSAIArrive.new(agent, target)

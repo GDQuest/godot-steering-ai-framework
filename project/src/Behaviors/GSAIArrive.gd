@@ -3,7 +3,6 @@
 class_name GSAIArrive
 extends GSAISteeringBehavior
 
-
 # Target agent to arrive to.
 var target: GSAIAgentLocation
 # Distance from the target for the agent to be considered successfully
@@ -31,9 +30,9 @@ func _arrive(acceleration: GSAITargetAcceleration, target_position: Vector3) -> 
 		if distance <= deceleration_radius:
 			desired_speed *= distance / deceleration_radius
 
-		var desired_velocity := to_target * desired_speed/distance
+		var desired_velocity := to_target * desired_speed / distance
 
-		desired_velocity = (desired_velocity - agent.linear_velocity) * 1.0 / time_to_reach
+		desired_velocity = ((desired_velocity - agent.linear_velocity) * 1.0 / time_to_reach)
 
 		acceleration.linear = GSAIUtils.clampedv3(desired_velocity, agent.linear_acceleration_max)
 		acceleration.angular = 0
