@@ -2,6 +2,17 @@
 
 This document lists new features, improvements, changes, and bug fixes in every release of the add-on.
 
+## Godot Steering AI Framework 2.1.1 ##
+
+### Changes ###
+
+- Unused and undocumented variable `_body_type` has been removed from `SpecializedAgent`
+
+### Bug fixes ###
+
+- The specialized agents now use WeakRef internally to prevent crashes when their `body` is freed.
+- `RigidBody2DAgent` now properly connects to physics updates.
+
 ## Godot Steering AI Framework 2.1.0 ##
 
 ### Features ###

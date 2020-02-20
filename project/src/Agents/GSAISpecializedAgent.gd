@@ -29,7 +29,6 @@ var linear_drag_percentage := 0.0
 var angular_drag_percentage := 0.0
 
 var _last_orientation: float
-var _body_type: int
 var _applied_steering := false
 
 
