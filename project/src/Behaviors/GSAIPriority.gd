@@ -1,5 +1,6 @@
 # Container for multiple behaviors that returns the result of the first child
 # behavior with non-zero acceleration.
+# category: Combination behaviors
 class_name GSAIPriority
 extends GSAISteeringBehavior
 

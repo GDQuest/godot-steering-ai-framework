@@ -1,4 +1,5 @@
 # Produces a linear acceleration that moves the agent along the specified path.
+# category: Individual behaviors
 class_name GSAIFollowPath
 extends GSAIArrive
 

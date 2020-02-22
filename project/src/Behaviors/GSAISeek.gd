@@ -1,5 +1,6 @@
 # Calculates an acceleration to take an agent to a target agent's position
 # directly.
+# category: Individual behaviors
 class_name GSAISeek
 extends GSAISteeringBehavior
 

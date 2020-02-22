@@ -1,4 +1,5 @@
 # Base type for group-based steering behaviors.
+# category: Base types
 class_name GSAIGroupBehavior
 extends GSAISteeringBehavior
 

@@ -1,5 +1,6 @@
 # Determines any agent that is in the specified list as being neighbors with the
 # owner agent, regardless of distance.
+# category: Proximities
 extends GSAIProximity
 class_name GSAIInfiniteProximity
 

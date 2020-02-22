@@ -1,5 +1,6 @@
 # A specialized steering agent that updates itself every frame so the user does
 # not have to using a RigidBody
+# category: Specialized agents
 extends GSAISpecializedAgent
 class_name GSAIRigidBody3DAgent
 

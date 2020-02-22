@@ -1,5 +1,6 @@
 # Steers the agent to avoid obstacles in its path. Approximates obstacles as
 # spheres.
+# category: Group behaviors
 class_name GSAIAvoidCollisions
 extends GSAIGroupBehavior
 

@@ -1,5 +1,6 @@
 # Determines any agent that is in the specified list as being neighbors with the owner agent if
 # they lie within the specified radius.
+# category: Proximities
 extends GSAIProximity
 class_name GSAIRadiusProximity
 

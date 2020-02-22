@@ -1,5 +1,6 @@
 # A desired linear and angular amount of acceleration requested by the steering
 # system.
+# category: Base types
 class_name GSAITargetAcceleration
 
 # Linear acceleration

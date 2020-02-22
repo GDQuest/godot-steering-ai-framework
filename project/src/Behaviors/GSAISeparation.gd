@@ -4,6 +4,7 @@
 # The acceleration is an average based on all neighbors, multiplied by a
 # strength decreasing by the inverse square law in relation to distance, and it
 # accumulates.
+# category: Group behaviors
 class_name GSAISeparation
 extends GSAIGroupBehavior
 

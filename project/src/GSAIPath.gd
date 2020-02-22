@@ -1,5 +1,6 @@
 # Represents a path made up of Vector3 waypoints, split into segments path
 # follow behaviors can use.
+# category: Base types
 class_name GSAIPath
 extends Reference
 

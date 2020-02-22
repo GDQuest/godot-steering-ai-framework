@@ -1,5 +1,6 @@
 # A specialized steering agent that updates itself every frame so the user does
 # not have to using a KinematicBody2D
+# category: Specialized agents
 extends GSAISpecializedAgent
 class_name GSAIKinematicBody2DAgent
 

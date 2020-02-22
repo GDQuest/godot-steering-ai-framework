@@ -1,4 +1,6 @@
 # Base container type that stores data to find the neighbors of an agent.
+# category: Proximities
+# tags: abstract
 extends Reference
 class_name GSAIProximity
 

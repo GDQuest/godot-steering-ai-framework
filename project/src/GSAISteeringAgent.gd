@@ -2,6 +2,7 @@
 #
 # It is the character's responsibility to keep this information up to date for
 # the steering toolkit to work correctly.
+# category: Base types
 extends GSAIAgentLocation
 class_name GSAISteeringAgent
 

@@ -1,5 +1,6 @@
 # A base class for a specialized steering agent that updates itself every frame
 # so the user does not have to. All other specialized agents derive from this.
+# category: Specialized agents
 # tags: abstract
 extends GSAISteeringAgent
 class_name GSAISpecializedAgent

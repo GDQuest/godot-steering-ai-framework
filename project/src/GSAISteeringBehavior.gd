@@ -5,6 +5,7 @@
 #
 # The `calculate_steering` function is the entry point for all behaviors.
 # Individual steering behaviors encapsulate the steering logic.
+# category: Base types
 class_name GSAISteeringBehavior
 
 # If `false`, all calculations return zero amounts of acceleration.

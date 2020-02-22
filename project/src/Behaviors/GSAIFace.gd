@@ -1,5 +1,6 @@
 # Calculates angular acceleration to rotate a target to face its target's
 # position. The behavior attemps to arrive with zero remaining angular velocity.
+# category: Individual behaviors
 class_name GSAIFace
 extends GSAIMatchOrientation
 
