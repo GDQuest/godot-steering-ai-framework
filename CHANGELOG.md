@@ -2,17 +2,6 @@
 
 This document lists new features, improvements, changes, and bug fixes in every release of the add-on.
 
-## Godot Steering AI Framework 2.1.1 ##
-
-### Changes ###
-
-- Unused and undocumented variable `_body_type` has been removed from `SpecializedAgent`
-
-### Bug fixes ###
-
-- The specialized agents now use WeakRef internally to prevent crashes when their `body` is freed.
-- `RigidBody2DAgent` now properly connects to physics updates.
-
 ## Godot Steering AI Framework 2.1.0 ##
 
 ### Features ###
@@ -29,6 +18,7 @@ This document lists new features, improvements, changes, and bug fixes in every 
 - `GSAIMatchOrientation` and its subclasses like `GSAIFace` and `GSAILookWhereYouGo` now include a `use_z` property. It should be `true` when using 3D so that facing will be done with the X and Z components.
 - The README now mentions a simple way to install the framework.
 - Exposed `agent_count` inside the `AvoidCollisionsDemo`.
+- Unused and undocumented variable `_body_type` has been removed from `SpecializedAgent`
 
 ### Bug fixes ###
 
@@ -36,6 +26,8 @@ This document lists new features, improvements, changes, and bug fixes in every 
 - The `SeekFleeDemo`'s boundaries will now match the size of the screen.
 - Fixed error when double clicking an item in the DemoPicker.
 - Fixed the background sometimes not covering the entire viewport in demos.
+- The specialized agents now use WeakRef internally to prevent crashes when their `body` is freed.
+- `RigidBody2DAgent` now properly connects to physics updates.
 
 ## Godot Steering AI Framework 2.0.0 ##
 
