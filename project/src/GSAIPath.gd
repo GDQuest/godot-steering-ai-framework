@@ -13,6 +13,7 @@ var _segments: Array
 
 var _nearest_point_on_segment: Vector3
 var _nearest_point_on_path: Vector3
+var _nearest_segment_index : int
 
 
 func _init(waypoints: Array, _is_open := false) -> void:
@@ -63,6 +64,7 @@ func calculate_distance(agent_current_position: Vector3) -> float:
 			_nearest_point_on_path = _nearest_point_on_segment
 			smallest_distance_squared = distance_squared
 			nearest_segment = segment
+			_nearest_segment_index = i
 
 	var length_on_path := (
 		nearest_segment.cumulative_length
