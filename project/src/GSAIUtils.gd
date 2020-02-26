@@ -35,3 +35,11 @@ static func to_vector2(vector: Vector3) -> Vector2:
 # Returns a vector3 with `vector`'s x and y components and 0 in z.
 static func to_vector3(vector: Vector2) -> Vector3:
 	return Vector3(vector.x, vector.y, 0)
+
+# Returns an array of vector3s from a path2d's curve.
+static func get_waypoints_from_path2d(path2d : Path2D) -> Array:
+	var waypoints = []
+	for p in path2d.curve.get_baked_points():
+		waypoints.append(to_vector3(p))
+	return waypoints
+
