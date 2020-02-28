@@ -42,4 +42,3 @@ static func get_waypoints_from_path2d(path2d : Path2D) -> Array:
 	for p in path2d.curve.get_baked_points():
 		waypoints.append(to_vector3(p))
 	return waypoints
-

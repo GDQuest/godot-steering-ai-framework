@@ -4,6 +4,8 @@
 class_name GSAIArrive
 extends GSAISteeringBehavior
 
+signal arrive
+
 # Target agent to arrive to.
 var target: GSAIAgentLocation
 # Distance from the target for the agent to be considered successfully
@@ -24,6 +26,7 @@ func _arrive(acceleration: GSAITargetAcceleration, target_position: Vector3) -> 
 	var distance := to_target.length()
 
 	if distance <= arrival_tolerance:
+		emit_signal("arrive")
 		acceleration.set_zero()
 	else:
 		var desired_speed := agent.linear_speed_max
