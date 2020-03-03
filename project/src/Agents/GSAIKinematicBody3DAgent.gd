@@ -38,19 +38,19 @@ func _apply_steering(acceleration: GSAITargetAcceleration, delta: float) -> void
 		MovementType.COLLIDE:
 			_apply_collide_steering(acceleration.linear, delta)
 		MovementType.SLIDE:
-			_apply_sliding_steering(acceleration.linear)
+			_apply_sliding_steering(acceleration.linear, delta)
 		_:
 			_apply_position_steering(acceleration.linear, delta)
 
 	_apply_orientation_steering(acceleration.angular, delta)
 
 
-func _apply_sliding_steering(accel: Vector3) -> void:
+func _apply_sliding_steering(accel: Vector3, delta: float) -> void:
 	var _body: KinematicBody = _body_ref.get_ref()
 	if not _body:
 		return
 		
-	var velocity := GSAIUtils.clampedv3(linear_velocity + accel, linear_speed_max)
+	var velocity := GSAIUtils.clampedv3(linear_velocity + accel * delta, linear_speed_max)
 	if apply_linear_drag:
 		velocity = velocity.linear_interpolate(Vector3.ZERO, linear_drag_percentage)
 	velocity = _body.move_and_slide(velocity)
@@ -63,7 +63,7 @@ func _apply_collide_steering(accel: Vector3, delta: float) -> void:
 	if not _body:
 		return
 		
-	var velocity := GSAIUtils.clampedv3(linear_velocity + accel, linear_speed_max)
+	var velocity := GSAIUtils.clampedv3(linear_velocity + accel * delta, linear_speed_max)
 	if apply_linear_drag:
 		velocity = velocity.linear_interpolate(Vector3.ZERO, linear_drag_percentage)
 	# warning-ignore:return_value_discarded
@@ -77,7 +77,7 @@ func _apply_position_steering(accel: Vector3, delta: float) -> void:
 	if not _body:
 		return
 		
-	var velocity := GSAIUtils.clampedv3(linear_velocity + accel, linear_speed_max)
+	var velocity := GSAIUtils.clampedv3(linear_velocity + accel * delta, linear_speed_max)
 	if apply_linear_drag:
 		velocity = velocity.linear_interpolate(Vector3.ZERO, linear_drag_percentage)
 	_body.global_position += velocity * delta
@@ -90,7 +90,11 @@ func _apply_orientation_steering(angular_acceleration: float, delta: float) -> v
 	if not _body:
 		return
 		
-	var velocity = angular_velocity + angular_acceleration
+	var velocity = clamp(
+		angular_velocity + angular_acceleration * delta,
+		-angular_acceleration_max,
+		angular_acceleration_max
+	)
 	if apply_angular_drag:
 		velocity = lerp(velocity, 0, angular_drag_percentage)
 	_body.rotation.y += velocity * delta

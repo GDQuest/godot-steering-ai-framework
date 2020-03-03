@@ -10,8 +10,8 @@
 
 [node name="PursueVSSeekDemo" type="Node"]
 script = ExtResource( 4 )
-linear_speed_max = 400.0
-linear_accel_max = 80.0
+linear_speed_max = 1280.0
+linear_accel_max = 1040.0
 predict_time = 1.1
 
 [node name="BackgroudLayer" parent="." instance=ExtResource( 7 )]

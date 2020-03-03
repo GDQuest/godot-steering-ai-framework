@@ -8,8 +8,11 @@
 
 [node name="GroupBehaviorsDemo" type="Node"]
 script = ExtResource( 3 )
+linear_accel_max = 4234.0
+proximity_radius = 158.0
+separation_decay_coefficient = 121500.0
 cohesion_strength = 0.2
-separation_strength = 4.5
+separation_strength = 8.8
 
 [node name="BackgroudLayer" parent="." instance=ExtResource( 5 )]
 

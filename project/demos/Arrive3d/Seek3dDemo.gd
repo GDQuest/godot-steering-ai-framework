@@ -1,13 +1,13 @@
 extends Node
 
-export (float, 0, 50, 0.1) var linear_speed_max := 10.0 setget set_linear_speed_max
-export (float, 0, 50, 0.1) var linear_acceleration_max := 1.0 setget set_linear_acceleration_max
+export (float, 0, 100, 5) var linear_speed_max := 10.0 setget set_linear_speed_max
+export (float, 0, 100, 0.1) var linear_acceleration_max := 1.0 setget set_linear_acceleration_max
 export (float, 0, 50, 0.1) var arrival_tolerance := 0.5 setget set_arrival_tolerance
 export (float, 0, 50, 0.1) var deceleration_radius := 5.0 setget set_deceleration_radius
-export (int, 0, 359, 2) var angular_speed_max := 270 setget set_angular_speed_max
-export (int, 0, 359, 2) var angular_accel_max := 45 setget set_angular_accel_max
-export (int, 0, 180, 2) var align_tolerance := 5 setget set_align_tolerance
-export (int, 0, 359, 2) var angular_deceleration_radius := 45 setget set_angular_deceleration_radius
+export (int, 0, 1080, 10) var angular_speed_max := 270 setget set_angular_speed_max
+export (int, 0, 2048, 10) var angular_accel_max := 45 setget set_angular_accel_max
+export (int, 0, 178, 2) var align_tolerance := 5 setget set_align_tolerance
+export (int, 0, 180, 2) var angular_deceleration_radius := 45 setget set_angular_deceleration_radius
 
 onready var target := $MouseTarget
 onready var arriver := $Arriver

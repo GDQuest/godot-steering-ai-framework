@@ -8,7 +8,8 @@
 
 [node name="AvoidCollisionsDemo" type="Node"]
 script = ExtResource( 2 )
-linear_speed_max = 400.0
+linear_speed_max = 520.0
+linear_acceleration_max = 2250.0
 proximity_radius = 100.0
 
 [node name="BackgroudLayer" parent="." instance=ExtResource( 5 )]

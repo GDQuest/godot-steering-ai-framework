@@ -77,7 +77,7 @@ func _ready() -> void:
 	# How close for the agent to be 'aligned', if not exact.
 	face.alignment_tolerance = deg2rad(5)
 	# When to start slowing down
-	face.deceleration_radius = deg2rad(45)
+	face.deceleration_radius = deg2rad(60)
 
 	# LookWhereYouGo turns the agent to keep looking towards its direction of travel. It will only
 	# be enabled while the agent is at low health.
@@ -85,7 +85,7 @@ func _ready() -> void:
 	# How close for the agent to be 'aligned', if not exact
 	look.alignment_tolerance = deg2rad(5)
 	# When to start slowing down.
-	look.deceleration_radius = deg2rad(45)
+	look.deceleration_radius = deg2rad(60)
 
 	# Behaviors that are not enabled produce 0 acceleration.
 	# Adding our fleeing behaviors to a blend. The order does not matter.
@@ -118,7 +118,7 @@ func _physics_process(delta: float) -> void:
 
 	# We add the discovered acceleration to our linear velocity. The toolkit does not limit
 	# velocity, just acceleration, so we clamp the result ourselves here.
-	velocity = (velocity + Vector2(acceleration.linear.x, acceleration.linear.y)).clamped(
+	velocity = (velocity + Vector2(acceleration.linear.x, acceleration.linear.y) * delta).clamped(
 		agent.linear_speed_max
 	)
 
@@ -131,7 +131,7 @@ func _physics_process(delta: float) -> void:
 
 	# We then do something similar to apply our agent's rotational speed.
 	angular_velocity = clamp(
-		angular_velocity + acceleration.angular, -agent.angular_speed_max, agent.angular_speed_max
+		angular_velocity + acceleration.angular * delta, -agent.angular_speed_max, agent.angular_speed_max
 	)
 	# This applies drag on the agent's rotation, helping it slow down naturally.
 	angular_velocity = lerp(angular_velocity, 0, angular_drag)

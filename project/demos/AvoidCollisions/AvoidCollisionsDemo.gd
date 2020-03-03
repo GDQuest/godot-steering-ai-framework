@@ -1,7 +1,7 @@
 extends Node
 
-export (float, 0, 2000, 40) var linear_speed_max := 350.0 setget set_linear_speed_max
-export (float, 0, 100, 2) var linear_acceleration_max := 40.0 setget set_linear_accel_max
+export (float, 0, 1000, 40) var linear_speed_max := 350.0 setget set_linear_speed_max
+export (float, 0, 4000, 2) var linear_acceleration_max := 40.0 setget set_linear_accel_max
 export (float, 0, 500, 10) var proximity_radius := 140.0 setget set_proximity_radius
 export var draw_proximity := true setget set_draw_proximity
 

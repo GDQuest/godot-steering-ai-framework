@@ -4,8 +4,8 @@ extends Node
 enum Mode { FLEE, SEEK }
 
 export (Mode) var behavior_mode := Mode.SEEK setget set_behavior_mode
-export (float, 0, 2000, 40) var linear_speed_max := 200.0 setget set_linear_speed_max
-export (float, 0, 500, 0.5) var linear_accel_max := 10.0 setget set_linear_accel_max
+export (float, 0, 1000, 30) var linear_speed_max := 200.0 setget set_linear_speed_max
+export (float, 0, 2000, 40) var linear_accel_max := 10.0 setget set_linear_accel_max
 export (float) var player_speed := 600.0 setget set_player_speed
 
 var camera_boundaries: Rect2

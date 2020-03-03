@@ -12,7 +12,8 @@ radius = 24.1954
 
 [node name="FollowPathDemo" type="Node"]
 script = ExtResource( 4 )
-linear_acceleration_max = 50.0
+linear_speed_max = 920.0
+linear_acceleration_max = 3740.0
 deceleration_radius = 200.0
 
 [node name="BackgroudLayer" parent="." instance=ExtResource( 5 )]

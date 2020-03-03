@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 	_blend.calculate_steering(accel)
 
 	agent.angular_velocity = clamp(
-		agent.angular_velocity + accel.angular, -agent.angular_speed_max, agent.angular_speed_max
+		agent.angular_velocity + accel.angular * delta, -agent.angular_speed_max, agent.angular_speed_max
 	)
 	agent.angular_velocity = lerp(agent.angular_velocity, 0, _angular_drag)
 
@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 
 	var linear_velocity := (
 		GSAIUtils.to_vector2(agent.linear_velocity)
-		+ (GSAIUtils.angle_to_vector2(rotation) * -agent.linear_acceleration_max)
+		+ (GSAIUtils.angle_to_vector2(rotation) * -agent.linear_acceleration_max * delta)
 	)
 	linear_velocity = linear_velocity.clamped(agent.linear_speed_max)
 	linear_velocity = linear_velocity.linear_interpolate(Vector2.ZERO, _linear_drag_coefficient)
@@ -51,14 +51,14 @@ func setup(predict_time: float, linear_speed_max: float, linear_accel_max: float
 
 	var orient_behavior := GSAIFace.new(agent, _direction_face)
 	orient_behavior.alignment_tolerance = deg2rad(5)
-	orient_behavior.deceleration_radius = deg2rad(5)
+	orient_behavior.deceleration_radius = deg2rad(30)
 
 	_blend = GSAIBlend.new(agent)
 	_blend.add(behavior, 1)
 	_blend.add(orient_behavior, 1)
 
-	agent.angular_acceleration_max = deg2rad(40)
-	agent.angular_speed_max = deg2rad(90)
+	agent.angular_acceleration_max = deg2rad(1080)
+	agent.angular_speed_max = deg2rad(360)
 	agent.linear_acceleration_max = linear_accel_max
 	agent.linear_speed_max = linear_speed_max
 

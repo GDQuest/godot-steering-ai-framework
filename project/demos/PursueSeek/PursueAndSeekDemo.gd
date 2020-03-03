@@ -1,7 +1,7 @@
 extends Node
 
 export (float, 0, 2000, 40) var linear_speed_max := 120.0 setget set_linear_speed_max
-export (float, 0, 200, 2) var linear_accel_max := 10.0 setget set_linear_accel_max
+export (float, 0, 2000, 20) var linear_accel_max := 10.0 setget set_linear_accel_max
 export (float, 0, 5, 0.1) var predict_time := 1.0 setget set_predict_time
 
 onready var pursuer := $BoundaryManager/Pursuer

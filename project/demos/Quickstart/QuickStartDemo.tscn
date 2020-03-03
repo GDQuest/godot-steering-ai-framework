@@ -17,6 +17,10 @@ position = Vector2( 402.346, 573.791 )
 rotation = 1.5708
 collision_mask = 2
 script = ExtResource( 3 )
+speed_max = 900.0
+acceleration_max = 4200.0
+rotation_speed_max = 360
+rotation_accel_max = 1280
 bullet = ExtResource( 4 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
@@ -37,6 +41,10 @@ rotation = 1.5708
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 2 )
+speed_max = 600.0
+acceleration_max = 2800.0
+angular_speed_max = 360
+angular_acceleration_max = 1280
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Agent"]
 polygon = PoolVector2Array( 0, -32, -24, 32, 24, 32 )

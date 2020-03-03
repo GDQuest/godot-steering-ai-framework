@@ -33,6 +33,11 @@ albedo_color = Color( 0.0941176, 0.235294, 0.486275, 1 )
 
 [node name="Arrive3dDemo" type="Node"]
 script = ExtResource( 3 )
+linear_speed_max = 50.0
+linear_acceleration_max = 53.2
+deceleration_radius = 10.8
+angular_speed_max = 550
+angular_accel_max = 910
 
 [node name="Arriver" type="KinematicBody" parent="."]
 script = ExtResource( 4 )

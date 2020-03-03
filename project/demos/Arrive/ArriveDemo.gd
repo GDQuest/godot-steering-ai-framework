@@ -1,7 +1,7 @@
 extends Node
 
-export (float, 0, 2000, 40) var linear_speed_max := 800.0 setget set_linear_speed_max
-export (float, 0, 200, 2.0) var linear_acceleration_max := 80.0 setget set_linear_acceleration_max
+export (float, 0, 3200, 100) var linear_speed_max := 800.0 setget set_linear_speed_max
+export (float, 0, 10000, 100) var linear_acceleration_max := 80.0 setget set_linear_acceleration_max
 export (float, 0, 100, 0.1) var arrival_tolerance := 25.0 setget set_arrival_tolerance
 export (float, 0, 500, 10) var deceleration_radius := 125.0 setget set_deceleration_radius
 

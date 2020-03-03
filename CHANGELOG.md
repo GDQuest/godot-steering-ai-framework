@@ -2,6 +2,10 @@
 
 This document lists new features, improvements, changes, and bug fixes in every release of the add-on.
 
+## Master ##
+
+- Acceleration for agents are multiplied by delta so values are acceleration per second. The demos' values have been increased significantly to compensate.
+
 ## Godot Steering AI Framework 2.1.0 ##
 
 ### Features ###

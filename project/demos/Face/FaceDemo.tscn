@@ -15,8 +15,9 @@ radius = 37.1052
 
 [node name="FaceDemo" type="Node"]
 script = ExtResource( 2 )
-angular_speed_max = 160
-angular_accel_max = 16
+angular_speed_max = 662
+angular_accel_max = 924
+deceleration_radius = 136
 
 [node name="BackgroudLayer" parent="." instance=ExtResource( 5 )]
 

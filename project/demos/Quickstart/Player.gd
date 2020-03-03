@@ -40,13 +40,13 @@ func _physics_process(delta: float) -> void:
 
 	direction = GSAIUtils.angle_to_vector2(rotation)
 
-	velocity += direction * acceleration_max * movement
+	velocity += direction * acceleration_max * movement * delta
 	velocity = velocity.clamped(speed_max)
 	velocity = velocity.linear_interpolate(Vector2.ZERO, 0.1)
 	velocity = move_and_slide(velocity)
 
 	face.calculate_steering(accel)
-	angular_velocity += accel.angular
+	angular_velocity += accel.angular * delta
 	angular_velocity = clamp(angular_velocity, -agent.angular_speed_max, agent.angular_speed_max)
 	angular_velocity = lerp(angular_velocity, 0, 0.1)
 	rotation += angular_velocity * delta

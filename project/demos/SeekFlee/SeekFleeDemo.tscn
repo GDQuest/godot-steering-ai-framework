@@ -20,6 +20,8 @@ extents = Vector2( 965.654, 10 )
 
 [node name="SeekFleeDemo" type="Node"]
 script = ExtResource( 3 )
+linear_speed_max = 570.0
+linear_accel_max = 1160.0
 
 [node name="BackgroudLayer" parent="." instance=ExtResource( 8 )]
 

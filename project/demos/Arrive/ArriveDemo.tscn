@@ -12,6 +12,10 @@ radius = 23.2163
 
 [node name="ArriveDemo" type="Node"]
 script = ExtResource( 3 )
+linear_speed_max = 1600.0
+linear_acceleration_max = 5000.0
+arrival_tolerance = 35.0
+deceleration_radius = 180.0
 
 [node name="BackgroudLayer" parent="." instance=ExtResource( 4 )]
 
