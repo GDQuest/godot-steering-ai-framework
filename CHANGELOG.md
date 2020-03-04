@@ -4,7 +4,9 @@ This document lists new features, improvements, changes, and bug fixes in every 
 
 ## Master ##
 
-- Acceleration for agents are multiplied by delta so values are acceleration per second. The demos' values have been increased significantly to compensate.
+### Changes ###
+
+- Acceleration for agents are now multiplied by delta in order to make acceleration be per second instead of instant. The demos' values have been increased significantly to better fit with reality.
 
 ## Godot Steering AI Framework 2.1.0 ##
 
