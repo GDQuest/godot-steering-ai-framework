@@ -8,6 +8,10 @@ This document lists new features, improvements, changes, and bug fixes in every 
 
 - Acceleration for agents are now multiplied by delta in order to make acceleration be per second instead of instant. The demos' values have been increased significantly to better fit with reality.
 
+### Fixes
+
+- KinematicBody2DAgents and KinematicBody3DAgents that moved fast enough no longer reverse velocity suddenly during a frame where no acceleration is applied.
+
 ## Godot Steering AI Framework 2.1.0 ##
 
 ### Features ###

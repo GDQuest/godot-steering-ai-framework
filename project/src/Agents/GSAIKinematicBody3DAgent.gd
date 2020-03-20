@@ -128,7 +128,7 @@ func _on_SceneTree_physics_frame() -> void:
 			_applied_steering = false
 		else:
 			linear_velocity = GSAIUtils.clampedv3(
-				_last_position - current_position, linear_speed_max
+				current_position - _last_position, linear_speed_max
 			)
 			if apply_linear_drag:
 				linear_velocity = linear_velocity.linear_interpolate(
