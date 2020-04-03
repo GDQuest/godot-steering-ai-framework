@@ -1,5 +1,5 @@
 # Calculates acceleration to take an agent directly away from a target agent.
-# category: Individual behaviors
+# @category - Individual behaviors
 class_name GSAIFlee
 extends GSAISeek
 

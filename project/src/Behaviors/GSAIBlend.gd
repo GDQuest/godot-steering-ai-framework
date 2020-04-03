@@ -6,7 +6,7 @@
 # 	behavior : GSAISteeringBehavior,
 # 	weight : float
 # }
-# category: Combination behaviors
+# @category - Combination behaviors
 class_name GSAIBlend
 extends GSAISteeringBehavior
 

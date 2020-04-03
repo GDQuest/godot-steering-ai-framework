@@ -1,6 +1,6 @@
 # Calculates an acceleration to make an agent intercept another based on the
 # target agent's movement.
-# category: Individual behaviors
+# @category - Individual behaviors
 class_name GSAIPursue
 extends GSAISteeringBehavior
 

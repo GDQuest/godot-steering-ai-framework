@@ -1,6 +1,6 @@
 # Base container type that stores data to find the neighbors of an agent.
-# category: Proximities
-# tags: abstract
+# @category - Proximities
+# @tags - abstract
 extends Reference
 class_name GSAIProximity
 
@@ -19,6 +19,6 @@ func _init(_agent: GSAISteeringAgent, _agents: Array) -> void:
 #
 # `_find_neighbors` calls `callback` for each agent in the `agents` array and
 # adds one to the count if its `callback` returns true.
-# tags: virtual
+# @tags - virtual
 func _find_neighbors(_callback: FuncRef) -> int:
 	return 0

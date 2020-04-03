@@ -1,6 +1,6 @@
 # A specialized steering agent that updates itself every frame so the user does
 # not have to using a KinematicBody2D
-# category: Specialized agents
+# @category - Specialized agents
 extends GSAISpecializedAgent
 class_name GSAIKinematicBody2DAgent
 
@@ -31,7 +31,7 @@ func _init(_body: KinematicBody2D, _movement_type: int = MovementType.SLIDE) -> 
 
 
 # Moves the agent's `body` by target `acceleration`.
-# tags: virtual
+# @tags - virtual
 func _apply_steering(acceleration: GSAITargetAcceleration, delta: float) -> void:
 	_applied_steering = true
 	match movement_type:

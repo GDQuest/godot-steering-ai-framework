@@ -1,6 +1,6 @@
 # A specialized steering agent that updates itself every frame so the user does
 # not have to using a RigidBody2D
-# category: Specialized agents
+# @category - Specialized agents
 extends GSAISpecializedAgent
 class_name GSAIRigidBody2DAgent
 
@@ -21,7 +21,7 @@ func _init(_body: RigidBody2D) -> void:
 
 
 # Moves the agent's `body` by target `acceleration`.
-# tags: virtual
+# @tags - virtual
 func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> void:
 	var _body: RigidBody2D = _body_ref.get_ref()
 	if not _body:

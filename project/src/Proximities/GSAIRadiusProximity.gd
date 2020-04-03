@@ -1,6 +1,6 @@
 # Determines any agent that is in the specified list as being neighbors with the owner agent if
 # they lie within the specified radius.
-# category: Proximities
+# @category - Proximities
 extends GSAIProximity
 class_name GSAIRadiusProximity
 
@@ -20,7 +20,7 @@ func _init(agent: GSAISteeringAgent, agents: Array, _radius: float).(agent, agen
 #
 # `_find_neighbors` calls `callback` for each agent in the `agents` array that lie within
 # the radius around the owning agent and adds one to the count if its `callback` returns true.
-# tags: virtual
+# @tags - virtual
 func _find_neighbors(callback: FuncRef) -> int:
 	var agent_count := agents.size()
 	var neighbor_count := 0

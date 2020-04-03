@@ -1,5 +1,5 @@
 # Represents an agent with only a location and an orientation.
-# category: Base types
+# @category - Base types
 class_name GSAIAgentLocation
 
 # The agent's position in space.

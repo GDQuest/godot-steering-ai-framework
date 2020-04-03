@@ -1,6 +1,6 @@
 # Calculates acceleration to take an agent away from where a target agent is
 # moving.
-# category: Individual behaviors
+# @category - Individual behaviors
 class_name GSAIEvade
 extends GSAIPursue
 

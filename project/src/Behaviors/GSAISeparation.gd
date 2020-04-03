@@ -4,7 +4,7 @@
 # The acceleration is an average based on all neighbors, multiplied by a
 # strength decreasing by the inverse square law in relation to distance, and it
 # accumulates.
-# category: Group behaviors
+# @category - Group behaviors
 class_name GSAISeparation
 extends GSAIGroupBehavior
 
@@ -27,7 +27,7 @@ func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:
 
 # Callback for the proximity to call when finding neighbors. Determines the amount of
 # acceleration that `neighbor` imposes based on its distance from the owner agent.
-# tags: virtual
+# @tags - virtual
 func _report_neighbor(neighbor: GSAISteeringAgent) -> bool:
 	var to_agent := agent.position - neighbor.position
 
