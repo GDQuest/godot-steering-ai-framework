@@ -18,7 +18,7 @@ func _init(_body: RigidBody2D) -> void:
 	_body_ref = weakref(_body)
 	# warning-ignore:return_value_discarded
 	_body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
-
+	body = _body
 
 # Moves the agent's `body` by target `acceleration`.
 # @tags - virtual
