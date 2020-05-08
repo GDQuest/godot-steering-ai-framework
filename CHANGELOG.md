@@ -11,6 +11,7 @@ This document lists new features, improvements, changes, and bug fixes in every 
 ### Fixes
 
 - KinematicBody2DAgents and KinematicBody3DAgents that moved fast enough no longer reverse velocity suddenly during a frame where no acceleration is applied.
+- RigidBody2DAgent should no longer crash due to a missing reference.
 
 ## Godot Steering AI Framework 2.1.0 ##
 

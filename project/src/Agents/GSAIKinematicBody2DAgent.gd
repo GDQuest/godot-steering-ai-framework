@@ -103,6 +103,7 @@ func _apply_orientation_steering(angular_acceleration: float, delta: float) -> v
 
 
 func _set_body(value: KinematicBody2D) -> void:
+	body = value
 	_body_ref = weakref(body)
 
 	_last_position = value.global_position

@@ -12,6 +12,7 @@ var _body_ref: WeakRef
 
 
 func _init(_body: RigidBody2D) -> void:
+	body = _body
 	if not _body.is_inside_tree():
 		yield(_body, "ready")
 
@@ -26,7 +27,7 @@ func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> voi
 	var _body: RigidBody2D = _body_ref.get_ref()
 	if not _body:
 		return
-		
+
 	_applied_steering = true
 	_body.apply_central_impulse(GSAIUtils.to_vector2(acceleration.linear))
 	_body.apply_torque_impulse(acceleration.angular)
@@ -36,6 +37,7 @@ func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> voi
 
 
 func _set_body(value: RigidBody2D) -> void:
+	body = value
 	_body_ref = weakref(value)
 
 	_last_position = value.global_position
@@ -49,9 +51,9 @@ func _on_SceneTree_frame() -> void:
 	var _body: RigidBody2D = _body_ref.get_ref()
 	if not _body:
 		return
-		
-	var current_position := body.global_position
-	var current_orientation := body.rotation
+
+	var current_position := _body.global_position
+	var current_orientation := _body.rotation
 
 	position = GSAIUtils.to_vector3(current_position)
 	orientation = current_orientation
@@ -60,5 +62,5 @@ func _on_SceneTree_frame() -> void:
 		if _applied_steering:
 			_applied_steering = false
 		else:
-			linear_velocity = GSAIUtils.to_vector3(body.linear_velocity)
-			angular_velocity = body.angular_velocity
+			linear_velocity = GSAIUtils.to_vector3(_body.linear_velocity)
+			angular_velocity = _body.angular_velocity

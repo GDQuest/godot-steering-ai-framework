@@ -11,6 +11,7 @@ var _last_position: Vector3
 var _body_ref: WeakRef
 
 func _init(_body: RigidBody) -> void:
+	body = _body
 	if not _body.is_inside_tree():
 		yield(_body, "ready")
 
@@ -35,6 +36,7 @@ func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> voi
 
 
 func _set_body(value: RigidBody) -> void:
+	body = value
 	_body_ref = weakref(value)
 
 	_last_position = value.transform.origin
