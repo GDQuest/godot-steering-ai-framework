@@ -5,7 +5,7 @@
   "classes": [
     {
       "name": "GSAIKinematicBody2DAgent",
-      "path": "res://src/Agents/GSAIKinematicBody2DAgent.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Agents/GSAIKinematicBody2DAgent.gd",
       "extends_class": [
         "GSAISpecializedAgent"
       ],
@@ -203,7 +203,7 @@
     },
     {
       "name": "GSAIKinematicBody3DAgent",
-      "path": "res://src/Agents/GSAIKinematicBody3DAgent.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Agents/GSAIKinematicBody3DAgent.gd",
       "extends_class": [
         "GSAISpecializedAgent"
       ],
@@ -401,7 +401,7 @@
     },
     {
       "name": "GSAIRigidBody2DAgent",
-      "path": "res://src/Agents/GSAIRigidBody2DAgent.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Agents/GSAIRigidBody2DAgent.gd",
       "extends_class": [
         "GSAISpecializedAgent"
       ],
@@ -511,7 +511,7 @@
     },
     {
       "name": "GSAIRigidBody3DAgent",
-      "path": "res://src/Agents/GSAIRigidBody3DAgent.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Agents/GSAIRigidBody3DAgent.gd",
       "extends_class": [
         "GSAISpecializedAgent"
       ],
@@ -621,7 +621,7 @@
     },
     {
       "name": "GSAISpecializedAgent",
-      "path": "res://src/Agents/GSAISpecializedAgent.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Agents/GSAISpecializedAgent.gd",
       "extends_class": [
         "GSAISteeringAgent"
       ],
@@ -735,7 +735,7 @@
     },
     {
       "name": "GSAIArrive",
-      "path": "res://src/Behaviors/GSAIArrive.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIArrive.gd",
       "extends_class": [
         "GSAISteeringBehavior"
       ],
@@ -849,7 +849,7 @@
     },
     {
       "name": "GSAIAvoidCollisions",
-      "path": "res://src/Behaviors/GSAIAvoidCollisions.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIAvoidCollisions.gd",
       "extends_class": [
         "GSAIGroupBehavior"
       ],
@@ -979,7 +979,7 @@
     },
     {
       "name": "GSAIBlend",
-      "path": "res://src/Behaviors/GSAIBlend.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIBlend.gd",
       "extends_class": [
         "GSAISteeringBehavior"
       ],
@@ -1082,7 +1082,7 @@
     },
     {
       "name": "GSAICohesion",
-      "path": "res://src/Behaviors/GSAICohesion.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAICohesion.gd",
       "extends_class": [
         "GSAIGroupBehavior"
       ],
@@ -1162,7 +1162,7 @@
     },
     {
       "name": "GSAIEvade",
-      "path": "res://src/Behaviors/GSAIEvade.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIEvade.gd",
       "extends_class": [
         "GSAIPursue"
       ],
@@ -1222,7 +1222,7 @@
     },
     {
       "name": "GSAIFace",
-      "path": "res://src/Behaviors/GSAIFace.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIFace.gd",
       "extends_class": [
         "GSAIMatchOrientation"
       ],
@@ -1302,7 +1302,7 @@
     },
     {
       "name": "GSAIFlee",
-      "path": "res://src/Behaviors/GSAIFlee.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIFlee.gd",
       "extends_class": [
         "GSAISeek"
       ],
@@ -1360,7 +1360,7 @@
     },
     {
       "name": "GSAIFollowPath",
-      "path": "res://src/Behaviors/GSAIFollowPath.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIFollowPath.gd",
       "extends_class": [
         "GSAIArrive"
       ],
@@ -1467,7 +1467,7 @@
     },
     {
       "name": "GSAILookWhereYouGo",
-      "path": "res://src/Behaviors/GSAILookWhereYouGo.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAILookWhereYouGo.gd",
       "extends_class": [
         "GSAIMatchOrientation"
       ],
@@ -1526,7 +1526,7 @@
     },
     {
       "name": "GSAIMatchOrientation",
-      "path": "res://src/Behaviors/GSAIMatchOrientation.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIMatchOrientation.gd",
       "extends_class": [
         "GSAISteeringBehavior"
       ],
@@ -1655,7 +1655,7 @@
     },
     {
       "name": "GSAIPriority",
-      "path": "res://src/Behaviors/GSAIPriority.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIPriority.gd",
       "extends_class": [
         "GSAISteeringBehavior"
       ],
@@ -1769,7 +1769,7 @@
     },
     {
       "name": "GSAIPursue",
-      "path": "res://src/Behaviors/GSAIPursue.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIPursue.gd",
       "extends_class": [
         "GSAISteeringBehavior"
       ],
@@ -1861,7 +1861,7 @@
     },
     {
       "name": "GSAISeek",
-      "path": "res://src/Behaviors/GSAISeek.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAISeek.gd",
       "extends_class": [
         "GSAISteeringBehavior"
       ],
@@ -1928,7 +1928,7 @@
     },
     {
       "name": "GSAISeparation",
-      "path": "res://src/Behaviors/GSAISeparation.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAISeparation.gd",
       "extends_class": [
         "GSAIGroupBehavior"
       ],
@@ -2018,7 +2018,7 @@
     },
     {
       "name": "GSAIAgentLocation",
-      "path": "res://src/GSAIAgentLocation.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAIAgentLocation.gd",
       "extends_class": [
 
       ],
@@ -2066,7 +2066,7 @@
     },
     {
       "name": "GSAIGroupBehavior",
-      "path": "res://src/GSAIGroupBehavior.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAIGroupBehavior.gd",
       "extends_class": [
         "GSAISteeringBehavior"
       ],
@@ -2143,7 +2143,7 @@
     },
     {
       "name": "GSAIPath",
-      "path": "res://src/GSAIPath.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAIPath.gd",
       "extends_class": [
         "Reference"
       ],
@@ -2154,7 +2154,7 @@
       "sub_classes": [
         {
           "name": "GSAISegment",
-          "path": "res://src/GSAIPath.gd",
+          "path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAIPath.gd",
           "extends_class": [
 
           ],
@@ -2401,7 +2401,7 @@
     },
     {
       "name": "GSAISteeringAgent",
-      "path": "res://src/GSAISteeringAgent.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAISteeringAgent.gd",
       "extends_class": [
         "GSAIAgentLocation"
       ],
@@ -2519,7 +2519,7 @@
     },
     {
       "name": "GSAISteeringBehavior",
-      "path": "res://src/GSAISteeringBehavior.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAISteeringBehavior.gd",
       "extends_class": [
 
       ],
@@ -2605,7 +2605,7 @@
     },
     {
       "name": "GSAITargetAcceleration",
-      "path": "res://src/GSAITargetAcceleration.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAITargetAcceleration.gd",
       "extends_class": [
 
       ],
@@ -2699,7 +2699,7 @@
     },
     {
       "name": "GSAIUtils",
-      "path": "res://src/GSAIUtils.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAIUtils.gd",
       "extends_class": [
 
       ],
@@ -2809,7 +2809,7 @@
     },
     {
       "name": "GSAIInfiniteProximity",
-      "path": "res://src/Proximities/GSAIInfiniteProximity.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Proximities/GSAIInfiniteProximity.gd",
       "extends_class": [
         "GSAIProximity"
       ],
@@ -2867,7 +2867,7 @@
     },
     {
       "name": "GSAIProximity",
-      "path": "res://src/Proximities/GSAIProximity.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Proximities/GSAIProximity.gd",
       "extends_class": [
         "Reference"
       ],
@@ -2944,7 +2944,7 @@
     },
     {
       "name": "GSAIRadiusProximity",
-      "path": "res://src/Proximities/GSAIRadiusProximity.gd",
+      "path": "res://addons/com.gdquest.godot-steering-ai-framework/Proximities/GSAIRadiusProximity.gd",
       "extends_class": [
         "GSAIProximity"
       ],
