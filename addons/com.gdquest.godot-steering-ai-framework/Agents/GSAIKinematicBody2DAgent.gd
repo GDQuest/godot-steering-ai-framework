@@ -23,7 +23,7 @@ func _init(_body: KinematicBody2D, _movement_type: int = MovementType.SLIDE) -> 
 	if not _body.is_inside_tree():
 		yield(_body, "ready")
 
-	_body_ref = weakref(_body)
+	self.body = _body
 	self.movement_type = _movement_type
 
 	# warning-ignore:return_value_discarded

@@ -20,11 +20,10 @@ var _body_ref: WeakRef
 
 
 func _init(_body: KinematicBody, _movement_type: int = MovementType.SLIDE) -> void:
-	body = _body
 	if not _body.is_inside_tree():
 		yield(_body, "ready")
 
-	self._body_ref = weakref(_body)
+	self.body = _body
 	self.movement_type = _movement_type
 
 	# warning-ignore:return_value_discarded

@@ -11,11 +11,10 @@ var _last_position: Vector3
 var _body_ref: WeakRef
 
 func _init(_body: RigidBody) -> void:
-	body = _body
 	if not _body.is_inside_tree():
 		yield(_body, "ready")
+	self.body = _body
 
-	_body_ref = weakref(_body)
 	# warning-ignore:return_value_discarded
 	_body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
 
