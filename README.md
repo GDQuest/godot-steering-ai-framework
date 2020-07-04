@@ -20,6 +20,12 @@ It supports all essential steering behaviors like flee, follow, look at, but als
 - [Example usage](#example-usage)
 <!-- markdown-toc end -->
 
+## Getting the framework
+
+This repository contains just the framework to make it easy for you to install it.
+
+You should also check out the [Steering AI Framework Demos](https://github.com/GDQuest/godot-steering-ai-framework-demos) repository! It contains many demos to learn to use the framework and see what you can achieve with it.
+
 ## Introduction
 
 In the 1990s, [Craig Reynolds](http://www.red3d.com/cwr/) developed algorithms for common AI behaviors. They allowed AI agents to seek out or flee from a target, follow a pre-defined path, or face in a particular direction. They were simple, repeatable tasks that could be broken down into programming algorithms, which made them easy to reuse, maintain, combine, and extend.
