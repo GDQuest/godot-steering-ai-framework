@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Demos/AvoidCollisions/Spawner.gd" type="Script" id=1]
+[ext_resource path="res://Demos/AvoidCollisions/AvoidCollisionsDemo.gd" type="Script" id=2]
+[ext_resource path="res://Demos/AvoidCollisions/Avoider.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Demos/Utils/DemoInterface.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Demos/Utils/BackgroudLayer.tscn" type="PackedScene" id=5]
+
+[node name="AvoidCollisionsDemo" type="Node"]
+script = ExtResource( 2 )
+linear_speed_max = 520.0
+linear_acceleration_max = 2250.0
+proximity_radius = 100.0
+
+[node name="BackgroudLayer" parent="." instance=ExtResource( 5 )]
+
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource( 1 )
+avoider_template = ExtResource( 3 )
+inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
+outer_color = Color( 0.560784, 0.870588, 0.364706, 1 )
+agent_count = 80
+
+[node name="DemoInterface" parent="." instance=ExtResource( 4 )]
+text_bbcode = "Avoid Collisions Demo
+Watch each agent try to keep traveling in a particular direction, but prioritize avoiding collisions with other agents."

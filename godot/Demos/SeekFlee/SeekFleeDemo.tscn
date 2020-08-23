@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Demos/SeekFlee/Player.gd" type="Script" id=2]
+[ext_resource path="res://Demos/SeekFlee/SeekFleeDemo.gd" type="Script" id=3]
+[ext_resource path="res://Demos/SeekFlee/Spawner.gd" type="Script" id=4]
+[ext_resource path="res://Demos/Utils/DemoInterface.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Demos/SeekFlee/Seeker.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Demos/Utils/CircleDraw.gd" type="Script" id=7]
+[ext_resource path="res://Demos/Utils/BackgroudLayer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Demos/SeekFlee/Boundaries.gd" type="Script" id=9]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 542 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 965.654, 10 )
+
+[node name="SeekFleeDemo" type="Node"]
+script = ExtResource( 3 )
+linear_speed_max = 570.0
+linear_accel_max = 1160.0
+
+[node name="BackgroudLayer" parent="." instance=ExtResource( 8 )]
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 960, 540 )
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 1 )
+script = ExtResource( 7 )
+inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
+outer_color = Color( 0.560784, 0.870588, 0.364706, 1 )
+stroke = 4.0
+
+[node name="Boundaries" type="Node2D" parent="."]
+script = ExtResource( 9 )
+
+[node name="LeftBoundary" type="StaticBody2D" parent="Boundaries"]
+position = Vector2( 0, 540 )
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/LeftBoundary"]
+shape = SubResource( 2 )
+
+[node name="RightBoundary" type="StaticBody2D" parent="Boundaries"]
+position = Vector2( 1920, 540 )
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/RightBoundary"]
+shape = SubResource( 2 )
+
+[node name="TopBoundary" type="StaticBody2D" parent="Boundaries"]
+position = Vector2( 960, 0 )
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/TopBoundary"]
+shape = SubResource( 3 )
+
+[node name="BottomBoundary" type="StaticBody2D" parent="Boundaries"]
+position = Vector2( 960, 1080 )
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BottomBoundary"]
+shape = SubResource( 3 )
+
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource( 4 )
+Entity = ExtResource( 6 )
+
+[node name="DemoInterface" parent="." instance=ExtResource( 5 )]
+text_bbcode = "Seek & Flee Demo
+Move the [color=lime]green \"Player\"[/color] around with WASD and notice the [color=#ffb570]orange \"Enemies\"[/color] try to seek to or flee from the player."

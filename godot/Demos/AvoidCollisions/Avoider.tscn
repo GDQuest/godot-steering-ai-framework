@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Demos/Utils/CircleDraw.gd" type="Script" id=1]
+[ext_resource path="res://Demos/AvoidCollisions/Avoider.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 21.3503
+
+[node name="Avoider" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+script = ExtResource( 1 )
+inner_color = Color( 0.890196, 0.411765, 0.337255, 1 )
+outer_color = Color( 1, 0.709804, 0.439216, 1 )
+stroke = 5.0

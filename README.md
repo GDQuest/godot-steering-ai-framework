@@ -8,23 +8,21 @@ This project is a framework to code complex and smooth AI movement in the [Godot
 
 It supports all essential steering behaviors like flee, follow, look at, but also blended behaviors, group behaviors, avoiding neighbors, following a path, following the leader, and much more.
 
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-
-**Table of Contents**
-
-- [Introduction](#introduction)
-- [The framework](#the-framework)
-- [Installation](#installation)
-- [Getting Started](#getting-started)
-  - [More information and resources](#more-information-and-resources)
-- [Example usage](#example-usage)
-<!-- markdown-toc end -->
+- [Godot Steering AI Framework](#godot-steering-ai-framework)
+  - [Getting the framework](#getting-the-framework)
+  - [Introduction](#introduction)
+  - [The framework](#the-framework)
+    - [How it works](#how-it-works)
+  - [Documentation](#documentation)
+  - [Contributing](#contributing)
+  - [Support us](#support-us)
+  - [Join the community](#join-the-community)
 
 ## Getting the framework
 
-This repository contains just the framework to make it easy for you to install it.
+This repository contains the framework and some demos for learning purposes.
 
-You should also check out the [Steering AI Framework Demos](https://github.com/GDQuest/godot-steering-ai-framework-demos) repository! It contains many demos to learn to use the framework and see what you can achieve with it.
+If you want just the framework with nothing else to get in the way or to create a Git submodule, use the [Godot Steering AI Framework Submodules](https://github.com/GDQuest/godot-steering-ai-framework-submodule) repository.
 
 ## Introduction
 

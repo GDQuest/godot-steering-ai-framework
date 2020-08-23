@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Demos/Utils/Line2DDraw.gd" type="Script" id=1]
+[ext_resource path="res://Demos/Quickstart/Agent.gd" type="Script" id=2]
+[ext_resource path="res://Demos/Quickstart/Player.gd" type="Script" id=3]
+[ext_resource path="res://Demos/Quickstart/Bullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Demos/Utils/BackgroudLayer.tscn" type="PackedScene" id=5]
+
+[node name="QuickStartDemo" type="Node"]
+
+[node name="BackgroudLayer" parent="." instance=ExtResource( 5 )]
+
+[node name="Player" type="KinematicBody2D" parent="." groups=[
+"Player",
+]]
+position = Vector2( 402.346, 573.791 )
+rotation = 1.5708
+collision_mask = 2
+script = ExtResource( 3 )
+speed_max = 900.0
+acceleration_max = 4200.0
+rotation_speed_max = 360
+rotation_accel_max = 1280
+bullet = ExtResource( 4 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+polygon = PoolVector2Array( 0, -32, -24, 32, 24, 32 )
+
+[node name="Line2D" type="Line2D" parent="Player"]
+points = PoolVector2Array( 0, 32, 24, 32, 0, -32, -24, 32, 0, 32 )
+width = 8.0
+default_color = Color( 0.560784, 0.870588, 0.364706, 1 )
+joint_mode = 2
+antialiased = true
+script = ExtResource( 1 )
+inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
+
+[node name="Agent" type="KinematicBody2D" parent="."]
+position = Vector2( 974.675, 266.224 )
+rotation = 1.5708
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 2 )
+speed_max = 600.0
+acceleration_max = 2800.0
+angular_speed_max = 360
+angular_acceleration_max = 1280
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Agent"]
+polygon = PoolVector2Array( 0, -32, -24, 32, 24, 32 )
+
+[node name="Line2D" type="Line2D" parent="Agent"]
+points = PoolVector2Array( 0, 32, 24, 32, 0, -32, -24, 32, 0, 32 )
+width = 8.0
+default_color = Color( 1, 0.709804, 0.439216, 1 )
+joint_mode = 2
+antialiased = true
+script = ExtResource( 1 )
+inner_color = Color( 0.890196, 0.411765, 0.337255, 1 )
+
+[node name="Bullets" type="Node2D" parent="."]

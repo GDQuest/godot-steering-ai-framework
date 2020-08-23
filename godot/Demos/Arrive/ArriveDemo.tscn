@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Demos/Arrive/Arriver.gd" type="Script" id=1]
+[ext_resource path="res://Demos/Utils/DemoInterface.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Demos/Arrive/ArriveDemo.gd" type="Script" id=3]
+[ext_resource path="res://Demos/Utils/BackgroudLayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Demos/Arrive/TargetDrawer.gd" type="Script" id=5]
+[ext_resource path="res://Demos/Utils/CircleDraw.gd" type="Script" id=6]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 23.2163
+
+[node name="ArriveDemo" type="Node"]
+script = ExtResource( 3 )
+linear_speed_max = 1600.0
+linear_acceleration_max = 5000.0
+arrival_tolerance = 35.0
+deceleration_radius = 180.0
+
+[node name="BackgroudLayer" parent="." instance=ExtResource( 4 )]
+
+[node name="TargetDrawer" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="Arriver" type="KinematicBody2D" parent="."]
+show_behind_parent = true
+position = Vector2( 960, 540 )
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arriver"]
+shape = SubResource( 1 )
+script = ExtResource( 6 )
+inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
+outer_color = Color( 0.560784, 0.870588, 0.364706, 1 )
+stroke = 6.0
+
+[node name="DemoInterface" parent="." instance=ExtResource( 2 )]
+text_bbcode = "Arrive Demo
+Mouse click to make the [color=lime]green \"Player\"[/color] move to the [color=fuchsia]purple target[/color]"

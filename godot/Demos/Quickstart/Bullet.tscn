@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Demos/Utils/CircleDraw.gd" type="Script" id=1]
+[ext_resource path="res://Demos/Quickstart/Bullet.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 4.0
+
+[node name="Bullet" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+script = ExtResource( 1 )
+inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
+outer_color = Color( 0.560784, 0.870588, 0.364706, 1 )
+stroke = 2.0
+
+[node name="Lifetime" type="Timer" parent="."]
+process_mode = 0
+wait_time = 3.0

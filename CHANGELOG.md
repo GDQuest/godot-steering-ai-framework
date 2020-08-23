@@ -4,6 +4,9 @@ This document lists new features, improvements, changes, and bug fixes in every 
 
 ## Master
 
+- Removed the demos repository and brought demos back into main repo
+- Added a repository with just the files for [submodule](https://github.com/GDQuest/godot-steering-ai-framework-submodule) usage.
+
 ## Godot Steering AI Framework 3.0.0
 
 ### Changes

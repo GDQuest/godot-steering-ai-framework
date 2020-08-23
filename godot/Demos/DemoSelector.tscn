@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Demos/PopulateItemList.gd" type="Script" id=1]
+[ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=2]
+[ext_resource path="res://assets/sprites/background.png" type="Texture" id=3]
+[ext_resource path="res://Demos/DemoPickerUI.gd" type="Script" id=4]
+[ext_resource path="res://Demos/DemoPlayer.gd" type="Script" id=5]
+[ext_resource path="res://Demos/Demos.gd" type="Script" id=6]
+
+[node name="Demos" type="Node"]
+script = ExtResource( 6 )
+
+[node name="DemoPlayer" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="DemoPickerUI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="DemoPickerUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1024, 600 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DemoPickerUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -341.0
+margin_top = -290.0
+margin_right = 341.0
+margin_bottom = 290.0
+rect_min_size = Vector2( 682, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="DemoPickerUI/VBoxContainer"]
+margin_top = 231.0
+margin_right = 682.0
+margin_bottom = 240.0
+auto_height = true
+script = ExtResource( 1 )
+
+[node name="Button" type="Button" parent="DemoPickerUI/VBoxContainer"]
+margin_left = 201.0
+margin_top = 248.0
+margin_right = 481.0
+margin_bottom = 348.0
+rect_min_size = Vector2( 280, 100 )
+size_flags_horizontal = 4
+size_flags_vertical = 13
+text = "Load scene"
+
+[node name="ButtonGoBack" type="Button" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 48.0
+margin_top = -156.0
+margin_right = 328.0
+margin_bottom = -56.0
+rect_min_size = Vector2( 280, 100 )
+size_flags_horizontal = 4
+size_flags_vertical = 13
+theme = ExtResource( 2 )
+text = "Go back"
+__meta__ = {
+"_edit_use_anchors_": false
+}

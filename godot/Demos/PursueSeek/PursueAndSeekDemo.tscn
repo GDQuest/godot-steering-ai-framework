@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Demos/PursueSeek/Pursuer.gd" type="Script" id=1]
+[ext_resource path="res://Demos/PursueSeek/Player.gd" type="Script" id=2]
+[ext_resource path="res://Demos/PursueSeek/BoundaryManager.gd" type="Script" id=3]
+[ext_resource path="res://Demos/PursueSeek/PursueAndSeekDemo.gd" type="Script" id=4]
+[ext_resource path="res://Demos/Utils/DemoInterface.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Demos/Utils/Line2DDraw.gd" type="Script" id=6]
+[ext_resource path="res://Demos/Utils/BackgroudLayer.tscn" type="PackedScene" id=7]
+
+[node name="PursueVSSeekDemo" type="Node"]
+script = ExtResource( 4 )
+linear_speed_max = 1280.0
+linear_accel_max = 1040.0
+predict_time = 1.1
+
+[node name="BackgroudLayer" parent="." instance=ExtResource( 7 )]
+
+[node name="BoundaryManager" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="Player" type="KinematicBody2D" parent="BoundaryManager"]
+position = Vector2( 307.552, 555.999 )
+rotation = 1.5708
+collision_mask = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+thruster_strength = 1000.0
+side_thruster_strength = 40.0
+velocity_max = 450.0
+angular_velocity_max = 3.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoundaryManager/Player"]
+polygon = PoolVector2Array( 0, -32, -24, 32, 24, 32 )
+
+[node name="Line2D" type="Line2D" parent="BoundaryManager/Player"]
+points = PoolVector2Array( 0, 32, 24, 32, 0, -32, -24, 32, 0, 32 )
+width = 8.0
+default_color = Color( 0.560784, 0.870588, 0.364706, 1 )
+joint_mode = 2
+antialiased = true
+script = ExtResource( 6 )
+inner_color = Color( 0.235294, 0.639216, 0.439216, 1 )
+
+[node name="Pursuer" type="KinematicBody2D" parent="BoundaryManager"]
+position = Vector2( 1240.22, 866.784 )
+collision_layer = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoundaryManager/Pursuer"]
+polygon = PoolVector2Array( 0, -32, -24, 32, 24, 32 )
+
+[node name="Line2D" type="Line2D" parent="BoundaryManager/Pursuer"]
+points = PoolVector2Array( 0, 32, 24, 32, 0, -32, -24, 32, 0, 32 )
+width = 8.0
+default_color = Color( 1, 0.709804, 0.439216, 1 )
+joint_mode = 2
+antialiased = true
+script = ExtResource( 6 )
+inner_color = Color( 0.890196, 0.411765, 0.337255, 1 )
+
+[node name="Seeker" type="KinematicBody2D" parent="BoundaryManager"]
+position = Vector2( 1240.22, 280.108 )
+rotation = 3.14159
+collision_layer = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+use_seek = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoundaryManager/Seeker"]
+polygon = PoolVector2Array( 0, -32, -24, 32, 24, 32 )
+
+[node name="Line2D" type="Line2D" parent="BoundaryManager/Seeker"]
+points = PoolVector2Array( 0, 32, 24, 32, 0, -32, -24, 32, 0, 32 )
+width = 8.0
+default_color = Color( 0.301961, 0.65098, 1, 1 )
+joint_mode = 2
+antialiased = true
+script = ExtResource( 6 )
+inner_color = Color( 0.294118, 0.356863, 0.670588, 1 )
+
+[node name="DemoInterface" parent="." instance=ExtResource( 5 )]
+text_bbcode = "Pursue vs. Seek Demo
+Move the player around with WASD and notice the [color=#ffb570]orange Pursuer[/color] and the [color=aqua]blue Seeker[/color] follow
+the [color=lime]green \"Ship\"[/color] around"
