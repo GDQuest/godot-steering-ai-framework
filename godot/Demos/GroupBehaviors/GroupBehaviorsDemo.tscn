@@ -1,10 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://src/GroupBehaviors/Member.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/GroupBehaviors/Spawner.gd" type="Script" id=2]
-[ext_resource path="res://src/GroupBehaviors/GroupBehaviorsDemo.gd" type="Script" id=3]
-[ext_resource path="res://src/Utils/DemoInterface.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Utils/BackgroudLayer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Demos/GroupBehaviors/Member.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Demos/GroupBehaviors/Spawner.gd" type="Script" id=2]
+[ext_resource path="res://Demos/GroupBehaviors/GroupBehaviorsDemo.gd" type="Script" id=3]
+[ext_resource path="res://Demos/Utils/DemoInterface.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Demos/Utils/BackgroudLayer.tscn" type="PackedScene" id=5]
+
 
 [node name="GroupBehaviorsDemo" type="Node"]
 script = ExtResource( 3 )

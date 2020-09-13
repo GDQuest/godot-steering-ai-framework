@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/GroupBehaviors/Member.gd" type="Script" id=1]
-[ext_resource path="res://src/Utils/CircleDraw.gd" type="Script" id=3]
+[ext_resource path="res://Demos/GroupBehaviors/Member.gd" type="Script" id=1]
+[ext_resource path="res://Demos/Utils/CircleDraw.gd" type="Script" id=3]
+
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0
