@@ -3,10 +3,12 @@
 [ext_resource path="res://Demos/GroupBehaviors/Member.gd" type="Script" id=1]
 [ext_resource path="res://Demos/Utils/CircleDraw.gd" type="Script" id=3]
 
+
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0
 
 [node name="Member" type="KinematicBody2D"]
+input_pickable = true
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

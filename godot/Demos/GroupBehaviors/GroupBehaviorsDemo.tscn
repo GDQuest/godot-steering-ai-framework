@@ -6,6 +6,7 @@
 [ext_resource path="res://Demos/Utils/DemoInterface.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Demos/Utils/BackgroudLayer.tscn" type="PackedScene" id=5]
 
+
 [node name="GroupBehaviorsDemo" type="Node"]
 script = ExtResource( 3 )
 linear_accel_max = 4234.0
@@ -17,10 +18,12 @@ separation_strength = 8.8
 [node name="BackgroudLayer" parent="." instance=ExtResource( 5 )]
 
 [node name="Spawner" type="Node2D" parent="."]
-position = Vector2( 512, 300 )
+position = Vector2( 973.261, 528.829 )
 script = ExtResource( 2 )
 member = ExtResource( 1 )
 
 [node name="DemoInterface" parent="." instance=ExtResource( 4 )]
+mouse_filter = 2
 text_bbcode = "Group Behavior Demo
-Each of the \"Agents\" are both attempting to stay separated from each other but within reach of their nearest group's center of mass."
+Each of the \"Agents\" are both attempting to stay separated from each other but within reach of their nearest group's center of mass.
+Click on agent to see it's proximity."
