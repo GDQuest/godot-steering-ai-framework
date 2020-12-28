@@ -2,16 +2,23 @@ extends Node2D
 
 export var member: PackedScene
 
-func follower_input_event(viewport: Node, event: InputEvent, shape_idx: int, follower:KinematicBody2D):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and event.pressed:
-			for other in get_children():
-				if other.draw_proximity:
-					other.draw_proximity = false
-					other.update()
-			follower.draw_proximity = true
-			follower.update()
-			move_child(follower,get_children().size())
+
+func follower_input_event(
+	viewport: Node,
+	event: InputEvent,
+	shape_idx: int,
+	follower: KinematicBody2D
+) -> void:
+	if event.is_action_pressed("click"):
+		for other in get_children():
+			if other.draw_proximity:
+				other.draw_proximity = false
+				other.update()
+		follower.draw_proximity = true
+		follower.update()
+		move_child(follower, get_child_count())
+
+
 func setup(
 	linear_speed_max: float,
 	linear_accel_max: float,
@@ -35,10 +42,12 @@ func setup(
 			cohesion_strength,
 			separation_strength
 		)
+
 		if i == 0 and show_proximity_radius:
 			follower.draw_proximity = true
 			follower.update()
-		follower.connect("input_event",self,"follower_input_event",[follower])
+		follower.connect("input_event", self, "follower_input_event", [follower])
+
 	var agents := []
 	for i in followers:
 		agents.append(i.agent)
