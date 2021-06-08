@@ -94,7 +94,7 @@ func _apply_position_steering(accel: Vector3, delta: float) -> void:
 		velocity = velocity.linear_interpolate(
 			Vector3.ZERO, linear_drag_percentage
 		)
-	_body.global_position += velocity * delta
+	_body.global_transform.origin += velocity * delta
 	if calculate_velocities:
 		linear_velocity = velocity
 
