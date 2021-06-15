@@ -6,6 +6,7 @@ This document lists new features, improvements, changes, and bug fixes in every 
 
 - Removed the demos repository and brought demos back into main repo
 - Added a repository with just the files for [submodule](https://github.com/GDQuest/godot-steering-ai-framework-submodule) usage.
+- Fix a bug in GSAIKinematicBody2DAgent and GSAIKinematicBody3DAgent where angular velocity was clamped using max acceleration instead of max speed.
 
 ## Godot Steering AI Framework 3.0.0
 

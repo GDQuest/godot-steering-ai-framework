@@ -92,8 +92,8 @@ func _apply_orientation_steering(angular_acceleration: float, delta: float) -> v
 		
 	var velocity = clamp(
 		angular_velocity + angular_acceleration * delta,
-		-angular_acceleration_max,
-		angular_acceleration_max
+		-angular_speed_max,
+		angular_speed_max
 	)
 	if apply_angular_drag:
 		velocity = lerp(velocity, 0, angular_drag_percentage)
