@@ -49,6 +49,9 @@ func _on_SceneTree_frame() -> void:
 	var _body: RigidBody = _body_ref.get_ref()
 	if not _body:
 		return
+	
+	if not _body.is_inside_tree():
+		return
 		
 	var current_position := _body.transform.origin
 	var current_orientation := _body.rotation.y

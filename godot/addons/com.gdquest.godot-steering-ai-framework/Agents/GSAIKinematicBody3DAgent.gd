@@ -132,6 +132,9 @@ func _on_SceneTree_physics_frame() -> void:
 	if not _body:
 		return
 
+	if not _body.is_inside_tree():
+		return
+
 	var current_position := _body.transform.origin
 	var current_orientation := _body.rotation.y
 
