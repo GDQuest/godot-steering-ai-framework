@@ -49,6 +49,9 @@ func _apply_sliding_steering(accel: Vector3, delta: float) -> void:
 	var _body: KinematicBody2D = _body_ref.get_ref()
 	if not _body:
 		return
+
+	if not _body.is_inside_tree():
+		return
 		
 	var velocity := GSAIUtils.to_vector2(linear_velocity + accel * delta).clamped(linear_speed_max)
 	if apply_linear_drag:
