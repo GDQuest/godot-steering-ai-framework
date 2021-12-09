@@ -50,7 +50,7 @@ func _apply_sliding_steering(accel: Vector3, delta: float) -> void:
 	if not _body:
 		return
 
-	if not _body.is_inside_tree():
+	if not _body.is_inside_tree() or _body.get_tree().paused:
 		return
 		
 	var velocity := GSAIUtils.to_vector2(linear_velocity + accel * delta).clamped(linear_speed_max)
