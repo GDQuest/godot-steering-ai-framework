@@ -46,13 +46,13 @@ The coder then applies that acceleration in whatever ways is appropriate to the 
 
 ## Documentation
 
-The framework's documentation and code reference are both available on the [GDQuest](https://www.gdquest.com/docs/godot-steering-ai-framework/getting-started) website.
+The framework's documentation and code reference are both available on a Gitbook website.
 
 Here are some guides to get you started:
 
-1. [How to install the framework](https://www.gdquest.com/docs/godot-steering-ai-framework/how-to-install/)
-1. [Getting Started](https://www.gdquest.com/docs/godot-steering-ai-framework/getting-started/)
-1. [Code reference](https://www.gdquest.com/docs/godot-steering-ai-framework/reference/)
+1. [How to install the framework](https://app.gitbook.com/o/DybexkDbiRI9dVCUhhn5/s/4epMWQROkHdhNfTA1DbU/installation)
+1. [Getting Started](https://app.gitbook.com/o/DybexkDbiRI9dVCUhhn5/s/4epMWQROkHdhNfTA1DbU/getting-started)
+1. [Code reference](https://app.gitbook.com/o/DybexkDbiRI9dVCUhhn5/s/4epMWQROkHdhNfTA1DbU/code-reference)
 
 ## Contributing
 
