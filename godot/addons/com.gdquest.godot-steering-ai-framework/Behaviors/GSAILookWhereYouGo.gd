@@ -5,8 +5,8 @@ class_name GSAILookWhereYouGo
 extends GSAIMatchOrientation
 
 
-func _init(agent: GSAISteeringAgent, use_z := false).(agent, null, use_z) -> void:
-	pass
+func _init(agent: GSAISteeringAgent, use_z := false) -> void:
+	super._init(agent, null, use_z)
 
 
 func _calculate_steering(accel: GSAITargetAcceleration) -> void:

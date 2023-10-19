@@ -1,8 +1,8 @@
 # Determines any agent that is in the specified list as being neighbors with the owner agent if
 # they lie within the specified radius.
 # @category - Proximities
-extends GSAIProximity
 class_name GSAIRadiusProximity
+extends GSAIProximity
 
 # The radius around the owning agent to find neighbors in
 var radius := 0.0
@@ -11,7 +11,8 @@ var _last_frame := 0
 var _scene_tree: SceneTree
 
 
-func _init(agent: GSAISteeringAgent, agents: Array, _radius: float).(agent, agents) -> void:
+func _init(agent: GSAISteeringAgent, agents: Array, _radius: float) -> void:
+	super._init(agent, agents)
 	self.radius = _radius
 	_scene_tree = Engine.get_main_loop()
 
@@ -21,7 +22,7 @@ func _init(agent: GSAISteeringAgent, agents: Array, _radius: float).(agent, agen
 # `_find_neighbors` calls `callback` for each agent in the `agents` array that lie within
 # the radius around the owning agent and adds one to the count if its `callback` returns true.
 # @tags - virtual
-func _find_neighbors(callback: FuncRef) -> int:
+func _find_neighbors(callback: Callable) -> int:
 	var agent_count := agents.size()
 	var neighbor_count := 0
 
@@ -40,7 +41,7 @@ func _find_neighbors(callback: FuncRef) -> int:
 				var range_to := radius + current_agent.bounding_radius
 
 				if distance_squared < range_to * range_to:
-					if callback.call_func(current_agent):
+					if callback.call(current_agent):
 						current_agent.is_tagged = true
 						neighbor_count += 1
 						continue
@@ -51,7 +52,7 @@ func _find_neighbors(callback: FuncRef) -> int:
 			var current_agent = agents[i] as GSAISteeringAgent
 
 			if current_agent != agent and current_agent.is_tagged:
-				if callback.call_func(current_agent):
+				if callback.call(current_agent):
 					neighbor_count += 1
 
 	return neighbor_count

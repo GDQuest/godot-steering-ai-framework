@@ -2,8 +2,8 @@
 # so the user does not have to. All other specialized agents derive from this.
 # @category - Specialized agents
 # @tags - abstract
-extends GSAISteeringAgent
 class_name GSAISpecializedAgent
+extends GSAISteeringAgent
 
 # If `true`, calculates linear and angular velocities based on the previous
 # frame. When `false`, the user must keep those values updated.

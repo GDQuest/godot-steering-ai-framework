@@ -1,21 +1,21 @@
 extends Node
 
-onready var demo_picker: DemoPickerUI = $DemoPickerUI
-onready var demo_player := $DemoPlayer
-onready var button_go_back: Button = $ButtonGoBack
+@onready var demo_picker: DemoPickerUI = $DemoPickerUI
+@onready var demo_player := $DemoPlayer
+@onready var button_go_back: Button = $ButtonGoBack
 
 
 func _ready() -> void:
 	# warning-ignore:return_value_discarded
-	demo_picker.connect("demo_requested", self, "_on_DemoPickerUI_demo_requested")
+	demo_picker.connect("demo_requested", Callable(self, "_on_DemoPickerUI_demo_requested"))
 	# warning-ignore:return_value_discarded
-	button_go_back.connect("pressed", self, "_on_ButtonGoBack_pressed")
+	button_go_back.connect("pressed", Callable(self, "_on_ButtonGoBack_pressed"))
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_fullscreen"):
-		OS.window_fullscreen = not OS.window_fullscreen
-		get_tree().set_input_as_handled()
+		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (not ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))) else Window.MODE_WINDOWED
+		get_viewport().set_input_as_handled()
 
 
 func _on_DemoPickerUI_demo_requested() -> void:

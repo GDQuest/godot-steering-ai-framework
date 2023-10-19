@@ -1,18 +1,17 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 # Maximum possible linear velocity
-export var speed_max := 450.0
+@export var speed_max := 450.0
 # Maximum change in linear velocity
-export var acceleration_max := 50.0
+@export var acceleration_max := 50.0
 # Maximum rotation velocity represented in degrees
-export var angular_speed_max := 240
+@export var angular_speed_max := 240
 # Maximum change in rotation velocity represented in degrees
-export var angular_acceleration_max := 40
+@export var angular_acceleration_max := 40
 
-export var health_max := 100
-export var flee_health_threshold := 20
+@export var health_max := 100
+@export var flee_health_threshold := 20
 
-var velocity := Vector2.ZERO
 var angular_velocity := 0.0
 var linear_drag := 0.1
 var angular_drag := 0.1
@@ -20,38 +19,38 @@ var angular_drag := 0.1
 # Holds the linear and angular components calculated by our steering behaviors.
 var acceleration := GSAITargetAcceleration.new()
 
-onready var current_health := health_max
+@onready var current_health := health_max
 
 # GSAISteeringAgent holds our agent's position, orientation, maximum speed and acceleration.
-onready var agent := GSAISteeringAgent.new()
+@onready var agent := GSAISteeringAgent.new()
 
-onready var player: Node = get_tree().get_nodes_in_group("Player")[0]
+@onready var player: Node = get_tree().get_nodes_in_group("Player")[0]
 # This assumes that our player class will keep its own agent updated.
-onready var player_agent: GSAISteeringAgent = player.agent
+@onready var player_agent: GSAISteeringAgent = player.agent
 
 # Proximities represent an area with which an agent can identify where neighbors in its relevant
 # group are. In our case, the group will feature the player, which will be used to avoid a
 # collision with them. We use a radius proximity so the player is only relevant inside 100 pixels.
-onready var proximity := GSAIRadiusProximity.new(agent, [player_agent], 100)
+@onready var proximity := GSAIRadiusProximity.new(agent, [player_agent], 100)
 
 # GSAIBlend combines behaviors together, calculating all of their acceleration together and adding
 # them together, multiplied by a strength. We will have one for fleeing, and one for pursuing,
 # toggling them depending on the agent's health. Since we want the agent to rotate AND move, then
 # we aim to blend them together.
-onready var flee_blend := GSAIBlend.new(agent)
-onready var pursue_blend := GSAIBlend.new(agent)
+@onready var flee_blend := GSAIBlend.new(agent)
+@onready var pursue_blend := GSAIBlend.new(agent)
 
 # GSAIPriority will be the main steering behavior we use. It holds sub-behaviors and will pick the
 # first one that returns non-zero acceleration, ignoring any afterwards.
-onready var priority := GSAIPriority.new(agent)
+@onready var priority := GSAIPriority.new(agent)
 
 
 func _ready() -> void:
 	# ---------- Configuration for our agent ----------
 	agent.linear_speed_max = speed_max
 	agent.linear_acceleration_max = acceleration_max
-	agent.angular_speed_max = deg2rad(angular_speed_max)
-	agent.angular_acceleration_max = deg2rad(angular_acceleration_max)
+	agent.angular_speed_max = deg_to_rad(angular_speed_max)
+	agent.angular_acceleration_max = deg_to_rad(angular_acceleration_max)
 	agent.bounding_radius = calculate_radius($CollisionPolygon2D.polygon)
 	update_agent()
 
@@ -75,17 +74,17 @@ func _ready() -> void:
 
 	# We use deg2rad because the math in the toolkit assumes radians.
 	# How close for the agent to be 'aligned', if not exact.
-	face.alignment_tolerance = deg2rad(5)
+	face.alignment_tolerance = deg_to_rad(5)
 	# When to start slowing down
-	face.deceleration_radius = deg2rad(60)
+	face.deceleration_radius = deg_to_rad(60)
 
 	# LookWhereYouGo turns the agent to keep looking towards its direction of travel. It will only
 	# be enabled while the agent is at low health.
 	var look := GSAILookWhereYouGo.new(agent)
 	# How close for the agent to be 'aligned', if not exact
-	look.alignment_tolerance = deg2rad(5)
+	look.alignment_tolerance = deg_to_rad(5)
 	# When to start slowing down.
-	look.deceleration_radius = deg2rad(60)
+	look.deceleration_radius = deg_to_rad(60)
 
 	# Behaviors that are not enabled produce 0 acceleration.
 	# Adding our fleeing behaviors to a blend. The order does not matter.
@@ -118,23 +117,23 @@ func _physics_process(delta: float) -> void:
 
 	# We add the discovered acceleration to our linear velocity. The toolkit does not limit
 	# velocity, just acceleration, so we clamp the result ourselves here.
-	velocity = (velocity + Vector2(acceleration.linear.x, acceleration.linear.y) * delta).clamped(
+	velocity = (velocity + Vector2(acceleration.linear.x, acceleration.linear.y) * delta).limit_length(
 		agent.linear_speed_max
 	)
 
 	# This applies drag on the agent's motion, helping it to slow down naturally.
-	velocity = velocity.linear_interpolate(Vector2.ZERO, linear_drag)
+	velocity = velocity.lerp(Vector2.ZERO, linear_drag)
 
 	# And since we're using a KinematicBody2D, we use Godot's excellent move_and_slide to actually
 	# apply the final movement, and record any change in velocity the physics engine discovered.
-	velocity = move_and_slide(velocity)
+	move_and_slide()
 
 	# We then do something similar to apply our agent's rotational speed.
 	angular_velocity = clamp(
 		angular_velocity + acceleration.angular * delta, -agent.angular_speed_max, agent.angular_speed_max
 	)
 	# This applies drag on the agent's rotation, helping it slow down naturally.
-	angular_velocity = lerp(angular_velocity, 0, angular_drag)
+	angular_velocity = lerp(angular_velocity, 0.0, angular_drag)
 	rotation += angular_velocity * delta
 
 
@@ -151,7 +150,7 @@ func update_agent() -> void:
 
 # We calculate the radius from the collision shape - this will approximate the agent's size in the
 # game world, to avoid collisions with the player.
-func calculate_radius(polygon: PoolVector2Array) -> float:
+func calculate_radius(polygon: PackedVector2Array) -> float:
 	var furthest_point := Vector2(-INF, -INF)
 	for p in polygon:
 		if abs(p.x) > furthest_point.x:

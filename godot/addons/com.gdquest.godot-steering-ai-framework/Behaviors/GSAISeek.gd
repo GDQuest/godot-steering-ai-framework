@@ -8,7 +8,8 @@ extends GSAISteeringBehavior
 var target: GSAIAgentLocation
 
 
-func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation).(agent) -> void:
+func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation) -> void:
+	super._init(agent)
 	self.target = _target
 
 

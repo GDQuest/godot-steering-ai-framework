@@ -4,19 +4,19 @@ extends Control
 # warning-ignore:unused_signal
 signal demo_requested
 
-var demo_path := "" setget set_demo_path
+var demo_path := "": set = set_demo_path
 
-onready var list: ItemList = $VBoxContainer/ItemList
-onready var button: Button = $VBoxContainer/Button
+@onready var list: ItemList = $VBoxContainer/ItemList
+@onready var button: Button = $VBoxContainer/Button
 
 
 func _ready() -> void:
 	# warning-ignore:return_value_discarded
-	list.connect("demo_selected", self, "set_demo_path")
+	list.connect("demo_selected", Callable(self, "set_demo_path"))
 	# warning-ignore:return_value_discarded
-	list.connect("item_activated", self, "_on_ItemList_item_activated")
+	list.connect("item_activated", Callable(self, "_on_ItemList_item_activated"))
 	# warning-ignore:return_value_discarded
-	button.connect("pressed", self, "emit_signal", ["demo_requested"])
+	button.connect("pressed", Callable(self, "emit_signal").bind("demo_requested"))
 	demo_path = list.file_paths[0]
 
 

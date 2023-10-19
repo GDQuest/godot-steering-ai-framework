@@ -5,10 +5,8 @@ class_name GSAIEvade
 extends GSAIPursue
 
 
-func _init(agent: GSAISteeringAgent, target: GSAISteeringAgent, predict_time_max := 1.0).(
-	agent, target, predict_time_max
-):
-	pass
+func _init(agent: GSAISteeringAgent, target: GSAISteeringAgent, predict_time_max := 1.0):
+	super._init(agent, target, predict_time_max)
 
 
 func _get_modified_acceleration() -> float:

@@ -1,27 +1,26 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-export var speed_max := 650.0
-export var acceleration_max := 70.0
-export var rotation_speed_max := 240
-export var rotation_accel_max := 40
-export var bullet: PackedScene
+@export var speed_max := 650.0
+@export var acceleration_max := 70.0
+@export var rotation_speed_max := 240
+@export var rotation_accel_max := 40
+@export var bullet: PackedScene
 
-var velocity := Vector2.ZERO
 var angular_velocity := 0.0
 var direction := Vector2.RIGHT
 
-onready var agent := GSAISteeringAgent.new()
-onready var proxy_target := GSAIAgentLocation.new()
-onready var face := GSAIFace.new(agent, proxy_target)
-onready var accel := GSAITargetAcceleration.new()
-onready var bullets := owner.get_node("Bullets")
+@onready var agent := GSAISteeringAgent.new()
+@onready var proxy_target := GSAIAgentLocation.new()
+@onready var face := GSAIFace.new(agent, proxy_target)
+@onready var accel := GSAITargetAcceleration.new()
+@onready var bullets := owner.get_node("Bullets")
 
 
 func _ready() -> void:
 	agent.linear_speed_max = speed_max
 	agent.linear_acceleration_max = acceleration_max
-	agent.angular_speed_max = deg2rad(rotation_speed_max)
-	agent.angular_acceleration_max = deg2rad(rotation_accel_max)
+	agent.angular_speed_max = deg_to_rad(rotation_speed_max)
+	agent.angular_acceleration_max = deg_to_rad(rotation_accel_max)
 	agent.bounding_radius = calculate_radius($CollisionPolygon2D.polygon)
 	update_agent()
 
@@ -29,8 +28,8 @@ func _ready() -> void:
 	proxy_target.position.x = mouse_pos.x
 	proxy_target.position.y = mouse_pos.y
 
-	face.alignment_tolerance = deg2rad(5)
-	face.deceleration_radius = deg2rad(45)
+	face.alignment_tolerance = deg_to_rad(5)
+	face.deceleration_radius = deg_to_rad(45)
 
 
 func _physics_process(delta: float) -> void:
@@ -41,14 +40,14 @@ func _physics_process(delta: float) -> void:
 	direction = GSAIUtils.angle_to_vector2(rotation)
 
 	velocity += direction * acceleration_max * movement * delta
-	velocity = velocity.clamped(speed_max)
-	velocity = velocity.linear_interpolate(Vector2.ZERO, 0.1)
-	velocity = move_and_slide(velocity)
+	velocity = velocity.limit_length(speed_max)
+	velocity = velocity.lerp(Vector2.ZERO, 0.1)
+	move_and_slide()
 
 	face.calculate_steering(accel)
 	angular_velocity += accel.angular * delta
 	angular_velocity = clamp(angular_velocity, -agent.angular_speed_max, agent.angular_speed_max)
-	angular_velocity = lerp(angular_velocity, 0, 0.1)
+	angular_velocity = lerp(angular_velocity, 0.0, 0.1)
 	rotation += angular_velocity * delta
 
 
@@ -58,8 +57,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		proxy_target.position.x = mouse_pos.x
 		proxy_target.position.y = mouse_pos.y
 	elif event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and event.pressed:
-			var next_bullet := bullet.instance()
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			var next_bullet := bullet.instantiate()
 			next_bullet.global_position = (
 				global_position
 				- direction * (agent.bounding_radius - 5)
@@ -82,7 +81,7 @@ func update_agent() -> void:
 	agent.angular_velocity = angular_velocity
 
 
-func calculate_radius(polygon: PoolVector2Array) -> float:
+func calculate_radius(polygon: PackedVector2Array) -> float:
 	var furthest_point := Vector2(-INF, -INF)
 	for p in polygon:
 		if abs(p.x) > furthest_point.x:

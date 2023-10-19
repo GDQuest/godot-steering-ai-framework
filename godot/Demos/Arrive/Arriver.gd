@@ -1,13 +1,12 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-var agent := GSAIKinematicBody2DAgent.new(self)
+var agent := await GSAICharacterBody2DAgent.new(self)
 var target := GSAIAgentLocation.new()
 var arrive := GSAIArrive.new(agent, target)
 var _accel := GSAITargetAcceleration.new()
 
 var _velocity := Vector2()
 var _drag := 0.1
-
 
 func _physics_process(delta: float) -> void:
 	arrive.calculate_steering(_accel)

@@ -15,9 +15,8 @@ var is_arrive_enabled := true
 var prediction_time := 0.0
 
 
-func _init(agent: GSAISteeringAgent, _path: GSAIPath, _path_offset := 0.0, _prediction_time := 0.0).(
-	agent, null
-) -> void:
+func _init(agent: GSAISteeringAgent, _path: GSAIPath, _path_offset := 0.0, _prediction_time := 0.0) -> void:
+	super._init(agent, null)
 	self.path = _path
 	self.path_offset = _path_offset
 	self.prediction_time = _prediction_time

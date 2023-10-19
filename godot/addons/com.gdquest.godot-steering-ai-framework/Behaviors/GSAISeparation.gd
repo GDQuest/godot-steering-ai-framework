@@ -14,7 +14,8 @@ var decay_coefficient := 1.0
 var _acceleration: GSAITargetAcceleration
 
 
-func _init(agent: GSAISteeringAgent, proximity: GSAIProximity).(agent, proximity) -> void:
+func _init(agent: GSAISteeringAgent, proximity: GSAIProximity) -> void:
+	super._init(agent, proximity)
 	pass
 
 

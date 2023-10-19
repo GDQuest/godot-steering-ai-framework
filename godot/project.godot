@@ -6,205 +6,20 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Control",
-"class": "DemoPickerUI",
-"language": "GDScript",
-"path": "res://Demos/DemoPickerUI.gd"
-}, {
-"base": "Reference",
-"class": "GSAIAgentLocation",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAIAgentLocation.gd"
-}, {
-"base": "GSAISteeringBehavior",
-"class": "GSAIArrive",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIArrive.gd"
-}, {
-"base": "GSAIGroupBehavior",
-"class": "GSAIAvoidCollisions",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIAvoidCollisions.gd"
-}, {
-"base": "GSAISteeringBehavior",
-"class": "GSAIBlend",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIBlend.gd"
-}, {
-"base": "GSAIGroupBehavior",
-"class": "GSAICohesion",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAICohesion.gd"
-}, {
-"base": "GSAIPursue",
-"class": "GSAIEvade",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIEvade.gd"
-}, {
-"base": "GSAIMatchOrientation",
-"class": "GSAIFace",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIFace.gd"
-}, {
-"base": "GSAISeek",
-"class": "GSAIFlee",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIFlee.gd"
-}, {
-"base": "GSAIArrive",
-"class": "GSAIFollowPath",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIFollowPath.gd"
-}, {
-"base": "GSAISteeringBehavior",
-"class": "GSAIGroupBehavior",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAIGroupBehavior.gd"
-}, {
-"base": "GSAIProximity",
-"class": "GSAIInfiniteProximity",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Proximities/GSAIInfiniteProximity.gd"
-}, {
-"base": "GSAISpecializedAgent",
-"class": "GSAIKinematicBody2DAgent",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Agents/GSAIKinematicBody2DAgent.gd"
-}, {
-"base": "GSAISpecializedAgent",
-"class": "GSAIKinematicBody3DAgent",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Agents/GSAIKinematicBody3DAgent.gd"
-}, {
-"base": "GSAIMatchOrientation",
-"class": "GSAILookWhereYouGo",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAILookWhereYouGo.gd"
-}, {
-"base": "GSAISteeringBehavior",
-"class": "GSAIMatchOrientation",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIMatchOrientation.gd"
-}, {
-"base": "Reference",
-"class": "GSAIPath",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAIPath.gd"
-}, {
-"base": "GSAISteeringBehavior",
-"class": "GSAIPriority",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIPriority.gd"
-}, {
-"base": "Reference",
-"class": "GSAIProximity",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Proximities/GSAIProximity.gd"
-}, {
-"base": "GSAISteeringBehavior",
-"class": "GSAIPursue",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAIPursue.gd"
-}, {
-"base": "GSAIProximity",
-"class": "GSAIRadiusProximity",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Proximities/GSAIRadiusProximity.gd"
-}, {
-"base": "GSAISpecializedAgent",
-"class": "GSAIRigidBody2DAgent",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Agents/GSAIRigidBody2DAgent.gd"
-}, {
-"base": "GSAISpecializedAgent",
-"class": "GSAIRigidBody3DAgent",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Agents/GSAIRigidBody3DAgent.gd"
-}, {
-"base": "GSAISteeringBehavior",
-"class": "GSAISeek",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAISeek.gd"
-}, {
-"base": "GSAIGroupBehavior",
-"class": "GSAISeparation",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Behaviors/GSAISeparation.gd"
-}, {
-"base": "GSAISteeringAgent",
-"class": "GSAISpecializedAgent",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/Agents/GSAISpecializedAgent.gd"
-}, {
-"base": "GSAIAgentLocation",
-"class": "GSAISteeringAgent",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAISteeringAgent.gd"
-}, {
-"base": "Reference",
-"class": "GSAISteeringBehavior",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAISteeringBehavior.gd"
-}, {
-"base": "Reference",
-"class": "GSAITargetAcceleration",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAITargetAcceleration.gd"
-}, {
-"base": "Reference",
-"class": "GSAIUtils",
-"language": "GDScript",
-"path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAIUtils.gd"
-} ]
-_global_script_class_icons={
-"DemoPickerUI": "",
-"GSAIAgentLocation": "",
-"GSAIArrive": "",
-"GSAIAvoidCollisions": "",
-"GSAIBlend": "",
-"GSAICohesion": "",
-"GSAIEvade": "",
-"GSAIFace": "",
-"GSAIFlee": "",
-"GSAIFollowPath": "",
-"GSAIGroupBehavior": "",
-"GSAIInfiniteProximity": "",
-"GSAIKinematicBody2DAgent": "",
-"GSAIKinematicBody3DAgent": "",
-"GSAILookWhereYouGo": "",
-"GSAIMatchOrientation": "",
-"GSAIPath": "",
-"GSAIPriority": "",
-"GSAIProximity": "",
-"GSAIPursue": "",
-"GSAIRadiusProximity": "",
-"GSAIRigidBody2DAgent": "",
-"GSAIRigidBody3DAgent": "",
-"GSAISeek": "",
-"GSAISeparation": "",
-"GSAISpecializedAgent": "",
-"GSAISteeringAgent": "",
-"GSAISteeringBehavior": "",
-"GSAITargetAcceleration": "",
-"GSAIUtils": ""
-}
+config_version=5
 
 [application]
 
 config/name="Godot Steering AI Framework Demos"
 run/main_scene="res://Demos/DemoSelector.tscn"
+config/features=PackedStringArray("4.1")
 config/icon="res://assets/icon.png"
 
 [display]
 
-window/size/width=1920
-window/size/height=1080
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/size/always_on_top=true
-window/size/test_width=1280
-window/size/test_height=720
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
@@ -212,39 +27,35 @@ window/stretch/aspect="expand"
 
 sf_left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":65,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":-1.0,"script":null)
- ]
+]
 }
 sf_right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":68,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
- ]
+]
 }
 sf_up={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":87,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
- ]
+]
 }
 sf_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":83,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
- ]
+]
 }
 toggle_fullscreen={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777254,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194342,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 click={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
 }
-
-[rendering]
-
-environment/default_environment="res://default_env.tres"

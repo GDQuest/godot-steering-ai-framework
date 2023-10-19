@@ -7,8 +7,8 @@ extends GSAIGroupBehavior
 var _center_of_mass: Vector3
 
 
-func _init(agent: GSAISteeringAgent, proximity: GSAIProximity).(agent, proximity) -> void:
-	pass
+func _init(agent: GSAISteeringAgent, proximity: GSAIProximity) -> void:
+	super._init(agent, proximity)
 
 
 func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:

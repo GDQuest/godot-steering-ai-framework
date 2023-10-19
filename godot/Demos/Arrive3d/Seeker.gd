@@ -1,13 +1,13 @@
-extends KinematicBody
+extends CharacterBody3D
 
-var target_node: Spatial
+var target_node: Node3D
 
-onready var agent := GSAIKinematicBody3DAgent.new(self)
-onready var target := GSAIAgentLocation.new()
-onready var accel := GSAITargetAcceleration.new()
-onready var blend := GSAIBlend.new(agent)
-onready var face := GSAIFace.new(agent, target, true)
-onready var arrive := GSAIArrive.new(agent, target)
+@onready var agent := await GSAICharacterBody3DAgent.new(self)
+@onready var target := GSAIAgentLocation.new()
+@onready var accel := GSAITargetAcceleration.new()
+@onready var blend := GSAIBlend.new(agent)
+@onready var face := GSAIFace.new(agent, target, true)
+@onready var arrive := GSAIArrive.new(agent, target)
 
 
 func _physics_process(delta: float) -> void:
@@ -26,7 +26,7 @@ func setup(
 	arrival_tolerance: float,
 	linear_acceleration_max: float,
 	linear_speed_max: float,
-	_target: Spatial
+	_target: Node3D
 ) -> void:
 	agent.linear_speed_max = linear_speed_max
 	agent.linear_acceleration_max = linear_acceleration_max

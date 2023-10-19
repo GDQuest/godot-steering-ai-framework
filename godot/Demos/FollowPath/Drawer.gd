@@ -11,13 +11,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if is_drawing:
 			active_points.append(event.position)
-			update()
+			queue_redraw()
 	elif event is InputEventMouseButton:
-		if event.pressed and event.button_index == BUTTON_LEFT:
+		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			active_points.clear()
 			active_points.append(event.position)
 			is_drawing = true
-			update()
+			queue_redraw()
 		elif not event.pressed:
 			is_drawing = false
 			if active_points.size() >= 2:
@@ -27,12 +27,12 @@ func _unhandled_input(event: InputEvent) -> void:
 func _draw() -> void:
 	if is_drawing:
 		for point in active_points:
-			draw_circle(point, 2, Color.red)
+			draw_circle(point, 2, Color.RED)
 	else:
 		if active_points.size() > 0:
-			draw_circle(active_points.front(), 2, Color.red)
-			draw_circle(active_points.back(), 2, Color.yellow)
-			draw_polyline(active_points, Color.skyblue, 1.0)
+			draw_circle(active_points.front(), 2, Color.RED)
+			draw_circle(active_points.back(), 2, Color.YELLOW)
+			draw_polyline(active_points, Color.SKY_BLUE, 1.0)
 
 
 func _simplify() -> void:
@@ -49,5 +49,5 @@ func _simplify() -> void:
 	active_points = simplified_path
 	if active_points.back() != last:
 		active_points.append(last)
-	update()
+	queue_redraw()
 	emit_signal("path_established", active_points)

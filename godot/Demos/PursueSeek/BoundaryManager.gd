@@ -6,7 +6,7 @@ var _world_bounds: Vector2
 
 func _ready() -> void:
 	_world_bounds = Vector2(
-		ProjectSettings["display/window/size/width"], ProjectSettings["display/window/size/height"]
+		ProjectSettings["display/window/size/viewport_width"], ProjectSettings["display/window/size/viewport_height"]
 	)
 
 

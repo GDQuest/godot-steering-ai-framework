@@ -1,15 +1,14 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-export var speed := 1500.0
+@export var speed := 1500.0
 
-var velocity := Vector2.ZERO
 var player: Node
 
-onready var timer := $Lifetime
+@onready var timer := $Lifetime
 
 
 func _ready() -> void:
-	timer.connect("timeout", self, "_on_Lifetime_timeout")
+	timer.connect("timeout", Callable(self, "_on_Lifetime_timeout"))
 	timer.start()
 
 
@@ -18,7 +17,7 @@ func _physics_process(delta: float) -> void:
 	if collision:
 		timer.stop()
 		clear()
-		collision.collider.damage(10)
+		collision.get_collider().damage(10)
 
 
 func start(direction: Vector2) -> void:
