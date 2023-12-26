@@ -1,8 +1,8 @@
-extends KinematicBody2D
+extends CharacterBody2D
 # Class to control the player in basic left/right up/down movement.
 
 var speed: float
-onready var agent := GSAIAgentLocation.new()
+@onready var agent := GSAIAgentLocation.new()
 
 
 func _ready() -> void:
@@ -15,7 +15,8 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	# warning-ignore:return_value_discarded
-	move_and_slide(movement * speed)
+	set_velocity(movement * speed)
+	move_and_slide()
 	agent.position = GSAIUtils.to_vector3(global_position)
 
 

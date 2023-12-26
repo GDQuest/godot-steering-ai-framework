@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var draw_proximity: bool
 
@@ -11,13 +11,13 @@ var _direction := Vector2()
 var _drag := 0.1
 var _color := Color(0.4, 1.0, 0.89, 0.3)
 
-onready var collision := $CollisionShape2D
-onready var agent := GSAIKinematicBody2DAgent.new(self)
-onready var proximity := GSAIRadiusProximity.new(agent, [], 140)
-onready var avoid := GSAIAvoidCollisions.new(agent, proximity)
-onready var target := GSAIAgentLocation.new()
-onready var seek := GSAISeek.new(agent, target)
-onready var priority := GSAIPriority.new(agent, 0.0001)
+@onready var collision := $CollisionShape2D
+@onready var agent := await GSAICharacterBody2DAgent.new(self)
+@onready var proximity := GSAIRadiusProximity.new(agent, [], 140)
+@onready var avoid := GSAIAvoidCollisions.new(agent, proximity)
+@onready var target := GSAIAgentLocation.new()
+@onready var seek := GSAISeek.new(agent, target)
+@onready var priority := GSAIPriority.new(agent, 0.0001)
 
 
 func _draw() -> void:
@@ -70,7 +70,7 @@ func set_proximity_agents(agents: Array) -> void:
 func set_random_nonoverlapping_position(others: Array, distance_from_boundary_min: float) -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
-	var tries_max := max(100, others.size() * others.size())
+	var tries_max : int = max(100, others.size() * others.size())
 	while tries_max > 0:
 		tries_max -= 1
 		global_position.x = rng.randf_range(

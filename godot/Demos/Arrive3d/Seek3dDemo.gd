@@ -1,31 +1,33 @@
 extends Node
 
-export (float, 0, 100, 5) var linear_speed_max := 10.0 setget set_linear_speed_max
-export (float, 0, 100, 0.1) var linear_acceleration_max := 1.0 setget set_linear_acceleration_max
-export (float, 0, 50, 0.1) var arrival_tolerance := 0.5 setget set_arrival_tolerance
-export (float, 0, 50, 0.1) var deceleration_radius := 5.0 setget set_deceleration_radius
-export (int, 0, 1080, 10) var angular_speed_max := 270 setget set_angular_speed_max
-export (int, 0, 2048, 10) var angular_accel_max := 45 setget set_angular_accel_max
-export (int, 0, 178, 2) var align_tolerance := 5 setget set_align_tolerance
-export (int, 0, 180, 2) var angular_deceleration_radius := 45 setget set_angular_deceleration_radius
+@export_range(0, 100, 5) var linear_speed_max := 10.0: set = set_linear_speed_max
+@export_range(0, 100, 0.1) var linear_acceleration_max := 1.0: set = set_linear_acceleration_max
+@export_range(0, 50, 0.1) var arrival_tolerance := 0.5: set = set_arrival_tolerance
+@export_range(0, 50, 0.1) var deceleration_radius := 5.0: set = set_deceleration_radius
+@export_range(0, 1080, 10) var angular_speed_max := 270: set = set_angular_speed_max
+@export_range(0, 2048, 10) var angular_accel_max := 45: set = set_angular_accel_max
+@export_range(0, 178, 2) var align_tolerance := 5: set = set_align_tolerance
+@export_range(0, 180, 2) var angular_deceleration_radius := 45: set = set_angular_deceleration_radius
 
-onready var target := $MouseTarget
-onready var arriver := $Arriver
+@onready var target := $MouseTarget
+@onready var arriver := $Arriver
 
 
 func _ready() -> void:
+	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
+	get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
 	arriver.setup(
-		deg2rad(align_tolerance),
-		deg2rad(angular_deceleration_radius),
-		deg2rad(angular_accel_max),
-		deg2rad(angular_speed_max),
+		deg_to_rad(align_tolerance),
+		deg_to_rad(angular_deceleration_radius),
+		deg_to_rad(angular_accel_max),
+		deg_to_rad(angular_speed_max),
 		deceleration_radius,
 		arrival_tolerance,
 		linear_acceleration_max,
 		linear_speed_max,
 		target
 	)
-	$Camera.setup(target)
+	$Camera3D.setup(target)
 
 
 func set_align_tolerance(value: int) -> void:
@@ -33,7 +35,7 @@ func set_align_tolerance(value: int) -> void:
 	if not is_inside_tree():
 		return
 
-	arriver.face.alignment_tolerance = deg2rad(value)
+	arriver.face.alignment_tolerance = deg_to_rad(value)
 
 
 func set_angular_deceleration_radius(value: int) -> void:
@@ -41,7 +43,7 @@ func set_angular_deceleration_radius(value: int) -> void:
 	if not is_inside_tree():
 		return
 
-	arriver.face.deceleration_radius = deg2rad(value)
+	arriver.face.deceleration_radius = deg_to_rad(value)
 
 
 func set_angular_accel_max(value: int) -> void:
@@ -49,7 +51,7 @@ func set_angular_accel_max(value: int) -> void:
 	if not is_inside_tree():
 		return
 
-	arriver.agent.angular_acceleration_max = deg2rad(value)
+	arriver.agent.angular_acceleration_max = deg_to_rad(value)
 
 
 func set_angular_speed_max(value: int) -> void:
@@ -57,7 +59,7 @@ func set_angular_speed_max(value: int) -> void:
 	if not is_inside_tree():
 		return
 
-	arriver.agent.angular_speed_max = deg2rad(value)
+	arriver.agent.angular_speed_max = deg_to_rad(value)
 
 
 func set_arrival_tolerance(value: float) -> void:

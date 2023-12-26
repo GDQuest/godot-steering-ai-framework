@@ -1,37 +1,30 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://b1iy8iir6k8tr"]
 
-[ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=1]
-[ext_resource path="res://Demos/Utils/DemoInterface.gd" type="Script" id=2]
+[ext_resource type="Theme" uid="uid://c2l0v31q141pv" path="res://assets/theme/gdquest.theme" id="1"]
+[ext_resource type="Script" path="res://Demos/Utils/DemoInterface.gd" id="2"]
 
-[sub_resource type="GDScript" id=1]
-script/source = "tool
+[sub_resource type="GDScript" id="1"]
+script/source = "@tool
 extends RichTextLabel
 
 "
 
 [node name="DemoInterface" type="PanelContainer"]
+custom_minimum_size = Vector2(1024, 0)
+anchors_preset = 10
 anchor_right = 1.0
-margin_bottom = 140.0
-rect_min_size = Vector2( 1024, 0 )
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_bottom = 140.0
+theme = ExtResource("1")
+script = ExtResource("2")
 text_bbcode = "Replace this text for the demo."
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 1920.0
-margin_bottom = 140.0
+layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 1904.0
-margin_bottom = 124.0
-rect_min_size = Vector2( 0, 55 )
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
 bbcode_enabled = true
-bbcode_text = "Replace this text for the demo."
 text = "Replace this text for the demo."
 scroll_active = false
-script = SubResource( 1 )
+script = SubResource("1")

@@ -1,17 +1,17 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var separation: GSAISeparation
 var cohesion: GSAICohesion
 var proximity: GSAIRadiusProximity
-var agent := GSAIKinematicBody2DAgent.new(self)
+var agent := await GSAICharacterBody2DAgent.new(self)
 var blend := GSAIBlend.new(agent)
 var acceleration := GSAITargetAcceleration.new()
 var draw_proximity := false
 
-var _color := Color.red
+var _color := Color.RED
 var _velocity := Vector2()
 
-onready var collision_shape := $CollisionShape2D
+@onready var collision_shape := $CollisionShape2D
 
 
 func setup(
@@ -22,7 +22,7 @@ func setup(
 	cohesion_strength: float,
 	separation_strength: float
 ) -> void:
-	_color = Color(rand_range(0.5, 1), rand_range(0.25, 1), rand_range(0, 1))
+	_color = Color(randf_range(0.5, 1), randf_range(0.25, 1), randf_range(0, 1))
 	collision_shape.inner_color = _color
 
 	agent.linear_acceleration_max = linear_accel_max

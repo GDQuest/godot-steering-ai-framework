@@ -1,14 +1,14 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var face: GSAIFace
-var agent := GSAIKinematicBody2DAgent.new(self)
+var agent := await GSAICharacterBody2DAgent.new(self)
 
 var _accel := GSAITargetAcceleration.new()
 var _angular_drag := 0.1
 var _cannon: Rect2
 var _color: Color
 
-onready var collision_shape := $CollisionShape2D
+@onready var collision_shape := $CollisionShape2D
 
 
 func _ready() -> void:

@@ -14,8 +14,8 @@ var _behaviors := []
 var _accel := GSAITargetAcceleration.new()
 
 
-func _init(agent: GSAISteeringAgent).(agent) -> void:
-	pass
+func _init(agent: GSAISteeringAgent) -> void:
+	super._init(agent)
 
 
 # Appends a behavior to the internal array along with its `weight`.

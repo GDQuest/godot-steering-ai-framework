@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0
 
-[node name="Member" type="KinematicBody2D"]
+[node name="Member" type="CharacterBody2D"]
 input_pickable = true
 script = ExtResource( 1 )
 

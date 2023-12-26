@@ -3,23 +3,26 @@ extends Node
 
 enum Mode { FLEE, SEEK }
 
-export (Mode) var behavior_mode := Mode.SEEK setget set_behavior_mode
-export (float, 0, 1000, 30) var linear_speed_max := 200.0 setget set_linear_speed_max
-export (float, 0, 2000, 40) var linear_accel_max := 10.0 setget set_linear_accel_max
-export (float) var player_speed := 600.0 setget set_player_speed
+@export var behavior_mode := Mode.SEEK: set = set_behavior_mode
+@export_range(0, 1000, 30) var linear_speed_max := 200.0: set = set_linear_speed_max
+@export_range(0, 2000, 40) var linear_accel_max := 10.0: set = set_linear_accel_max
+@export var player_speed := 600.0: set = set_player_speed
 
 var camera_boundaries: Rect2
 
-onready var player: KinematicBody2D = $Player
-onready var spawner: Node2D = $Spawner
+@onready var player: CharacterBody2D = $Player
+@onready var spawner: Node2D = $Spawner
 
 
 func _ready() -> void:
+	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
+	get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
+	
 	camera_boundaries = Rect2(
 		Vector2.ZERO,
 		Vector2(
-			ProjectSettings["display/window/size/width"],
-			ProjectSettings["display/window/size/height"]
+			ProjectSettings["display/window/size/viewport_width"],
+			ProjectSettings["display/window/size/viewport_height"]
 		)
 	)
 
@@ -33,7 +36,7 @@ func _ready() -> void:
 			rng.randf_range(0, camera_boundaries.size.x),
 			rng.randf_range(0, camera_boundaries.size.y)
 		)
-		var entity: KinematicBody2D = spawner.Entity.instance()
+		var entity: CharacterBody2D = spawner.Entity.instantiate()
 		entity.global_position = new_pos
 		entity.player_agent = player.agent
 		entity.start_speed = linear_speed_max

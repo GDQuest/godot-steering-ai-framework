@@ -1,19 +1,19 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var _velocity := Vector2.ZERO
 var _accel := GSAITargetAcceleration.new()
 var _valid := false
 var _drag := 0.1
 
-onready var agent := GSAIKinematicBody2DAgent.new(self)
-onready var path := GSAIPath.new(
+@onready var agent := await GSAICharacterBody2DAgent.new(self)
+@onready var path := GSAIPath.new(
 	[
 		Vector3(global_position.x, global_position.y, 0),
 		Vector3(global_position.x, global_position.y, 0)
 	],
 	true
 )
-onready var follow := GSAIFollowPath.new(agent, path, 0, 0)
+@onready var follow := GSAIFollowPath.new(agent, path, 0.0, 0)
 
 
 func setup(
@@ -24,7 +24,7 @@ func setup(
 	decel_radius: float,
 	arrival_tolerance: float
 ) -> void:
-	owner.drawer.connect("path_established", self, "_on_Drawer_path_established")
+	owner.drawer.connect("path_established", Callable(self, "_on_Drawer_path_established"))
 	follow.path_offset = path_offset
 	follow.prediction_time = predict_time
 	follow.deceleration_radius = decel_radius
@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_Drawer_path_established(points: Array) -> void:
-	var positions := PoolVector3Array()
+	var positions := PackedVector3Array()
 	for p in points:
 		positions.append(Vector3(p.x, p.y, 0))
 	path.create_path(positions)

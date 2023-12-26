@@ -2,7 +2,7 @@
 # follow behaviors can use.
 # @category - Base types
 class_name GSAIPath
-extends Reference
+extends RefCounted
 
 # If `false`, the path loops.
 var is_open: bool
@@ -75,7 +75,7 @@ func calculate_distance(agent_current_position: Vector3) -> float:
 # Calculates a target position from the path's starting point based on the `target_distance`.
 func calculate_target_position(target_distance: float) -> Vector3:
 	if is_open:
-		target_distance = clamp(target_distance, 0, length)
+		target_distance = clamp(target_distance, 0.0, length)
 	else:
 		if target_distance < 0:
 			target_distance = length + fmod(target_distance, length)
@@ -116,7 +116,7 @@ func _calculate_point_segment_distance_squared(start: Vector3, end: Vector3, pos
 	var start_end_length_squared := start_end.length_squared()
 	if start_end_length_squared != 0:
 		var t = (position - start).dot(start_end) / start_end_length_squared
-		_nearest_point_on_segment += start_end * clamp(t, 0, 1)
+		_nearest_point_on_segment += start_end * clamp(t, 0.0, 1)
 
 	return _nearest_point_on_segment.distance_squared_to(position)
 

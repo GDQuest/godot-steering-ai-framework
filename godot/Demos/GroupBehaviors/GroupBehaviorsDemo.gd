@@ -1,17 +1,20 @@
 extends Node
 
-onready var spawner := $Spawner
+@onready var spawner := $Spawner
 
-export (float, 0, 2000, 40.0) var linear_speed_max := 600.0 setget set_linear_speed_max
-export (float, 0, 9000, 2.0) var linear_accel_max := 40.0 setget set_linear_accel_max
-export (float, 0, 300, 2.0) var proximity_radius := 140.0 setget set_proximity_radius
-export (float, 0, 200000, 250) var separation_decay_coefficient := 2000.0 setget set_separation_decay_coef
-export (float, 0, 2, 0.1) var cohesion_strength := 0.1 setget set_cohesion_strength
-export (float, 0, 10, 0.2) var separation_strength := 1.5 setget set_separation_strength
-export var show_proximity_radius := true setget set_show_proximity_radius
+@export_range(0, 2000, 40.0) var linear_speed_max := 600.0: set = set_linear_speed_max
+@export_range(0, 9000, 2.0) var linear_accel_max := 40.0: set = set_linear_accel_max
+@export_range(0, 300, 2.0) var proximity_radius := 140.0: set = set_proximity_radius
+@export_range(0, 200000, 250) var separation_decay_coefficient := 2000.0: set = set_separation_decay_coef
+@export_range(0, 2, 0.1) var cohesion_strength := 0.1: set = set_cohesion_strength
+@export_range(0, 10, 0.2) var separation_strength := 1.5: set = set_separation_strength
+@export var show_proximity_radius := true: set = set_show_proximity_radius
 
 
 func _ready() -> void:
+	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
+	get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
+	
 	spawner.setup(
 		linear_speed_max,
 		linear_accel_max,

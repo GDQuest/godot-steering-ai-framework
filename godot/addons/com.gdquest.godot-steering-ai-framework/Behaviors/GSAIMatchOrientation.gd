@@ -19,7 +19,8 @@ var time_to_reach: float = 0.1
 var use_z: bool
 
 
-func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation, _use_z := false).(agent) -> void:
+func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation, _use_z := false) -> void:
+	super._init(agent)
 	self.use_z = _use_z
 	self.target = _target
 

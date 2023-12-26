@@ -3,8 +3,8 @@
 # It is the character's responsibility to keep this information up to date for
 # the steering toolkit to work correctly.
 # @category - Base types
-extends GSAIAgentLocation
 class_name GSAISteeringAgent
+extends GSAIAgentLocation
 
 # The amount of velocity to be considered effectively not moving.
 var zero_linear_speed_threshold := 0.01

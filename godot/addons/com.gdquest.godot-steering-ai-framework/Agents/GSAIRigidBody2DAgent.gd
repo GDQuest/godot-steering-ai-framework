@@ -1,11 +1,11 @@
 # A specialized steering agent that updates itself every frame so the user does
 # not have to using a RigidBody2D
 # @category - Specialized agents
-extends GSAISpecializedAgent
 class_name GSAIRigidBody2DAgent
+extends GSAISpecializedAgent
 
 # The RigidBody2D to keep track of
-var body: RigidBody2D setget _set_body
+var body: RigidBody2D: set = _set_body
 
 var _last_position: Vector2
 var _body_ref: WeakRef
@@ -13,11 +13,11 @@ var _body_ref: WeakRef
 
 func _init(_body: RigidBody2D) -> void:
 	if not _body.is_inside_tree():
-		yield(_body, "ready")
+		await(_body).ready
 	self.body = _body
 
 	# warning-ignore:return_value_discarded
-	_body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
+	_body.get_tree().physics_frame.connect(_on_SceneTree_frame)
 
 
 # Moves the agent's `body` by target `acceleration`.
@@ -51,7 +51,7 @@ func _on_SceneTree_frame() -> void:
 	if not _body:
 		return
 	
-	if not _body.is_inside_tree() or _body.get_tree().paused:
+	if not _body.is_inside_tree():
 		return
 
 	var current_position := _body.global_position
