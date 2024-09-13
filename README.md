@@ -20,9 +20,7 @@ It supports all essential steering behaviors like flee, follow, look at, but als
 
 ## Getting the framework
 
-This repository contains the framework and some demos for learning purposes.
-
-If you want just the framework with nothing else to get in the way or to create a Git submodule, use the [Godot Steering AI Framework Submodules](https://github.com/GDQuest/godot-steering-ai-framework-submodule) repository.
+This repository contains the framework and some demos for learning purposes. You can download a copy by clicking the green _Code_ button and clicking _Download ZIP_. Then, copy and paste the `addons/` directory into your project.
 
 ## Introduction
 
